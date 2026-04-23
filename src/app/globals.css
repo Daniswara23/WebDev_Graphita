@@ -1,0 +1,38 @@
+/* 
+  globals.css
+  File ini adalah CSS global — berlaku untuk SEMUA halaman.
+  Di sini kita definisikan variabel warna (CSS Variables) dan reset dasar.
+*/
+
+/* Import font dari Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* 
+  :root = selector untuk elemen paling atas (html).
+  CSS Variables di sini bisa dipakai di seluruh project dengan var(--nama).
+  Keuntungan: kalau mau ganti warna, cukup ubah di sini saja.
+*/
+:root {
+  --navy: #1a2744;
+  --navy-dark: #0f1a30;
+  --gold: #c9933a;
+  --gold-light: #e8b86d;
+  --green: #2d6a4f;
+  --green-light: #52b788;
+  --cream: #f8f5ef;
+  --white: #ffffff;
+}
+
+/* Reset dasar — menghapus margin/padding bawaan browser */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--navy-dark);
+  color: var(--white);
+  overflow-x: hidden; /* Mencegah scroll horizontal */
+}
