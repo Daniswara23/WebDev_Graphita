@@ -44,7 +44,7 @@ export default function Trusted() {
             whiteSpace: "nowrap", // Cegah teks dipotong ke baris baru
           }}
         >
-          Dipercaya oleh pemimpin industri
+          Dipercaya oleh Pemimpin Industri
         </span>
         
         {/* Garis kanan */}

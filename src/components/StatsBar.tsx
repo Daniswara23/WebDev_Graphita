@@ -22,7 +22,7 @@ const stats: StatItem[] = [
   { number: "50+", label: "Organisasi Dipercaya" },
   { number: "12", label: "Tahun Pengalaman" },
   { number: "98%", label: "Tingkat Kepuasan" },
-  { number: "17", label: "SDG Goals Covered" },
+  { number: "$10M+", label: "Dampak Bisnis Tersampaikan" },
 ];
 
 export default function StatsBar() {

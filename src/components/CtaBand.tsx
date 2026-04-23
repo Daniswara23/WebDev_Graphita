@@ -31,7 +31,7 @@ export default function CtaBand() {
             marginBottom: "8px",
           }}
         >
-          Siap memulai perjalanan sustainability?
+        Siap menyelesaikan tantangan keberlanjutan Anda?
         </h3>
         <p
           style={{
@@ -40,7 +40,7 @@ export default function CtaBand() {
             fontWeight: 300,
           }}
         >
-          Bicara dengan konsultan kami hari ini, gratis dan tanpa komitmen.
+        Dapatkan saran ahli gratis. Mulai kolaborasi hari ini.
         </p>
       </div>
 
@@ -61,7 +61,7 @@ export default function CtaBand() {
           whiteSpace: "nowrap",        // Cegah teks tombol terpotong
         }}
       >
-        Jadwalkan Konsultasi
+        Mulai Kolaborasi
       </button>
     </div>
   );

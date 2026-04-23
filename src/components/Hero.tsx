@@ -80,31 +80,6 @@ export default function Hero() {
         />
       </div>
 
-      {/* ===== NAVBAR ===== */}
-      <nav
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "20px 50px",
-          background: "rgba(10, 20, 40, 0.9)",
-          borderRadius: "50px",
-          margin: "30px 50px 0 50px",
-          zIndex: 10,
-          position: "relative",
-        }}
-      >
-        <div style={{ color: "var(--white)", fontWeight: "bold", fontSize: "20px" }}>LOGO</div>
-        <div style={{ display: "flex", gap: "25px", alignItems: "center" }}>
-          <a href="#" style={{ color: "var(--white)", textDecoration: "none", textTransform: "uppercase", fontSize: "12px" }}>ABOUT US</a>
-          <a href="#" style={{ color: "var(--white)", textDecoration: "none", textTransform: "uppercase", fontSize: "12px" }}>INSIGHT</a>
-          <a href="#" style={{ color: "var(--white)", textDecoration: "none", textTransform: "uppercase", fontSize: "12px" }}>SERVICE</a>
-          <a href="#" style={{ color: "var(--white)", textDecoration: "none", textTransform: "uppercase", fontSize: "12px" }}>CONTACT</a>
-          <button style={{ background: "var(--gold)", color: "var(--navy-dark)", border: "none", padding: "10px 20px", borderRadius: "5px", cursor: "pointer", fontWeight: "bold", textTransform: "uppercase", fontSize: "12px" }}>LOGIN</button>
-          <button style={{ background: "var(--gold)", color: "var(--navy-dark)", border: "none", padding: "10px 20px", borderRadius: "5px", cursor: "pointer", fontWeight: "bold", textTransform: "uppercase", fontSize: "12px" }}>SIGN UP</button>
-        </div>
-      </nav>
-
       {/* ===== KONTEN UTAMA ===== */}
       <div
         style={{
@@ -112,10 +87,9 @@ export default function Hero() {
           display: "flex",
           justifyContent: "flex-start",
           alignItems: "center",
-          padding: "0 56px",
+          padding: "96px 56px 0",
           zIndex: 5,
           position: "relative",
-          marginTop: "-100px",
         }}
       >
         <div

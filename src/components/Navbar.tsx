@@ -86,7 +86,7 @@ export default function Navbar() {
           Kita map array menu agar tidak perlu tulis <li> berulang.
           map() = looping di React untuk membuat elemen dari array.
         */}
-        {["Tentang", "Insight", "Layanan", "Kontak"].map((item) => (
+        {["Tentang", "Layanan", "Studi Kasus", "Kontak"].map((item) => (
           <li key={item}>
             <a
               href={`#${item.toLowerCase()}`}
@@ -109,22 +109,6 @@ export default function Navbar() {
         <button
           style={{
             padding: "8px 22px",
-            border: "1px solid rgba(201,147,58,0.6)",
-            background: "transparent",
-            color: "var(--gold-light)",
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: "13px",
-            letterSpacing: "1px",
-            textTransform: "uppercase",
-            cursor: "pointer",
-            borderRadius: "2px",
-          }}
-        >
-          Masuk
-        </button>
-        <button
-          style={{
-            padding: "8px 22px",
             border: "1px solid var(--gold)",
             background: "var(--gold)",
             color: "var(--navy-dark)",
@@ -137,7 +121,7 @@ export default function Navbar() {
             borderRadius: "2px",
           }}
         >
-          Daftar
+          Mulai Kolaborasi
         </button>
       </div>
     </nav>

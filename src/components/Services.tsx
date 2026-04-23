@@ -8,22 +8,19 @@
   agar tidak perlu install package tambahan.
 */
 
-// Tipe data untuk setiap layanan
 type Service = {
   num: string;
   title: string;
   desc: string;
-  icon: React.ReactNode; // ReactNode = bisa berupa JSX (elemen React)
+  icon: React.ReactNode;
 };
 
-// Data layanan dengan ikon SVG inline
 const services: Service[] = [
   {
     num: "01",
     title: "Strategi ESG & Keberlanjutan",
-    desc: "Merancang roadmap ESG yang terintegrasi dengan visi bisnis jangka panjang perusahaan Anda.",
+    desc: "Menyusun peta jalan ESG yang selaras dengan strategi bisnis jangka panjang perusahaan.",
     icon: (
-      // SVG = format gambar vektor yang bisa langsung ditulis di HTML/JSX
       <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="24" height="24">
         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
       </svg>
@@ -32,7 +29,7 @@ const services: Service[] = [
   {
     num: "02",
     title: "Pelaporan & Pengukuran SDG",
-    desc: "Sistem tracking SDG yang terukur, transparan, dan siap untuk audit eksternal.",
+    desc: "Membangun sistem pemantauan SDG yang terukur, transparan, dan siap untuk audit eksternal.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="24" height="24">
         <circle cx="12" cy="12" r="10" />
@@ -42,8 +39,8 @@ const services: Service[] = [
   },
   {
     num: "03",
-    title: "Carbon Footprint & Net Zero",
-    desc: "Kalkulasi emisi karbon dan perancangan strategi dekarbonisasi menuju net zero.",
+    title: "Jejak Karbon & Strategi Net Zero",
+    desc: "Menghitung emisi karbon serta merancang strategi dekarbonisasi menuju target net zero.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="24" height="24">
         <path d="M3 3h18v18H3zM3 9h18M9 21V9" />
@@ -52,8 +49,8 @@ const services: Service[] = [
   },
   {
     num: "04",
-    title: "Pelatihan & Capacity Building",
-    desc: "Program pelatihan sustainability untuk tim internal agar siap mengimplementasikan perubahan.",
+    title: "Pelatihan & Penguatan Kapasitas",
+    desc: "Menyelenggarakan program pelatihan keberlanjutan untuk meningkatkan kesiapan tim internal.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="24" height="24">
         <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
@@ -65,7 +62,7 @@ const services: Service[] = [
   {
     num: "05",
     title: "Due Diligence Keberlanjutan",
-    desc: "Penilaian risiko dan peluang keberlanjutan dalam proses investasi dan M&A.",
+    desc: "Melakukan analisis risiko dan peluang keberlanjutan dalam proses investasi dan akuisisi.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="24" height="24">
         <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
@@ -75,7 +72,7 @@ const services: Service[] = [
   {
     num: "06",
     title: "Energi Terbarukan & Efisiensi",
-    desc: "Konsultasi transisi energi dan audit efisiensi operasional berbasis data.",
+    desc: "Memberikan konsultasi transisi energi serta peningkatan efisiensi operasional secara terukur.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="24" height="24">
         <circle cx="12" cy="12" r="3" />
@@ -87,11 +84,7 @@ const services: Service[] = [
 
 export default function Services() {
   return (
-    <section
-      id="layanan" // id ini dipakai oleh link navbar "#layanan"
-      style={{ padding: "96px 56px" }}
-    >
-      {/* Header Section */}
+    <section id="layanan" style={{ padding: "96px 56px" }}>
       <div
         style={{
           display: "flex",
@@ -100,7 +93,6 @@ export default function Services() {
           marginBottom: "64px",
         }}
       >
-        {/* Judul kiri */}
         <div>
           <div
             style={{
@@ -119,7 +111,7 @@ export default function Services() {
                 color: "var(--gold-light)",
               }}
             >
-              Apa yang kami tawarkan
+              Solusi Strategis untuk Tantangan Anda
             </span>
           </div>
 
@@ -132,14 +124,11 @@ export default function Services() {
               color: "var(--white)",
             }}
           >
-            Layanan{" "}
-            <span style={{ color: "var(--gold-light)" }}>Berkelanjutan</span>
-            <br />
-            untuk Masa Depan
+            Layanan Keberlanjutan<br />
+            <span style={{ color: "var(--gold-light)" }}>Solusi Kami</span>
           </h2>
         </div>
 
-        {/* Link kanan */}
         <button
           style={{
             fontSize: "12px",
@@ -156,12 +145,11 @@ export default function Services() {
         </button>
       </div>
 
-      {/* Grid 3 kolom untuk kartu layanan */}
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "2px", // Gap tipis → efek "garis pemisah"
+          gap: "2px",
         }}
       >
         {services.map((service) => (
@@ -172,12 +160,8 @@ export default function Services() {
               border: "1px solid rgba(255,255,255,0.06)",
               padding: "40px 32px",
               cursor: "pointer",
-              // Tidak bisa hover langsung di inline style React
-              // Untuk hover, gunakan Tailwind atau CSS module
-              // Contoh dengan Tailwind: className="hover:bg-gold/10"
             }}
           >
-            {/* Nomor */}
             <span
               style={{
                 fontFamily: "'Playfair Display', serif",
@@ -191,7 +175,6 @@ export default function Services() {
               {service.num}
             </span>
 
-            {/* Ikon */}
             <div
               style={{
                 width: "48px",
@@ -207,7 +190,6 @@ export default function Services() {
               {service.icon}
             </div>
 
-            {/* Judul layanan */}
             <div
               style={{
                 fontFamily: "'Playfair Display', serif",
@@ -221,7 +203,6 @@ export default function Services() {
               {service.title}
             </div>
 
-            {/* Deskripsi */}
             <p
               style={{
                 fontSize: "13px",
