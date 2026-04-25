@@ -7,7 +7,15 @@
   Komponen paling sederhana — hanya tampilan statis.
 */
 
+"use client";
+
+import { useRouter } from "next/navigation";
+
 export default function CtaBand() {
+  const router = useRouter();
+  const goToContact = () => {
+    router.push("/contact");
+  };
   return (
     <div
       style={{
@@ -46,6 +54,7 @@ export default function CtaBand() {
 
       {/* Tombol kanan */}
       <button
+        onClick={goToContact}
         style={{
           padding: "14px 40px",
           background: "var(--navy-dark)",

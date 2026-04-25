@@ -1,15 +1,20 @@
+"use client";
+
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import StatsBar from "@/components/StatsBar";
 import Trusted from "@/components/Trusted";
 import Services from "@/components/Services";
 import CaseStudies from "@/components/CaseStudies";
-import Testimonials from "@/components/Testimonials";
-import ContactForm from "@/components/ContactForm";
+import Etos3T from "@/components/Etos3T";
 import CtaBand from "@/components/CtaBand";
 import Footer from "@/components/Footer";
+import TestimonialsModal from "@/components/TestimonialsModal";
 
 export default function HomePage() {
+  const [showTestimonials, setShowTestimonials] = useState(false);
+
   return (
     <>
       <Navbar />
@@ -20,20 +25,25 @@ export default function HomePage() {
 
         {/* 2. Trust */}
         <StatsBar />
-        <Trusted />
+        <Trusted onViewTestimonials={() => setShowTestimonials(true)} />
 
         {/* 3. Proof */}
         <CaseStudies />
-        <Testimonials />
 
         {/* 4. Value */}
         <Services />
 
-        {/* 5. CTA */}
+        {/* 5. Etos */}
+        <Etos3T />
+
+        {/* 6. CTA */}
         <CtaBand />
-        <ContactForm />
         <Footer />
       </main>
+
+      {showTestimonials && (
+        <TestimonialsModal onClose={() => setShowTestimonials(false)} />
+      )}
     </>
   );
 }

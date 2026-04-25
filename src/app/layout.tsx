@@ -10,6 +10,7 @@
 
 import type { Metadata } from "next";
 import "./globals.css";
+import ScrollAnimations from "@/components/ScrollAnimations";
 
 // Metadata = informasi halaman yang muncul di tab browser & hasil Google
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="id">
       {/* lang="id" penting untuk aksesibilitas & SEO */}
       <body>
+        <ScrollAnimations />
         {children}
       </body>
     </html>

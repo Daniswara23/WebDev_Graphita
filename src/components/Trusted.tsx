@@ -15,7 +15,7 @@ const clients = [
   { initials: "EV", name: "Evergreen" },
 ];
 
-export default function Trusted() {
+export default function Trusted({ onViewTestimonials }: { onViewTestimonials: () => void }) {
   return (
     <div
       style={{
@@ -30,6 +30,7 @@ export default function Trusted() {
           alignItems: "center",
           gap: "20px",
           marginBottom: "32px",
+          justifyContent: "center",
         }}
       >
         {/* Garis kiri */}
@@ -41,7 +42,7 @@ export default function Trusted() {
             letterSpacing: "2px",
             textTransform: "uppercase",
             color: "rgba(255,255,255,0.35)",
-            whiteSpace: "nowrap", // Cegah teks dipotong ke baris baru
+            whiteSpace: "nowrap",
           }}
         >
           Dipercaya oleh Pemimpin Industri
@@ -51,6 +52,42 @@ export default function Trusted() {
         <div style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.08)" }} />
       </div>
 
+      {/* Tombol Lihat Testimoni di tengah */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "32px",
+        }}
+      >
+        <button
+          onClick={onViewTestimonials}
+          style={{
+            padding: "6px 16px",
+            background: "rgba(201,147,58,0.1)",
+            border: "1px solid rgba(201,147,58,0.3)",
+            color: "var(--gold-light)",
+            fontSize: "11px",
+            letterSpacing: "1px",
+            textTransform: "uppercase",
+            cursor: "pointer",
+            borderRadius: "4px",
+            whiteSpace: "nowrap",
+            transition: "all 0.3s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "rgba(201,147,58,0.2)";
+            e.currentTarget.style.borderColor = "rgba(201,147,58,0.6)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "rgba(201,147,58,0.1)";
+            e.currentTarget.style.borderColor = "rgba(201,147,58,0.3)";
+          }}
+        >
+          Lihat Testimoni
+        </button>
+      </div>
+
       {/* Grid logo klien */}
       <div
         style={{
@@ -58,7 +95,7 @@ export default function Trusted() {
           alignItems: "center",
           justifyContent: "space-around",
           gap: "32px",
-          flexWrap: "wrap", // Pindah baris jika layar kecil
+          flexWrap: "wrap",
         }}
       >
         {clients.map((client) => (

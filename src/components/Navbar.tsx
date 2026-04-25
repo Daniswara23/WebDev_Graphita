@@ -10,6 +10,7 @@
 */
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
@@ -86,43 +87,112 @@ export default function Navbar() {
           Kita map array menu agar tidak perlu tulis <li> berulang.
           map() = looping di React untuk membuat elemen dari array.
         */}
-        {["Tentang", "Layanan", "Studi Kasus", "Kontak"].map((item) => (
+        {["Home", "Tentang Kami", "Layanan", "Publikasi & Riset", "Kontak"].map((item) => (
           <li key={item}>
-            <a
-              href={`#${item.toLowerCase()}`}
-              style={{
-                color: "rgba(255,255,255,0.75)",
-                textDecoration: "none",
-                fontSize: "13px",
-                letterSpacing: "1.5px",
-                textTransform: "uppercase",
-              }}
-            >
-              {item}
-            </a>
+            {item === 'Home' ? (
+              <Link
+                href="/"
+                style={{
+                  color: "rgba(255,255,255,0.75)",
+                  textDecoration: "none",
+                  fontSize: "13px",
+                  letterSpacing: "1.5px",
+                  textTransform: "uppercase",
+                }}
+              >
+                {item}
+              </Link>
+            ) : item === 'Kontak' ? (
+              <Link
+                href="/contact"
+                style={{
+                  color: "rgba(255,255,255,0.75)",
+                  textDecoration: "none",
+                  fontSize: "13px",
+                  letterSpacing: "1.5px",
+                  textTransform: "uppercase",
+                }}
+              >
+                {item}
+              </Link>
+            ) : item === 'Tentang Kami' ? (
+              <Link
+                href="/about"
+                style={{
+                  color: "rgba(255,255,255,0.75)",
+                  textDecoration: "none",
+                  fontSize: "13px",
+                  letterSpacing: "1.5px",
+                  textTransform: "uppercase",
+                }}
+              >
+                {item}
+              </Link>
+            ) : item === 'Layanan' ? (
+              <Link
+                href="/services"
+                style={{
+                  color: "rgba(255,255,255,0.75)",
+                  textDecoration: "none",
+                  fontSize: "13px",
+                  letterSpacing: "1.5px",
+                  textTransform: "uppercase",
+                }}
+              >
+                {item}
+              </Link>
+            ) : item === 'Publikasi & Riset' ? (
+              <Link
+                href="/insights"
+                style={{
+                  color: "rgba(255,255,255,0.75)",
+                  textDecoration: "none",
+                  fontSize: "13px",
+                  letterSpacing: "1.5px",
+                  textTransform: "uppercase",
+                }}
+              >
+                {item}
+              </Link>
+            ) : (
+              <a
+                href={`#${item.toLowerCase()}`}
+                style={{
+                  color: "rgba(255,255,255,0.75)",
+                  textDecoration: "none",
+                  fontSize: "13px",
+                  letterSpacing: "1.5px",
+                  textTransform: "uppercase",
+                }}
+              >
+                {item}
+              </a>
+            )}
           </li>
         ))}
       </ul>
 
       {/* TOMBOL AKSI */}
       <div style={{ display: "flex", gap: "12px" }}>
-        <button
-          style={{
-            padding: "8px 22px",
-            border: "1px solid var(--gold)",
-            background: "var(--gold)",
-            color: "var(--navy-dark)",
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: "13px",
-            fontWeight: 500,
-            letterSpacing: "1px",
-            textTransform: "uppercase",
-            cursor: "pointer",
-            borderRadius: "2px",
-          }}
-        >
-          Mulai Kolaborasi
-        </button>
+        <Link href="/contact">
+          <button
+            style={{
+              padding: "8px 22px",
+              border: "1px solid var(--gold)",
+              background: "var(--gold)",
+              color: "var(--navy-dark)",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "13px",
+              fontWeight: 500,
+              letterSpacing: "1px",
+              textTransform: "uppercase",
+              cursor: "pointer",
+              borderRadius: "8px",
+            }}
+          >
+            Mulai Kolaborasi
+          </button>
+        </Link>
       </div>
     </nav>
   );

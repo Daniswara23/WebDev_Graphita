@@ -2,7 +2,15 @@
   Hero.tsx — SECTION UTAMA (HERO)
 */
 
+"use client";
+
+import { useRouter } from "next/navigation";
+
 export default function Hero() {
+  const router = useRouter();
+  const goToContact = () => {
+    router.push("/contact");
+  };
   return (
     <section
       style={{
@@ -101,6 +109,7 @@ export default function Hero() {
           }}
         >
           <h1
+            className="animate-on-scroll"
             style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(32px, 4vw, 56px)",
@@ -117,6 +126,7 @@ export default function Hero() {
           </h1>
 
           <p
+            className="animate-on-scroll animate-delay-200"
             style={{
               fontSize: "14px",
               lineHeight: 1.6,
@@ -130,8 +140,10 @@ export default function Hero() {
             yang nyata dan terukur.
           </p>
 
-          <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+          <div className="animate-on-scroll animate-delay-400" style={{ display: "flex", gap: "16px", alignItems: "center" }}>
             <button
+              onClick={goToContact}
+              className="hover-lift hover-glow"
               style={{
                 padding: "12px 30px",
                 background: "var(--gold)",
@@ -143,13 +155,20 @@ export default function Hero() {
                 textTransform: "capitalize",
                 cursor: "pointer",
                 border: "none",
-                borderRadius: "50px",
+                borderRadius: "8px",
               }}
             >
-              Mulai Konsultasi
+              Mulai Kolaborasi
             </button>
 
             <button
+              onClick={() => {
+                const element = document.getElementById('layanan');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="hover-scale"
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -161,6 +180,13 @@ export default function Hero() {
                 cursor: "pointer",
                 background: "none",
                 border: "none",
+                transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "var(--gold)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "var(--gold-light)";
               }}
             >
               Lihat Layanan

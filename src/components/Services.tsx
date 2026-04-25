@@ -8,6 +8,8 @@
   agar tidak perlu install package tambahan.
 */
 
+import Link from "next/link";
+
 type Service = {
   num: string;
   title: string;
@@ -84,7 +86,7 @@ const services: Service[] = [
 
 export default function Services() {
   return (
-    <section id="layanan" style={{ padding: "96px 56px" }}>
+    <section id="layanan" className="animate-on-scroll" style={{ padding: "96px 56px" }}>
       <div
         style={{
           display: "flex",
@@ -111,7 +113,7 @@ export default function Services() {
                 color: "var(--gold-light)",
               }}
             >
-              Solusi Strategis untuk Tantangan Anda
+              Layanan Utama
             </span>
           </div>
 
@@ -124,12 +126,14 @@ export default function Services() {
               color: "var(--white)",
             }}
           >
-            Layanan Keberlanjutan<br />
-            <span style={{ color: "var(--gold-light)" }}>Solusi Kami</span>
+            Ikonografi yang mewakili<br />
+            <span style={{ color: "var(--gold-light)" }}>Aktivitas Profesional, Ilmiah, dan Teknis</span>
           </h2>
         </div>
 
-        <button
+        <Link
+          href="/services"
+          className="hover-scale"
           style={{
             fontSize: "12px",
             letterSpacing: "1.5px",
@@ -139,10 +143,11 @@ export default function Services() {
             border: "none",
             background: "none",
             marginBottom: "8px",
+            textDecoration: "none",
           }}
         >
           Semua Layanan →
-        </button>
+        </Link>
       </div>
 
       <div
@@ -152,14 +157,16 @@ export default function Services() {
           gap: "2px",
         }}
       >
-        {services.map((service) => (
+        {services.map((service, index) => (
           <div
             key={service.num}
+            className={`grid-item hover-lift hover-glow`}
             style={{
               background: "rgba(255,255,255,0.03)",
               border: "1px solid rgba(255,255,255,0.06)",
               padding: "40px 32px",
               cursor: "pointer",
+              animationDelay: `${index * 0.1}s`,
             }}
           >
             <span
