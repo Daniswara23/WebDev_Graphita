@@ -1,24 +1,17 @@
 /*
-  StatsBar.tsx — BAR STATISTIK
-  
-  Menampilkan angka-angka pencapaian perusahaan.
-  Server Component (tidak butuh interaktivitas).
-  
-  Pola yang dipakai: DATA ARRAY + MAP
-  Daripada menulis JSX berulang untuk tiap stat,
-  kita simpan datanya dalam array lalu render dengan .map()
+  StatsBar.tsx — BAR STATISTIK (Client Component, fetch dari Supabase)
+  Fallback FALLBACK_STATS dipakai saat loading / query gagal.
 */
 
-// Tipe data untuk setiap item statistik
-// TypeScript: mendefinisikan "bentuk" data agar tidak salah isi
-type StatItem = {
-  number: string;
-  label: string;
-};
+"use client";
 
-// Data statistik disimpan di luar komponen
-// Keuntungan: mudah diupdate tanpa ubah struktur komponen
-const stats: StatItem[] = [
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+import type { SiteStatRow } from "@/types/database";
+
+type StatItem = { number: string; label: string };
+
+const FALLBACK_STATS: StatItem[] = [
   { number: "50+", label: "Portofolio visual" },
   { number: "12", label: "Tahun pengalaman" },
   { number: "98%", label: "Kepuasan mitra" },
@@ -26,6 +19,22 @@ const stats: StatItem[] = [
 ];
 
 export default function StatsBar() {
+  const [stats, setStats] = useState<StatItem[]>(FALLBACK_STATS);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase
+      .from("site_stats")
+      .select("value, label, sort_order")
+      .order("sort_order", { ascending: true })
+      .then(({ data, error }) => {
+        if (!error && data && data.length > 0) {
+          const rows = data as Pick<SiteStatRow, "value" | "label" | "sort_order">[];
+          setStats(rows.map((r) => ({ number: r.value, label: r.label })));
+        }
+      });
+  }, []);
+
   return (
     <div
       style={{
@@ -34,29 +43,22 @@ export default function StatsBar() {
         borderBottom: "1px solid rgba(201,147,58,0.1)",
         padding: "28px 56px",
         display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)", // 4 kolom rata
+        gridTemplateColumns: `repeat(${stats.length}, 1fr)`,
         gap: "24px",
       }}
     >
-      {/*
-        stats.map((item, index) => ...)
-        = untuk setiap item di array stats, render satu blok JSX.
-        key={index} wajib ada di React untuk performa rendering.
-      */}
       {stats.map((item, index) => (
         <div
           key={index}
           style={{
             textAlign: "center",
             padding: "8px 0",
-            // Garis pemisah antar stat, kecuali yang terakhir
             borderRight:
               index < stats.length - 1
                 ? "1px solid rgba(255,255,255,0.08)"
                 : "none",
           }}
         >
-          {/* Angka besar */}
           <div
             style={{
               fontFamily: "'Times New Roman', serif",
@@ -69,7 +71,6 @@ export default function StatsBar() {
           >
             {item.number}
           </div>
-          {/* Label kecil */}
           <div
             style={{
               fontSize: "var(--text-xs)",

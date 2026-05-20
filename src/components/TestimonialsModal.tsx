@@ -1,32 +1,66 @@
 /*
-  TestimonialsModal.tsx — TESTIMONIALS POPUP MODAL
-  Displays testimonials in a modal/popup overlay below Trusted section
+  TestimonialsModal.tsx — TESTIMONIALS POPUP MODAL (fetch Supabase)
 */
 
 "use client";
 
-const testimonials = [
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+import type { TestimonialRow } from "@/types/database";
+
+type Testimonial = { quote: string; author: string; company: string };
+
+const FALLBACK_TESTIMONIALS: Testimonial[] = [
   {
-    quote: "GAS membantu kami mentransformasi pelaporan ESG dari proses yang tidak terstruktur menjadi sistem yang siap audit dalam waktu kurang dari 6 bulan.",
+    quote:
+      "GAS membantu kami mentransformasi pelaporan ESG dari proses yang tidak terstruktur menjadi sistem yang siap audit dalam waktu kurang dari 6 bulan.",
     author: "Dr. Rina S., Direktur Keberlanjutan",
     company: "PT Energi Nasional",
   },
   {
-    quote: "Pendekatan strategis mereka dalam menyusun peta jalan net zero memberikan arah yang jelas sekaligus dampak finansial yang terukur bagi perusahaan.",
+    quote:
+      "Pendekatan strategis mereka dalam menyusun peta jalan net zero memberikan arah yang jelas sekaligus dampak finansial yang terukur bagi perusahaan.",
     author: "Budi A., Kepala CSR",
     company: "Astra Agro Lestari",
   },
   {
-    quote: "Solusi SDG yang diberikan tidak hanya konseptual, tetapi juga dapat langsung diimplementasikan dalam operasional sehari-hari.",
+    quote:
+      "Solusi SDG yang diberikan tidak hanya konseptual, tetapi juga dapat langsung diimplementasikan dalam operasional sehari-hari.",
     author: "Sari L., Manajer Operasional",
     company: "PT Tambang Berkelanjutan",
   },
 ];
 
 export default function TestimonialsModal({ onClose }: { onClose: () => void }) {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(FALLBACK_TESTIMONIALS);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase
+      .from("testimonials")
+      .select("quote, author_name, author_title, company, sort_order")
+      .order("sort_order", { ascending: true })
+      .then(({ data, error }) => {
+        if (!error && data && data.length > 0) {
+          const rows = data as Pick<
+            TestimonialRow,
+            "quote" | "author_name" | "author_title" | "company" | "sort_order"
+          >[];
+          setTestimonials(
+            rows.map((row) => ({
+              quote: row.quote,
+              author: row.author_title
+                ? `${row.author_name}, ${row.author_title}`
+                : row.author_name,
+              company: row.company ?? "",
+            }))
+          );
+        }
+      });
+  }, []);
+
   return (
     <>
-      {/* Overlay backdrop */}
       <div
         onClick={onClose}
         style={{
@@ -40,8 +74,6 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
           backdropFilter: "blur(4px)",
         }}
       />
-
-      {/* Modal content */}
       <div
         style={{
           position: "fixed",
@@ -60,7 +92,6 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
           backdropFilter: "blur(12px)",
         }}
       >
-        {/* Header */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "32px" }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
@@ -89,14 +120,11 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
               justifyContent: "center",
               transition: "color 0.3s ease",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--white)")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}
           >
-            ✕
+            X
           </button>
         </div>
 
-        {/* Testimonials grid */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
           {testimonials.map((t, index) => (
             <div

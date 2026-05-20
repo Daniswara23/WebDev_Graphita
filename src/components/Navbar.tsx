@@ -86,7 +86,7 @@ export default function Navbar() {
           listStyle: "none",     // Hapus bullet point bawaan
         }}
       >
-        {/* 
+        {/*
           Kita map array menu agar tidak perlu tulis <li> berulang.
           map() = looping di React untuk membuat elemen dari array.
         */}

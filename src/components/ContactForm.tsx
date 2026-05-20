@@ -1,15 +1,46 @@
 /*
-  ContactForm.tsx — SIMPLE CONTACT FORM
-  Use Netlify form or EmailJS for production.
-  For now, static with JS alert placeholder.
+  ContactForm.tsx — FORM KONTAK (insert ke Supabase)
 */
 
 "use client";
 
+import { useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+
+type FormState = "idle" | "submitting" | "success" | "error";
+
 export default function ContactForm() {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [organization, setOrganization] = useState("");
+  const [message, setMessage] = useState("");
+  const [state, setState] = useState<FormState>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Terima kasih! Kami akan menghubungi Anda segera. (Demo - integrasikan EmailJS/Netlify di produksi)");
+    setState("submitting");
+    setErrorMsg("");
+
+    const supabase = createClient();
+    const { error } = await supabase.from("contact_submissions").insert({
+      name,
+      email,
+      organization: organization || null,
+      message,
+    });
+
+    if (error) {
+      setState("error");
+      setErrorMsg(error.message);
+      return;
+    }
+
+    setState("success");
+    setName("");
+    setEmail("");
+    setOrganization("");
+    setMessage("");
   };
 
   return (
@@ -33,40 +64,27 @@ export default function ContactForm() {
           </p>
         </div>
 
+        {state === "success" && (
+          <div style={{ padding: "20px", marginBottom: "24px", background: "rgba(82,183,136,0.1)", border: "1px solid rgba(82,183,136,0.4)", color: "#52b788", borderRadius: "8px", textAlign: "center", fontSize: "var(--text-base)" }}>
+            Terima kasih! Pesan Anda telah kami terima. Tim kami akan menghubungi Anda dalam 24 jam kerja.
+          </div>
+        )}
+
+        {state === "error" && (
+          <div style={{ padding: "20px", marginBottom: "24px", background: "rgba(220,38,38,0.1)", border: "1px solid rgba(220,38,38,0.4)", color: "#fca5a5", borderRadius: "8px", textAlign: "center", fontSize: "var(--text-base)" }}>
+            Maaf, pesan gagal terkirim: {errorMsg}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           <div style={{ display: "flex", gap: "16px" }}>
-            <input type="text" placeholder="Nama Anda" required style={{ flex: 1, padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "var(--text-base)" }} />
-            <input type="email" placeholder="Alamat Email" required style={{ flex: 1, padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "var(--text-base)" }} />
+            <input type="text" placeholder="Nama Anda" required value={name} onChange={(e) => setName(e.target.value)} style={{ flex: 1, padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "var(--text-base)" }} />
+            <input type="email" placeholder="Alamat Email" required value={email} onChange={(e) => setEmail(e.target.value)} style={{ flex: 1, padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "var(--text-base)" }} />
           </div>
-          <input type="text" placeholder="Perusahaan/Organisasi" style={{ padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "var(--text-base)" }} />
-          <textarea placeholder="Ceritakan tentang tantangan Anda..." rows={4} required style={{ padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "var(--text-base)", resize: "vertical" }} />
-          <button 
-            type="submit" 
-            style={{ 
-              padding: "16px 40px", 
-              background: "var(--gold)", 
-              color: "var(--navy-dark)", 
-              fontFamily: "'DM Sans', sans-serif", 
-              fontSize: "var(--text-xs)", 
-              fontWeight: 600, 
-              letterSpacing: "1px", 
-              textTransform: "uppercase", 
-              cursor: "pointer", 
-              border: "none", 
-              borderRadius: "8px",
-              transition: "all 0.3s ease",
-              alignSelf: "center"
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--gold-light)";
-              e.currentTarget.style.transform = "translateY(-2px)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "var(--gold)";
-              e.currentTarget.style.transform = "translateY(0)";
-            }}
-          >
-            Kirim Pesan
+          <input type="text" placeholder="Perusahaan/Organisasi" value={organization} onChange={(e) => setOrganization(e.target.value)} style={{ padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "var(--text-base)" }} />
+          <textarea placeholder="Ceritakan tentang tantangan Anda..." rows={4} required value={message} onChange={(e) => setMessage(e.target.value)} style={{ padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "var(--text-base)", resize: "vertical" }} />
+          <button type="submit" disabled={state === "submitting"} style={{ padding: "16px 40px", background: state === "submitting" ? "rgba(201,147,58,0.5)" : "var(--gold)", color: "var(--navy-dark)", fontFamily: "'DM Sans', sans-serif", fontSize: "var(--text-xs)", fontWeight: 600, letterSpacing: "1px", textTransform: "uppercase", cursor: state === "submitting" ? "not-allowed" : "pointer", border: "none", borderRadius: "8px", transition: "all 0.3s ease", alignSelf: "center" }}>
+            {state === "submitting" ? "Mengirim..." : "Kirim Pesan"}
           </button>
         </form>
         <p style={{ fontSize: "var(--text-sm)", color: "rgba(255,255,255,0.5)", marginTop: "28px", textAlign: "center" }}>
