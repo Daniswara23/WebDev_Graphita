@@ -4,6 +4,7 @@
 
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function Hero() {
@@ -33,12 +34,11 @@ export default function Hero() {
           zIndex: 1,
         }}
       >
-        <img
+        <Image
           src="/images/hero.jpg"
           alt="Latar belakang panel surya dan pekerja"
+          fill
           style={{
-            width: "100%",
-            height: "100%",
             objectFit: "cover",
             opacity: 0.85,
           }}
@@ -111,10 +111,10 @@ export default function Hero() {
           <h1
             className="animate-on-scroll"
             style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(32px, 4vw, 56px)",
+              fontFamily: "var(--font-primary)",
+              fontSize: "var(--text-5xl)",
               fontWeight: 900,
-              lineHeight: 1.2,
+              lineHeight: "var(--line-tight)",
               marginBottom: "20px",
               color: "var(--gold-light)",
               textTransform: "uppercase",
@@ -128,16 +128,17 @@ export default function Hero() {
           <p
             className="animate-on-scroll animate-delay-200"
             style={{
-              fontSize: "14px",
-              lineHeight: 1.6,
-              color: "rgba(255, 215, 0, 0.8)",
+              fontFamily: "var(--font-primary)",
+              fontSize: "var(--text-base)",
+              lineHeight: "var(--line-normal)",
+              color: "rgba(255,255,255,0.95)",
               maxWidth: "480px",
               marginBottom: "40px",
               fontWeight: 300,
             }}
           >
-            Kami membantu bisnis dan organisasi membangun solusi sustainability
-            yang nyata dan terukur.
+            Kami membantu organisasi merancang arah keberlanjutan yang jelas,
+            sederhana, dan mudah dijalankan.
           </p>
 
           <div className="animate-on-scroll animate-delay-400" style={{ display: "flex", gap: "16px", alignItems: "center" }}>
@@ -148,8 +149,8 @@ export default function Hero() {
                 padding: "12px 30px",
                 background: "var(--gold)",
                 color: "var(--navy-dark)",
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: "12px",
+                fontFamily: "var(--font-primary)",
+                fontSize: "var(--text-xs)",
                 fontWeight: 600,
                 letterSpacing: "1px",
                 textTransform: "capitalize",
@@ -174,7 +175,8 @@ export default function Hero() {
                 alignItems: "center",
                 gap: "8px",
                 color: "var(--gold-light)",
-                fontSize: "12px",
+                fontFamily: "var(--font-primary)",
+                fontSize: "var(--text-xs)",
                 letterSpacing: "1px",
                 textTransform: "capitalize",
                 cursor: "pointer",
@@ -209,27 +211,21 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ===== SECTION LOGO KLIEN ===== */}
+      {/* ===== SECTION STATEMENT VISUAL ===== */}
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          padding: "40px 0",
-          backgroundColor: "rgba(0,0,0,0.3)",
+          justifyContent: "center",
+          padding: "40px 56px",
+          backgroundColor: "rgba(0,0,0,0.35)",
           zIndex: 5,
           position: "relative",
           width: "100%",
         }}
       >
-        <p style={{ color: "var(--gold-light)", fontSize: "14px", marginBottom: "20px" }}>Dipercaya oleh 50+ organisasi</p>
-        <div style={{ display: "flex", gap: "40px", alignItems: "center" }}>
-          <img src="/images/logo1.png" alt="Logo Klien 1" style={{ height: "30px" }} />
-          <img src="/images/logo2.png" alt="Logo Klien 2" style={{ height: "30px" }} />
-          <img src="/images/logo3.png" alt="Logo Klien 3" style={{ height: "30px" }} />
-          <img src="/images/logo4.png" alt="Logo Klien 4" style={{ height: "30px" }} />
-        </div>
-        <p style={{ color: "var(--gold-light)", fontSize: "11px", marginTop: "20px" }}>Scroll untuk melihat lebih</p>
+        <p style={{ fontFamily: "var(--font-primary)", color: "var(--gold-light)", fontSize: "var(--text-base)", maxWidth: "760px", textAlign: "center", lineHeight: "var(--line-relaxed)" }}>
+          Pernyataan kami tidak bergantung pada daftar nama. Kami menghadirkan pengalaman mitra secara visual, melalui proses yang jelas dan hasil yang dapat ditinjau.
+        </p>
       </div>
 
     </section>

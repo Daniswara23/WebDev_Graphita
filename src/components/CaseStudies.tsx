@@ -3,6 +3,7 @@
   Addresses key gap: concrete evidence to build trust.
 */
 
+import Image from "next/image";
 import Link from "next/link";
 
 type CaseStudy = {
@@ -31,16 +32,16 @@ export default function CaseStudies() {
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
-            <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "var(--gold-light)" }}>
+            <span style={{ fontSize: "var(--text-xs)", letterSpacing: "2px", textTransform: "uppercase", color: "var(--gold-light)" }}>
               Sekilas Tentang Kami
             </span>
           </div>
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(30px, 3.5vw, 48px)", fontWeight: 700, lineHeight: 1.1, color: "var(--white)" }}>
+          <h2 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-4xl)", fontWeight: 700, lineHeight: 1.1, color: "var(--white)" }}>
             Ringkasan Pendirian<br />
             <span style={{ color: "var(--gold-light)" }}>dan Komitmen SDGs</span>
           </h2>
         </div>
-        <Link href="/about" className="hover-scale" style={{ fontSize: "12px", letterSpacing: "1.5px", textTransform: "uppercase", color: "var(--green-light)", cursor: "pointer", border: "none", background: "none", marginBottom: "8px", textDecoration: "none" }}>
+        <Link href="/about" className="hover-scale" style={{ fontSize: "var(--text-xs)", letterSpacing: "1.5px", textTransform: "uppercase", color: "var(--green-light)", cursor: "pointer", border: "none", background: "none", marginBottom: "8px", textDecoration: "none" }}>
           Pelajari Lebih Lanjut →
         </Link>
       </div>
@@ -48,18 +49,24 @@ export default function CaseStudies() {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "32px" }}>
         {caseStudies.map((cs, index) => (
           <div key={index} className={`grid-item hover-lift hover-glow`} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)", padding: "40px", cursor: "pointer", animationDelay: `${index * 0.15}s` }}>
-            <img src={cs.image} alt={cs.title} style={{ width: "100%", height: "200px", objectFit: "cover", borderRadius: "8px", marginBottom: "24px" }} />
-            <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "20px", fontWeight: "700", color: "var(--white)", marginBottom: "12px" }}>
+            <Image
+              src={cs.image}
+              alt={cs.title}
+              width={1200}
+              height={200}
+              style={{ width: "100%", height: "200px", objectFit: "cover", borderRadius: "8px", marginBottom: "24px" }}
+            />
+            <h3 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-2xl)", fontWeight: "700", color: "var(--white)", marginBottom: "12px" }}>
               {cs.title}
             </h3>
-            <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", marginBottom: "16px" }}>
+            <p style={{ fontSize: "var(--text-sm)", color: "rgba(255,255,255,0.6)", marginBottom: "16px" }}>
               <strong>Pendirian:</strong> {cs.client}
             </p>
-            <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.7)", marginBottom: "8px" }}>
+            <p style={{ fontSize: "var(--text-sm)", color: "rgba(255,255,255,0.7)", marginBottom: "8px" }}>
               <strong>Deskripsi:</strong> {cs.challenge}
             </p>
-            <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.7)", marginBottom: "8px" }}><strong>Komitmen SDGs:</strong> {cs.solution}</p>
-            <p style={{ fontSize: "14px", fontWeight: "600", color: "var(--gold-light)" }}><strong>Dampak:</strong> {cs.result}</p>
+            <p style={{ fontSize: "var(--text-sm)", color: "rgba(255,255,255,0.7)", marginBottom: "8px" }}><strong>Komitmen SDGs:</strong> {cs.solution}</p>
+            <p style={{ fontSize: "var(--text-base)", fontWeight: "600", color: "var(--gold-light)" }}><strong>Dampak:</strong> {cs.result}</p>
           </div>
         ))}
       </div>

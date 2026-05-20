@@ -107,27 +107,27 @@ export default function Services() {
             <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
             <span
               style={{
-                fontSize: "11px",
+                fontSize: "var(--text-xs)",
                 letterSpacing: "2px",
                 textTransform: "uppercase",
                 color: "var(--gold-light)",
               }}
             >
-              Layanan Utama
+              Ragam Layanan
             </span>
           </div>
 
           <h2
             style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(30px, 3.5vw, 48px)",
+              fontFamily: "var(--font-primary)",
+              fontSize: "var(--text-4xl)",
               fontWeight: 700,
               lineHeight: 1.1,
               color: "var(--white)",
             }}
           >
-            Ikonografi yang mewakili<br />
-            <span style={{ color: "var(--gold-light)" }}>Aktivitas Profesional, Ilmiah, dan Teknis</span>
+            Ragam layanan kami untuk menyokong<br />
+            <span style={{ color: "var(--gold-light)" }}>perjalanan keberlanjutan Anda</span>
           </h2>
         </div>
 
@@ -135,7 +135,7 @@ export default function Services() {
           href="/services"
           className="hover-scale"
           style={{
-            fontSize: "12px",
+            fontSize: "var(--text-xs)",
             letterSpacing: "1.5px",
             textTransform: "uppercase",
             color: "var(--green-light)",
@@ -171,12 +171,13 @@ export default function Services() {
           >
             <span
               style={{
-                fontFamily: "'Playfair Display', serif",
-                fontSize: "11px",
+                fontFamily: "'Times New Roman', serif",
+                fontSize: "var(--text-xs)",
                 color: "rgba(201,147,58,0.4)",
                 letterSpacing: "2px",
                 display: "block",
                 marginBottom: "24px",
+                fontWeight: 700,
               }}
             >
               {service.num}
@@ -199,8 +200,8 @@ export default function Services() {
 
             <div
               style={{
-                fontFamily: "'Playfair Display', serif",
-                fontSize: "20px",
+                fontFamily: "var(--font-primary)",
+                fontSize: "var(--text-2xl)",
                 fontWeight: 700,
                 color: "var(--white)",
                 marginBottom: "14px",
@@ -212,8 +213,8 @@ export default function Services() {
 
             <p
               style={{
-                fontSize: "13px",
-                lineHeight: 1.7,
+                fontSize: "var(--text-sm)",
+                lineHeight: "var(--line-relaxed)",
                 color: "rgba(255,255,255,0.5)",
                 fontWeight: 300,
               }}

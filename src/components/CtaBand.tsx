@@ -32,8 +32,8 @@ export default function CtaBand() {
       <div>
         <h3
           style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "28px",
+            fontFamily: "var(--font-primary)",
+            fontSize: "var(--text-3xl)",
             fontWeight: 700,
             color: "var(--navy-dark)",  // Teks gelap di background terang
             marginBottom: "8px",
@@ -43,7 +43,7 @@ export default function CtaBand() {
         </h3>
         <p
           style={{
-            fontSize: "14px",
+            fontSize: "var(--text-base)",
             color: "rgba(15,26,48,0.65)",
             fontWeight: 300,
           }}
@@ -59,8 +59,8 @@ export default function CtaBand() {
           padding: "14px 40px",
           background: "var(--navy-dark)",
           color: "var(--gold-light)",
-          fontFamily: "'DM Sans', sans-serif",
-          fontSize: "13px",
+          fontFamily: "var(--font-primary)",
+          fontSize: "var(--text-sm)",
           fontWeight: 500,
           letterSpacing: "1.5px",
           textTransform: "uppercase",

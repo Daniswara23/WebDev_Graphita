@@ -12,6 +12,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   /*
@@ -41,6 +42,8 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const pathname = usePathname();
+
   return (
     <nav
       style={{
@@ -63,8 +66,8 @@ export default function Navbar() {
       {/* LOGO */}
       <div
         style={{
-          fontFamily: "'Playfair Display', serif",
-          fontSize: "20px",
+          fontFamily: "var(--font-primary)",
+          fontSize: "var(--text-2xl)",
           fontWeight: 700,
           color: "var(--gold-light)",
           letterSpacing: "0.5px",
@@ -87,102 +90,61 @@ export default function Navbar() {
           Kita map array menu agar tidak perlu tulis <li> berulang.
           map() = looping di React untuk membuat elemen dari array.
         */}
-        {["Home", "Tentang Kami", "Layanan", "Publikasi & Riset", "Kontak"].map((item) => (
-          <li key={item}>
-            {item === 'Home' ? (
-              <Link
-                href="/"
-                style={{
-                  color: "rgba(255,255,255,0.75)",
-                  textDecoration: "none",
-                  fontSize: "13px",
-                  letterSpacing: "1.5px",
-                  textTransform: "uppercase",
-                }}
-              >
-                {item}
-              </Link>
-            ) : item === 'Kontak' ? (
-              <Link
-                href="/contact"
-                style={{
-                  color: "rgba(255,255,255,0.75)",
-                  textDecoration: "none",
-                  fontSize: "13px",
-                  letterSpacing: "1.5px",
-                  textTransform: "uppercase",
-                }}
-              >
-                {item}
-              </Link>
-            ) : item === 'Tentang Kami' ? (
-              <Link
-                href="/about"
-                style={{
-                  color: "rgba(255,255,255,0.75)",
-                  textDecoration: "none",
-                  fontSize: "13px",
-                  letterSpacing: "1.5px",
-                  textTransform: "uppercase",
-                }}
-              >
-                {item}
-              </Link>
-            ) : item === 'Layanan' ? (
-              <Link
-                href="/services"
-                style={{
-                  color: "rgba(255,255,255,0.75)",
-                  textDecoration: "none",
-                  fontSize: "13px",
-                  letterSpacing: "1.5px",
-                  textTransform: "uppercase",
-                }}
-              >
-                {item}
-              </Link>
-            ) : item === 'Publikasi & Riset' ? (
-              <Link
-                href="/insights"
-                style={{
-                  color: "rgba(255,255,255,0.75)",
-                  textDecoration: "none",
-                  fontSize: "13px",
-                  letterSpacing: "1.5px",
-                  textTransform: "uppercase",
-                }}
-              >
-                {item}
-              </Link>
-            ) : (
-              <a
-                href={`#${item.toLowerCase()}`}
-                style={{
-                  color: "rgba(255,255,255,0.75)",
-                  textDecoration: "none",
-                  fontSize: "13px",
-                  letterSpacing: "1.5px",
-                  textTransform: "uppercase",
-                }}
-              >
-                {item}
-              </a>
-            )}
-          </li>
-        ))}
+        {["Home", "Tentang Kami", "Ragam Layanan", "Toko", "Riset dan Publikasi", "Kontak"].map((item) => {
+          const href =
+            item === "Home"
+              ? "/"
+              : item === "Tentang Kami"
+              ? "/about"
+              : item === "Ragam Layanan"
+              ? "/services"
+              : item === "Toko"
+              ? "/toko"
+              : item === "Riset dan Publikasi"
+              ? "/insights"
+              : item === "Kontak"
+              ? "/contact"
+              : `#${item.toLowerCase()}`;
+
+          const isInternal = href.startsWith("/");
+          const isActive = pathname === href;
+
+          const linkStyle = {
+            color: "rgba(255,255,255,0.75)",
+            textDecoration: "none",
+            fontSize: "var(--text-sm)",
+            letterSpacing: "1.5px",
+            textTransform: "uppercase",
+          };
+
+          return (
+            <li key={item}>
+              {isInternal ? (
+                <Link href={href} className="nav-link" aria-current={isActive ? "page" : undefined} style={linkStyle}>
+                  {item}
+                </Link>
+              ) : (
+                <a href={href} className="nav-link" style={linkStyle}>
+                  {item}
+                </a>
+              )}
+            </li>
+          );
+        })}
       </ul>
 
       {/* TOMBOL AKSI */}
       <div style={{ display: "flex", gap: "12px" }}>
         <Link href="/contact">
           <button
+            className="hover-lift hover-glow"
             style={{
               padding: "8px 22px",
               border: "1px solid var(--gold)",
               background: "var(--gold)",
               color: "var(--navy-dark)",
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "13px",
+              fontFamily: "var(--font-primary)",
+              fontSize: "var(--text-sm)",
               fontWeight: 500,
               letterSpacing: "1px",
               textTransform: "uppercase",

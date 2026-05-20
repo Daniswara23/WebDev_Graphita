@@ -76,16 +76,15 @@ export default function InsightsPage() {
         <div style={{ padding: "120px 56px 80px", textAlign: "center", background: "var(--navy-dark)" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
-            <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "var(--gold-light)" }}>
-              Publikasi & Riset
+            <span style={{ fontSize: "var(--text-xs)", letterSpacing: "2px", textTransform: "uppercase", color: "var(--gold-light)" }}>
+              Riset dan Publikasi
             </span>
           </div>
-          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 700, lineHeight: 1.1, color: "var(--white)", marginBottom: "24px" }}>
-            Wadah Produksi Pengetahuan
+          <h1 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-5xl)", fontWeight: 700, lineHeight: 1.1, color: "var(--white)", marginBottom: "24px" }}>
+            Ruang Berbagi Pengetahuan
           </h1>
-          <p style={{ fontSize: "18px", lineHeight: "1.7", color: "rgba(255,255,255,0.9)", maxWidth: "700px", margin: "0 auto" }}>
-            Kami memproduksi dan menerbitkan karya publikasi yang berkontribusi pada pengembangan ilmu pengetahuan tentang keberlanjutan, 
-            keberdayaan, dan transformasi sosial ekonomi di Indonesia.
+          <p style={{ fontSize: "var(--text-lg)", lineHeight: "var(--line-relaxed)", color: "rgba(255,255,255,0.9)", maxWidth: "700px", margin: "0 auto" }}>
+            Sebuah ruang untuk membagikan insight, riset, dan narasi yang membantu organisasi memahami peran mereka dalam keberlanjutan.
           </p>
         </div>
 

@@ -4,9 +4,10 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import StatsBar from "@/components/StatsBar";
-import Trusted from "@/components/Trusted";
 import Services from "@/components/Services";
 import CaseStudies from "@/components/CaseStudies";
+import StorePreview from "@/components/StorePreview";
+import Trusted from "@/components/Trusted";
 import Etos3T from "@/components/Etos3T";
 import CtaBand from "@/components/CtaBand";
 import Footer from "@/components/Footer";
@@ -33,11 +34,11 @@ export default function HomePage() {
         <StatsBar />
         <Trusted onViewTestimonials={() => setShowTestimonials(true)} />
 
-        {/* 3. Proof */}
         <CaseStudies />
 
         {/* 4. Value */}
         <Services />
+        <StorePreview />
 
         {/* 5. Etos */}
         <Etos3T />

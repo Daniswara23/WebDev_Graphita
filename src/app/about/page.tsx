@@ -15,125 +15,96 @@ export default function AboutPage() {
                 Tentang Kami
               </span>
             </div>
-            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 700, lineHeight: 1.1, color: "var(--white)", marginBottom: "24px" }}>
-              Fondasi Perusahaan Kami
+            <h1 style={{ fontFamily: "Goudy Old Style, Georgia, serif", fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 700, lineHeight: 1.1, color: "var(--white)", marginBottom: "24px" }}>
+              Kami bekerja dengan cara yang terasa lebih ringan
             </h1>
             <p style={{ fontSize: "18px", lineHeight: "1.7", color: "rgba(255,255,255,0.9)", maxWidth: "600px", margin: "0 auto" }}>
-              Kami adalah mitra strategis Anda dalam keberlanjutan, membantu bisnis dan organisasi mengatasi tantangan sosial, ekonomi, dan lingkungan yang kompleks.
+              Grahita Adhi Sasmita hadir untuk menjadi teman perjalanan organisasi yang ingin menjelaskan arah keberlanjutan tanpa harus terdengar berlebihan.
             </p>
           </div>
 
-          {/* Landasan Filosofi */}
+          {/* Landasan Cerita */}
           <section className="animate-on-scroll" style={{ marginBottom: "80px" }}>
             <h2 style={{ fontSize: "32px", fontWeight: 700, color: "var(--white)", marginBottom: "24px", textAlign: "center" }}>
-              Landasan Filosofi
+              Landasan Cerita
             </h2>
             <div className="hover-lift" style={{ background: "rgba(255,255,255,0.03)", padding: "48px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.06)" }}>
               <p style={{ fontSize: "18px", color: "rgba(255,255,255,0.9)", lineHeight: "1.8", marginBottom: "24px" }}>
-                Di Grahita Adhi Sasmita, kami percaya bahwa sektor swasta memiliki peran fundamental dalam membangun kesejahteraan umum dan kecerdasan bangsa. 
-                Keberlanjutan bukanlah pilihan, melainkan kewajiban moral dan strategis bagi setiap entitas bisnis modern.
+                Kami mulai dari mendengar. Setiap pendekatan kami rancang berdasarkan siapa Anda, apa yang penting bagi tim, dan bagaimana perubahan itu bisa terasa alami.
               </p>
               <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.8)", lineHeight: "1.7" }}>
-                Melalui pendekatan yang sistematis dan berbasis data, kami membantu perusahaan tidak hanya memenuhi tanggung jawab sosialnya, 
-                tetapi juga menciptakan nilai ekonomi yang berkelanjutan. Setiap solusi yang kami kembangkan dirancang untuk memberikan dampak 
-                positif yang terukur terhadap masyarakat, lingkungan, dan perekonomian nasional.
+                Alih-alih menawarkan sekadar kerangka konsep, kami membantu menyusun langkah-langkah yang bisa langsung dipakai dan ditindaklanjuti.
               </p>
             </div>
           </section>
 
-          {/* Nilai-Nilai Inti (GAS) */}
+          {/* Nilai Inti */}
           <section className="animate-on-scroll animate-delay-200" style={{ marginBottom: "80px" }}>
             <h2 style={{ fontSize: "32px", fontWeight: 700, color: "var(--white)", marginBottom: "24px", textAlign: "center" }}>
-              Nilai-Nilai Inti (GAS)
+              Nilai Inti Kami
             </h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "32px" }}>
-              {/* Gigih */}
               <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "rgba(255,255,255,0.03)", padding: "32px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.06)", textAlign: "center" }}>
-                <div style={{ fontSize: "48px", marginBottom: "16px" }}>💪</div>
+                <div style={{ width: "52px", height: "52px", margin: "0 auto 16px", borderRadius: "16px", background: "rgba(201,147,58,0.12)" }} />
                 <h3 style={{ fontSize: "24px", fontWeight: 700, color: "var(--gold)", marginBottom: "16px" }}>Gigih</h3>
                 <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.8)", lineHeight: "1.6" }}>
-                  Kami tidak pernah menyerah dalam menghadapi tantangan kompleks. Setiap proyek adalah komitmen untuk memberikan 
-                  hasil terbaik, bahkan ketika jalan terasa sulit.
+                  Kami terus mencari jalan yang paling masuk akal, bahkan ketika kondisi terlihat rumit.
                 </p>
               </div>
 
-              {/* Adaptif */}
-              <div style={{ background: "rgba(255,255,255,0.03)", padding: "32px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.06)", textAlign: "center" }}>
-                <div style={{ fontSize: "48px", marginBottom: "16px" }}>🔄</div>
+              <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "rgba(255,255,255,0.03)", padding: "32px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.06)", textAlign: "center" }}>
+                <div style={{ width: "52px", height: "52px", margin: "0 auto 16px", borderRadius: "16px", background: "rgba(201,147,58,0.12)" }} />
                 <h3 style={{ fontSize: "24px", fontWeight: 700, color: "var(--gold)", marginBottom: "16px" }}>Adaptif</h3>
                 <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.8)", lineHeight: "1.6" }}>
-                  Dunia berubah dengan cepat, dan kami siap beradaptasi. Setiap solusi disesuaikan dengan konteks spesifik 
-                  klien dan perkembangan terkini.
+                  Solusi kami disesuaikan dengan ritme organisasi, bukan paksa dalam satu formula yang sama untuk semua.
                 </p>
               </div>
 
-              {/* Sinergi */}
-              <div style={{ background: "rgba(255,255,255,0.03)", padding: "32px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.06)", textAlign: "center" }}>
-                <div style={{ fontSize: "48px", marginBottom: "16px" }}>🤝</div>
+              <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "rgba(255,255,255,0.03)", padding: "32px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.06)", textAlign: "center" }}>
+                <div style={{ width: "52px", height: "52px", margin: "0 auto 16px", borderRadius: "16px", background: "rgba(201,147,58,0.12)" }} />
                 <h3 style={{ fontSize: "24px", fontWeight: 700, color: "var(--gold)", marginBottom: "16px" }}>Sinergi</h3>
                 <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.8)", lineHeight: "1.6" }}>
-                  Kami percaya kekuatan kolaborasi. Setiap proyek melibatkan pemangku kepentingan yang tepat untuk 
-                  menciptakan dampak maksimal.
+                  Kolaborasi jadi pusat. Kami bekerja dengan orang-orang yang punya tujuan serupa untuk kelanjutan yang lebih nyata.
                 </p>
               </div>
             </div>
           </section>
 
-          {/* Komitmen SDGs */}
+          {/* Fokus Dampak */}
           <section className="animate-on-scroll animate-delay-400">
             <h2 style={{ fontSize: "32px", fontWeight: 700, color: "var(--white)", marginBottom: "24px", textAlign: "center" }}>
-              Komitmen SDGs
+              Fokus Dampak
             </h2>
             <p style={{ fontSize: "18px", color: "rgba(255,255,255,0.9)", lineHeight: "1.7", textAlign: "center", marginBottom: "48px" }}>
-              Kami berkomitmen untuk berkontribusi pada pencapaian Sustainable Development Goals (SDGs) melalui solusi bisnis yang berkelanjutan.
+              Kami bekerja dalam area yang jelas: ekonomi inklusif, kesehatan kerja, inovasi, inklusi sosial, dan kemitraan yang berkelanjutan.
             </p>
-            
+
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
-              {/* SDG 1 */}
               <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "rgba(201,147,58,0.1)", padding: "24px", borderRadius: "12px", border: "1px solid rgba(201,147,58,0.3)" }}>
-                <h4 style={{ fontSize: "20px", fontWeight: 700, color: "var(--gold)", marginBottom: "12px" }}>SDG 1: Tanpa Kemiskinan</h4>
+                <h4 style={{ fontSize: "20px", fontWeight: 700, color: "var(--gold)", marginBottom: "12px" }}>Pemberdayaan Ekonomi</h4>
                 <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)", lineHeight: "1.6" }}>
-                  Membantu perusahaan menciptakan lapangan kerja berkualitas dan program kesejahteraan yang berdampak pada pengurangan kemiskinan struktural.
+                  Mendorong peluang kerja dan usaha lokal yang memberi dampak ke masyarakat.
                 </p>
               </div>
 
-              {/* SDG 3 */}
-              <div style={{ background: "rgba(201,147,58,0.1)", padding: "24px", borderRadius: "12px", border: "1px solid rgba(201,147,58,0.3)" }}>
-                <h4 style={{ fontSize: "20px", fontWeight: 700, color: "var(--gold)", marginBottom: "12px" }}>SDG 3: Kesehatan yang Baik</h4>
+              <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "rgba(201,147,58,0.1)", padding: "24px", borderRadius: "12px", border: "1px solid rgba(201,147,58,0.3)" }}>
+                <h4 style={{ fontSize: "20px", fontWeight: 700, color: "var(--gold)", marginBottom: "12px" }}>Kesehatan & Kesejahteraan</h4>
                 <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)", lineHeight: "1.6" }}>
-                  Mengembangkan solusi yang meningkatkan kesehatan dan keselamatan kerja, serta mendukung program kesehatan masyarakat.
+                  Membantu organisasi menghadirkan lingkungan kerja yang lebih aman dan lebih manusiawi.
                 </p>
               </div>
 
-              {/* SDG 8 */}
-              <div style={{ background: "rgba(201,147,58,0.1)", padding: "24px", borderRadius: "12px", border: "1px solid rgba(201,147,58,0.3)" }}>
-                <h4 style={{ fontSize: "20px", fontWeight: 700, color: "var(--gold)", marginBottom: "12px" }}>SDG 8: Pekerjaan Layak</h4>
+              <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "rgba(201,147,58,0.1)", padding: "24px", borderRadius: "12px", border: "1px solid rgba(201,147,58,0.3)" }}>
+                <h4 style={{ fontSize: "20px", fontWeight: 700, color: "var(--gold)", marginBottom: "12px" }}>Inovasi yang Relevan</h4>
                 <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)", lineHeight: "1.6" }}>
-                  Mendorong praktik bisnis yang menciptakan pekerjaan yang layak, aman, dan berkelanjutan dengan upah yang adil.
+                  Menyusun pendekatan baru yang sesuai konteks dan bisa dipraktikkan setiap hari.
                 </p>
               </div>
 
-              {/* SDG 9 */}
-              <div style={{ background: "rgba(201,147,58,0.1)", padding: "24px", borderRadius: "12px", border: "1px solid rgba(201,147,58,0.3)" }}>
-                <h4 style={{ fontSize: "20px", fontWeight: 700, color: "var(--gold)", marginBottom: "12px" }}>SDG 9: Industri dan Inovasi</h4>
+              <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "rgba(201,147,58,0.1)", padding: "24px", borderRadius: "12px", border: "1px solid rgba(201,147,58,0.3)" }}>
+                <h4 style={{ fontSize: "20px", fontWeight: 700, color: "var(--gold)", marginBottom: "12px" }}>Kemitraan Nyata</h4>
                 <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)", lineHeight: "1.6" }}>
-                  Mendukung pengembangan infrastruktur yang berkelanjutan dan inovasi teknologi untuk pertumbuhan ekonomi inklusif.
-                </p>
-              </div>
-
-              {/* SDG 10 */}
-              <div style={{ background: "rgba(201,147,58,0.1)", padding: "24px", borderRadius: "12px", border: "1px solid rgba(201,147,58,0.3)" }}>
-                <h4 style={{ fontSize: "20px", fontWeight: 700, color: "var(--gold)", marginBottom: "12px" }}>SDG 10: Berkurangnya Kesenjangan</h4>
-                <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)", lineHeight: "1.6" }}>
-                  Mendorong praktik bisnis yang mengurangi kesenjangan sosial dan ekonomi melalui program inklusi dan pemberdayaan.
-                </p>
-              </div>
-
-              {/* SDG 17 */}
-              <div style={{ background: "rgba(201,147,58,0.1)", padding: "24px", borderRadius: "12px", border: "1px solid rgba(201,147,58,0.3)" }}>
-                <h4 style={{ fontSize: "20px", fontWeight: 700, color: "var(--gold)", marginBottom: "12px" }}>SDG 17: Kemitraan Global</h4>
-                <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)", lineHeight: "1.6" }}>
-                  Membangun kemitraan strategis antara sektor swasta, pemerintah, dan masyarakat sipil untuk pencapaian tujuan bersama.
+                  Membangun relasi lintas sektor yang mendukung keberlanjutan jangka panjang.
                 </p>
               </div>
             </div>

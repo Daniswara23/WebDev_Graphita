@@ -15,7 +15,7 @@ import ScrollAnimations from "@/components/ScrollAnimations";
 // Metadata = informasi halaman yang muncul di tab browser & hasil Google
 export const metadata: Metadata = {
   title: "PT Grahita Adhi Sasmita",
-  description: "Menjadi sahabat menuju keberlanjutan yang maknawi. Konsultan sustainability terpercaya.",
+  description: "Sahabat organisasi dalam membangun jejak keberlanjutan yang jelas, personal, dan terasa.",
 };
 
 export default function RootLayout({

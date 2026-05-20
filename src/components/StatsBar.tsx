@@ -19,10 +19,10 @@ type StatItem = {
 // Data statistik disimpan di luar komponen
 // Keuntungan: mudah diupdate tanpa ubah struktur komponen
 const stats: StatItem[] = [
-  { number: "50+", label: "Organisasi Dipercaya" },
-  { number: "12", label: "Tahun Pengalaman" },
-  { number: "98%", label: "Tingkat Kepuasan" },
-  { number: "$10M+", label: "Dampak Bisnis Tersampaikan" },
+  { number: "50+", label: "Portofolio visual" },
+  { number: "12", label: "Tahun pengalaman" },
+  { number: "98%", label: "Kepuasan mitra" },
+  { number: "$10M+", label: "Dampak bisnis nyata" },
 ];
 
 export default function StatsBar() {
@@ -59,7 +59,7 @@ export default function StatsBar() {
           {/* Angka besar */}
           <div
             style={{
-              fontFamily: "'Playfair Display', serif",
+              fontFamily: "'Times New Roman', serif",
               fontSize: "38px",
               fontWeight: 700,
               color: "var(--gold-light)",
@@ -72,7 +72,7 @@ export default function StatsBar() {
           {/* Label kecil */}
           <div
             style={{
-              fontSize: "11px",
+              fontSize: "var(--text-xs)",
               letterSpacing: "1.5px",
               textTransform: "uppercase",
               color: "rgba(255,255,255,0.45)",

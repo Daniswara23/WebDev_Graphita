@@ -8,10 +8,10 @@ export default function CasesPage() {
       <Navbar />
       <main>
         <div style={{ padding: "120px 56px 48px", textAlign: "center", background: "rgba(255,255,255,0.02)" }}>
-          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 700, color: "var(--white)" }}>
+          <h1 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-5xl)", fontWeight: 700, color: "var(--white)" }}>
             Studi Kasus
           </h1>
-          <p style={{ fontSize: "18px", color: "rgba(255,255,255,0.8)", maxWidth: "600px", margin: "0 auto" }}>
+          <p style={{ fontSize: "var(--text-lg)", color: "rgba(255,255,255,0.8)", maxWidth: "600px", margin: "0 auto" }}>
             Hasil nyata dari kemitraan nyata. Lihat bagaimana kami memberikan dampak yang terukur.
           </p>
         </div>

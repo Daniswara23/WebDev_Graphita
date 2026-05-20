@@ -5,7 +5,29 @@
 */
 
 /* Import font dari Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  /* Typography */
+  --font-primary: "Goudy Old Style", Georgia, serif;
+  
+  /* Font Sizes - Typography Scale */
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 14px;
+  --text-lg: 16px;
+  --text-xl: 18px;
+  --text-2xl: 20px;
+  --text-3xl: 24px;
+  --text-4xl: clamp(32px, 3.5vw, 44px);
+  --text-5xl: clamp(32px, 4vw, 56px);
+  
+  /* Line Heights */
+  --line-tight: 1.1;
+  --line-normal: 1.6;
+  --line-relaxed: 1.7;
+  --line-loose: 1.8;
+}
 
 /* 
   :root = selector untuk elemen paling atas (html).
@@ -31,7 +53,7 @@
 }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-primary);
   background-color: var(--navy-dark);
   color: var(--white);
   overflow-x: hidden; /* Mencegah scroll horizontal */
@@ -178,6 +200,44 @@ button, a, .card, .service-card, .article-card {
   transform: scale(1.02);
 }
 
+.button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 32px;
+  background: var(--gold);
+  color: var(--navy-dark);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.button-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: rgba(201,147,58,0.1);
+  border: 1px solid rgba(201,147,58,0.3);
+  border-radius: 8px;
+  color: var(--gold-light);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.social-link:hover {
+  background: rgba(201,147,58,0.2);
+  border-color: rgba(201,147,58,0.6);
+}
+
 /* Loading animation */
 @keyframes pulse {
   0%, 100% {
@@ -196,4 +256,35 @@ button, a, .card, .service-card, .article-card {
 .parallax-slow {
   transform: translateZ(0);
   will-change: transform;
+}
+
+/* Navbar link underline animation */
+.nav-link {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 6px; /* space for the underline */
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 2px;
+  width: 100%;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: center center;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-link::after {
+    transition: none;
+  }
 }

@@ -18,28 +18,28 @@ export default function ContactForm() {
         <div style={{ textAlign: "center", marginBottom: "56px" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
-            <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "var(--gold-light)" }}>
+            <span style={{ fontSize: "var(--text-xs)", letterSpacing: "2px", textTransform: "uppercase", color: "var(--gold-light)" }}>
               Formulir Kontak
             </span>
           </div>
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(32px, 3.5vw, 44px)", fontWeight: 700, lineHeight: 1.1, color: "var(--white)", marginBottom: "16px" }}>
+          <h2 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-4xl)", fontWeight: 700, lineHeight: 1.1, color: "var(--white)", marginBottom: "16px" }}>
             Mari Memulai Percakapan
           </h2>
-          <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.8)", marginBottom: "8px" }}>
+          <p style={{ fontSize: "var(--text-lg)", color: "rgba(255,255,255,0.8)", marginBottom: "8px" }}>
             Bagikan visi keberlanjutan Anda, dan kami akan merancang solusi yang tepat untuk organisasi Anda.
           </p>
-          <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.6)" }}>
+          <p style={{ fontSize: "var(--text-base)", color: "rgba(255,255,255,0.6)" }}>
             Tim ahli kami siap memberikan konsultasi gratis dalam 24 jam kerja.
           </p>
         </div>
 
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           <div style={{ display: "flex", gap: "16px" }}>
-            <input type="text" placeholder="Nama Anda" required style={{ flex: 1, padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "14px" }} />
-            <input type="email" placeholder="Alamat Email" required style={{ flex: 1, padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "14px" }} />
+            <input type="text" placeholder="Nama Anda" required style={{ flex: 1, padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "var(--text-base)" }} />
+            <input type="email" placeholder="Alamat Email" required style={{ flex: 1, padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "var(--text-base)" }} />
           </div>
-          <input type="text" placeholder="Perusahaan/Organisasi" style={{ padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "14px" }} />
-          <textarea placeholder="Ceritakan tentang tantangan Anda..." rows={4} required style={{ padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "14px", resize: "vertical" }} />
+          <input type="text" placeholder="Perusahaan/Organisasi" style={{ padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "var(--text-base)" }} />
+          <textarea placeholder="Ceritakan tentang tantangan Anda..." rows={4} required style={{ padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "var(--text-base)", resize: "vertical" }} />
           <button 
             type="submit" 
             style={{ 
@@ -47,7 +47,7 @@ export default function ContactForm() {
               background: "var(--gold)", 
               color: "var(--navy-dark)", 
               fontFamily: "'DM Sans', sans-serif", 
-              fontSize: "14px", 
+              fontSize: "var(--text-xs)", 
               fontWeight: 600, 
               letterSpacing: "1px", 
               textTransform: "uppercase", 
@@ -69,8 +69,8 @@ export default function ContactForm() {
             Kirim Pesan
           </button>
         </form>
-        <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", marginTop: "28px", textAlign: "center" }}>
-          Data Anda dilindungi dengan aman dan hanya digunakan untuk menghubungi Anda kembali.
+        <p style={{ fontSize: "var(--text-sm)", color: "rgba(255,255,255,0.5)", marginTop: "28px", textAlign: "center" }}>
+          Data Anda dilindungi dengan aman, dikirim melalui enkripsi, dan hanya digunakan untuk tindak lanjut yang relevan.
         </p>
       </div>
     </section>

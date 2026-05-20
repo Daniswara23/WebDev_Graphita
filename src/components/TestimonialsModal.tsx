@@ -69,8 +69,8 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
                 Apa Kata Mitra
               </span>
             </div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "32px", fontWeight: 700, color: "var(--white)" }}>
-              Dipercaya Pemimpin Industri
+            <h2 style={{ fontFamily: "Goudy Old Style, Georgia, serif", fontSize: "32px", fontWeight: 700, color: "var(--white)" }}>
+              Pengalaman Mitra dalam Cerita
             </h2>
           </div>
           <button
@@ -118,7 +118,7 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
                   marginBottom: "20px",
                 }}
               >
-                "{t.quote}"
+                &ldquo;{t.quote}&rdquo;
               </p>
               <div>
                 <div style={{ fontWeight: "600", color: "var(--white)", marginBottom: "4px", fontSize: "13px" }}>
