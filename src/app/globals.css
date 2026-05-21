@@ -1,0 +1,290 @@
+/* 
+  globals.css
+  File ini adalah CSS global — berlaku untuk SEMUA halaman.
+  Di sini kita definisikan variabel warna (CSS Variables) dan reset dasar.
+*/
+
+/* Import font dari Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  /* Typography */
+  --font-primary: "Goudy Old Style", Georgia, serif;
+  
+  /* Font Sizes - Typography Scale */
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 14px;
+  --text-lg: 16px;
+  --text-xl: 18px;
+  --text-2xl: 20px;
+  --text-3xl: 24px;
+  --text-4xl: clamp(32px, 3.5vw, 44px);
+  --text-5xl: clamp(32px, 4vw, 56px);
+  
+  /* Line Heights */
+  --line-tight: 1.1;
+  --line-normal: 1.6;
+  --line-relaxed: 1.7;
+  --line-loose: 1.8;
+}
+
+/* 
+  :root = selector untuk elemen paling atas (html).
+  CSS Variables di sini bisa dipakai di seluruh project dengan var(--nama).
+  Keuntungan: kalau mau ganti warna, cukup ubah di sini saja.
+*/
+:root {
+  --navy: #1a2744;
+  --navy-dark: #0f1a30;
+  --gold: #c9933a;
+  --gold-light: #e8b86d;
+  --green: #2d6a4f;
+  --green-light: #52b788;
+  --cream: #f8f5ef;
+  --white: #ffffff;
+}
+
+/* Reset dasar — menghapus margin/padding bawaan browser */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--navy-dark);
+  color: var(--white);
+  overflow-x: hidden; /* Mencegah scroll horizontal */
+}
+
+/* ===== ANIMASI ELEGANT ===== */
+
+/* Keyframe Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(201, 147, 58, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(201, 147, 58, 0.5);
+  }
+}
+
+/* Utility Classes untuk Animasi */
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.8s ease-out forwards;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.7s ease-out forwards;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Delay classes untuk staggered animations */
+.animate-delay-100 { animation-delay: 0.1s; }
+.animate-delay-200 { animation-delay: 0.2s; }
+.animate-delay-300 { animation-delay: 0.3s; }
+.animate-delay-400 { animation-delay: 0.4s; }
+.animate-delay-500 { animation-delay: 0.5s; }
+
+/* Initial state untuk animasi */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-on-scroll.animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smooth transitions untuk semua interactive elements */
+button, a, .card, .service-card, .article-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Grid items animation state */
+.grid-item {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.grid-item.animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover effects yang lebih smooth */
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 10px 30px rgba(201, 147, 58, 0.2);
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+.button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 32px;
+  background: var(--gold);
+  color: var(--navy-dark);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.button-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: rgba(201,147,58,0.1);
+  border: 1px solid rgba(201,147,58,0.3);
+  border-radius: 8px;
+  color: var(--gold-light);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.social-link:hover {
+  background: rgba(201,147,58,0.2);
+  border-color: rgba(201,147,58,0.6);
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.loading {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Subtle parallax effect untuk background elements */
+.parallax-slow {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Navbar link underline animation */
+.nav-link {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 6px; /* space for the underline */
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 2px;
+  width: 100%;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: center center;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-link::after {
+    transition: none;
+  }
+}
