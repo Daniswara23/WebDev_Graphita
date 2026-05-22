@@ -5,9 +5,9 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import StatsBar from "@/components/StatsBar";
 import Services from "@/components/Services";
-import CaseStudies from "@/components/CaseStudies";
+import AboutOverview from "@/components/AboutOverview";
 import StorePreview from "@/components/StorePreview";
-import Trusted from "@/components/Trusted";
+import TestimonialTrigger from "@/components/TestimonialTrigger";
 import Etos3T from "@/components/Etos3T";
 import CtaBand from "@/components/CtaBand";
 import Footer from "@/components/Footer";
@@ -26,9 +26,9 @@ export default function HomePage() {
 
         {/* 2. Trust */}
         <StatsBar />
-        <Trusted onViewTestimonials={() => setShowTestimonials(true)} />
+        <TestimonialTrigger onViewTestimonials={() => setShowTestimonials(true)} />
 
-        <CaseStudies />
+        <AboutOverview />
 
         {/* 4. Value */}
         <Services />

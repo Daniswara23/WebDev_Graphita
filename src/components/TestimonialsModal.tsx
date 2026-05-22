@@ -1,7 +1,7 @@
 /*
   TestimonialsModal.tsx — TESTIMONIALS POPUP MODAL
   Data diambil dari tabel `testimonials` di Supabase.
-  Tampilan tidak berubah.
+  Animasi: modal scale-in, overlay fade, staggered cards.
 */
 
 "use client";
@@ -18,8 +18,12 @@ type Testimonial = {
 
 export default function TestimonialsModal({ onClose }: { onClose: () => void }) {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // Trigger mounted state untuk entrance animation
+    requestAnimationFrame(() => setMounted(true));
+
     supabase
       .from("testimonials")
       .select("id, quote, author, company")
@@ -43,6 +47,8 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
           background: "rgba(0,0,0,0.7)",
           zIndex: 999,
           backdropFilter: "blur(4px)",
+          opacity: mounted ? 1 : 0,
+          transition: "opacity 0.4s ease-out",
         }}
       />
 
@@ -52,7 +58,11 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
           position: "fixed",
           top: "50%",
           left: "50%",
-          transform: "translate(-50%, -50%)",
+          transform: mounted
+            ? "translate(-50%, -50%) scale(1)"
+            : "translate(-50%, -50%) scale(0.92)",
+          opacity: mounted ? 1 : 0,
+          transition: "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
           background: "rgba(15,26,48,0.98)",
           border: "1px solid rgba(201,147,58,0.2)",
           borderRadius: "12px",
@@ -66,15 +76,53 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
         }}
       >
         {/* Header */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "32px" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: "32px",
+            opacity: mounted ? 1 : 0,
+            transform: mounted ? "translateY(0)" : "translateY(20px)",
+            transition: "all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s",
+          }}
+        >
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-              <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
-              <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "var(--gold-light)" }}>
+              <div
+                style={{
+                  width: "24px",
+                  height: "1px",
+                  background: "var(--gold)",
+                  transform: mounted ? "scaleX(1)" : "scaleX(0)",
+                  transformOrigin: "left center",
+                  transition: "transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.35s",
+                }}
+              />
+              <span
+                style={{
+                  fontSize: "11px",
+                  letterSpacing: "2px",
+                  textTransform: "uppercase",
+                  color: "var(--gold-light)",
+                  opacity: mounted ? 1 : 0,
+                  transition: "opacity 0.5s ease-out 0.4s",
+                }}
+              >
                 Apa Kata Mitra
               </span>
             </div>
-            <h2 style={{ fontFamily: "Goudy Old Style, Georgia, serif", fontSize: "32px", fontWeight: 700, color: "var(--white)" }}>
+            <h2
+              style={{
+                fontFamily: "Goudy Old Style, Georgia, serif",
+                fontSize: "32px",
+                fontWeight: 700,
+                color: "var(--white)",
+                opacity: mounted ? 1 : 0,
+                transform: mounted ? "translateY(0)" : "translateY(15px)",
+                transition: "all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.25s",
+              }}
+            >
               Pengalaman Mitra dalam Cerita
             </h2>
           </div>
@@ -92,10 +140,16 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              transition: "color 0.3s ease",
+              transition: "color 0.3s ease, transform 0.3s ease",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--white)")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "var(--white)";
+              e.currentTarget.style.transform = "rotate(90deg)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+              e.currentTarget.style.transform = "rotate(0deg)";
+            }}
           >
             ✕
           </button>
@@ -103,7 +157,7 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
 
         {/* Testimonials grid */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
-          {testimonials.map((t) => (
+          {testimonials.map((t, index) => (
             <div
               key={t.id}
               style={{
@@ -112,6 +166,9 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
                 background: "rgba(255,255,255,0.03)",
                 border: "1px solid rgba(255,255,255,0.06)",
                 borderRadius: "8px",
+                opacity: mounted ? 1 : 0,
+                transform: mounted ? "translateY(0)" : "translateY(30px)",
+                transition: `all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${0.35 + index * 0.1}s`,
               }}
             >
               <p

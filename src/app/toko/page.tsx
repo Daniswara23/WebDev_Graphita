@@ -21,8 +21,8 @@ type Product = {
 };
 
 const marketplaces = [
-  { name: "Tokopedia", color: "#23AB4F", href: "https://www.tokopedia.com/" },
-  { name: "Shopee",    color: "#EE4D2D", href: "https://shopee.co.id/" },
+  { name: "Tokopedia", href: "https://www.tokopedia.com/" },
+  { name: "Shopee",    href: "https://shopee.co.id/" },
 ];
 
 // Styles constants
@@ -54,15 +54,13 @@ export default function TokoPage() {
     base: {
       display:        "inline-flex" as const,
       alignItems:     "center" as const,
-      gap:            "10px",
-      padding:        "16px 28px",
-      minWidth:       "220px",
-      borderRadius:   "16px",
-      color:          "white",
-      textDecoration: "none" as const,
-      fontWeight:     700,
       justifyContent: "center" as const,
+      padding:        "20px 48px",
+      borderRadius:   "16px",
+      textDecoration: "none" as const,
       transition:     "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+      border:         "1px solid rgba(255,255,255,0.1)",
+      background:     "rgba(255,255,255,0.05)",
     },
   }), []);
 
@@ -71,28 +69,29 @@ export default function TokoPage() {
       <Navbar />
       <main style={{ minHeight: "100vh", background: "var(--navy-dark)" }}>
         <section style={SHARED_STYLES.headerSection}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+          <div className="animate-on-scroll" style={{ display: "inline-flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
             <span style={{ fontSize: "var(--text-xs)", letterSpacing: "2px", textTransform: "uppercase", color: "var(--gold-light)" }}>
               Toko Pangan Asli
             </span>
           </div>
-          <h1 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-5xl)", fontWeight: 700, color: "var(--white)", lineHeight: 1.05, marginBottom: "24px" }}>
+          <h1 className="animate-on-scroll animate-delay-100" style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-5xl)", fontWeight: 700, color: "var(--white)", lineHeight: 1.05, marginBottom: "24px" }}>
             Produk pangan asli, langsung dari petani dan UMKM lokal
           </h1>
-          <p style={{ maxWidth: "760px", margin: "0 auto", color: "rgba(255,255,255,0.75)", lineHeight: 1.9, fontSize: "var(--text-lg)" }}>
+          <p className="animate-on-scroll animate-delay-200" style={{ maxWidth: "760px", margin: "0 auto", color: "rgba(255,255,255,0.75)", lineHeight: 1.9, fontSize: "var(--text-lg)" }}>
             Semua produk difokuskan pada keaslian, transparansi asal, dan dukungan untuk ekosistem pangan lokal. Pilih produk, lalu lanjutkan pembelian melalui Tokopedia, Shopee, atau channel e-commerce resmi kami.
           </p>
         </section>
 
         <section style={SHARED_STYLES.sectionPadding}>
           <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "32px" }}>
+            <div className="animate-on-scroll" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "32px" }}>
               {products.map((product) => (
                 <div
                   key={product.id}
                   onMouseEnter={() => setHoveredProduct(product.id)}
                   onMouseLeave={() => setHoveredProduct(null)}
+                  className="grid-item hover-lift"
                   style={{
                     borderRadius: "20px",
                     overflow: "hidden",
@@ -219,38 +218,45 @@ export default function TokoPage() {
 
         <section style={SHARED_STYLES.marketplaceSection}>
           <div style={{ maxWidth: "1080px", margin: "0 auto", textAlign: "center" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+            <div className="animate-on-scroll" style={{ display: "inline-flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
               <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
               <span style={{ fontSize: "var(--text-xs)", letterSpacing: "2px", textTransform: "uppercase", color: "var(--gold-light)" }}>
                 Marketplace terhubung
               </span>
             </div>
-            <h2 style={{ fontSize: "var(--text-4xl)", fontWeight: 700, color: "var(--white)", marginBottom: "18px" }}>
+            <h2 className="animate-on-scroll animate-delay-100" style={{ fontSize: "var(--text-4xl)", fontWeight: 700, color: "var(--white)", marginBottom: "18px" }}>
               Integrasi mudah dengan platform jual beli populer
             </h2>
-            <p style={{ maxWidth: "660px", margin: "0 auto", color: "rgba(255,255,255,0.75)", lineHeight: 1.8, marginBottom: "40px" }}>
+            <p className="animate-on-scroll animate-delay-200" style={{ maxWidth: "660px", margin: "0 auto", color: "rgba(255,255,255,0.75)", lineHeight: 1.8, marginBottom: "40px" }}>
               Beli produk asli lewat marketplace resmi, dengan pilihan checkout cepat dan transparansi harga. Ideal untuk pembeli yang ingin belanja praktis dan terpercaya.
             </p>
-            <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "18px" }}>
+            <div className="animate-on-scroll animate-delay-300" style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "24px" }}>
               {marketplaces.map((market) => (
                 <a
                   key={market.name}
                   href={market.href}
                   target="_blank"
                   rel="noreferrer"
-                  style={{ ...marketplaceButtonStyles.base, background: market.color }}
+                  className="hover-lift"
+                  style={marketplaceButtonStyles.base}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "translateY(-4px)";
-                    e.currentTarget.style.boxShadow = "0 15px 35px rgba(0,0,0,0.3)";
-                    e.currentTarget.style.opacity = "0.95";
+                    e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.3)";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "translateY(0)";
                     e.currentTarget.style.boxShadow = "none";
-                    e.currentTarget.style.opacity = "1";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
                   }}
                 >
-                  {market.name}
+                  <img
+                    src={`/images/${market.name.toLowerCase()}-logo.png`}
+                    alt={market.name}
+                    style={{ height: "48px", objectFit: "contain" }}
+                  />
                 </a>
               ))}
             </div>

@@ -36,11 +36,15 @@ export default function StorePreview() {
     <section style={{ padding: "80px 56px", background: "rgba(255,255,255,0.02)" }}>
       <div style={{ maxWidth: "1080px", margin: "0 auto" }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "16px", marginBottom: "42px" }}>
-          <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "var(--gold-light)" }}>
-            Produk Asli & Terpercaya
-          </span>
+          {/* Header dengan garis kiri dan teks */}
+          <div style={{ display: "flex", alignItems: "center", gap: "20px", justifyContent: "center" }}>
+            <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
+            <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "var(--gold-light)", whiteSpace: "nowrap" }}>
+              Produk Asli & Terpercaya
+            </span>
+          </div>
           <h2 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-4xl)", fontWeight: 700, color: "var(--white)", textAlign: "center", maxWidth: "720px" }}>
-            Belanja pangan asli langsung dari mitra lokal, terhubung dengan Tokopedia dan Shopee.
+            Belanja pangan asli langsung dari mitra lokal, terhubung dengan Shopee.
           </h2>
           <p style={{ maxWidth: "720px", color: "rgba(255,255,255,0.75)", lineHeight: 1.8, textAlign: "center", fontSize: "var(--text-lg)" }}>
             Jelajah produk pilihan dan dapatkan jaminan kualitas asli. Setiap produk di toko kami membawa cerita petani dan UMKM Indonesia.

@@ -1,13 +1,12 @@
 "use client";
 
 /*
-  CaseStudies.tsx — SEKSI STUDI KASUS
+  AboutOverview.tsx — SEKSI TENTANG KAMI (PROFIL PERUSAHAAN)
   Data diambil dari tabel `case_studies` di Supabase.
   Tampilan tidak berubah.
 */
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 
@@ -21,7 +20,7 @@ type CaseStudy = {
   image_url: string | null;
 };
 
-export default function CaseStudies() {
+export default function AboutOverview() {
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
 
   useEffect(() => {
@@ -57,15 +56,12 @@ export default function CaseStudies() {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "32px" }}>
         {caseStudies.map((cs, index) => (
           <div key={cs.id} className="grid-item hover-lift hover-glow" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)", padding: "40px", cursor: "pointer", animationDelay: `${index * 0.15}s` }}>
-            {cs.image_url && (
-              <Image
-                src={cs.image_url}
-                alt={cs.title}
-                width={1200}
-                height={200}
-                style={{ width: "100%", height: "200px", objectFit: "cover", borderRadius: "8px", marginBottom: "24px" }}
-              />
-            )}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/sdg.jpg"
+              alt="SDGs"
+              style={{ maxWidth: "700px", width: "100%", height: "auto", borderRadius: "8px", marginBottom: "24px", display: "block" }}
+            />
             <h3 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-2xl)", fontWeight: "700", color: "var(--white)", marginBottom: "12px" }}>
               {cs.title}
             </h3>

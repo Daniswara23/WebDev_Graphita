@@ -1,11 +1,10 @@
 /*
-  Trusted.tsx — SECTION LOGO KLIEN
-  
-  Menampilkan logo/nama perusahaan yang sudah jadi klien.
-  Pola sama: data array + .map()
+  TestimonialTrigger.tsx — TRIGGER TOMBOL TESTIMONIAL
+   
+  Menampilkan tombol untuk membuka modal testimoni mitra.
 */
 
-export default function Trusted({ onViewTestimonials }: { onViewTestimonials: () => void }) {
+export default function TestimonialTrigger({ onViewTestimonials }: { onViewTestimonials: () => void }) {
   return (
     <div
       style={{

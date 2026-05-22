@@ -6,9 +6,31 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+
+const HERO_IMAGES = [
+  "/images/hero.jpg",
+  "/images/hero1.jpg",
+  "/images/hero2.jpg",
+];
 
 export default function Hero() {
   const router = useRouter();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+        setIsTransitioning(false);
+      }, 500);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const goToContact = () => {
     router.push("/contact");
   };
@@ -35,12 +57,14 @@ export default function Hero() {
         }}
       >
         <Image
-          src="/images/hero.jpg"
-          alt="Latar belakang panel surya dan pekerja"
+          src={HERO_IMAGES[currentImageIndex]}
+          alt="Latar belakang Graphita"
           fill
+          priority
           style={{
             objectFit: "cover",
-            opacity: 0.85,
+            opacity: isTransitioning ? 0 : 0.85,
+            transition: "opacity 0.5s ease-in-out",
           }}
         />
 
