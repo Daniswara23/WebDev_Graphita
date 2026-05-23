@@ -1,6 +1,7 @@
 /*
   src/lib/supabase/proxy.ts — HELPER UNTUK SESSION REFRESH
   Dipanggil dari src/proxy.ts (Next.js 16 — pengganti middleware).
+  Hanya refresh session — auth guard ditangani layout.tsx.
 */
 
 import { createServerClient } from "@supabase/ssr";
@@ -30,26 +31,8 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const pathname = request.nextUrl.pathname;
-  const needsAuth =
-    pathname.startsWith("/mitra") && !pathname.startsWith("/mitra/login");
-
-  if (needsAuth && !user) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/mitra/login";
-    url.searchParams.set("next", pathname);
-    return NextResponse.redirect(url);
-  }
-
-  if (pathname === "/mitra/login" && user) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/mitra/dashboard";
-    return NextResponse.redirect(url);
-  }
+  // Refresh session — biarkan layout.tsx yang handle redirect
+  await supabase.auth.getUser();
 
   return supabaseResponse;
 }

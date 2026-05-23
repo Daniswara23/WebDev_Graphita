@@ -12,7 +12,7 @@ const initialState: LoginState = {};
 
 export default function LoginForm() {
   const params = useSearchParams();
-  const next = params.get("next") ?? "/mitra/dashboard";
+  const next = params.get("next") ?? "/portal/dashboard";
   const [state, formAction, pending] = useActionState(loginAction, initialState);
 
   return (
@@ -40,7 +40,7 @@ export default function LoginForm() {
       </button>
 
       <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", textAlign: "center", marginTop: "8px" }}>
-        Akun dibuatkan oleh admin Grahita. Hubungi tim kami jika belum punya akses.
+  Hubungi tim Grahita jika belum memiliki akses admin.
       </p>
     </form>
   );

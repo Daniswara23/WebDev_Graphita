@@ -1,6 +1,6 @@
 /*
   src/proxy.ts — Next.js 16 PROXY (pengganti middleware.ts)
-  Refresh session Supabase + guard route /mitra/*.
+  Refresh session Supabase + guard route /portal/*.
 */
 
 import { type NextRequest } from "next/server";

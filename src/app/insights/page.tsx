@@ -3,7 +3,7 @@
 /*
   insights/page.tsx — Halaman /insights (Riset dan Publikasi)
   Data diambil dari tabel `articles` dan `research_reports` di Supabase.
-  Tampilan tidak berubah.
+  Tombol unduh untuk laporan yang punya file PDF.
 */
 
 import { useEffect, useState } from "react";
@@ -25,6 +25,7 @@ type ResearchReport = {
   subtitle: string;
   year: number;
   category: string;
+  file_url: string | null;
 };
 
 // Format date string "2026-04-15" → "15 April 2026"
@@ -47,7 +48,7 @@ export default function InsightsPage() {
 
     supabase
       .from("research_reports")
-      .select("id, title, subtitle, year, category")
+      .select("id, title, subtitle, year, category, file_url")
       .order("sort_order")
       .then(({ data }) => { if (data) setResearchReports(data); });
   }, []);
@@ -179,9 +180,29 @@ export default function InsightsPage() {
                     {report.subtitle}
                   </p>
                   <div style={{ marginTop: "24px", paddingTop: "16px", borderTop: "1px solid rgba(201,147,58,0.2)" }}>
-                    <span style={{ fontSize: "12px", color: "var(--gold)", fontWeight: 700, cursor: "pointer" }}>
-                      Unduh Laporan →
-                    </span>
+                    {report.file_url ? (
+                      <a
+                        href={report.file_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          fontSize: "12px",
+                          color: "var(--gold)",
+                          fontWeight: 700,
+                          textDecoration: "none",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "8px",
+                        }}
+                      >
+                        <span style={{ fontSize: "16px" }}>⬇</span>
+                        Unduh Laporan (PDF) →
+                      </a>
+                    ) : (
+                      <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)" }}>
+                        File belum tersedia
+                      </span>
+                    )}
                   </div>
                 </div>
               ))}

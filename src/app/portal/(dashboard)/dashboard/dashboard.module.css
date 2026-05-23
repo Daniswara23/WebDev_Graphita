@@ -1,0 +1,87 @@
+/* Dashboard page styles */
+
+.dashboardTitle {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.dashboardSubtitle {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 40px;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+.cardLink {
+  text-decoration: none;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 28px 24px;
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.cardLink:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(201,147,58,0.3);
+  transform: translateY(-2px);
+}
+
+.cardNumber {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.cardLabel {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.quickActionsSection {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 28px 32px;
+}
+
+.quickActionsTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.quickActionsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.actionLink {
+  padding: 12px 20px;
+  background: rgba(201,147,58,0.1);
+  border: 1px solid rgba(201,147,58,0.25);
+  border-radius: 8px;
+  color: var(--gold-light);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.actionLink:hover {
+  background: rgba(201,147,58,0.2);
+  border-color: rgba(201,147,58,0.4);
+}

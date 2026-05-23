@@ -1,6 +1,6 @@
 "use client";
 
-import { logoutAction } from "@/app/mitra/login/actions";
+import { logoutAction } from "@/app/portal/login/actions";
 
 export default function LogoutButton() {
   return (

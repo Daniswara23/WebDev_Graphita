@@ -1,6 +1,6 @@
 /*
   src/types/database.ts — TIPE TYPESCRIPT UNTUK SCHEMA SUPABASE
-  Disesuaikan dengan sqlsupabase_GAS.txt.
+  Disesuaikan dengan supabase/schema.sql + 001_portal_admin.sql.
 */
 
 export type Json =
@@ -22,6 +22,7 @@ export interface ArticleRow {
   content: string | null;
   category: string;
   cover_image: string | null;
+  file_url: string | null;
   is_published: boolean;
   published_at: string | null;
   created_at: string;
@@ -120,51 +121,24 @@ export interface PanganAsliProductRow {
   created_at: string;
 }
 
-export interface MitraProfileRow {
+export interface AdminUserRow {
   id: string;
-  full_name: string | null;
-  organization: string;
-  position: string | null;
-  phone: string | null;
-  avatar_url: string | null;
+  email: string;
+  full_name: string;
+  created_at: string;
+}
+
+export interface ProductRow {
+  id: string;
+  name: string;
+  description: string;
+  price: string;
+  label: string | null;
+  tokopedia_url: string | null;
+  shopee_url: string | null;
+  image_url: string | null;
   is_active: boolean;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface ProjectRow {
-  id: string;
-  mitra_id: string | null;
-  title: string;
-  description: string | null;
-  service_type: string | null;
-  status: string;
-  start_date: string | null;
-  end_date: string | null;
-  created_at: string;
-}
-
-export interface ProjectMilestoneRow {
-  id: string;
-  project_id: string | null;
-  title: string;
-  description: string | null;
-  status: string;
-  due_date: string | null;
-  completed_at: string | null;
   sort_order: number;
-  created_at: string;
-}
-
-export interface ProjectDocumentRow {
-  id: string;
-  project_id: string | null;
-  title: string;
-  file_url: string;
-  file_type: string | null;
-  file_size_kb: number | null;
-  uploaded_by: string | null;
-  is_visible: boolean;
   created_at: string;
 }
 
@@ -180,14 +154,11 @@ export interface Database {
       knowledge_hub_files: { Row: KnowledgeHubFileRow; Insert: WithDefaults<KnowledgeHubFileRow, "id" | "description" | "file_type" | "file_size_kb" | "category" | "tags" | "download_count" | "is_free" | "is_published" | "published_at" | "created_at">; Update: Partial<KnowledgeHubFileRow>; Relationships: EmptyRelationships; };
       sdg_metrics: { Row: SdgMetricRow; Insert: WithDefaults<SdgMetricRow, "id" | "sdg_icon" | "metric_unit" | "description" | "year" | "updated_at">; Update: Partial<SdgMetricRow>; Relationships: EmptyRelationships; };
       pangan_asli_products: { Row: PanganAsliProductRow; Insert: WithDefaults<PanganAsliProductRow, "id" | "description" | "origin_region" | "category" | "image_url" | "is_featured" | "is_active" | "created_at">; Update: Partial<PanganAsliProductRow>; Relationships: EmptyRelationships; };
-      mitra_profiles: { Row: MitraProfileRow; Insert: WithDefaults<MitraProfileRow, "full_name" | "position" | "phone" | "avatar_url" | "is_active" | "created_at" | "updated_at">; Update: Partial<MitraProfileRow>; Relationships: EmptyRelationships; };
-      projects: { Row: ProjectRow; Insert: WithDefaults<ProjectRow, "id" | "mitra_id" | "description" | "service_type" | "status" | "start_date" | "end_date" | "created_at">; Update: Partial<ProjectRow>; Relationships: EmptyRelationships; };
-      project_milestones: { Row: ProjectMilestoneRow; Insert: WithDefaults<ProjectMilestoneRow, "id" | "project_id" | "description" | "status" | "due_date" | "completed_at" | "sort_order" | "created_at">; Update: Partial<ProjectMilestoneRow>; Relationships: EmptyRelationships; };
-      project_documents: { Row: ProjectDocumentRow; Insert: WithDefaults<ProjectDocumentRow, "id" | "project_id" | "file_type" | "file_size_kb" | "uploaded_by" | "is_visible" | "created_at">; Update: Partial<ProjectDocumentRow>; Relationships: EmptyRelationships; };
+      admin_users: { Row: AdminUserRow; Insert: WithDefaults<AdminUserRow, "id" | "created_at">; Update: Partial<AdminUserRow>; Relationships: EmptyRelationships; };
+      products: { Row: ProductRow; Insert: WithDefaults<ProductRow, "id" | "label" | "tokopedia_url" | "shopee_url" | "image_url" | "is_active" | "sort_order" | "created_at">; Update: Partial<ProductRow>; Relationships: EmptyRelationships; };
     };
     Views: { [_ in never]: never };
     Functions: { [_ in never]: never };
     Enums: { [_ in never]: never };
   };
 }
- 
