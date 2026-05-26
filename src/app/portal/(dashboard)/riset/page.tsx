@@ -5,6 +5,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { deleteReport } from "./actions";
+import DeleteButton from "@/app/portal/(dashboard)/DeleteButton";
 
 export default async function RisetPage() {
   const supabase = await createClient();
@@ -90,20 +91,10 @@ export default async function RisetPage() {
                       }}>
                         Edit
                       </Link>
-                      <form action={deleteReport.bind(null, report.id)} method="POST" style={{ display: "inline" }}
-                        onSubmit={(e) => { if (!confirm("Hapus laporan ini?")) e.preventDefault(); }}>
-                        <button type="submit" style={{
-                          padding: "6px 14px",
-                          background: "rgba(220,38,38,0.1)",
-                          border: "1px solid rgba(220,38,38,0.3)",
-                          borderRadius: "6px",
-                          color: "#fca5a5",
-                          fontSize: "12px",
-                          cursor: "pointer",
-                        }}>
-                          Hapus
-                        </button>
-                      </form>
+                      <DeleteButton
+                        action={deleteReport.bind(null, report.id)}
+                        confirmMessage="Hapus laporan ini?"
+                      />
                     </div>
                   </td>
                 </tr>

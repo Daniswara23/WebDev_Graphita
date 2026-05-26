@@ -1,6 +1,7 @@
 /*
   src/proxy.ts — Next.js 16 PROXY (pengganti middleware.ts)
-  Refresh session Supabase + guard route /portal/*.
+  Refresh session Supabase di setiap request.
+  Auth guard ditangani di (dashboard)/layout.tsx.
 */
 
 import { type NextRequest } from "next/server";
@@ -15,3 +16,4 @@ export const config = {
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|css|js)$).*)",
   ],
 };
+

@@ -5,6 +5,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { deleteArticle } from "./actions";
+import DeleteButton from "@/app/portal/(dashboard)/DeleteButton";
 
 function formatDate(dateStr: string | null): string {
   if (!dateStr) return "-";
@@ -119,20 +120,10 @@ export default async function PublikasiPage() {
                       }}>
                         Edit
                       </Link>
-                      <form action={deleteArticle.bind(null, article.id)} method="POST" style={{ display: "inline" }}
-                        onSubmit={(e) => { if (!confirm("Hapus artikel ini?")) e.preventDefault(); }}>
-                        <button type="submit" style={{
-                          padding: "6px 14px",
-                          background: "rgba(220,38,38,0.1)",
-                          border: "1px solid rgba(220,38,38,0.3)",
-                          borderRadius: "6px",
-                          color: "#fca5a5",
-                          fontSize: "12px",
-                          cursor: "pointer",
-                        }}>
-                          Hapus
-                        </button>
-                      </form>
+                      <DeleteButton
+                        action={deleteArticle.bind(null, article.id)}
+                        confirmMessage="Hapus artikel ini?"
+                      />
                     </div>
                   </td>
                 </tr>

@@ -5,6 +5,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { deleteProduct } from "./actions";
+import DeleteButton from "@/app/portal/(dashboard)/DeleteButton";
 
 export default async function TokoAdminPage() {
   const supabase = await createClient();
@@ -100,20 +101,10 @@ export default async function TokoAdminPage() {
                       }}>
                         Edit
                       </Link>
-                      <form action={deleteProduct.bind(null, product.id)} method="POST" style={{ display: "inline" }}
-                        onSubmit={(e) => { if (!confirm("Hapus produk ini?")) e.preventDefault(); }}>
-                        <button type="submit" style={{
-                          padding: "6px 14px",
-                          background: "rgba(220,38,38,0.1)",
-                          border: "1px solid rgba(220,38,38,0.3)",
-                          borderRadius: "6px",
-                          color: "#fca5a5",
-                          fontSize: "12px",
-                          cursor: "pointer",
-                        }}>
-                          Hapus
-                        </button>
-                      </form>
+                      <DeleteButton
+                        action={deleteProduct.bind(null, product.id)}
+                        confirmMessage="Hapus produk ini?"
+                      />
                     </div>
                   </td>
                 </tr>

@@ -54,7 +54,7 @@ export default async function PesanPage() {
                     {msg.email}
                   </td>
                   <td style={{ padding: "16px 20px", fontSize: "13px", color: "rgba(255,255,255,0.6)" }}>
-                    {msg.organization || <span style={{ color: "rgba(255,255,255,0.3)" }}>—</span>}
+                    {msg.company || <span style={{ color: "rgba(255,255,255,0.3)" }}>—</span>}
                   </td>
                   <td style={{ padding: "16px 20px", fontSize: "12px", color: "rgba(255,255,255,0.5)" }}>
                     {formatDate(msg.created_at)}

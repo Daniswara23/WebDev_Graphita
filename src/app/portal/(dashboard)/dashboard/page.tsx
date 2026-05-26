@@ -9,7 +9,7 @@ import styles from "./dashboard.module.css";
 export default async function AdminDashboardPage() {
   const supabase = await createClient();
 
-  const [articlesCount, reportsCount, productsCount, messagesCount] = await Promise.all([
+  const [articlesRes, reportsRes, productsRes, messagesRes] = await Promise.all([
     supabase.from("articles").select("id", { count: "exact", head: true }),
     supabase.from("research_reports").select("id", { count: "exact", head: true }),
     supabase.from("products").select("id", { count: "exact", head: true }),
@@ -17,10 +17,10 @@ export default async function AdminDashboardPage() {
   ]);
 
   const cards = [
-    { label: "Artikel Publikasi", count: articlesCount.count ?? 0, href: "/portal/publikasi", color: "#52b788" },
-    { label: "Laporan Riset", count: reportsCount.count ?? 0, href: "/portal/riset", color: "#fbbf24" },
-    { label: "Produk Toko", count: productsCount.count ?? 0, href: "/portal/toko", color: "#60a5fa" },
-    { label: "Pesan Masuk", count: messagesCount.count ?? 0, href: "/portal/pesan", color: "#f472b6" },
+    { label: "Artikel Publikasi", count: articlesRes.count  ?? 0, href: "/portal/publikasi", color: "#52b788" },
+    { label: "Laporan Riset",     count: reportsRes.count   ?? 0, href: "/portal/riset",     color: "#fbbf24" },
+    { label: "Produk Toko",       count: productsRes.count  ?? 0, href: "/portal/toko",      color: "#60a5fa" },
+    { label: "Pesan Masuk",       count: messagesRes.count  ?? 0, href: "/portal/pesan",     color: "#f472b6" },
   ];
 
   return (

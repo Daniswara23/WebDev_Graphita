@@ -12,7 +12,7 @@ export async function createReport(formData: FormData) {
   const supabase = await createClient();
 
   const title = String(formData.get("title") ?? "");
-  const subtitle = String(formData.get("subtitle") ?? "");
+  const subtitle = String(formData.get("subtitle") ?? "").trim();
   const year = parseInt(String(formData.get("year") ?? "0"), 10);
   const category = String(formData.get("category") ?? "");
   const file = formData.get("file") as File | null;
@@ -52,13 +52,13 @@ export async function createReport(formData: FormData) {
     fileUrl = urlData.publicUrl;
   }
 
+  // subtitle: kolom NOT NULL di DB — simpan string kosong jika tidak diisi
   const { error } = await supabase.from("research_reports").insert({
     title,
-    subtitle: subtitle || null,
+    subtitle,
     year,
     category,
     file_url: fileUrl,
-    is_published: true,
   });
 
   if (error) throw new Error(error.message);
@@ -71,7 +71,7 @@ export async function updateReport(id: string, formData: FormData) {
   const supabase = await createClient();
 
   const title = String(formData.get("title") ?? "");
-  const subtitle = String(formData.get("subtitle") ?? "");
+  const subtitle = String(formData.get("subtitle") ?? "").trim();
   const year = parseInt(String(formData.get("year") ?? "0"), 10);
   const category = String(formData.get("category") ?? "");
   const existingUrl = String(formData.get("existing_url") ?? "");
@@ -111,11 +111,12 @@ export async function updateReport(id: string, formData: FormData) {
     fileUrl = urlData.publicUrl;
   }
 
+  // subtitle: kolom NOT NULL di DB — simpan string kosong jika tidak diisi
   const { error } = await supabase
     .from("research_reports")
     .update({
       title,
-      subtitle: subtitle || null,
+      subtitle,
       year,
       category,
       file_url: fileUrl,

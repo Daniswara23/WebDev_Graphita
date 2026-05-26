@@ -37,13 +37,7 @@ export default async function PesanDetailPage({ params }: { params: Promise<{ id
           <span style={{ fontSize: "14px", color: "var(--gold-light)" }}>{msg.email}</span>
 
           <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Perusahaan</span>
-          <span style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)" }}>{msg.organization || <span style={{ color: "rgba(255,255,255,0.3)" }}>—</span>}</span>
-
-          <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Telepon</span>
-          <span style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)" }}>{msg.phone || <span style={{ color: "rgba(255,255,255,0.3)" }}>—</span>}</span>
-
-          <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Layanan</span>
-          <span style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)" }}>{msg.service_interest || <span style={{ color: "rgba(255,255,255,0.3)" }}>—</span>}</span>
+          <span style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)" }}>{msg.company || <span style={{ color: "rgba(255,255,255,0.3)" }}>—</span>}</span>
 
           <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Tanggal</span>
           <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)" }}>{formatDate(msg.created_at)}</span>

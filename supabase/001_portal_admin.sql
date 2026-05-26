@@ -87,4 +87,4 @@ CREATE POLICY "admin_delete_standards" ON standards FOR DELETE USING (auth.role(
 --    Jalankan SETELAH akun dibuat di Authentication > Add User
 -- ─────────────────────────────────────────────────────────────
 INSERT INTO admin_users (email, full_name)
-VALUES ('admin@grahitaadhisasmita.com', 'Admin Grahita');
+VALUES ('admin@grahitaadhisasmita.com', 'Admin Grahita'); 
