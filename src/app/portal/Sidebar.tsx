@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { label: "Dashboard", href: "/portal/dashboard", icon: "◉" },
   { label: "Publikasi", href: "/portal/publikasi", icon: "📄" },
   { label: "Riset", href: "/portal/riset", icon: "📊" },
+  { label: "Video", href: "/portal/case-videos", icon: "🎬" },
   { label: "Toko", href: "/portal/toko", icon: "🏪" },
   { label: "Pesan", href: "/portal/pesan", icon: "✉" },
 ];

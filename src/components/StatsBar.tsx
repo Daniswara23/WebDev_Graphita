@@ -2,8 +2,8 @@
 
 /*
   StatsBar.tsx — BAR STATISTIK
-  Data diambil dari tabel `stats` di Supabase.
-  Tampilan tidak berubah.
+  - Item pertama ("Portofolio visual") diambil dari count articles + research_reports
+  - 3 item lainnya diambil dari tabel `stats` di Supabase
 */
 
 import { useEffect, useState } from "react";
@@ -19,13 +19,37 @@ export default function StatsBar() {
   const [stats, setStats] = useState<StatItem[]>([]);
 
   useEffect(() => {
-    supabase
-      .from("stats")
-      .select("id, number_text, label")
-      .order("sort_order")
-      .then(({ data }) => {
-        if (data) setStats(data);
-      });
+    async function fetchData() {
+      // Ambil semua stats (filter portofolio dilakukan setelahnya)
+      const statsResult = await supabase
+        .from("stats")
+        .select("id, number_text, label")
+        .order("sort_order");
+
+      // Hitung jumlah portofolio dari articles + research_reports
+      const [articlesResult, researchResult] = await Promise.all([
+        supabase.from("articles").select("id", { count: "exact", head: true }).eq("is_published", true),
+        supabase.from("research_reports").select("id", { count: "exact", head: true }),
+      ]);
+
+      const totalPortofolio = (articlesResult.count ?? 0) + (researchResult.count ?? 0);
+
+      const portofolioStat = {
+        id: "portofolio-dynamic",
+        number_text: String(totalPortofolio),
+        label: "Portofolio visual",
+      };
+
+      if (statsResult.data) {
+        // Filter out entry "Portofolio visual" dari stats agar tidak duplikat
+        const filteredStats = statsResult.data.filter(
+          (s) => s.label !== "Portofolio visual"
+        );
+        setStats([portofolioStat, ...filteredStats]);
+      }
+    }
+
+    fetchData();
   }, []);
 
   return (

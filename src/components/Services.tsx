@@ -154,6 +154,7 @@ export default function Services() {
             style={{
               background: "rgba(255,255,255,0.03)",
               border: "1px solid rgba(255,255,255,0.06)",
+              borderRadius: "16px",
               padding: "40px 32px",
               cursor: "pointer",
               animationDelay: `${index * 0.1}s`,

@@ -17,7 +17,7 @@ export default async function PublikasiPage() {
   const supabase = await createClient();
   const { data: articles } = await supabase
     .from("articles")
-    .select("id, title, slug, category, file_url, published_at, created_at")
+    .select("id, title, slug, category, file_url, external_url, published_at, created_at")
     .order("created_at", { ascending: false });
 
   return (
@@ -79,6 +79,8 @@ export default async function PublikasiPage() {
                   <td style={{ padding: "16px 20px" }}>
                     {article.file_url ? (
                       <span style={{ fontSize: "12px", color: "#52b788" }}>✓ PDF</span>
+                    ) : article.external_url ? (
+                      <span style={{ fontSize: "12px", color: "#f59e0b" }}>✓ Link</span>
                     ) : (
                       <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)" }}>—</span>
                     )}
@@ -96,6 +98,19 @@ export default async function PublikasiPage() {
                           fontSize: "12px",
                         }}>
                           Preview
+                        </a>
+                      )}
+                      {article.external_url && (
+                        <a href={article.external_url} target="_blank" rel="noopener noreferrer" style={{
+                          padding: "6px 14px",
+                          background: "rgba(245,158,11,0.1)",
+                          border: "1px solid rgba(245,158,11,0.3)",
+                          borderRadius: "6px",
+                          color: "#f59e0b",
+                          textDecoration: "none",
+                          fontSize: "12px",
+                        }}>
+                          Open Link
                         </a>
                       )}
                       <a href={`/insights/${article.slug}`} target="_blank" rel="noopener noreferrer" style={{

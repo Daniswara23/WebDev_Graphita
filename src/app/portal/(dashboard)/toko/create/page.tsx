@@ -40,6 +40,12 @@ export default function CreateProdukPage() {
         </div>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+          <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", textTransform: "uppercase", letterSpacing: "1px" }}>Foto Produk</span>
+          <input type="file" name="image" accept="image/*" style={{ padding: "10px 16px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "6px", fontSize: "15px" }} />
+          <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)" }}>Format: JPG, PNG, WebP. Maks 5MB.</span>
+        </label>
+
+        <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", textTransform: "uppercase", letterSpacing: "1px" }}>Link Tokopedia (opsional)</span>
           <input type="url" name="tokopedia_url" placeholder="https://tokopedia.com/..." style={{ padding: "12px 16px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "6px", fontSize: "15px" }} />
         </label>

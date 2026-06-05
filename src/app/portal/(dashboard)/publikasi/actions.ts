@@ -1,5 +1,5 @@
 /*
-  publikasi/actions.ts — Server Actions CRUD articles + upload PDF.
+  publikasi/actions.ts — Server Actions CRUD articles + upload PDF / external link.
 */
 
 "use server";
@@ -16,16 +16,26 @@ export async function createArticle(formData: FormData) {
   const content = String(formData.get("content") ?? "");
   const category = String(formData.get("category") ?? "");
   const publishedAt = String(formData.get("published_at") ?? "");
+  const sourceType = String(formData.get("source_type") ?? "");
   const file = formData.get("file") as File | null;
+  const externalUrl = String(formData.get("external_url") ?? "").trim();
 
   if (!title || !excerpt || !category || !publishedAt) {
     throw new Error("Title, excerpt, category, dan tanggal publikasi wajib diisi.");
   }
 
-  // Upload PDF to Supabase Storage if file provided
-  let fileUrl: string | null = null;
+  // Validasi: harus pilih salah satu format
+  if (!sourceType || (sourceType !== "pdf" && sourceType !== "link")) {
+    throw new Error("Pilih format artikel: PDF atau Link External.");
+  }
 
-  if (file && file.size > 0) {
+  let fileUrl: string | null = null;
+  let externalUrlValue: string | null = null;
+
+  if (sourceType === "pdf") {
+    if (!file || file.size === 0) {
+      throw new Error("File PDF wajib diupload.");
+    }
     if (file.type !== "application/pdf") {
       throw new Error("Hanya file PDF yang diizinkan.");
     }
@@ -45,12 +55,22 @@ export async function createArticle(formData: FormData) {
 
     if (uploadError) throw new Error("Gagal upload file: " + uploadError.message);
 
-    // Get public URL
     const { data: urlData } = supabase.storage
       .from("articles")
       .getPublicUrl(filePath);
 
     fileUrl = urlData.publicUrl;
+  } else if (sourceType === "link") {
+    if (!externalUrl) {
+      throw new Error("URL External wajib diisi.");
+    }
+    // Validasi format URL
+    try {
+      new URL(externalUrl);
+    } catch {
+      throw new Error("URL External tidak valid.");
+    }
+    externalUrlValue = externalUrl;
   }
 
   // Generate slug from title
@@ -68,6 +88,7 @@ export async function createArticle(formData: FormData) {
     content: content || null,
     category,
     file_url: fileUrl,
+    external_url: externalUrlValue,
     published_at: publishedAt,
     is_published: true,
   });
@@ -86,41 +107,66 @@ export async function updateArticle(id: string, formData: FormData) {
   const content = String(formData.get("content") ?? "");
   const category = String(formData.get("category") ?? "");
   const publishedAt = String(formData.get("published_at") ?? "");
-  const existingUrl = String(formData.get("existing_url") ?? "");
+  const sourceType = String(formData.get("source_type") ?? "");
+  const existingFileUrl = String(formData.get("existing_file_url") ?? "");
+  const existingExternalUrl = String(formData.get("existing_external_url") ?? "");
   const file = formData.get("file") as File | null;
+  const externalUrl = String(formData.get("external_url") ?? "").trim();
 
   if (!title || !excerpt || !category || !publishedAt) {
     throw new Error("Title, excerpt, category, dan tanggal publikasi wajib diisi.");
   }
 
-  let fileUrl = existingUrl || null;
+  // Validasi: harus pilih salah satu format
+  if (!sourceType || (sourceType !== "pdf" && sourceType !== "link")) {
+    throw new Error("Pilih format artikel: PDF atau Link External.");
+  }
 
-  // Upload new PDF if provided
-  if (file && file.size > 0) {
-    if (file.type !== "application/pdf") {
-      throw new Error("Hanya file PDF yang diizinkan.");
+  let fileUrl: string | null = null;
+  let externalUrlValue: string | null = null;
+
+  if (sourceType === "pdf") {
+    if (file && file.size > 0) {
+      if (file.type !== "application/pdf") {
+        throw new Error("Hanya file PDF yang diizinkan.");
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        throw new Error("Ukuran file maksimal 10 MB.");
+      }
+
+      const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
+      const filePath = `articles/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("articles")
+        .upload(filePath, file, {
+          contentType: "application/pdf",
+          upsert: false,
+        });
+
+      if (uploadError) throw new Error("Gagal upload file: " + uploadError.message);
+
+      const { data: urlData } = supabase.storage
+        .from("articles")
+        .getPublicUrl(filePath);
+
+      fileUrl = urlData.publicUrl;
+    } else {
+      // Keep existing file
+      fileUrl = existingFileUrl || null;
     }
-    if (file.size > 10 * 1024 * 1024) {
-      throw new Error("Ukuran file maksimal 10 MB.");
+  } else if (sourceType === "link") {
+    if (externalUrl) {
+      // Validasi format URL
+      try {
+        new URL(externalUrl);
+      } catch {
+        throw new Error("URL External tidak valid.");
+      }
+      externalUrlValue = externalUrl;
+    } else {
+      externalUrlValue = existingExternalUrl || null;
     }
-
-    const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
-    const filePath = `articles/${fileName}`;
-
-    const { error: uploadError } = await supabase.storage
-      .from("articles")
-      .upload(filePath, file, {
-        contentType: "application/pdf",
-        upsert: false,
-      });
-
-    if (uploadError) throw new Error("Gagal upload file: " + uploadError.message);
-
-    const { data: urlData } = supabase.storage
-      .from("articles")
-      .getPublicUrl(filePath);
-
-    fileUrl = urlData.publicUrl;
   }
 
   const { error } = await supabase
@@ -131,6 +177,7 @@ export async function updateArticle(id: string, formData: FormData) {
       content: content || null,
       category,
       file_url: fileUrl,
+      external_url: externalUrlValue,
       published_at: publishedAt,
     })
     .eq("id", id);

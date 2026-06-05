@@ -16,6 +16,8 @@ type Product = {
   name: string;
   description: string;
   price: string;
+  label: string | null;
+  image_url: string | null;
   tokopedia_url: string | null;
   shopee_url: string | null;
 };
@@ -41,11 +43,15 @@ export default function TokoPage() {
   useEffect(() => {
     supabase
       .from("products")
-      .select("id, name, description, price, tokopedia_url, shopee_url")
+      .select("id, name, description, price, label, image_url, tokopedia_url, shopee_url")
       .eq("is_active", true)
       .order("sort_order")
       .then(({ data, error }) => {
-        if (error) console.error("[Supabase] products:", error.message, error.details);
+        if (error) {
+          console.error("[Supabase] products error:", error.message);
+          console.error("[Supabase] products details:", error.details);
+        }
+        console.log("[DEBUG] Products data from Supabase:", data);
         if (data) setProducts(data);
       });
   }, []);
@@ -103,7 +109,7 @@ export default function TokoPage() {
                     borderColor: hoveredProduct === product.id ? "rgba(201,147,58,0.4)" : "rgba(201,147,58,0.2)",
                   }}
                 >
-                  {/* Image Area — placeholder untuk gambar nanti */}
+                  {/* Image Area */}
                   <div
                     style={{
                       width: "100%",
@@ -117,21 +123,33 @@ export default function TokoPage() {
                       transition: "all 0.3s ease",
                     }}
                   >
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        background: "rgba(255,255,255,0.02)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: "14px",
-                        color: "rgba(255,255,255,0.3)",
-                        fontStyle: "italic",
-                      }}
-                    >
-                      Gambar produk
-                    </div>
+                    {product.image_url ? (
+                      <img
+                        src={product.image_url}
+                        alt={product.name}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                        }}
+                      />
+                    ) : (
+                      <div
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          background: "rgba(255,255,255,0.02)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: "14px",
+                          color: "rgba(255,255,255,0.3)",
+                          fontStyle: "italic",
+                        }}
+                      >
+                        Gambar produk
+                      </div>
+                    )}
                   </div>
 
                   {/* Content Area */}
@@ -150,7 +168,7 @@ export default function TokoPage() {
                           transition: "background 0.3s ease",
                         }}
                       >
-                        Produk asli
+                        {product.label || "Produk asli"}
                       </span>
                     </div>
                     <h2 style={{ fontSize: "var(--text-2xl)", fontWeight: 700, color: "var(--white)", marginBottom: "12px", transition: "color 0.3s ease" }}>
@@ -168,46 +186,84 @@ export default function TokoPage() {
                       </span>
                     </div>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-                      <a href={product.tokopedia_url ?? "https://www.tokopedia.com/"} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
+                      {product.tokopedia_url ? (
+                        <a href={product.tokopedia_url} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
+                          <button
+                            style={{
+                              width: "100%",
+                              padding: "12px 14px",
+                              borderRadius: "10px",
+                              border: "none",
+                              background: "#23AB4F",
+                              color: "white",
+                              cursor: "pointer",
+                              fontWeight: 700,
+                              fontFamily: "var(--font-primary)",
+                              ...SHARED_STYLES.buttonTransition,
+                              transform: hoveredProduct === product.id ? "scale(1.02)" : "scale(1)",
+                              opacity: hoveredProduct === product.id ? 1 : 0.95,
+                            }}
+                          >
+                            Tokopedia
+                          </button>
+                        </a>
+                      ) : (
                         <button
+                          disabled
                           style={{
                             width: "100%",
                             padding: "12px 14px",
                             borderRadius: "10px",
-                            border: "none",
-                            background: "#23AB4F",
-                            color: "white",
-                            cursor: "pointer",
+                            border: "1px solid rgba(255,255,255,0.1)",
+                            background: "rgba(255,255,255,0.05)",
+                            color: "rgba(255,255,255,0.3)",
+                            cursor: "not-allowed",
                             fontWeight: 700,
                             fontFamily: "var(--font-primary)",
-                            ...SHARED_STYLES.buttonTransition,
-                            transform: hoveredProduct === product.id ? "scale(1.02)" : "scale(1)",
-                            opacity: hoveredProduct === product.id ? 1 : 0.95,
                           }}
                         >
                           Tokopedia
                         </button>
-                      </a>
-                      <a href={product.shopee_url ?? "https://shopee.co.id/"} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
+                      )}
+                      {product.shopee_url ? (
+                        <a href={product.shopee_url} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
+                          <button
+                            style={{
+                              width: "100%",
+                              padding: "12px 14px",
+                              borderRadius: "10px",
+                              border: "none",
+                              background: "#EE4D2D",
+                              color: "white",
+                              cursor: "pointer",
+                              fontWeight: 700,
+                              fontFamily: "var(--font-primary)",
+                              ...SHARED_STYLES.buttonTransition,
+                              transform: hoveredProduct === product.id ? "scale(1.02)" : "scale(1)",
+                              opacity: hoveredProduct === product.id ? 1 : 0.95,
+                            }}
+                          >
+                            Shopee
+                          </button>
+                        </a>
+                      ) : (
                         <button
+                          disabled
                           style={{
                             width: "100%",
                             padding: "12px 14px",
                             borderRadius: "10px",
-                            border: "none",
-                            background: "#EE4D2D",
-                            color: "white",
-                            cursor: "pointer",
+                            border: "1px solid rgba(255,255,255,0.1)",
+                            background: "rgba(255,255,255,0.05)",
+                            color: "rgba(255,255,255,0.3)",
+                            cursor: "not-allowed",
                             fontWeight: 700,
                             fontFamily: "var(--font-primary)",
-                            ...SHARED_STYLES.buttonTransition,
-                            transform: hoveredProduct === product.id ? "scale(1.02)" : "scale(1)",
-                            opacity: hoveredProduct === product.id ? 1 : 0.95,
                           }}
                         >
                           Shopee
                         </button>
-                      </a>
+                      )}
                     </div>
                   </div>
                 </div>

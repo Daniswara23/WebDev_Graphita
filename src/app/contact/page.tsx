@@ -3,6 +3,12 @@
 import Navbar from "@/components/Navbar";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import {
+  OfficeBuildingIcon,
+  ShareNetworkIcon,
+  SocialImageIcon,
+  SocialIconWrapper,
+} from "@/components/ContactIcons";
 
 export default function ContactPage() {
   return (
@@ -33,13 +39,13 @@ export default function ContactPage() {
           <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "48px" }}>
               {/* Kantor */}
-              <div className="grid-item animate-delay-100" style={{ 
+              <div className="grid-item animate-delay-100" style={{
                 textAlign: "center",
                 padding: "40px 32px",
                 border: "1px solid rgba(201,147,58,0.3)",
                 borderRadius: "12px",
                 background: "rgba(201,147,58,0.08)"
-              }} 
+              }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-4px)";
                 e.currentTarget.style.boxShadow = "0 10px 30px rgba(201, 147, 58, 0.2)";
@@ -48,7 +54,18 @@ export default function ContactPage() {
                 e.currentTarget.style.transform = "translateY(0)";
                 e.currentTarget.style.boxShadow = "none";
               }}>
-                <div style={{ width: "48px", height: "48px", margin: "0 auto 24px", borderRadius: "12px", background: "rgba(201,147,58,0.12)" }} />
+                <div style={{
+                  width: "48px",
+                  height: "48px",
+                  margin: "0 auto 24px",
+                  borderRadius: "4px",
+                  background: "rgba(45,106,79,0.2)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}>
+                  <OfficeBuildingIcon size={24} />
+                </div>
                 <h3 style={{ fontSize: "var(--text-3xl)", fontWeight: 700, color: "var(--white)", marginBottom: "16px" }}>
                   Lokasi Kantor
                 </h3>
@@ -69,7 +86,7 @@ export default function ContactPage() {
               </div>
 
               {/* Media Sosial */}
-              <div className="grid-item animate-delay-100" style={{ 
+              <div className="grid-item animate-delay-100" style={{
                 textAlign: "center",
                 padding: "40px 32px",
                 border: "1px solid rgba(201,147,58,0.3)",
@@ -84,7 +101,18 @@ export default function ContactPage() {
                 e.currentTarget.style.transform = "translateY(0)";
                 e.currentTarget.style.boxShadow = "none";
               }}>
-                <div style={{ width: "48px", height: "48px", margin: "0 auto 24px", borderRadius: "12px", background: "rgba(201,147,58,0.12)" }} />
+                <div style={{
+                  width: "48px",
+                  height: "48px",
+                  margin: "0 auto 24px",
+                  borderRadius: "4px",
+                  background: "rgba(45,106,79,0.2)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}>
+                  <ShareNetworkIcon size={24} />
+                </div>
                 <h3 style={{ fontSize: "var(--text-3xl)", fontWeight: 700, color: "var(--white)", marginBottom: "16px" }}>
                   Ikuti Kami
                 </h3>
@@ -92,20 +120,10 @@ export default function ContactPage() {
                   Temukan berita terbaru, insight, dan publikasi kami
                 </p>
                 <div style={{ display: "flex", justifyContent: "center", gap: "16px", flexWrap: "wrap" }}>
-                  {[
-                    { name: "LinkedIn", url: "#" },
-                    { name: "Instagram", url: "#" },
-                    { name: "Twitter", url: "#" },
-                    { name: "Facebook", url: "#" },
-                  ].map((social) => (
-                    <a
-                      key={social.name}
-                      href={social.url}
-                      className="social-link"
-                    >
-                      {social.name}
-                    </a>
-                  ))}
+                  <SocialIconWrapper href="https://www.linkedin.com" icon={<SocialImageIcon src="/images/LinkedIn-logo.png" alt="LinkedIn" size={22} />} label="LinkedIn" />
+                  <SocialIconWrapper href="https://www.instagram.com" icon={<SocialImageIcon src="/images/Instagram-icon.png" alt="Instagram" size={22} />} label="Instagram" />
+                  <SocialIconWrapper href="https://www.twitter.com" icon={<SocialImageIcon src="/images/X-logo.png" alt="X (Twitter)" size={22} />} label="X (Twitter)" />
+                  <SocialIconWrapper href="https://www.facebook.com" icon={<SocialImageIcon src="/images/Facebook-Logo.png" alt="Facebook" size={22} />} label="Facebook" />
                 </div>
               </div>
 

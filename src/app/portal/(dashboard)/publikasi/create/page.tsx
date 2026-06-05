@@ -4,6 +4,7 @@
 
 import Link from "next/link";
 import { createArticle } from "../actions";
+import ArticleFormatSelector from "../ArticleFormatSelector";
 
 export default function CreateArtikelPage() {
   return (
@@ -46,10 +47,8 @@ export default function CreateArtikelPage() {
           <textarea name="content" rows={10} style={{ padding: "12px 16px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "6px", fontSize: "15px", resize: "vertical", fontFamily: "monospace" }} />
         </label>
 
-        <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-          <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", textTransform: "uppercase", letterSpacing: "1px" }}>File PDF (opsional)</span>
-          <input type="file" name="file" accept="application/pdf" style={{ padding: "10px 16px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "6px", fontSize: "14px" }} />
-        </label>
+        {/* Pilihan Format Artikel */}
+        <ArticleFormatSelector mode="create" />
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", textTransform: "uppercase", letterSpacing: "1px" }}>Tanggal Publikasi *</span>

@@ -128,6 +128,15 @@ export interface AdminUserRow {
   created_at: string;
 }
 
+export interface CaseVideoRow {
+  id: string;
+  title: string;
+  video_url: string;
+  sort_order: number;
+  is_active: boolean;
+  created_at: string;
+}
+
 export interface ProductRow {
   id: string;
   name: string;
@@ -156,6 +165,7 @@ export interface Database {
       pangan_asli_products: { Row: PanganAsliProductRow; Insert: WithDefaults<PanganAsliProductRow, "id" | "description" | "origin_region" | "category" | "image_url" | "is_featured" | "is_active" | "created_at">; Update: Partial<PanganAsliProductRow>; Relationships: EmptyRelationships; };
       admin_users: { Row: AdminUserRow; Insert: WithDefaults<AdminUserRow, "id" | "created_at">; Update: Partial<AdminUserRow>; Relationships: EmptyRelationships; };
       products: { Row: ProductRow; Insert: WithDefaults<ProductRow, "id" | "label" | "tokopedia_url" | "shopee_url" | "image_url" | "is_active" | "sort_order" | "created_at">; Update: Partial<ProductRow>; Relationships: EmptyRelationships; };
+      case_videos: { Row: CaseVideoRow; Insert: WithDefaults<CaseVideoRow, "id" | "sort_order" | "is_active" | "created_at">; Update: Partial<CaseVideoRow>; Relationships: EmptyRelationships; };
     };
     Views: { [_ in never]: never };
     Functions: { [_ in never]: never };

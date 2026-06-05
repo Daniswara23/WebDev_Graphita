@@ -6,6 +6,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { updateArticle } from "../../actions";
+import ArticleFormatSelector from "../../ArticleFormatSelector";
 
 export default async function EditArtikelPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -13,6 +14,9 @@ export default async function EditArtikelPage({ params }: { params: Promise<{ id
   const { data: article } = await supabase.from("articles").select("*").eq("id", id).single();
 
   if (!article) notFound();
+
+  // Determine source type based on existing data
+  const currentSourceType = article.file_url ? "pdf" : article.external_url ? "link" : "";
 
   return (
     <div>
@@ -49,18 +53,13 @@ export default async function EditArtikelPage({ params }: { params: Promise<{ id
           <textarea name="content" defaultValue={article.content ?? ""} rows={10} style={{ padding: "12px 16px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "6px", fontSize: "15px", resize: "vertical", fontFamily: "monospace" }} />
         </label>
 
-        <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-          <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", textTransform: "uppercase", letterSpacing: "1px" }}>File PDF</span>
-          {article.file_url ? (
-            <div style={{ fontSize: "13px", color: "#52b788", marginBottom: "6px" }}>
-              PDF saat ini: <a href={article.file_url} target="_blank" rel="noopener noreferrer" style={{ color: "#52b788", textDecoration: "underline" }}>Lihat PDF</a>
-            </div>
-          ) : (
-            <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", marginBottom: "6px" }}>Belum ada file PDF.</div>
-          )}
-          <input type="file" name="file" accept="application/pdf" style={{ padding: "10px 16px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "6px", fontSize: "14px" }} />
-          <input type="hidden" name="existing_url" value={article.file_url ?? ""} />
-        </label>
+        {/* Pilihan Format Artikel */}
+        <ArticleFormatSelector
+          mode="edit"
+          defaultSourceType={currentSourceType}
+          existingFileUrl={article.file_url}
+          existingExternalUrl={article.external_url}
+        />
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", textTransform: "uppercase", letterSpacing: "1px" }}>Tanggal Publikasi *</span>

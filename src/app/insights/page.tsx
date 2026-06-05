@@ -17,6 +17,8 @@ type Article = {
   excerpt: string;
   category: string;
   published_at: string;
+  file_url: string | null;
+  external_url: string | null;
 };
 
 type ResearchReport = {
@@ -41,7 +43,7 @@ export default function InsightsPage() {
   useEffect(() => {
     supabase
       .from("articles")
-      .select("id, title, excerpt, category, published_at")
+      .select("id, title, excerpt, category, published_at, file_url, external_url")
       .eq("is_published", true)
       .order("sort_order")
       .then(({ data }) => { if (data) setArticles(data); });
@@ -97,7 +99,7 @@ export default function InsightsPage() {
                     borderRadius: "12px",
                     border: "1px solid rgba(255,255,255,0.06)",
                     transition: "all 0.3s ease",
-                    cursor: "pointer",
+                    cursor: article.file_url || article.external_url ? "pointer" : "default",
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.background = "rgba(255,255,255,0.05)";
@@ -106,6 +108,13 @@ export default function InsightsPage() {
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = "rgba(255,255,255,0.03)";
                     e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                  }}
+                  onClick={() => {
+                    if (article.file_url) {
+                      window.open(article.file_url, "_blank");
+                    } else if (article.external_url) {
+                      window.open(article.external_url, "_blank");
+                    }
                   }}
                 >
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
@@ -123,7 +132,12 @@ export default function InsightsPage() {
                     {article.excerpt}
                   </p>
                   <div style={{ marginTop: "24px", paddingTop: "16px", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
-                    <span style={{ fontSize: "12px", color: "var(--gold-light)", fontWeight: 600, cursor: "pointer" }}>
+                    <span style={{
+                      fontSize: "12px",
+                      color: article.file_url || article.external_url ? "var(--gold-light)" : "rgba(255,255,255,0.4)",
+                      fontWeight: 600,
+                      cursor: article.file_url || article.external_url ? "pointer" : "default",
+                    }}>
                       Baca Selengkapnya →
                     </span>
                   </div>

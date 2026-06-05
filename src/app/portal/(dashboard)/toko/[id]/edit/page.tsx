@@ -10,7 +10,16 @@ import { updateProduct } from "../../actions";
 export default async function EditProdukPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const supabase = await createClient();
-  const { data: product } = await supabase.from("products").select("*").eq("id", id).single();
+
+  // Debug: log the ID being queried
+  console.log("[DEBUG] Edit page - product ID:", id);
+
+  const { data: product, error } = await supabase.from("products").select("*").eq("id", id).single();
+
+  if (error) {
+    console.error("[DEBUG] Error fetching product:", error.message);
+  }
+  console.log("[DEBUG] Product data:", product);
 
   if (!product) notFound();
 
@@ -45,6 +54,18 @@ export default async function EditProdukPage({ params }: { params: Promise<{ id:
             <input type="text" name="label" defaultValue={product.label ?? ""} style={{ padding: "12px 16px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "6px", fontSize: "15px" }} />
           </label>
         </div>
+
+        <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+          <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", textTransform: "uppercase", letterSpacing: "1px" }}>Foto Produk</span>
+          {product.image_url && (
+            <div style={{ marginBottom: "8px" }}>
+              <img src={product.image_url} alt={product.name} style={{ width: "120px", height: "120px", objectFit: "cover", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.1)" }} />
+              <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.4)", marginTop: "4px" }}>Foto saat ini</p>
+            </div>
+          )}
+          <input type="file" name="image" accept="image/*" style={{ padding: "10px 16px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "6px", fontSize: "15px" }} />
+          <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)" }}>Format: JPG, PNG, WebP. Kosongkan jika tidak ingin mengubah foto.</span>
+        </label>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", textTransform: "uppercase", letterSpacing: "1px" }}>Link Tokopedia (opsional)</span>
