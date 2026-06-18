@@ -13,6 +13,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Navbar() {
   /*
@@ -132,6 +133,9 @@ export default function Navbar() {
           );
         })}
       </ul>
+
+      {/* THEME TOGGLE */}
+      <ThemeToggle />
 
       {/* TOMBOL AKSI */}
       <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
