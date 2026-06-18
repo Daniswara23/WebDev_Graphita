@@ -134,11 +134,9 @@ export default function Navbar() {
         })}
       </ul>
 
-      {/* THEME TOGGLE */}
-      <ThemeToggle />
-
       {/* TOMBOL AKSI */}
       <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+        <ThemeToggle />
         <Link href="/portal/login" style={{ fontSize: "11px", color: "rgba(255,255,255,0.4)", textDecoration: "none", letterSpacing: "1px", textTransform: "uppercase", transition: "color 0.2s", marginRight: "4px" }}
           onMouseEnter={(e) => e.currentTarget.style.color = "var(--gold-light)"}
           onMouseLeave={(e) => e.currentTarget.style.color = "rgba(255,255,255,0.4)"}
