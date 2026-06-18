@@ -33,8 +33,11 @@
   :root = selector untuk elemen paling atas (html).
   CSS Variables di sini bisa dipakai di seluruh project dengan var(--nama).
   Keuntungan: kalau mau ganti warna, cukup ubah di sini saja.
+
+  DARK MODE (Default) - Mode ini aktif secara default
 */
 :root {
+  /* Base Colors */
   --navy: #1a2744;
   --navy-dark: #0f1a30;
   --gold: #c9933a;
@@ -43,6 +46,108 @@
   --green-light: #52b788;
   --cream: #f8f5ef;
   --white: #ffffff;
+
+  /* Semantic Variables - DARK MODE */
+  --bg-primary: #0f1a30;
+  --bg-secondary: rgba(26, 39, 68, 0.5);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --accent-gold: #e8b86d;
+  --accent-gold-dark: #c9933a;
+  --accent-green: #2d6a4f;
+  --accent-green-light: #52b788;
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --overlay-gold: rgba(201, 147, 58, 0.15);
+
+  /* Card & Section - DARK MODE */
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+  --section-bg-alt: rgba(255, 255, 255, 0.02);
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --input-border: rgba(255, 255, 255, 0.1);
+
+  /* CTA Band - DARK MODE */
+  --cta-bg: var(--gold);
+  --cta-text: var(--navy-dark);
+  --cta-text-muted: rgba(15, 26, 48, 0.65);
+  --cta-btn-bg: var(--navy-dark);
+  --cta-btn-text: var(--gold-light);
+
+  /* Modal - DARK MODE */
+  --modal-bg: rgba(15, 26, 48, 0.98);
+  --modal-border: rgba(201, 147, 58, 0.2);
+  --modal-company-text: var(--gold-light);
+
+  /* Component-specific - DARK MODE */
+  --navbar-bg: rgba(15, 26, 48, 0.85);
+  --navbar-bg-scrolled: rgba(15, 26, 48, 0.97);
+  --hero-bg: var(--navy-dark);
+  --hero-overlay: rgba(10, 20, 40, 0.97);
+  --hero-overlay-mid: rgba(10, 20, 40, 0.88);
+  --hero-overlay-mid2: rgba(10, 20, 40, 0.45);
+  --hero-overlay-2: rgba(10, 20, 40, 1);
+  --hero-statement-bg: rgba(0, 0, 0, 0.35);
+  --hero-text: rgba(255, 255, 255, 0.95);
+  --hero-heading: var(--gold-light);
+  --hero-statement-text: var(--gold-light);
+  --footer-bg: var(--navy-dark);
+  --footer-text: rgba(255, 255, 255, 0.6);
+  --footer-text-muted: rgba(255, 255, 255, 0.4);
+  --footer-heading: var(--white);
+  --footer-link: rgba(255, 255, 255, 0.7);
+  --footer-border: rgba(255, 255, 255, 0.06);
+}
+
+/* LIGHT MODE - Aktif saat ada class .light-mode di <html> */
+html.light-mode {
+  --bg-primary: #f8f5ef;
+  --bg-secondary: #ffffff;
+  --text-primary: #1a2744;
+  --text-secondary: rgba(26, 39, 68, 0.7);
+  --accent-gold: #c9933a;
+  --accent-gold-dark: #9e7629;
+  --accent-green: #52b788;
+  --accent-green-light: #74c69d;
+  --border-subtle: rgba(26, 39, 68, 0.1);
+  --overlay-gold: rgba(201, 147, 58, 0.08);
+
+  /* Card & Section - LIGHT MODE */
+  --card-bg: #ffffff;
+  --card-border: rgba(26, 39, 68, 0.08);
+  --section-bg-alt: rgba(26, 39, 68, 0.02);
+  --input-bg: rgba(26, 39, 68, 0.03);
+  --input-border: rgba(26, 39, 68, 0.12);
+
+  /* CTA Band - LIGHT MODE */
+  --cta-bg: #1a2744;
+  --cta-text: #ffffff;
+  --cta-text-muted: rgba(255, 255, 255, 0.65);
+  --cta-btn-bg: #c9933a;
+  --cta-btn-text: #1a2744;
+
+  /* Modal - LIGHT MODE */
+  --modal-bg: #f8f5ef;
+  --modal-border: rgba(201, 147, 58, 0.25);
+  --modal-company-text: var(--accent-gold);
+
+  /* Component-specific - LIGHT MODE */
+  --navbar-bg: rgba(248, 245, 239, 0.85);
+  --navbar-bg-scrolled: rgba(255, 255, 255, 0.95);
+  --hero-bg: var(--bg-primary);
+  --hero-overlay: rgba(248, 245, 239, 0.97);
+  --hero-overlay-mid: rgba(248, 245, 239, 0.88);
+  --hero-overlay-mid2: rgba(248, 245, 239, 0.45);
+  --hero-overlay-2: rgba(248, 245, 239, 1);
+  --hero-statement-bg: rgba(201, 147, 58, 0.08);
+  --hero-text: #1a2744;
+  --hero-heading: #1a2744;
+  --hero-statement-text: #1a2744;
+  --footer-bg: #ffffff;
+  --footer-text: rgba(26, 39, 68, 0.7);
+  --footer-text-muted: rgba(26, 39, 68, 0.4);
+  --footer-heading: #1a2744;
+  --footer-link: rgba(26, 39, 68, 0.7);
+  --footer-border: rgba(26, 39, 68, 0.08);
 }
 
 /* Reset dasar — menghapus margin/padding bawaan browser */
