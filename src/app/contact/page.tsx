@@ -16,17 +16,17 @@ export default function ContactPage() {
       <Navbar />
       <main style={{ minHeight: "100vh" }}>
         {/* Hero Section */}
-        <div style={{ padding: "120px 56px 80px", textAlign: "center", background: "var(--navy-dark)" }}>
+        <div style={{ padding: "120px 56px 80px", textAlign: "center", background: "var(--bg-primary)" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
             <span style={{ fontSize: "var(--text-xs)", letterSpacing: "2px", textTransform: "uppercase", color: "var(--gold-light)" }}>
               Kontak
             </span>
           </div>
-          <h1 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-5xl)", fontWeight: 700, lineHeight: 1.1, color: "var(--white)", marginBottom: "24px" }}>
+          <h1 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-5xl)", fontWeight: 700, lineHeight: 1.1, color: "var(--text-primary)", marginBottom: "24px" }}>
             Ayo ngobrol tentang arah keberlanjutan Anda
           </h1>
-          <p style={{ fontSize: "var(--text-lg)", lineHeight: "var(--line-relaxed)", color: "rgba(255,255,255,0.9)", maxWidth: "700px", margin: "0 auto" }}>
+          <p style={{ fontSize: "var(--text-lg)", lineHeight: "var(--line-relaxed)", color: "var(--text-primary)", maxWidth: "700px", margin: "0 auto" }}>
             Sampaikan ide, tantangan, atau rencana Anda. Semua masukan ditangani dengan hati-hati dan diberi perlindungan data yang baik.
           </p>
         </div>
@@ -35,7 +35,7 @@ export default function ContactPage() {
         <ContactForm />
 
         {/* Office & Social Media Section */}
-        <div className="animate-on-scroll" style={{ padding: "80px 56px", background: "rgba(255,255,255,0.02)" }}>
+        <div className="animate-on-scroll" style={{ padding: "80px 56px", background: "var(--section-bg-alt)" }}>
           <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "48px" }}>
               {/* Kantor */}
@@ -44,7 +44,7 @@ export default function ContactPage() {
                 padding: "40px 32px",
                 border: "1px solid rgba(201,147,58,0.3)",
                 borderRadius: "12px",
-                background: "rgba(201,147,58,0.08)"
+                background: "var(--overlay-gold)"
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-4px)";
@@ -66,20 +66,20 @@ export default function ContactPage() {
                 }}>
                   <OfficeBuildingIcon size={24} />
                 </div>
-                <h3 style={{ fontSize: "var(--text-3xl)", fontWeight: 700, color: "var(--white)", marginBottom: "16px" }}>
+                <h3 style={{ fontSize: "var(--text-3xl)", fontWeight: 700, color: "var(--text-primary)", marginBottom: "16px" }}>
                   Lokasi Kantor
                 </h3>
-                <p style={{ fontSize: "var(--text-lg)", color: "rgba(255,255,255,0.8)", lineHeight: "var(--line-relaxed)", marginBottom: "8px" }}>
+                <p style={{ fontSize: "var(--text-lg)", color: "var(--text-secondary)", lineHeight: "var(--line-relaxed)", marginBottom: "8px" }}>
                   <strong>Grahita Adhi Sasmita</strong>
                 </p>
-                <p style={{ fontSize: "var(--text-lg)", color: "rgba(255,255,255,0.8)", lineHeight: "var(--line-relaxed)", marginBottom: "16px" }}>
+                <p style={{ fontSize: "var(--text-lg)", color: "var(--text-secondary)", lineHeight: "var(--line-relaxed)", marginBottom: "16px" }}>
                   Jakarta, Indonesia
                 </p>
-                <div style={{ background: "rgba(201,147,58,0.1)", padding: "16px", borderRadius: "8px", border: "1px solid rgba(201,147,58,0.2)" }}>
-                  <p style={{ fontSize: "var(--text-base)", color: "rgba(255,255,255,0.9)", margin: "0" }}>
+                <div style={{ background: "var(--overlay-gold)", padding: "16px", borderRadius: "8px", border: "1px solid rgba(201,147,58,0.2)" }}>
+                  <p style={{ fontSize: "var(--text-base)", color: "var(--text-primary)", margin: "0" }}>
                     hello@grahitaadhisasmita.com
                   </p>
-                  <p style={{ fontSize: "var(--text-base)", color: "rgba(255,255,255,0.9)", margin: "8px 0 0 0" }}>
+                  <p style={{ fontSize: "var(--text-base)", color: "var(--text-primary)", margin: "8px 0 0 0" }}>
                     +62 (Hubungi untuk informasi)
                   </p>
                 </div>
@@ -91,7 +91,7 @@ export default function ContactPage() {
                 padding: "40px 32px",
                 border: "1px solid rgba(201,147,58,0.3)",
                 borderRadius: "12px",
-                background: "rgba(201,147,58,0.08)"
+                background: "var(--overlay-gold)"
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-4px)";
@@ -113,10 +113,10 @@ export default function ContactPage() {
                 }}>
                   <ShareNetworkIcon size={24} />
                 </div>
-                <h3 style={{ fontSize: "var(--text-3xl)", fontWeight: 700, color: "var(--white)", marginBottom: "16px" }}>
+                <h3 style={{ fontSize: "var(--text-3xl)", fontWeight: 700, color: "var(--text-primary)", marginBottom: "16px" }}>
                   Ikuti Kami
                 </h3>
-                <p style={{ fontSize: "var(--text-lg)", color: "rgba(255,255,255,0.8)", lineHeight: "var(--line-relaxed)", marginBottom: "32px" }}>
+                <p style={{ fontSize: "var(--text-lg)", color: "var(--text-secondary)", lineHeight: "var(--line-relaxed)", marginBottom: "32px" }}>
                   Temukan berita terbaru, insight, dan publikasi kami
                 </p>
                 <div style={{ display: "flex", justifyContent: "center", gap: "16px", flexWrap: "wrap" }}>

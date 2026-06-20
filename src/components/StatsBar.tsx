@@ -2,8 +2,11 @@
 
 /*
   StatsBar.tsx — BAR STATISTIK
-  - Item pertama ("Portofolio visual") diambil dari count articles + research_reports
-  - 3 item lainnya diambil dari tabel `stats` di Supabase
+  Semua data diambil real-time dari database Supabase:
+  - Portofolio visual  → COUNT articles (published) + research_reports
+  - Tahun pengalaman   → dari tabel stats
+  - Layanan Unggulan   → COUNT home_services
+  - Produk Lokal       → COUNT products (is_active = true)
 */
 
 import { useEffect, useState } from "react";
@@ -20,7 +23,7 @@ export default function StatsBar() {
 
   useEffect(() => {
     async function fetchData() {
-      // Ambil semua stats (filter portofolio dilakukan setelahnya)
+      // Ambil stats statis dari tabel (hanya "Tahun pengalaman")
       const statsResult = await supabase
         .from("stats")
         .select("id, number_text, label")
@@ -32,21 +35,52 @@ export default function StatsBar() {
         supabase.from("research_reports").select("id", { count: "exact", head: true }),
       ]);
 
+      // Hitung jumlah layanan dari home_services
+      const servicesResult = await supabase
+        .from("home_services")
+        .select("id", { count: "exact", head: true });
+
+      // Hitung jumlah produk aktif dari products
+      const productsResult = await supabase
+        .from("products")
+        .select("id", { count: "exact", head: true })
+        .eq("is_active", true);
+
       const totalPortofolio = (articlesResult.count ?? 0) + (researchResult.count ?? 0);
+      const totalServices = servicesResult.count ?? 0;
+      const totalProducts = productsResult.count ?? 0;
 
-      const portofolioStat = {
-        id: "portofolio-dynamic",
-        number_text: String(totalPortofolio),
-        label: "Portofolio visual",
-      };
+      // Bangun 4 item stat
+      const dynamicStats: StatItem[] = [
+        {
+          id: "portofolio-dynamic",
+          number_text: String(totalPortofolio),
+          label: "Portofolio visual",
+        },
+      ];
 
+      // Ambil "Tahun pengalaman" dari tabel stats (filter agar tidak duplikat)
       if (statsResult.data) {
-        // Filter out entry "Portofolio visual" dari stats agar tidak duplikat
         const filteredStats = statsResult.data.filter(
           (s) => s.label !== "Portofolio visual"
         );
-        setStats([portofolioStat, ...filteredStats]);
+        dynamicStats.push(...filteredStats);
       }
+
+      dynamicStats.push(
+        {
+          id: "services-dynamic",
+          number_text: String(totalServices),
+          label: "Layanan Unggulan",
+        },
+        {
+          id: "products-dynamic",
+          number_text: String(totalProducts),
+          label: "Produk Lokal",
+        }
+      );
+
+      setStats(dynamicStats);
     }
 
     fetchData();
@@ -55,13 +89,15 @@ export default function StatsBar() {
   return (
     <div
       style={{
-        background: "rgba(201,147,58,0.08)",
+        background: "var(--overlay-gold)",
         borderTop: "1px solid rgba(201,147,58,0.2)",
         borderBottom: "1px solid rgba(201,147,58,0.1)",
-        padding: "28px 56px",
-        display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
+        padding: "28px 24px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         gap: "24px",
+        flexWrap: "wrap",
       }}
     >
       {stats.map((item, index) => (
@@ -69,17 +105,18 @@ export default function StatsBar() {
           key={item.id}
           style={{
             textAlign: "center",
-            padding: "8px 0",
+            padding: "8px 24px",
+            minWidth: "120px",
             borderRight:
               index < stats.length - 1
-                ? "1px solid rgba(255,255,255,0.08)"
+                ? "1px solid var(--border-subtle)"
                 : "none",
           }}
         >
           <div
             style={{
               fontFamily: "'Times New Roman', serif",
-              fontSize: "38px",
+              fontSize: "32px",
               fontWeight: 700,
               color: "var(--gold-light)",
               lineHeight: 1,
@@ -90,10 +127,11 @@ export default function StatsBar() {
           </div>
           <div
             style={{
-              fontSize: "var(--text-xs)",
+              fontSize: "10px",
               letterSpacing: "1.5px",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.45)",
+              color: "var(--text-secondary)",
+              whiteSpace: "nowrap",
             }}
           >
             {item.label}

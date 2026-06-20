@@ -9,7 +9,7 @@ export default function TestimonialTrigger({ onViewTestimonials }: { onViewTesti
     <div
       style={{
         padding: "48px 56px",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        borderBottom: "1px solid var(--border-subtle)",
       }}
     >
       {/* Header dengan garis kanan-kiri dan teks tengah */}
@@ -23,14 +23,14 @@ export default function TestimonialTrigger({ onViewTestimonials }: { onViewTesti
         }}
       >
         {/* Garis kiri */}
-        <div style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.08)" }} />
+        <div style={{ flex: 1, height: "1px", background: "var(--border-subtle)" }} />
         
         <span
           style={{
             fontSize: "11px",
             letterSpacing: "2px",
             textTransform: "uppercase",
-            color: "rgba(255,255,255,0.35)",
+            color: "var(--text-secondary)",
             whiteSpace: "nowrap",
           }}
         >
@@ -38,7 +38,7 @@ export default function TestimonialTrigger({ onViewTestimonials }: { onViewTesti
         </span>
         
         {/* Garis kanan */}
-        <div style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.08)" }} />
+        <div style={{ flex: 1, height: "1px", background: "var(--border-subtle)" }} />
       </div>
 
       {/* Tombol Lihat Testimoni di tengah */}
@@ -53,7 +53,7 @@ export default function TestimonialTrigger({ onViewTestimonials }: { onViewTesti
           onClick={onViewTestimonials}
           style={{
             padding: "6px 16px",
-            background: "rgba(201,147,58,0.1)",
+            background: "var(--overlay-gold)",
             border: "1px solid rgba(201,147,58,0.3)",
             color: "var(--gold-light)",
             fontSize: "11px",

@@ -20,34 +20,34 @@ export default async function PesanDetailPage({ params }: { params: Promise<{ id
 
   return (
     <div>
-      <Link href="/portal/pesan" style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", textDecoration: "none", marginBottom: "24px", display: "inline-block" }}>
+      <Link href="/portal/pesan" style={{ fontSize: "13px", color: "var(--text-secondary)", textDecoration: "none", marginBottom: "24px", display: "inline-block" }}>
         &larr; Kembali ke daftar pesan
       </Link>
 
-      <h1 style={{ fontSize: "28px", fontWeight: 700, color: "var(--white)", marginBottom: "32px" }}>
+      <h1 style={{ fontSize: "28px", fontWeight: 700, color: "var(--text-primary)", marginBottom: "32px" }}>
         Detail Pesan
       </h1>
 
       <div style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "16px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: "12px", padding: "16px 20px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "8px" }}>
-          <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Nama</span>
-          <span style={{ fontSize: "15px", color: "var(--white)", fontWeight: 600 }}>{msg.name}</span>
+        <div style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: "12px", padding: "16px 20px", background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "8px" }}>
+          <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Nama</span>
+          <span style={{ fontSize: "15px", color: "var(--text-primary)", fontWeight: 600 }}>{msg.name}</span>
 
-          <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Email</span>
+          <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Email</span>
           <span style={{ fontSize: "14px", color: "var(--gold-light)" }}>{msg.email}</span>
 
-          <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Perusahaan</span>
-          <span style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)" }}>{msg.company || <span style={{ color: "rgba(255,255,255,0.3)" }}>—</span>}</span>
+          <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Perusahaan</span>
+          <span style={{ fontSize: "14px", color: "var(--text-primary)" }}>{msg.company || <span style={{ color: "var(--text-secondary)" }}>—</span>}</span>
 
-          <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Tanggal</span>
-          <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)" }}>{formatDate(msg.created_at)}</span>
+          <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Tanggal</span>
+          <span style={{ fontSize: "13px", color: "var(--text-secondary)" }}>{formatDate(msg.created_at)}</span>
         </div>
 
-        <div style={{ padding: "20px 24px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "8px" }}>
-          <h3 style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "12px" }}>
+        <div style={{ padding: "20px 24px", background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "8px" }}>
+          <h3 style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "12px" }}>
             Isi Pesan
           </h3>
-          <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.9)", lineHeight: 1.8, whiteSpace: "pre-wrap" }}>
+          <p style={{ fontSize: "15px", color: "var(--text-primary)", lineHeight: 1.8, whiteSpace: "pre-wrap" }}>
             {msg.message}
           </p>
         </div>

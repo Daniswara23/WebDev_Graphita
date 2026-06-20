@@ -18,10 +18,10 @@ export default async function TokoAdminPage() {
     <div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "32px" }}>
         <div>
-          <h1 style={{ fontSize: "28px", fontWeight: 700, color: "var(--white)", marginBottom: "4px" }}>
+          <h1 style={{ fontSize: "28px", fontWeight: 700, color: "var(--text-primary)", marginBottom: "4px" }}>
             Toko
           </h1>
-          <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.6)" }}>
+          <p style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
             Kelola produk toko Pangan Asli.
           </p>
         </div>
@@ -40,38 +40,34 @@ export default async function TokoAdminPage() {
         </Link>
       </div>
 
-      <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "12px", overflow: "hidden" }}>
+      <div style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "12px", overflow: "hidden" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.08)", textAlign: "left" }}>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Nama Produk</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Harga</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Label</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Status</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px", textAlign: "right" }}>Aksi</th>
+            <tr style={{ borderBottom: "1px solid var(--card-border)", textAlign: "left" }}>
+              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Nama Produk</th>
+              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Label</th>
+              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Status</th>
+              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px", textAlign: "right" }}>Aksi</th>
             </tr>
           </thead>
           <tbody>
             {(!products || products.length === 0) ? (
               <tr>
-                <td colSpan={5} style={{ padding: "40px", textAlign: "center", color: "rgba(255,255,255,0.5)", fontSize: "14px" }}>
+                <td colSpan={4} style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", fontSize: "14px" }}>
                   Belum ada produk. Klik "+ Produk Baru" untuk menambah.
                 </td>
               </tr>
             ) : (
               products.map((product) => (
-                <tr key={product.id} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                <tr key={product.id} style={{ borderBottom: "1px solid var(--card-border)" }}>
                   <td style={{ padding: "16px 20px" }}>
-                    <div style={{ fontSize: "15px", fontWeight: 600, color: "var(--white)" }}>{product.name}</div>
-                  </td>
-                  <td style={{ padding: "16px 20px", fontSize: "14px", color: "var(--gold-light)", fontFamily: "'Times New Roman', serif" }}>
-                    {product.price}
+                    <div style={{ fontSize: "15px", fontWeight: 600, color: "var(--text-primary)" }}>{product.name}</div>
                   </td>
                   <td style={{ padding: "16px 20px" }}>
                     {product.label ? (
                       <span style={{ fontSize: "12px", color: "#fbbf24", textTransform: "uppercase", letterSpacing: "0.5px" }}>{product.label}</span>
                     ) : (
-                      <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)" }}>—</span>
+                      <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>—</span>
                     )}
                   </td>
                   <td style={{ padding: "16px 20px" }}>
@@ -92,10 +88,10 @@ export default async function TokoAdminPage() {
                     <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}>
                       <Link href={`/portal/toko/${product.id}/edit`} style={{
                         padding: "6px 14px",
-                        background: "rgba(255,255,255,0.05)",
-                        border: "1px solid rgba(255,255,255,0.15)",
+                        background: "var(--bg-secondary)",
+                        border: "1px solid var(--border-subtle)",
                         borderRadius: "6px",
-                        color: "rgba(255,255,255,0.8)",
+                        color: "var(--text-primary)",
                         textDecoration: "none",
                         fontSize: "12px",
                       }}>

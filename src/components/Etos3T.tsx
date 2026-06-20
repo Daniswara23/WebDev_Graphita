@@ -43,7 +43,7 @@ export default function Etos3T() {
             Standar Layanan Kami
           </span>
         </div>
-        <h2 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-4xl)", fontWeight: 700, lineHeight: 1.1, color: "var(--white)" }}>
+        <h2 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-4xl)", fontWeight: 700, lineHeight: 1.1, color: "var(--text-primary)" }}>
           Cara kami bekerja
         </h2>
       </div>
@@ -55,8 +55,8 @@ export default function Etos3T() {
             onClick={() => toggleCard(index)}
             style={{
               padding: "40px 24px",
-              background: expandedIndex === index ? "rgba(201,147,58,0.15)" : "rgba(255,255,255,0.03)",
-              border: expandedIndex === index ? "1px solid rgba(201,147,58,0.4)" : "1px solid rgba(255,255,255,0.06)",
+              background: expandedIndex === index ? "var(--overlay-gold)" : "var(--card-bg)",
+              border: expandedIndex === index ? "1px solid rgba(201,147,58,0.4)" : "1px solid var(--card-border)",
               borderRadius: "12px",
               textAlign: "center",
               cursor: "pointer",
@@ -68,13 +68,13 @@ export default function Etos3T() {
             }}
             onMouseEnter={(e) => {
               if (expandedIndex !== index) {
-                e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+                e.currentTarget.style.background = "var(--section-bg-alt)";
                 e.currentTarget.style.transform = "translateY(-4px)";
               }
             }}
             onMouseLeave={(e) => {
               if (expandedIndex !== index) {
-                e.currentTarget.style.background = "rgba(255,255,255,0.03)";
+                e.currentTarget.style.background = "var(--card-bg)";
                 e.currentTarget.style.transform = "translateY(0)";
               }
             }}
@@ -85,7 +85,7 @@ export default function Etos3T() {
                   width: "52px",
                   height: "52px",
                   borderRadius: "16px",
-                  background: expandedIndex === index ? "rgba(201,147,58,0.25)" : "rgba(201,147,58,0.12)",
+                  background: expandedIndex === index ? "var(--overlay-gold)" : "rgba(201,147,58,0.12)",
                   transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                   display: "flex",
                   alignItems: "center",
@@ -102,7 +102,7 @@ export default function Etos3T() {
             <h3 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-2xl)", fontWeight: 700, color: "var(--gold-light)", marginBottom: "16px" }}>
               {item.title}
             </h3>
-            <p style={{ fontSize: "var(--text-base)", lineHeight: "var(--line-relaxed)", color: "rgba(255,255,255,0.8)", marginBottom: expandedIndex === index ? "20px" : "0" }}>
+            <p style={{ fontSize: "var(--text-base)", lineHeight: "var(--line-relaxed)", color: "var(--text-primary)", marginBottom: expandedIndex === index ? "20px" : "0" }}>
               {item.description}
             </p>
 
@@ -117,7 +117,7 @@ export default function Etos3T() {
               }}
             >
               <div style={{ paddingTop: expandedIndex === index ? "16px" : "0", borderTop: "1px solid rgba(201,147,58,0.2)" }}>
-                <p style={{ fontSize: "var(--text-sm)", lineHeight: "var(--line-loose)", color: "rgba(255,255,255,0.7)" }}>
+                <p style={{ fontSize: "var(--text-sm)", lineHeight: "var(--line-loose)", color: "var(--text-secondary)" }}>
                   {item.details}
                 </p>
               </div>

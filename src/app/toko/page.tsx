@@ -15,7 +15,6 @@ type Product = {
   id: string;
   name: string;
   description: string;
-  price: string;
   label: string | null;
   image_url: string | null;
   tokopedia_url: string | null;
@@ -31,7 +30,7 @@ const marketplaces = [
 const SHARED_STYLES = {
   sectionPadding:    { padding: "0 56px 80px" },
   headerSection:     { padding: "120px 56px 60px", textAlign: "center" as const },
-  marketplaceSection: { padding: "60px 56px 100px", background: "rgba(255,255,255,0.02)" },
+  marketplaceSection: { padding: "60px 56px 100px", background: "var(--section-bg-alt)" },
   buttonTransition:  { transition: "all 0.2s ease" },
   smoothTransition:  { transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease" },
 };
@@ -43,7 +42,7 @@ export default function TokoPage() {
   useEffect(() => {
     supabase
       .from("products")
-      .select("id, name, description, price, label, image_url, tokopedia_url, shopee_url")
+      .select("id, name, description, label, image_url, tokopedia_url, shopee_url")
       .eq("is_active", true)
       .order("sort_order")
       .then(({ data, error }) => {
@@ -65,15 +64,15 @@ export default function TokoPage() {
       borderRadius:   "16px",
       textDecoration: "none" as const,
       transition:     "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-      border:         "1px solid rgba(255,255,255,0.1)",
-      background:     "rgba(255,255,255,0.05)",
+      border:         "1px solid var(--border-subtle)",
+      background:     "var(--card-bg)",
     },
   }), []);
 
   return (
     <>
       <Navbar />
-      <main style={{ minHeight: "100vh", background: "var(--navy-dark)" }}>
+      <main style={{ minHeight: "100vh", background: "var(--bg-primary)" }}>
         <section style={SHARED_STYLES.headerSection}>
           <div className="animate-on-scroll" style={{ display: "inline-flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
@@ -81,10 +80,10 @@ export default function TokoPage() {
               Toko Pangan Asli
             </span>
           </div>
-          <h1 className="animate-on-scroll animate-delay-100" style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-5xl)", fontWeight: 700, color: "var(--white)", lineHeight: 1.05, marginBottom: "24px" }}>
+          <h1 className="animate-on-scroll animate-delay-100" style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-5xl)", fontWeight: 700, color: "var(--text-primary)", lineHeight: 1.05, marginBottom: "24px" }}>
             Produk pangan asli, langsung dari petani dan UMKM lokal
           </h1>
-          <p className="animate-on-scroll animate-delay-200" style={{ maxWidth: "760px", margin: "0 auto", color: "rgba(255,255,255,0.75)", lineHeight: 1.9, fontSize: "var(--text-lg)" }}>
+          <p className="animate-on-scroll animate-delay-200" style={{ maxWidth: "760px", margin: "0 auto", color: "var(--text-secondary)", lineHeight: 1.9, fontSize: "var(--text-lg)" }}>
             Semua produk difokuskan pada keaslian, transparansi asal, dan dukungan untuk ekosistem pangan lokal. Pilih produk, lalu lanjutkan pembelian melalui Tokopedia, Shopee, atau channel e-commerce resmi kami.
           </p>
         </section>
@@ -101,7 +100,7 @@ export default function TokoPage() {
                   style={{
                     borderRadius: "20px",
                     overflow: "hidden",
-                    background: "rgba(255,255,255,0.02)",
+                    background: "var(--card-bg)",
                     border: "1px solid rgba(201,147,58,0.2)",
                     ...SHARED_STYLES.smoothTransition,
                     transform:   hoveredProduct === product.id ? "translateY(-8px)" : "translateY(0)",
@@ -138,12 +137,12 @@ export default function TokoPage() {
                         style={{
                           width: "100%",
                           height: "100%",
-                          background: "rgba(255,255,255,0.02)",
+                          background: "var(--card-bg)",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
                           fontSize: "14px",
-                          color: "rgba(255,255,255,0.3)",
+                          color: "var(--text-secondary)",
                           fontStyle: "italic",
                         }}
                       >
@@ -171,20 +170,12 @@ export default function TokoPage() {
                         {product.label || "Produk asli"}
                       </span>
                     </div>
-                    <h2 style={{ fontSize: "var(--text-2xl)", fontWeight: 700, color: "var(--white)", marginBottom: "12px", transition: "color 0.3s ease" }}>
+                    <h2 style={{ fontSize: "var(--text-2xl)", fontWeight: 700, color: "var(--text-primary)", marginBottom: "12px", transition: "color 0.3s ease" }}>
                       {product.name}
                     </h2>
-                    <p style={{ color: "rgba(255,255,255,0.7)", lineHeight: 1.8, marginBottom: "22px", fontSize: "var(--text-base)" }}>
+                    <p style={{ color: "var(--text-secondary)", lineHeight: 1.8, marginBottom: "22px", fontSize: "var(--text-base)" }}>
                       {product.description}
                     </p>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "28px", paddingBottom: "20px", borderBottom: "1px solid rgba(201,147,58,0.1)" }}>
-                      <span style={{ fontSize: "20px", fontWeight: 700, transition: "color 0.3s ease", color: hoveredProduct === product.id ? "var(--gold)" : "var(--gold-light)", fontFamily: "'Times New Roman', serif" }}>
-                        {product.price}
-                      </span>
-                      <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "0.5px" }}>
-                        Stok terbatas
-                      </span>
-                    </div>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
                       {product.tokopedia_url ? (
                         <a href={product.tokopedia_url} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
@@ -214,9 +205,9 @@ export default function TokoPage() {
                             width: "100%",
                             padding: "12px 14px",
                             borderRadius: "10px",
-                            border: "1px solid rgba(255,255,255,0.1)",
-                            background: "rgba(255,255,255,0.05)",
-                            color: "rgba(255,255,255,0.3)",
+                            border: "1px solid var(--border-subtle)",
+                            background: "var(--card-bg)",
+                            color: "var(--text-secondary)",
                             cursor: "not-allowed",
                             fontWeight: 700,
                             fontFamily: "var(--font-primary)",
@@ -253,9 +244,9 @@ export default function TokoPage() {
                             width: "100%",
                             padding: "12px 14px",
                             borderRadius: "10px",
-                            border: "1px solid rgba(255,255,255,0.1)",
-                            background: "rgba(255,255,255,0.05)",
-                            color: "rgba(255,255,255,0.3)",
+                            border: "1px solid var(--border-subtle)",
+                            background: "var(--card-bg)",
+                            color: "var(--text-secondary)",
                             cursor: "not-allowed",
                             fontWeight: 700,
                             fontFamily: "var(--font-primary)",
@@ -280,10 +271,10 @@ export default function TokoPage() {
                 Marketplace terhubung
               </span>
             </div>
-            <h2 className="animate-on-scroll animate-delay-100" style={{ fontSize: "var(--text-4xl)", fontWeight: 700, color: "var(--white)", marginBottom: "18px" }}>
+            <h2 className="animate-on-scroll animate-delay-100" style={{ fontSize: "var(--text-4xl)", fontWeight: 700, color: "var(--text-primary)", marginBottom: "18px" }}>
               Integrasi mudah dengan platform jual beli populer
             </h2>
-            <p className="animate-on-scroll animate-delay-200" style={{ maxWidth: "660px", margin: "0 auto", color: "rgba(255,255,255,0.75)", lineHeight: 1.8, marginBottom: "40px" }}>
+            <p className="animate-on-scroll animate-delay-200" style={{ maxWidth: "660px", margin: "0 auto", color: "var(--text-secondary)", lineHeight: 1.8, marginBottom: "40px" }}>
               Beli produk asli lewat marketplace resmi, dengan pilihan checkout cepat dan transparansi harga. Ideal untuk pembeli yang ingin belanja praktis dan terpercaya.
             </p>
             <div className="animate-on-scroll animate-delay-300" style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "24px" }}>
@@ -298,14 +289,14 @@ export default function TokoPage() {
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "translateY(-4px)";
                     e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.3)";
-                    e.currentTarget.style.background = "rgba(255,255,255,0.1)";
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
+                    e.currentTarget.style.background = "var(--bg-secondary)";
+                    e.currentTarget.style.borderColor = "var(--border-subtle)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "translateY(0)";
                     e.currentTarget.style.boxShadow = "none";
-                    e.currentTarget.style.background = "rgba(255,255,255,0.05)";
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+                    e.currentTarget.style.background = "var(--card-bg)";
+                    e.currentTarget.style.borderColor = "var(--border-subtle)";
                   }}
                 >
                   <img

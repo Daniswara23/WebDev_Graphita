@@ -44,7 +44,7 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
           left: 0,
           right: 0,
           bottom: 0,
-          background: "rgba(0,0,0,0.7)",
+          background: "var(--modal-bg)",
           zIndex: 999,
           backdropFilter: "blur(4px)",
           opacity: mounted ? 1 : 0,
@@ -63,8 +63,8 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
             : "translate(-50%, -50%) scale(0.92)",
           opacity: mounted ? 1 : 0,
           transition: "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-          background: "rgba(15,26,48,0.98)",
-          border: "1px solid rgba(201,147,58,0.2)",
+          background: "var(--modal-bg)",
+          border: "1px solid var(--modal-border)",
           borderRadius: "12px",
           padding: "48px",
           maxWidth: "900px",
@@ -117,7 +117,7 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
                 fontFamily: "Goudy Old Style, Georgia, serif",
                 fontSize: "32px",
                 fontWeight: 700,
-                color: "var(--white)",
+                color: "var(--text-primary)",
                 opacity: mounted ? 1 : 0,
                 transform: mounted ? "translateY(0)" : "translateY(15px)",
                 transition: "all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.25s",
@@ -132,7 +132,7 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
               background: "none",
               border: "none",
               fontSize: "28px",
-              color: "rgba(255,255,255,0.6)",
+              color: "var(--text-secondary)",
               cursor: "pointer",
               padding: "0",
               width: "40px",
@@ -147,7 +147,7 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
               e.currentTarget.style.transform = "rotate(90deg)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+                e.currentTarget.style.color = "var(--text-secondary)";
               e.currentTarget.style.transform = "rotate(0deg)";
             }}
           >
@@ -163,8 +163,8 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
               style={{
                 textAlign: "center",
                 padding: "32px 24px",
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.06)",
+                background: "var(--card-bg)",
+                border: "1px solid var(--card-border)",
                 borderRadius: "8px",
                 opacity: mounted ? 1 : 0,
                 transform: mounted ? "translateY(0)" : "translateY(30px)",
@@ -175,7 +175,7 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
                 style={{
                   fontSize: "14px",
                   lineHeight: "1.6",
-                  color: "rgba(255,255,255,0.9)",
+                  color: "var(--text-primary)",
                   fontStyle: "italic",
                   marginBottom: "20px",
                 }}
@@ -183,10 +183,10 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
                 &ldquo;{t.quote}&rdquo;
               </p>
               <div>
-                <div style={{ fontWeight: "600", color: "var(--white)", marginBottom: "4px", fontSize: "13px" }}>
+                <div style={{ fontWeight: "600", color: "var(--text-primary)", marginBottom: "4px", fontSize: "13px" }}>
                   {t.author}
                 </div>
-                <div style={{ fontSize: "12px", color: "var(--gold-light)" }}>{t.company}</div>
+                <div style={{ fontSize: "12px", color: "var(--modal-company-text)" }}>{t.company}</div>
               </div>
             </div>
           ))}

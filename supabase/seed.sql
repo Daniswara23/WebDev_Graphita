@@ -9,10 +9,7 @@
 -- 1. STATS
 -- ─────────────────────────────────────────────────────────────
 INSERT INTO stats (number_text, label, sort_order) VALUES
-  ('50+',   'Portofolio visual',   1),
-  ('12',    'Tahun pengalaman',    2),
-  ('98%',   'Kepuasan mitra',      3),
-  ('$10M+', 'Dampak bisnis nyata', 4);
+  ('12',    'Tahun pengalaman',    1);
 
 
 -- ─────────────────────────────────────────────────────────────

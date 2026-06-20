@@ -19,53 +19,53 @@ export default async function PesanPage() {
 
   return (
     <div>
-      <h1 style={{ fontSize: "28px", fontWeight: 700, color: "var(--white)", marginBottom: "4px" }}>
+      <h1 style={{ fontSize: "28px", fontWeight: 700, color: "var(--text-primary)", marginBottom: "4px" }}>
         Pesan Masuk
       </h1>
-      <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.6)", marginBottom: "32px" }}>
+      <p style={{ fontSize: "14px", color: "var(--text-secondary)", marginBottom: "32px" }}>
         Pesan yang dikirim pengunjung melalui form kontak.
       </p>
 
-      <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "12px", overflow: "hidden" }}>
+      <div style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "12px", overflow: "hidden" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.08)", textAlign: "left" }}>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Nama</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Email</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Perusahaan</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Tanggal</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px", textAlign: "right" }}>Aksi</th>
+            <tr style={{ borderBottom: "1px solid var(--card-border)", textAlign: "left" }}>
+              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Nama</th>
+              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Email</th>
+              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Perusahaan</th>
+              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Tanggal</th>
+              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px", textAlign: "right" }}>Aksi</th>
             </tr>
           </thead>
           <tbody>
             {(!messages || messages.length === 0) ? (
               <tr>
-                <td colSpan={5} style={{ padding: "40px", textAlign: "center", color: "rgba(255,255,255,0.5)", fontSize: "14px" }}>
+                <td colSpan={5} style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", fontSize: "14px" }}>
                   Belum ada pesan masuk.
                 </td>
               </tr>
             ) : (
               messages.map((msg) => (
-                <tr key={msg.id} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                <tr key={msg.id} style={{ borderBottom: "1px solid var(--card-border)" }}>
                   <td style={{ padding: "16px 20px" }}>
-                    <div style={{ fontSize: "15px", fontWeight: 600, color: "var(--white)" }}>{msg.name}</div>
+                    <div style={{ fontSize: "15px", fontWeight: 600, color: "var(--text-primary)" }}>{msg.name}</div>
                   </td>
-                  <td style={{ padding: "16px 20px", fontSize: "13px", color: "rgba(255,255,255,0.7)" }}>
+                  <td style={{ padding: "16px 20px", fontSize: "13px", color: "var(--text-primary)" }}>
                     {msg.email}
                   </td>
-                  <td style={{ padding: "16px 20px", fontSize: "13px", color: "rgba(255,255,255,0.6)" }}>
-                    {msg.company || <span style={{ color: "rgba(255,255,255,0.3)" }}>—</span>}
+                  <td style={{ padding: "16px 20px", fontSize: "13px", color: "var(--text-secondary)" }}>
+                    {msg.company || <span style={{ color: "var(--text-secondary)" }}>—</span>}
                   </td>
-                  <td style={{ padding: "16px 20px", fontSize: "12px", color: "rgba(255,255,255,0.5)" }}>
+                  <td style={{ padding: "16px 20px", fontSize: "12px", color: "var(--text-secondary)" }}>
                     {formatDate(msg.created_at)}
                   </td>
                   <td style={{ padding: "16px 20px", textAlign: "right" }}>
                     <Link href={`/portal/pesan/${msg.id}`} style={{
                       padding: "6px 14px",
-                      background: "rgba(255,255,255,0.05)",
-                      border: "1px solid rgba(255,255,255,0.15)",
+                      background: "var(--bg-secondary)",
+                      border: "1px solid var(--border-subtle)",
                       borderRadius: "6px",
-                      color: "rgba(255,255,255,0.8)",
+                      color: "var(--text-primary)",
                       textDecoration: "none",
                       fontSize: "12px",
                     }}>

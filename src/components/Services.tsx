@@ -113,11 +113,11 @@ export default function Services() {
               fontSize: "var(--text-4xl)",
               fontWeight: 700,
               lineHeight: 1.1,
-              color: "var(--white)",
+              color: "var(--text-primary)",
             }}
           >
             Ragam layanan kami untuk menyokong<br />
-            <span style={{ color: "var(--gold-light)" }}>perjalanan keberlanjutan Anda</span>
+            <span style={{ color: "var(--accent-gold)" }}>perjalanan keberlanjutan Anda</span>
           </h2>
         </div>
 
@@ -128,7 +128,7 @@ export default function Services() {
             fontSize: "var(--text-xs)",
             letterSpacing: "1.5px",
             textTransform: "uppercase",
-            color: "var(--green-light)",
+              color: "var(--accent-green-light)",
             cursor: "pointer",
             border: "none",
             background: "none",
@@ -152,8 +152,8 @@ export default function Services() {
             key={service.id}
             className="grid-item hover-lift hover-glow"
             style={{
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.06)",
+              background: "var(--card-bg)",
+              border: "1px solid var(--card-border)",
               borderRadius: "16px",
               padding: "40px 32px",
               cursor: "pointer",
@@ -164,7 +164,7 @@ export default function Services() {
               style={{
                 fontFamily: "'Times New Roman', serif",
                 fontSize: "var(--text-xs)",
-                color: "rgba(201,147,58,0.4)",
+                  color: "var(--overlay-gold)",
                 letterSpacing: "2px",
                 display: "block",
                 marginBottom: "24px",
@@ -182,7 +182,7 @@ export default function Services() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                background: "rgba(45,106,79,0.2)",
+                background: "var(--overlay-gold)",
                 borderRadius: "4px",
               }}
             >
@@ -194,7 +194,7 @@ export default function Services() {
                 fontFamily: "var(--font-primary)",
                 fontSize: "var(--text-2xl)",
                 fontWeight: 700,
-                color: "var(--white)",
+                  color: "var(--text-primary)",
                 marginBottom: "14px",
                 lineHeight: 1.2,
               }}
@@ -206,7 +206,7 @@ export default function Services() {
               style={{
                 fontSize: "var(--text-sm)",
                 lineHeight: "var(--line-relaxed)",
-                color: "rgba(255,255,255,0.5)",
+                color: "var(--text-secondary)",
                 fontWeight: 300,
               }}
             >

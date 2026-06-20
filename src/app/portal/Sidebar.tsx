@@ -7,6 +7,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { logoutAction } from "@/app/portal/login/actions";
+import ThemeToggle from "@/components/ThemeToggle";
 import styles from "./Sidebar.module.css";
 
 const NAV_ITEMS = [
@@ -14,8 +15,10 @@ const NAV_ITEMS = [
   { label: "Publikasi", href: "/portal/publikasi", icon: "📄" },
   { label: "Riset", href: "/portal/riset", icon: "📊" },
   { label: "Video", href: "/portal/case-videos", icon: "🎬" },
+  { label: "Dokumentasi", href: "/portal/dokumentasi", icon: "📸" },
   { label: "Toko", href: "/portal/toko", icon: "🏪" },
   { label: "Pesan", href: "/portal/pesan", icon: "✉" },
+  { label: "Feedback", href: "/portal/testimoni", icon: "💬" },
 ];
 
 export default function Sidebar({ adminName }: { adminName: string }) {
@@ -26,13 +29,18 @@ export default function Sidebar({ adminName }: { adminName: string }) {
       {/* Logo */}
       <div className={styles.logo}>
         <Link href="/portal/dashboard" className={styles.logoLink}>
-          Grahita <span style={{ color: "var(--white)" }}>Admin</span>
+          <img src="/images/logo-GAS.png" alt="Grahita Adhi Sasmita" className={styles.logoImg} />
         </Link>
       </div>
 
       {/* Admin name */}
       <div className={styles.adminName}>
         {adminName}
+      </div>
+
+      {/* Theme Toggle */}
+      <div style={{ padding: "12px 24px", borderBottom: "1px solid var(--card-border)" }}>
+        <ThemeToggle />
       </div>
 
       {/* Navigation */}

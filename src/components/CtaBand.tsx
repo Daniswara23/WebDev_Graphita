@@ -44,7 +44,7 @@ export default function CtaBand() {
         <p
           style={{
             fontSize: "var(--text-base)",
-            color: "rgba(15,26,48,0.65)",
+            color: "var(--cta-text-muted)",
             fontWeight: 300,
           }}
         >

@@ -18,10 +18,10 @@ export default async function CaseVideosPage() {
     <div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "32px" }}>
         <div>
-          <h1 style={{ fontSize: "28px", fontWeight: 700, color: "var(--white)", marginBottom: "4px" }}>
+          <h1 style={{ fontSize: "28px", fontWeight: 700, color: "var(--text-primary)", marginBottom: "4px" }}>
             Video Carousel
           </h1>
-          <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.6)" }}>
+          <p style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
             Kelola video untuk section "Sekilas Tentang Kami". Video ditampilkan sebagai carousel di samping gambar.
           </p>
         </div>
@@ -40,29 +40,29 @@ export default async function CaseVideosPage() {
         </Link>
       </div>
 
-      <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "12px", overflow: "hidden" }}>
+      <div style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "12px", overflow: "hidden" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.08)", textAlign: "left" }}>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Judul</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Link</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Urutan</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px" }}>Status</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px", textAlign: "right" }}>Aksi</th>
+            <tr style={{ borderBottom: "1px solid var(--card-border)", textAlign: "left" }}>
+              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Judul</th>
+              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Link</th>
+              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Urutan</th>
+              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Status</th>
+              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px", textAlign: "right" }}>Aksi</th>
             </tr>
           </thead>
           <tbody>
             {(!videos || videos.length === 0) ? (
               <tr>
-                <td colSpan={5} style={{ padding: "40px", textAlign: "center", color: "rgba(255,255,255,0.5)", fontSize: "14px" }}>
+                <td colSpan={5} style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", fontSize: "14px" }}>
                   Belum ada video. Klik "+ Video Baru" untuk menambahkan.
                 </td>
               </tr>
             ) : (
               videos.map((video) => (
-                <tr key={video.id} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                <tr key={video.id} style={{ borderBottom: "1px solid var(--card-border)" }}>
                   <td style={{ padding: "16px 20px" }}>
-                    <div style={{ fontSize: "15px", fontWeight: 600, color: "var(--white)" }}>{video.title}</div>
+                    <div style={{ fontSize: "15px", fontWeight: 600, color: "var(--text-primary)" }}>{video.title}</div>
                   </td>
                   <td style={{ padding: "16px 20px" }}>
                     <a href={video.video_url} target="_blank" rel="noopener noreferrer" style={{
@@ -79,24 +79,24 @@ export default async function CaseVideosPage() {
                       {video.video_url}
                     </a>
                   </td>
-                  <td style={{ padding: "16px 20px", fontSize: "13px", color: "rgba(255,255,255,0.7)" }}>
+                  <td style={{ padding: "16px 20px", fontSize: "13px", color: "var(--text-primary)" }}>
                     {video.sort_order}
                   </td>
                   <td style={{ padding: "16px 20px" }}>
                     {video.is_active ? (
                       <span style={{ fontSize: "12px", color: "#52b788" }}>● Aktif</span>
                     ) : (
-                      <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)" }}>● Non-aktif</span>
+                      <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>● Non-aktif</span>
                     )}
                   </td>
                   <td style={{ padding: "16px 20px", textAlign: "right" }}>
                     <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}>
                       <Link href={`/portal/case-videos/${video.id}/edit`} style={{
                         padding: "6px 14px",
-                        background: "rgba(255,255,255,0.05)",
-                        border: "1px solid rgba(255,255,255,0.15)",
+                        background: "var(--bg-secondary)",
+                        border: "1px solid var(--border-subtle)",
                         borderRadius: "6px",
-                        color: "rgba(255,255,255,0.8)",
+                        color: "var(--text-primary)",
                         textDecoration: "none",
                         fontSize: "12px",
                       }}>
@@ -115,7 +115,7 @@ export default async function CaseVideosPage() {
         </table>
       </div>
 
-      <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)", marginTop: "16px" }}>
+      <p style={{ fontSize: "12px", color: "var(--text-secondary)", marginTop: "16px" }}>
         💡 Tips: Upload video ke YouTube terlebih dahulu, lalu salin link video (https://youtu.be/... atau https://www.youtube.com/watch?v=...) ke form tambah video.
       </p>
     </div>

@@ -9,11 +9,13 @@ import styles from "./dashboard.module.css";
 export default async function AdminDashboardPage() {
   const supabase = await createClient();
 
-  const [articlesRes, reportsRes, productsRes, messagesRes] = await Promise.all([
+  const [articlesRes, reportsRes, productsRes, messagesRes, testimonialsRes, galleriesRes] = await Promise.all([
     supabase.from("articles").select("id", { count: "exact", head: true }),
     supabase.from("research_reports").select("id", { count: "exact", head: true }),
     supabase.from("products").select("id", { count: "exact", head: true }),
     supabase.from("contact_submissions").select("id", { count: "exact", head: true }),
+    supabase.from("testimonials").select("id", { count: "exact", head: true }),
+    supabase.from("photo_galleries").select("id", { count: "exact", head: true }),
   ]);
 
   const cards = [
@@ -21,6 +23,8 @@ export default async function AdminDashboardPage() {
     { label: "Laporan Riset",     count: reportsRes.count   ?? 0, href: "/portal/riset",     color: "#fbbf24" },
     { label: "Produk Toko",       count: productsRes.count  ?? 0, href: "/portal/toko",      color: "#60a5fa" },
     { label: "Pesan Masuk",       count: messagesRes.count  ?? 0, href: "/portal/pesan",     color: "#f472b6" },
+    { label: "Feedback",          count: testimonialsRes.count ?? 0, href: "/portal/testimoni", color: "#a78bfa" },
+    { label: "Dokumentasi",       count: galleriesRes.count ?? 0, href: "/portal/dokumentasi", color: "#f97316" },
   ];
 
   return (
@@ -54,7 +58,10 @@ export default async function AdminDashboardPage() {
           {[
             { label: "+ Artikel Baru", href: "/portal/publikasi/create" },
             { label: "+ Laporan Riset Baru", href: "/portal/riset/create" },
+            { label: "+ Video Baru", href: "/portal/case-videos/create" },
             { label: "+ Produk Baru", href: "/portal/toko/create" },
+            { label: "+ Dokumentasi Baru", href: "/portal/dokumentasi/create" },
+            { label: "+ Feedback Baru", href: "/portal/testimoni/create" },
             { label: "Lihat Pesan", href: "/portal/pesan" },
           ].map((action) => (
             <Link

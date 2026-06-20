@@ -57,26 +57,21 @@ export default function Navbar() {
         padding: "20px 48px",
         // Background berubah berdasarkan state scrolled
         background: scrolled
-          ? "rgba(15,26,48,0.97)"
-          : "rgba(15,26,48,0.85)",
+          ? "var(--navbar-bg-scrolled)"
+          : "var(--navbar-bg)",
         backdropFilter: "blur(12px)", // Efek blur background
         borderBottom: "1px solid rgba(201,147,58,0.15)",
         transition: "all 0.3s ease",  // Animasi halus saat berubah
       }}
     >
       {/* LOGO */}
-      <div
-        style={{
-          fontFamily: "var(--font-primary)",
-          fontSize: "var(--text-2xl)",
-          fontWeight: 700,
-          color: "var(--gold-light)",
-          letterSpacing: "0.5px",
-        }}
-      >
-        Grahita{" "}
-        <span style={{ color: "var(--white)" }}>Adhi Sasmita</span>
-      </div>
+      <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
+        <img
+          src="/images/logo-GAS.png"
+          alt="Grahita Adhi Sasmita"
+          style={{ height: "60px", width: "auto" }}
+        />
+      </Link>
 
       {/* MENU LINKS */}
       <ul
@@ -91,7 +86,7 @@ export default function Navbar() {
           Kita map array menu agar tidak perlu tulis <li> berulang.
           map() = looping di React untuk membuat elemen dari array.
         */}
-        {["Home", "Tentang Kami", "Ragam Layanan", "Toko", "Riset dan Publikasi", "Kontak"].map((item) => {
+        {["Home", "Tentang Kami", "Ragam Layanan", "Galeri Kegiatan", "Toko", "Riset dan Publikasi", "Kontak"].map((item) => {
           const href =
             item === "Home"
               ? "/"
@@ -105,13 +100,15 @@ export default function Navbar() {
               ? "/insights"
               : item === "Kontak"
               ? "/contact"
+              : item === "Galeri Kegiatan"
+              ? "/dokumentasi"
               : `#${item.toLowerCase()}`;
 
           const isInternal = href.startsWith("/");
           const isActive = pathname === href;
 
           const linkStyle = {
-            color: "rgba(255,255,255,0.75)",
+            color: "var(--text-secondary)",
             textDecoration: "none",
             fontSize: "var(--text-sm)",
             letterSpacing: "1.5px",
@@ -137,9 +134,9 @@ export default function Navbar() {
       {/* TOMBOL AKSI */}
       <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
         <ThemeToggle />
-        <Link href="/portal/login" style={{ fontSize: "11px", color: "rgba(255,255,255,0.4)", textDecoration: "none", letterSpacing: "1px", textTransform: "uppercase", transition: "color 0.2s", marginRight: "4px" }}
-          onMouseEnter={(e) => e.currentTarget.style.color = "var(--gold-light)"}
-          onMouseLeave={(e) => e.currentTarget.style.color = "rgba(255,255,255,0.4)"}
+        <Link href="/portal/login" style={{ fontSize: "11px", color: "var(--footer-text-muted)", textDecoration: "none", letterSpacing: "1px", textTransform: "uppercase", transition: "color 0.2s", marginRight: "4px" }}
+          onMouseEnter={(e) => e.currentTarget.style.color = "var(--accent-gold)"}
+          onMouseLeave={(e) => e.currentTarget.style.color = "var(--footer-text-muted)"}
         >
           Admin
         </Link>

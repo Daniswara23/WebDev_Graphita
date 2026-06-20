@@ -25,7 +25,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
   }
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "var(--navy-dark)" }}>
+    <div style={{ display: "flex", minHeight: "100vh", background: "var(--bg-primary)" }}>
       <Sidebar adminName={admin.full_name} />
       <main style={{ flex: 1, marginLeft: "260px", padding: "32px 40px", overflow: "auto" }}>
         {children}

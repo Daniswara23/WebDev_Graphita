@@ -84,23 +84,23 @@ export default function ServicesPage() {
       <Navbar />
       <main style={{ minHeight: "100vh" }}>
         {/* Hero Section */}
-        <div style={{ padding: "120px 56px 80px", textAlign: "center", background: "var(--navy-dark)" }}>
+        <div style={{ padding: "120px 56px 80px", textAlign: "center", background: "var(--bg-primary)" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
             <span style={{ fontSize: "var(--text-xs)", letterSpacing: "2px", textTransform: "uppercase", color: "var(--gold-light)" }}>
               Ragam Layanan
             </span>
           </div>
-          <h1 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-5xl)", fontWeight: 700, lineHeight: 1.1, color: "var(--white)", marginBottom: "24px" }}>
+          <h1 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-5xl)", fontWeight: 700, lineHeight: 1.1, color: "var(--text-primary)", marginBottom: "24px" }}>
             Ragam layanan yang dibangun untuk langkah nyata
           </h1>
-          <p style={{ fontSize: "var(--text-lg)", lineHeight: "var(--line-relaxed)", color: "rgba(255,255,255,0.9)", maxWidth: "700px", margin: "0 auto" }}>
+          <p style={{ fontSize: "var(--text-lg)", lineHeight: "var(--line-relaxed)", color: "var(--text-primary)", maxWidth: "700px", margin: "0 auto" }}>
             Kami membantu organisasi merancang layanan keberlanjutan yang tidak terlalu rumit, tetapi jelas, relevan, dan dapat dijalankan.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="animate-on-scroll" style={{ padding: "80px 56px", background: "rgba(255,255,255,0.02)" }}>
+        <div className="animate-on-scroll" style={{ padding: "80px 56px", background: "var(--section-bg-alt)" }}>
           <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(500px, 1fr))", gap: "48px" }}>
               {services.map((service, index) => (
@@ -108,27 +108,27 @@ export default function ServicesPage() {
                   key={service.id}
                   className="grid-item hover-lift hover-glow animate-delay-100"
                   style={{
-                    background: "rgba(255,255,255,0.03)",
+                    background: "var(--card-bg)",
                     padding: "48px",
                     borderRadius: "12px",
-                    border: "1px solid rgba(255,255,255,0.06)",
+                    border: "1px solid var(--card-border)",
                     animationDelay: `${index * 0.1}s`,
                   }}
                 >
                   <div style={{ width: "60px", height: "60px", margin: "0 auto 24px", borderRadius: "12px", background: "rgba(45,106,79,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     {getIcon(service.title)}
                   </div>
-                  <h3 style={{ fontSize: "var(--text-3xl)", fontWeight: 700, color: "var(--white)", marginBottom: "16px" }}>
+                  <h3 style={{ fontSize: "var(--text-3xl)", fontWeight: 700, color: "var(--text-primary)", marginBottom: "16px" }}>
                     {service.title}
                   </h3>
-                  <p style={{ fontSize: "var(--text-lg)", color: "rgba(255,255,255,0.8)", lineHeight: "var(--line-relaxed)", marginBottom: "24px" }}>
+                  <p style={{ fontSize: "var(--text-lg)", color: "var(--text-secondary)", lineHeight: "var(--line-relaxed)", marginBottom: "24px" }}>
                     {service.description}
                   </p>
                   <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                     {service.features.map((feature, fi) => (
                       <div key={fi} style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                         <div style={{ width: "8px", height: "8px", background: "var(--gold)", borderRadius: "50%", flexShrink: 0 }} />
-                        <span style={{ fontSize: "var(--text-base)", color: "rgba(255,255,255,0.9)" }}>{feature}</span>
+                        <span style={{ fontSize: "var(--text-base)", color: "var(--text-primary)" }}>{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -139,11 +139,11 @@ export default function ServicesPage() {
         </div>
 
         {/* CTA Section */}
-        <div style={{ padding: "80px 56px", textAlign: "center", background: "var(--navy-dark)" }}>
-          <h2 style={{ fontSize: "var(--text-4xl)", fontWeight: 700, color: "var(--white)", marginBottom: "16px" }}>
+        <div style={{ padding: "80px 56px", textAlign: "center", background: "var(--cta-bg)" }}>
+          <h2 style={{ fontSize: "var(--text-4xl)", fontWeight: 700, color: "var(--cta-text)", marginBottom: "16px" }}>
             Siap Memulai Transformasi?
           </h2>
-          <p style={{ fontSize: "18px", color: "rgba(255,255,255,0.8)", marginBottom: "32px", maxWidth: "600px", margin: "0 auto 32px" }}>
+          <p style={{ fontSize: "18px", color: "var(--cta-text-muted)", marginBottom: "32px", maxWidth: "600px", margin: "0 auto 32px" }}>
             Mari diskusikan bagaimana layanan kami dapat membantu organisasi Anda mencapai tujuan keberlanjutan.
           </p>
           <a href="/contact" className="button-primary">

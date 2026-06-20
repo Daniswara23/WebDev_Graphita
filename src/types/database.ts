@@ -128,6 +128,28 @@ export interface AdminUserRow {
   created_at: string;
 }
 
+export interface PhotoGalleryRow {
+  id: string;
+  title: string;
+  slug: string;
+  description: string | null;
+  location: string | null;
+  event_date: string | null;
+  is_published: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface GalleryImageRow {
+  id: string;
+  gallery_id: string;
+  image_url: string;
+  caption: string | null;
+  sort_order: number;
+  created_at: string;
+}
+
 export interface CaseVideoRow {
   id: string;
   title: string;
@@ -141,7 +163,6 @@ export interface ProductRow {
   id: string;
   name: string;
   description: string;
-  price: string;
   label: string | null;
   tokopedia_url: string | null;
   shopee_url: string | null;
@@ -154,6 +175,8 @@ export interface ProductRow {
 export interface Database {
   public: {
     Tables: {
+      photo_galleries: { Row: PhotoGalleryRow; Insert: WithDefaults<PhotoGalleryRow, "id" | "slug" | "description" | "location" | "event_date" | "is_published" | "sort_order" | "created_at" | "updated_at">; Update: Partial<PhotoGalleryRow>; Relationships: EmptyRelationships; };
+      gallery_images: { Row: GalleryImageRow; Insert: WithDefaults<GalleryImageRow, "id" | "caption" | "sort_order" | "created_at">; Update: Partial<GalleryImageRow>; Relationships: EmptyRelationships; };
       articles: { Row: ArticleRow; Insert: WithDefaults<ArticleRow, "id" | "is_published" | "published_at" | "content" | "cover_image" | "created_at" | "updated_at">; Update: Partial<ArticleRow>; Relationships: EmptyRelationships; };
       research_reports: { Row: ResearchReportRow; Insert: WithDefaults<ResearchReportRow, "id" | "subtitle" | "category" | "file_url" | "is_published" | "created_at">; Update: Partial<ResearchReportRow>; Relationships: EmptyRelationships; };
       contact_submissions: { Row: ContactSubmissionRow; Insert: WithDefaults<ContactSubmissionRow, "id" | "organization" | "phone" | "service_interest" | "status" | "created_at">; Update: Partial<ContactSubmissionRow>; Relationships: EmptyRelationships; };

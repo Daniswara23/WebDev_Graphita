@@ -40,7 +40,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contact" style={{ padding: "80px 56px", background: "rgba(255,255,255,0.02)" }}>
+    <section id="contact" style={{ padding: "80px 56px", background: "var(--section-bg-alt)" }}>
       <div style={{ maxWidth: "700px", margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "56px" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "16px" }}>
@@ -49,13 +49,13 @@ export default function ContactForm() {
               Formulir Kontak
             </span>
           </div>
-          <h2 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-4xl)", fontWeight: 700, lineHeight: 1.1, color: "var(--white)", marginBottom: "16px" }}>
+          <h2 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-4xl)", fontWeight: 700, lineHeight: 1.1, color: "var(--text-primary)", marginBottom: "16px" }}>
             Mari Memulai Percakapan
           </h2>
-          <p style={{ fontSize: "var(--text-lg)", color: "rgba(255,255,255,0.8)", marginBottom: "8px" }}>
+          <p style={{ fontSize: "var(--text-lg)", color: "var(--text-primary)", marginBottom: "8px" }}>
             Bagikan visi keberlanjutan Anda, dan kami akan merancang solusi yang tepat untuk organisasi Anda.
           </p>
-          <p style={{ fontSize: "var(--text-base)", color: "rgba(255,255,255,0.6)" }}>
+          <p style={{ fontSize: "var(--text-base)", color: "var(--text-secondary)" }}>
             Tim ahli kami siap memberikan konsultasi gratis dalam 24 jam kerja.
           </p>
         </div>
@@ -67,28 +67,28 @@ export default function ContactForm() {
               type="text"
               placeholder="Nama Anda"
               required
-              style={{ flex: 1, padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "var(--text-base)" }}
+              style={{ flex: 1, padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
             />
             <input
               name="email"
               type="email"
               placeholder="Alamat Email"
               required
-              style={{ flex: 1, padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "var(--text-base)" }}
+              style={{ flex: 1, padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
             />
           </div>
           <input
             name="company"
             type="text"
             placeholder="Perusahaan/Organisasi"
-            style={{ padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "var(--text-base)" }}
+            style={{ padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
           />
           <textarea
             name="message"
             placeholder="Ceritakan tentang tantangan Anda..."
             rows={4}
             required
-            style={{ padding: "14px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--white)", borderRadius: "4px", fontSize: "var(--text-base)", resize: "vertical" }}
+            style={{ padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)", resize: "vertical" }}
           />
           <button
             type="submit"
@@ -123,7 +123,7 @@ export default function ContactForm() {
             {submitting ? "Mengirim..." : "Kirim Pesan"}
           </button>
         </form>
-        <p style={{ fontSize: "var(--text-sm)", color: "rgba(255,255,255,0.5)", marginTop: "28px", textAlign: "center" }}>
+        <p style={{ fontSize: "var(--text-sm)", color: "var(--text-secondary)", marginTop: "28px", textAlign: "center" }}>
           Data Anda dilindungi dengan aman, dikirim melalui enkripsi, dan hanya digunakan untuk tindak lanjut yang relevan.
         </p>
       </div>

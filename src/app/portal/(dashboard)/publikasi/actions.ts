@@ -1,5 +1,5 @@
 /*
-  publikasi/actions.ts — Server Actions CRUD articles + upload PDF / external link.
+  portal/(dashboard)/publikasi/actions.ts — Server Actions CRUD articles + upload PDF / external link.
 */
 
 "use server";
@@ -7,6 +7,76 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+
+/* ───── Helpers ───── */
+
+function validateSourceType(sourceType: string): asserts sourceType is "pdf" | "link" {
+  if (!sourceType || (sourceType !== "pdf" && sourceType !== "link")) {
+    throw new Error("Pilih format artikel: PDF atau Link External.");
+  }
+}
+
+function validatePdfFile(file: File | null) {
+  if (!file || file.size === 0) {
+    throw new Error("File PDF wajib diupload.");
+  }
+  if (file.type !== "application/pdf") {
+    throw new Error("Hanya file PDF yang diizinkan.");
+  }
+  if (file.size > 10 * 1024 * 1024) {
+    throw new Error("Ukuran file maksimal 10 MB.");
+  }
+}
+
+function generateSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .slice(0, 100);
+}
+
+function validateExternalUrl(url: string): void {
+  if (!url) {
+    throw new Error("URL External wajib diisi.");
+  }
+  try {
+    new URL(url);
+  } catch {
+    throw new Error("URL External tidak valid.");
+  }
+}
+
+async function uploadPdfToStorage(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  file: File | null
+): Promise<string> {
+  if (!file) {
+    throw new Error("File PDF tidak valid.");
+  }
+  const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
+  const filePath = `articles/${fileName}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from("articles")
+    .upload(filePath, file, {
+      contentType: "application/pdf",
+      upsert: false,
+    });
+
+  if (uploadError) {
+    throw new Error("Gagal upload file: " + uploadError.message);
+  }
+
+  const { data: urlData } = supabase.storage
+    .from("articles")
+    .getPublicUrl(filePath);
+
+  return urlData.publicUrl;
+}
+
+/* ───── Actions ───── */
 
 export async function createArticle(formData: FormData) {
   const supabase = await createClient();
@@ -24,62 +94,20 @@ export async function createArticle(formData: FormData) {
     throw new Error("Title, excerpt, category, dan tanggal publikasi wajib diisi.");
   }
 
-  // Validasi: harus pilih salah satu format
-  if (!sourceType || (sourceType !== "pdf" && sourceType !== "link")) {
-    throw new Error("Pilih format artikel: PDF atau Link External.");
-  }
+  validateSourceType(sourceType);
 
   let fileUrl: string | null = null;
   let externalUrlValue: string | null = null;
 
   if (sourceType === "pdf") {
-    if (!file || file.size === 0) {
-      throw new Error("File PDF wajib diupload.");
-    }
-    if (file.type !== "application/pdf") {
-      throw new Error("Hanya file PDF yang diizinkan.");
-    }
-    if (file.size > 10 * 1024 * 1024) {
-      throw new Error("Ukuran file maksimal 10 MB.");
-    }
-
-    const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
-    const filePath = `articles/${fileName}`;
-
-    const { error: uploadError } = await supabase.storage
-      .from("articles")
-      .upload(filePath, file, {
-        contentType: "application/pdf",
-        upsert: false,
-      });
-
-    if (uploadError) throw new Error("Gagal upload file: " + uploadError.message);
-
-    const { data: urlData } = supabase.storage
-      .from("articles")
-      .getPublicUrl(filePath);
-
-    fileUrl = urlData.publicUrl;
-  } else if (sourceType === "link") {
-    if (!externalUrl) {
-      throw new Error("URL External wajib diisi.");
-    }
-    // Validasi format URL
-    try {
-      new URL(externalUrl);
-    } catch {
-      throw new Error("URL External tidak valid.");
-    }
+      validatePdfFile(file);
+      fileUrl = await uploadPdfToStorage(supabase, file);
+  } else {
+    validateExternalUrl(externalUrl);
     externalUrlValue = externalUrl;
   }
 
-  // Generate slug from title
-  const slug = title
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .slice(0, 100);
+  const slug = generateSlug(title);
 
   const { error } = await supabase.from("articles").insert({
     title,
@@ -117,52 +145,21 @@ export async function updateArticle(id: string, formData: FormData) {
     throw new Error("Title, excerpt, category, dan tanggal publikasi wajib diisi.");
   }
 
-  // Validasi: harus pilih salah satu format
-  if (!sourceType || (sourceType !== "pdf" && sourceType !== "link")) {
-    throw new Error("Pilih format artikel: PDF atau Link External.");
-  }
+  validateSourceType(sourceType);
 
   let fileUrl: string | null = null;
   let externalUrlValue: string | null = null;
 
   if (sourceType === "pdf") {
     if (file && file.size > 0) {
-      if (file.type !== "application/pdf") {
-        throw new Error("Hanya file PDF yang diizinkan.");
-      }
-      if (file.size > 10 * 1024 * 1024) {
-        throw new Error("Ukuran file maksimal 10 MB.");
-      }
-
-      const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
-      const filePath = `articles/${fileName}`;
-
-      const { error: uploadError } = await supabase.storage
-        .from("articles")
-        .upload(filePath, file, {
-          contentType: "application/pdf",
-          upsert: false,
-        });
-
-      if (uploadError) throw new Error("Gagal upload file: " + uploadError.message);
-
-      const { data: urlData } = supabase.storage
-        .from("articles")
-        .getPublicUrl(filePath);
-
-      fileUrl = urlData.publicUrl;
+    validatePdfFile(file);
+    fileUrl = await uploadPdfToStorage(supabase, file);
     } else {
-      // Keep existing file
       fileUrl = existingFileUrl || null;
     }
-  } else if (sourceType === "link") {
+  } else {
     if (externalUrl) {
-      // Validasi format URL
-      try {
-        new URL(externalUrl);
-      } catch {
-        throw new Error("URL External tidak valid.");
-      }
+      validateExternalUrl(externalUrl);
       externalUrlValue = externalUrl;
     } else {
       externalUrlValue = existingExternalUrl || null;

@@ -42,7 +42,7 @@ export default function Hero() {
         flexDirection: "column",
         position: "relative",
         overflow: "hidden",
-        backgroundColor: "var(--navy-dark)",
+        backgroundColor: "var(--hero-bg)",
       }}
     >
       {/* ===== GAMBAR LATAR BELAKANG DAN OVERLAY ===== */}
@@ -79,7 +79,7 @@ export default function Hero() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to right, rgba(10,20,40,0.97) 0%, rgba(10,20,40,0.88) 30%, rgba(10,20,40,0.45) 52%, transparent 68%)",
+              "linear-gradient(to right, var(--hero-overlay) 0%, var(--hero-overlay-mid) 30%, var(--hero-overlay-mid2) 52%, transparent 68%)",
             zIndex: 2,
           }}
         />
@@ -102,7 +102,7 @@ export default function Hero() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundColor: "rgba(10, 20, 40, 1)",
+            backgroundColor: "var(--hero-overlay-2)",
             WebkitMaskImage:
               "radial-gradient(ellipse 52% 68% at 70% 44%, transparent 0%, transparent 52%, rgba(0,0,0,0.3) 65%, rgba(0,0,0,0.75) 78%, black 92%)",
             maskImage:
@@ -140,7 +140,7 @@ export default function Hero() {
               fontWeight: 900,
               lineHeight: "var(--line-tight)",
               marginBottom: "20px",
-              color: "var(--gold-light)",
+              color: "var(--hero-heading-primary)",
               textTransform: "uppercase",
             }}
           >
@@ -155,7 +155,7 @@ export default function Hero() {
               fontFamily: "var(--font-primary)",
               fontSize: "var(--text-base)",
               lineHeight: "var(--line-normal)",
-              color: "rgba(255,255,255,0.95)",
+              color: "var(--gold)",
               maxWidth: "480px",
               marginBottom: "40px",
               fontWeight: 300,
@@ -241,13 +241,13 @@ export default function Hero() {
           display: "flex",
           justifyContent: "center",
           padding: "40px 56px",
-          backgroundColor: "rgba(0,0,0,0.35)",
+          backgroundColor: "var(--hero-statement-bg)",
           zIndex: 5,
           position: "relative",
           width: "100%",
         }}
       >
-        <p style={{ fontFamily: "var(--font-primary)", color: "var(--gold-light)", fontSize: "var(--text-base)", maxWidth: "760px", textAlign: "center", lineHeight: "var(--line-relaxed)" }}>
+        <p style={{ fontFamily: "var(--font-primary)", color: "var(--hero-statement-text)", fontSize: "var(--text-base)", maxWidth: "760px", textAlign: "center", lineHeight: "var(--line-relaxed)" }}>
           Pernyataan kami tidak bergantung pada daftar nama. Kami menghadirkan pengalaman mitra secara visual, melalui proses yang jelas dan hasil yang dapat ditinjau.
         </p>
       </div>

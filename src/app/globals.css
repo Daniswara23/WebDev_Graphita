@@ -90,6 +90,7 @@
   --hero-text: rgba(255, 255, 255, 0.95);
   --hero-heading: var(--gold-light);
   --hero-statement-text: var(--gold-light);
+  --hero-heading-primary: var(--gold-light);
   --footer-bg: var(--navy-dark);
   --footer-text: rgba(255, 255, 255, 0.6);
   --footer-text-muted: rgba(255, 255, 255, 0.4);
@@ -141,6 +142,7 @@ html.light-mode {
   --hero-statement-bg: rgba(201, 147, 58, 0.08);
   --hero-text: #1a2744;
   --hero-heading: #1a2744;
+  --hero-heading-primary: #0f1a30;
   --hero-statement-text: #1a2744;
   --footer-bg: #ffffff;
   --footer-text: rgba(26, 39, 68, 0.7);
@@ -159,8 +161,8 @@ html.light-mode {
 
 body {
   font-family: var(--font-primary);
-  background-color: var(--navy-dark);
-  color: var(--white);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   overflow-x: hidden; /* Mencegah scroll horizontal */
 }
 
