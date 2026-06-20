@@ -4,6 +4,19 @@
 -- Jalankan SETELAH schema.sql berhasil dijalankan.
 -- ============================================================
 
+-- Hapus data lama sebelum insert data baru (hindari duplikasi)
+DELETE FROM standards;
+DELETE FROM testimonials;
+DELETE FROM ecosystem_case_studies;
+DELETE FROM ecosystem_partners;
+DELETE FROM research_reports;
+DELETE FROM articles;
+DELETE FROM products;
+DELETE FROM case_studies;
+DELETE FROM service_details;
+DELETE FROM home_services;
+DELETE FROM stats;
+
 
 -- ─────────────────────────────────────────────────────────────
 -- 1. STATS
@@ -17,29 +30,25 @@ INSERT INTO stats (number_text, label, sort_order) VALUES
 -- icon_key dipetakan ke SVG di Services.tsx (tidak disimpan di DB)
 -- ─────────────────────────────────────────────────────────────
 INSERT INTO home_services (num, title, description, icon_key, sort_order) VALUES
-  ('01', 'Strategi ESG & Keberlanjutan',
-   'Menyusun peta jalan ESG yang selaras dengan strategi bisnis jangka panjang perusahaan.',
-   'layers', 1),
+  ('01', 'Riset & Pemetaan Sosial Terintegrasi',
+   'Menganalisis kondisi psikososial, ekonomi, dan lingkungan secara holistik untuk menghasilkan data dan pemetaan yang dapat diandalkan.',
+   'barChart', 1),
 
-  ('02', 'Pelaporan & Pengukuran SDG',
-   'Membangun sistem pemantauan SDG yang terukur, transparan, dan siap untuk audit eksternal.',
-   'clock', 2),
+  ('02', 'Perencanaan Strategis & Konsultasi Keberlanjutan',
+   'Mendampingi organisasi menyusun rencana strategis adaptif yang selaras dengan tujuan keberlanjutan jangka panjang.',
+   'checkCircle', 2),
 
-  ('03', 'Jejak Karbon & Strategi Net Zero',
-   'Menghitung emisi karbon serta merancang strategi dekarbonisasi menuju target net zero.',
-   'grid', 3),
+  ('03', 'Pengembangan Kapasitas & Pemberdayaan Komunitas',
+   'Meningkatkan kompetensi SDM dan memberdayakan komunitas melalui program pelatihan, workshop, dan pendampingan berkelanjutan.',
+   'userGroup', 3),
 
-  ('04', 'Pelatihan & Penguatan Kapasitas',
-   'Menyelenggarakan program pelatihan keberlanjutan untuk meningkatkan kesiapan tim internal.',
-   'users', 4),
+  ('04', 'Fasilitasi Kolaborasi Multipihak',
+   'Menjembatani kerja sama antara penyandang dana, mitra teknis, pemerintah, dan organisasi sosial untuk menciptakan dampak yang lebih luas.',
+   'network', 4),
 
-  ('05', 'Due Diligence Keberlanjutan',
-   'Melakukan analisis risiko dan peluang keberlanjutan dalam proses investasi dan akuisisi.',
-   'pulse', 5),
-
-  ('06', 'Energi Terbarukan & Efisiensi',
-   'Memberikan konsultasi transisi energi serta peningkatan efisiensi operasional secara terukur.',
-   'sun', 6);
+  ('05', 'Publikasi & Diseminasi Ilmu Pengetahuan',
+   'Menerbitkan dan menyebarluaskan hasil riset, laporan dampak, serta publikasi ilmiah untuk mendukung pengambilan kebijakan berbasis bukti.',
+   'documentText', 5);
 
 
 -- ─────────────────────────────────────────────────────────────
@@ -47,28 +56,34 @@ INSERT INTO home_services (num, title, description, icon_key, sort_order) VALUES
 -- ─────────────────────────────────────────────────────────────
 INSERT INTO service_details (title, description, features, sort_order) VALUES
   (
-    'Kajian Pemetaan Terpadu',
-    'Analisis komprehensif yang mencakup tiga dimensi utama: psikososial, ekonomi, dan lingkungan. Kami membantu organisasi memahami kompleksitas tantangan keberlanjutan melalui pendekatan holistik.',
-    ARRAY['Assessment psikososial komunitas', 'Analisis dampak ekonomi lokal', 'Evaluasi kondisi lingkungan'],
+    'Riset & Pemetaan Sosial Terintegrasi',
+    'Layanan kajian komprehensif yang menggabungkan analisis psikososial, ekonomi, dan lingkungan untuk menghasilkan data terukur serta pemetaan berbasis bukti — dasar pengambilan kebijakan yang lebih tepat.',
+    ARRAY['Pemetaan psikososial & ekonomi lokal', 'Analisis dampak lingkungan berbasis data', 'Laporan riset siap pakai untuk kebijakan'],
     1
   ),
   (
-    'Pendampingan Organisasi & SDM',
-    'Pengembangan kapasitas organisasi melalui perancangan rencana strategis yang adaptif dan program peningkatan kinerja tim yang berkelanjutan.',
-    ARRAY['Perancangan strategi adaptif', 'Capacity building tim', 'Change management'],
+    'Perencanaan Strategis & Konsultasi Keberlanjutan',
+    'Pendampingan menyusun rencana strategis adaptif yang selaras dengan SDGs, mulai dari asesmen awal hingga implementasi dan evaluasi berkelanjutan.',
+    ARRAY['Roadmap keberlanjutan perusahaan', 'Konsultasi strategis adaptif berkelanjutan', 'Monitoring & evaluasi berbasis indikator'],
     2
   ),
   (
-    'Pengembangan Potensi Lokal',
-    'Implementasi model tekno-sosial dan pengembangan mata pencaharian yang ramah lingkungan untuk meningkatkan kesejahteraan masyarakat lokal.',
-    ARRAY['Model tekno-sosial inovatif', 'Pengembangan UMKM lokal', 'Mata pencaharian berkelanjutan'],
+    'Pengembangan Kapasitas & Pemberdayaan Komunitas',
+    'Program capacity building untuk SDM internal dan eksternal, termasuk pelatihan, workshop, dan pendampingan komunitas untuk meningkatkan daya saing dan kesejahteraan.',
+    ARRAY['Pelatihan SDM & change management', 'Workshop pemberdayaan komunitas', 'Pendampingan berkelanjutan jangka panjang'],
     3
   ),
   (
-    'Ekosistem Pangan ASLI',
-    'Inisiasi program pangan yang Aman, Sehat, dan Lestari untuk membangun ketahanan pangan dan kesejahteraan masyarakat melalui pendekatan holistik.',
-    ARRAY['Sistem pertanian berkelanjutan', 'Supply chain pangan lokal', 'Pendidikan nutrisi masyarakat'],
+    'Fasilitasi Kolaborasi Multipihak',
+    'Menjembatani kerja sama antar stakeholders — penyandang dana, mitra teknis, pemerintah, dan organisasi sosial — agar setiap program berjalan efektif dan berdampak luas.',
+    ARRAY['Kerjasama penyandang dana & mitra teknis', 'Kolaborasi dengan pemerintah & LSM', 'Memetakan ekosistem stakeholders'],
     4
+  ),
+  (
+    'Publikasi & Diseminasi Ilmu Pengetahuan',
+    'Memproduksi dan menerbitkan hasil riset, laporan dampak, publikasi ilmiah, serta infografis kreatif untuk mendukung penyebaran knowledge berbasis bukti.',
+    ARRAY['Laporan tahunan dampak ESG', 'Publikasi ilmiah & policy brief', 'Infografis kreatif untuk publik'],
+    5
   );
 
 
@@ -77,11 +92,11 @@ INSERT INTO service_details (title, description, features, sort_order) VALUES
 -- ─────────────────────────────────────────────────────────────
 INSERT INTO case_studies (title, client, challenge, solution, result, image_url, sort_order) VALUES
   (
-    'Ringkasan Pendirian Perusahaan',
-    'Didirikan 03 Februari 2026',
-    'Perusahaan dibentuk untuk mendukung transformasi menuju praktik bisnis berkelanjutan.',
-    'Kami berfokus pada integrasi SDGs dalam setiap layanan dan proyek yang kami jalankan.',
-    'Komitmen terhadap tujuan SDGs untuk menciptakan dampak positif dan pertumbuhan berkelanjutan.',
+    'Landasan Filosofi & Komitmen SDGs',
+    'PT Grahita Adhi Sasmita — Didirikan 03 Februari 2026',
+    'Menjawab kebutuhan akan partisipasi sektor swasta dalam mencerdaskan kehidupan bangsa dan mendukung kesejahteraan umum — berlandaskan Akta Pendirian Nomor 02.',
+    'Kami menyelaraskan seluruh kegiatan usaha dengan Sustainable Development Goals (SDGs), fokus pada 3 pilar: Penguatan Pertumbuhan Ekonomi & Inovasi (SDG 8 & 9), Pengembangan Ilmu Pengetahuan & Pengurangan Kesenjangan (SDG 10 & 17), serta Peningkatan Kesejahteraan & Keadilan Sosial (SDG 1 & 3).',
+    'Komitmen untuk menjadi sahabat yang menuju keberlanjutan yang maknawi — menciptakan pusaran kebaikan yang terus bertumbuh dan memberikan nilai tambah yang dapat diwariskan bagi generasi selanjutnya.',
     '/images/case1.jpg',
     1
   );
@@ -90,11 +105,10 @@ INSERT INTO case_studies (title, client, challenge, solution, result, image_url,
 -- ─────────────────────────────────────────────────────────────
 -- 5. PRODUCTS
 -- ─────────────────────────────────────────────────────────────
-INSERT INTO products (name, description, price, label, tokopedia_url, shopee_url, sort_order) VALUES
+INSERT INTO products (name, description, label, tokopedia_url, shopee_url, sort_order) VALUES
   (
     'Beras Organik Lokal',
     'Dari petani asli, tanpa pestisida, langsung siap masak.',
-    'Rp 85.000/kg',
     'Best seller',
     'https://www.tokopedia.com/',
     'https://shopee.co.id/',
@@ -103,7 +117,6 @@ INSERT INTO products (name, description, price, label, tokopedia_url, shopee_url
   (
     'Gula Aren Tradisional',
     'Rasa alami, tekstur lembut, cocok untuk minuman dan kue.',
-    'Rp 45.000/350g',
     'Terlaris',
     'https://www.tokopedia.com/',
     'https://shopee.co.id/',
@@ -112,7 +125,6 @@ INSERT INTO products (name, description, price, label, tokopedia_url, shopee_url
   (
     'Kopi Robusta Nusantara',
     'Aroma kuat, biji pilihan, dukung petani lokal.',
-    'Rp 75.000/250g',
     'Asli Indonesia',
     'https://www.tokopedia.com/',
     'https://shopee.co.id/',
@@ -189,31 +201,78 @@ INSERT INTO research_reports (title, subtitle, year, category, sort_order) VALUE
 
 
 -- ─────────────────────────────────────────────────────────────
--- 8. STANDARDS (Etos3T — "Cara kami bekerja")
+-- 8. STANDARDS (Etos3T — "Cara kami bekerja" → 3T: Tanggap, Tangguh, Tumbuh)
 -- ─────────────────────────────────────────────────────────────
 INSERT INTO standards (title, description, details, sort_order) VALUES
   (
-    'Mengenal Diriku',
-    'Kami mulai dengan mendengar dan memahami konteks tim Anda. Bukan sekadar data, tetapi cerita yang memberi arah pada setiap opsi.',
-    'Kami melakukan deep dive untuk memahami nilai-nilai, tantangan, dan visi organisasi Anda. Setiap insight diterjemahkan menjadi strategi yang relevan dan implementatif untuk sustainability journey Anda.',
+    'Tanggap',
+    'Peka terhadap situasi serta sigap merumuskan solusi yang relevan dengan perubahan yang terjadi.',
+    'Kami selalu hadir dan peka terhadap kebutuhan serta dinamika yang berkembang. Setiap perubahan dianalisis secara cepat dan tepat, sehingga solusi yang ditawarkan selalu relevan dan kontekstual. Ketanggapan kami adalah fondasi untuk membangun kepercayaan dan kolaborasi yang solid.',
     1
   ),
   (
-    'Proses yang Ringkas',
-    'Tak ada jargon yang bikin bingung. Langkah kami dibuat sederhana, ramah, dan mudah diikuti untuk semua pihak.',
-    'Metodologi kami dirancang untuk transparency dan engagement. Setiap fase dijelaskan dengan jelas, milestones dimonitor bersama, dan feedback loops memastikan alignment maksimal dengan kebutuhan Anda.',
+    'Tangguh',
+    'Pantang surut saat menghadapi masalah, menjaga kejujuran dan kepercayaan, serta menyelesaikan setiap aktivitas dengan kesungguhan sesuai target.',
+    'Komitmen kami tidak pernah goyah dalam menghadapi tantangan. Integritas dan kejujuran menjadi pegangan utama dalam setiap langkah. Setiap aktivitas dijalani dengan dedikasi penuh, memastikan hasil yang sesuai target dan melampaui harapan mitra.',
     2
   ),
   (
-    'Hasil yang Terlihat',
-    'Setiap rekomendasi disajikan sebagai sesuatu yang bisa ditinjau dan digunakan, bukan hanya sebagai laporan tebal di rak.',
-    'Deliverables kami actionable, terukur, dan siap implementasi. Dari roadmap strategis hingga toolkit operasional, semua dirancang untuk memberikan impact nyata dan sustainable value bagi organisasi Anda.',
+    'Tumbuh',
+    'Senantiasa belajar hal-hal baru, menambah pengetahuan, dan berkembang bersama mitra untuk mencapai tujuan yang lebih maju dan berkualitas.',
+    'Kami percaya bahwa pertumbuhan adalah perjalanan bersama. Setiap interaksi dengan mitra menjadi kesempatan untuk belajar dan berinovasi. Dengan semangat terus berkembang, kami bersama-sama menciptakan solusi yang lebih baik, lebih maju, dan lebih berdampak bagi semua.',
     3
   );
 
 
 -- ─────────────────────────────────────────────────────────────
--- 9. TESTIMONIALS
+-- 9. ECOSYSTEM_PARTNERS (mitra kolaborasi)
+-- ─────────────────────────────────────────────────────────────
+INSERT INTO ecosystem_partners (category, name, description, icon_svg, sort_order) VALUES
+  ('donor', 'Kementerian Lingkungan Hidup', 'Pendanaan Program CSR untuk inisiatif keberlanjutan nasional.', 'handHeart', 1),
+  ('donor', 'UNDP Indonesia', 'Hibah internasional untuk program pengembangan manusia dan lingkungan.', 'handHeart', 2),
+  ('donor', 'PT Sarana Multi Infrastruktur', 'Investasi hijau untuk proyek-proyek berkelanjutan.', 'handHeart', 3),
+
+  ('technical', 'Institut Pertanian Bogor', 'Riset pangan lokal dan inovasi pertanian berkelanjutan.', 'microscope', 1),
+  ('technical', 'ICSEL Consulting', 'Konsultan ahli di bidang keberlanjutan dan ESG.', 'microscope', 2),
+  ('technical', 'Universitas Gadjah Mada', 'Penelitian psikososial masyarakat dan pengembangan kebijakan.', 'microscope', 3),
+
+  ('government', 'Bappeda Provinsi Kalimantan', 'Perencanaan pembangunan daerah terpadu.', 'building', 1),
+  ('government', 'Kementerian Kooperasi & UMKM', 'Pengembangan ekonomi usaha kecil dan menengah.', 'building', 2),
+  ('government', 'LSM Gerakan Lingkungan', 'Advokasi dan aksi nyata untuk lingkungan hidup.', 'building', 3);
+
+
+-- ─────────────────────────────────────────────────────────────
+-- 10. ECOSYSTEM_CASE_STUDIES (studi kasus proyek)
+-- ─────────────────────────────────────────────────────────────
+INSERT INTO ecosystem_case_studies (title, client, sector, summary, impact, sort_order) VALUES
+  (
+    'Transformasi ESG di Sektor Pertambangan',
+    'PT Tambang Berkelanjutan',
+    'Mining & Energy',
+    'Mendampingi perusahaan tambang dalam menyusun peta jalan keberlanjutan, mulai dari pengukuran emisi karbon hingga program pemberdayaan masyarakat sekitar.',
+    'Pengurangan emisi 32% dalam 2 tahun dan 1.200 keluarga masyarakat mendapatkan akses pasar lokal.',
+    1
+  ),
+  (
+    'Ekosistem Pangan ASLI di Kalimantan Timur',
+    'Dinas Pertanian Kaltim',
+    'Pertanian',
+    'Menginisiasi dan mengakselerasi program Pangan ASLI (Aman, Sehat, Lestari) melibatkan 500 petani lokal dan pembentukan supply chain berkelanjutan.',
+    'Peningkatan pendapatan petani 45% dan pengurangan penggunaan pestisida kimia sebesar 60%.',
+    2
+  ),
+  (
+    'Pemetaan Sosial untuk Pembangunan Infrastruktur',
+    'Kementerian PUPR',
+    'Infrastruktur',
+    'Melakukan kajian pemetaan psikososial dan ekonomi komunitas terdampak pembangunan jalan tol, merancang program mitigasi dan pemberdayaan.',
+    '156 households terdampak mendapatkan kompensasi tepat waktu dan 85% keluhan masyarakat teratasi sebelum proyek rampung.',
+    3
+  );
+
+
+-- ─────────────────────────────────────────────────────────────
+-- 11. TESTIMONIALS
 -- ─────────────────────────────────────────────────────────────
 INSERT INTO testimonials (quote, author, company, sort_order) VALUES
   (

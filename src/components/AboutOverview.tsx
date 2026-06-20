@@ -68,19 +68,150 @@ export default function AboutOverview() {
 
   const currentVideo = videos[currentVideoIndex];
 
+  const [etymologyIndex, setEtymologyIndex] = useState<number | null>(null);
+
+  const toggleEtymology = (index: number) => {
+    setEtymologyIndex(etymologyIndex === index ? null : index);
+  };
+
+  const etymologyItems = [
+    {
+      letter: "G",
+      word: "Grahita",
+      meaning: "Pemahaman Mendalam",
+      detail: "Kepercayaan bahwa setiap perubahan dimulai dari pengenalan konteks yang benar — tidak hanya melihat angka, tetapi memahami cerita yang melatarbelakangi setiap tantangan.",
+      color: "#0c1163",
+      bgColor: "rgba(12, 17, 99, 0.08)"
+    },
+    {
+      letter: "A",
+      word: "Adhi",
+      meaning: "Keunggulan / Pelopor",
+      detail: "Komitmen untuk selalu hadir sebagai pelopor — mengangkat standar, merancang solusi yang inovatif, dan menjadi contoh konkret dalam mewujudkan keberlanjutan.",
+      color: "#a97b2d",
+      bgColor: "rgba(169, 123, 45, 0.08)"
+    },
+    {
+      letter: "S",
+      word: "Sasmita",
+      meaning: "Pendekatan Ramah & Inklusif",
+      detail: "Setiap interaksi adalah kesempatan untuk membangun hubungan yang lasting — menghormati perbedaan, mendengarkan kebutuhan, dan menciptakan ruang kolaborasi yang nyaman.",
+      color: "#0c1163",
+      bgColor: "rgba(12, 17, 99, 0.08)"
+    }
+  ];
+
   return (
     <section id="cases" className="animate-on-scroll" style={{ padding: "96px 56px", background: "var(--section-bg-alt)" }}>
+
+      {/* ===== SECTION ETIMOLOGI NAMA (BARU) ===== */}
+      <div style={{ marginBottom: "80px", textAlign: "center" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "16px" }}>
+          <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
+          <span style={{ fontSize: "var(--text-xs)", letterSpacing: "2px", textTransform: "uppercase", color: "var(--gold-light)" }}>
+            Filosofi Nama Kami
+          </span>
+          <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
+        </div>
+        <h2 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-4xl)", fontWeight: 700, lineHeight: 1.1, color: "var(--text-primary)", marginBottom: "24px" }}>
+          <span style={{ color: "#0c1163" }}>Grahita</span> <span style={{ color: "#a97b2d" }}>Adhi</span> <span style={{ color: "#0c1163" }}>Sasmita</span>
+        </h2>
+        <p style={{ fontSize: "var(--text-base)", color: "var(--text-secondary)", maxWidth: "640px", margin: "0 auto 48px", lineHeight: 1.6 }}>
+          Setiap huruf membawa makna yang menjadi fondasi cara kami bekerja — dari pemahaman yang mendalam, keunggulan yang berkelanjutan, hingga pendekatan yang ramah dan inklusif.
+        </p>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px", maxWidth: "960px", margin: "0 auto" }}>
+          {etymologyItems.map((item, index) => (
+            <div
+              key={item.letter}
+              onClick={() => toggleEtymology(index)}
+              style={{
+                padding: "36px 24px 28px",
+                background: etymologyIndex === index ? item.bgColor : "var(--card-bg)",
+                border: `1px solid ${etymologyIndex === index ? item.color : "var(--card-border)"}`,
+                borderRadius: "16px",
+                cursor: "pointer",
+                transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                textAlign: "center",
+                position: "relative",
+                overflow: "hidden",
+              }}
+              onMouseEnter={(e) => {
+                if (etymologyIndex !== index) {
+                  e.currentTarget.style.transform = "translateY(-4px)";
+                  e.currentTarget.style.borderColor = item.color;
+                  e.currentTarget.style.background = item.bgColor;
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (etymologyIndex !== index) {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.borderColor = "var(--card-border)";
+                  e.currentTarget.style.background = "var(--card-bg)";
+                }
+              }}
+            >
+              <div style={{
+                width: "56px",
+                height: "56px",
+                borderRadius: "50%",
+                background: item.bgColor,
+                border: `2px solid ${item.color}`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "24px",
+                fontWeight: 800,
+                color: item.color,
+                fontFamily: "'Times New Roman', serif",
+                margin: "0 auto 20px",
+                transition: "all 0.4s ease",
+              }}>
+                {item.letter}
+              </div>
+              <h3 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-xl)", fontWeight: 700, color: item.color, marginBottom: "8px" }}>
+                {item.word}
+              </h3>
+              <p style={{ fontSize: "var(--text-sm)", color: "var(--text-secondary)", marginBottom: etymologyIndex === index ? "16px" : "0", lineHeight: 1.5 }}>
+                {item.meaning}
+              </p>
+              <div style={{
+                maxHeight: etymologyIndex === index ? "120px" : "0",
+                overflow: "hidden",
+                opacity: etymologyIndex === index ? 1 : 0,
+                transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+              }}>
+                <p style={{ fontSize: "var(--text-sm)", color: "var(--text-primary)", lineHeight: 1.6, paddingTop: "12px", borderTop: `1px solid ${item.color}33` }}>
+                  {item.detail}
+                </p>
+              </div>
+              <span style={{
+                marginTop: "12px",
+                fontSize: "11px",
+                color: item.color,
+                opacity: 0.7,
+                fontStyle: "italic",
+                letterSpacing: "0.5px",
+              }}>
+                {etymologyIndex === index ? "Klik untuk tutup" : "Klik untuk detail"}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ===== HEADER SECTION ===== */}
       <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: "64px" }}>
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
             <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
             <span style={{ fontSize: "var(--text-xs)", letterSpacing: "2px", textTransform: "uppercase", color: "var(--gold-light)" }}>
-              Sekilas Tentang Kami
+              Landasan Filosofi & Komitmen
             </span>
           </div>
           <h2 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-4xl)", fontWeight: 700, lineHeight: 1.1, color: "var(--text-primary)" }}>
-            Ringkasan Pendirian<br />
-            <span style={{ color: "var(--gold-light)" }}>dan Komitmen SDGs</span>
+            Selaras dengan SDGs,<br />
+            <span style={{ color: "var(--gold-light)" }}>Bernilai untuk Masyarakat</span>
           </h2>
         </div>
         <Link href="/about" className="hover-scale" style={{ fontSize: "var(--text-xs)", letterSpacing: "1.5px", textTransform: "uppercase", color: "var(--accent-green-light)", cursor: "pointer", border: "none", background: "none", marginBottom: "8px", textDecoration: "none" }}>

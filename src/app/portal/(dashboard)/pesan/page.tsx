@@ -33,6 +33,8 @@ export default async function PesanPage() {
               <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Nama</th>
               <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Email</th>
               <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Perusahaan</th>
+              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Jenis Permintaan</th>
+              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Minat Layanan</th>
               <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Tanggal</th>
               <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px", textAlign: "right" }}>Aksi</th>
             </tr>
@@ -40,40 +42,60 @@ export default async function PesanPage() {
           <tbody>
             {(!messages || messages.length === 0) ? (
               <tr>
-                <td colSpan={5} style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", fontSize: "14px" }}>
+                <td colSpan={7} style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", fontSize: "14px" }}>
                   Belum ada pesan masuk.
                 </td>
               </tr>
             ) : (
-              messages.map((msg) => (
-                <tr key={msg.id} style={{ borderBottom: "1px solid var(--card-border)" }}>
-                  <td style={{ padding: "16px 20px" }}>
-                    <div style={{ fontSize: "15px", fontWeight: 600, color: "var(--text-primary)" }}>{msg.name}</div>
-                  </td>
-                  <td style={{ padding: "16px 20px", fontSize: "13px", color: "var(--text-primary)" }}>
-                    {msg.email}
-                  </td>
-                  <td style={{ padding: "16px 20px", fontSize: "13px", color: "var(--text-secondary)" }}>
-                    {msg.company || <span style={{ color: "var(--text-secondary)" }}>—</span>}
-                  </td>
-                  <td style={{ padding: "16px 20px", fontSize: "12px", color: "var(--text-secondary)" }}>
-                    {formatDate(msg.created_at)}
-                  </td>
-                  <td style={{ padding: "16px 20px", textAlign: "right" }}>
-                    <Link href={`/portal/pesan/${msg.id}`} style={{
-                      padding: "6px 14px",
-                      background: "var(--bg-secondary)",
-                      border: "1px solid var(--border-subtle)",
-                      borderRadius: "6px",
-                      color: "var(--text-primary)",
-                      textDecoration: "none",
-                      fontSize: "12px",
-                    }}>
-                      Detail
-                    </Link>
-                  </td>
-                </tr>
-              ))
+              messages.map((msg) => {
+                const requestTypeMap: Record<string, string> = {
+                  konsultasi: "Konsultasi Awal",
+                  kolaborasi: "Kolaborasi Proyek",
+                  umum: "Pesan Umum",
+                };
+                const serviceInterestMap: Record<string, string> = {
+                  pemetaan: "Pemetaan Terpadu",
+                  pendampingan: "Pendampingan",
+                  solusi_tekno: "Solusi Tekno-Sosial",
+                  publikasi: "Publikasi & Penelitian",
+                  lainnya: "Lainnya",
+                };
+                return (
+                  <tr key={msg.id} style={{ borderBottom: "1px solid var(--card-border)" }}>
+                    <td style={{ padding: "16px 20px" }}>
+                      <div style={{ fontSize: "15px", fontWeight: 600, color: "var(--text-primary)" }}>{msg.name}</div>
+                    </td>
+                    <td style={{ padding: "16px 20px", fontSize: "13px", color: "var(--text-primary)" }}>
+                      {msg.email}
+                    </td>
+                    <td style={{ padding: "16px 20px", fontSize: "13px", color: "var(--text-secondary)" }}>
+                      {msg.company || <span style={{ color: "var(--text-secondary)" }}>—</span>}
+                    </td>
+                    <td style={{ padding: "16px 20px", fontSize: "12px", color: "var(--gold)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                      {requestTypeMap[msg.request_type] || msg.request_type || "—"}
+                    </td>
+                    <td style={{ padding: "16px 20px", fontSize: "12px", color: "var(--text-secondary)" }}>
+                      {serviceInterestMap[msg.service_interest] || msg.service_interest || <span style={{ color: "var(--text-secondary)" }}>—</span>}
+                    </td>
+                    <td style={{ padding: "16px 20px", fontSize: "12px", color: "var(--text-secondary)" }}>
+                      {formatDate(msg.created_at)}
+                    </td>
+                    <td style={{ padding: "16px 20px", textAlign: "right" }}>
+                      <Link href={`/portal/pesan/${msg.id}`} style={{
+                        padding: "6px 14px",
+                        background: "var(--bg-secondary)",
+                        border: "1px solid var(--border-subtle)",
+                        borderRadius: "6px",
+                        color: "var(--text-primary)",
+                        textDecoration: "none",
+                        fontSize: "12px",
+                      }}>
+                        Detail
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })
             )}
           </tbody>
         </table>

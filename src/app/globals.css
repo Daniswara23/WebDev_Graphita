@@ -1,5 +1,5 @@
-/* 
-  globals.css
+/*
+globals.css
   File ini adalah CSS global — berlaku untuk SEMUA halaman.
   Di sini kita definisikan variabel warna (CSS Variables) dan reset dasar.
 */
@@ -10,7 +10,7 @@
 :root {
   /* Typography */
   --font-primary: "Goudy Old Style", Georgia, serif;
-  
+
   /* Font Sizes - Typography Scale */
   --text-xs: 11px;
   --text-sm: 13px;
@@ -21,7 +21,7 @@
   --text-3xl: 24px;
   --text-4xl: clamp(32px, 3.5vw, 44px);
   --text-5xl: clamp(32px, 4vw, 56px);
-  
+
   /* Line Heights */
   --line-tight: 1.1;
   --line-normal: 1.6;
@@ -29,35 +29,40 @@
   --line-loose: 1.8;
 }
 
-/* 
-  :root = selector untuk elemen paling atas (html).
-  CSS Variables di sini bisa dipakai di seluruh project dengan var(--nama).
-  Keuntungan: kalau mau ganti warna, cukup ubah di sini saja.
-
-  DARK MODE (Default) - Mode ini aktif secara default
+/*
+  DARK MODE (Default)
 */
 :root {
-  /* Base Colors */
-  --navy: #1a2744;
-  --navy-dark: #0f1a30;
-  --gold: #c9933a;
-  --gold-light: #e8b86d;
+  /* Base Colors - Enhanced palette */
+  --navy: #1e3a5f;
+  --navy-dark: #152b4a;
+  --bright-blue: #2563eb;
+  --bright-blue-dark: #1d4ed8;
+  --gold: #c9a84c;
+  --gold-light: #e0c26a;
   --green: #2d6a4f;
   --green-light: #52b788;
   --cream: #f8f5ef;
   --white: #ffffff;
+  --earth: #a0785a;
+  --earth-light: #c4a882;
+  --earth-dark: #7a5e42;
 
   /* Semantic Variables - DARK MODE */
-  --bg-primary: #0f1a30;
-  --bg-secondary: rgba(26, 39, 68, 0.5);
+  --bg-primary: var(--navy-dark);
+  --bg-secondary: rgba(30, 58, 95, 0.5);
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.7);
-  --accent-gold: #e8b86d;
-  --accent-gold-dark: #c9933a;
-  --accent-green: #2d6a4f;
-  --accent-green-light: #52b788;
+  --accent-gold: var(--gold-light);
+  --accent-gold-dark: var(--gold);
+  --accent-blue: var(--bright-blue);
+  --accent-blue-dark: var(--bright-blue-dark);
+  --accent-green: var(--green);
+  --accent-green-light: var(--green-light);
+  --accent-earth: var(--earth);
+  --accent-earth-light: var(--earth-light);
   --border-subtle: rgba(255, 255, 255, 0.1);
-  --overlay-gold: rgba(201, 147, 58, 0.15);
+  --overlay-gold: rgba(201, 168, 76, 0.15);
 
   /* Card & Section - DARK MODE */
   --card-bg: rgba(255, 255, 255, 0.03);
@@ -69,18 +74,19 @@
   /* CTA Band - DARK MODE */
   --cta-bg: var(--gold);
   --cta-text: var(--navy-dark);
-  --cta-text-muted: rgba(15, 26, 48, 0.65);
+  --cta-text-muted: rgba(21, 43, 74, 0.65);
   --cta-btn-bg: var(--navy-dark);
   --cta-btn-text: var(--gold-light);
 
   /* Modal - DARK MODE */
-  --modal-bg: rgba(15, 26, 48, 0.98);
-  --modal-border: rgba(201, 147, 58, 0.2);
+  --modal-bg: rgba(21, 43, 74, 0.98);
+  --modal-border: rgba(201, 168, 76, 0.2);
   --modal-company-text: var(--gold-light);
 
   /* Component-specific - DARK MODE */
-  --navbar-bg: rgba(15, 26, 48, 0.85);
-  --navbar-bg-scrolled: rgba(15, 26, 48, 0.97);
+  --navbar-bg: rgba(21, 43, 74, 0.85);
+  --navbar-bg-scrolled: rgba(21, 43, 74, 0.97);
+  --navbar-text: var(--text-secondary);
   --hero-bg: var(--navy-dark);
   --hero-overlay: rgba(10, 20, 40, 0.97);
   --hero-overlay-mid: rgba(10, 20, 40, 0.88);
@@ -99,60 +105,66 @@
   --footer-border: rgba(255, 255, 255, 0.06);
 }
 
-/* LIGHT MODE - Aktif saat ada class .light-mode di <html> */
+/* LIGHT MODE */
 html.light-mode {
-  --bg-primary: #f8f5ef;
-  --bg-secondary: #ffffff;
-  --text-primary: #1a2744;
-  --text-secondary: rgba(26, 39, 68, 0.7);
-  --accent-gold: #c9933a;
+  --bg-primary: #f0f8ff;
+  --bg-secondary: #fcfaf7;
+  --text-primary: #0c1163;
+  --text-secondary: rgba(30, 58, 95, 0.7);
+  --accent-gold: var(--gold);
   --accent-gold-dark: #9e7629;
-  --accent-green: #52b788;
+  --accent-blue: var(--bright-blue);
+  --accent-blue-dark: var(--bright-blue-dark);
+  --accent-green: var(--green-light);
   --accent-green-light: #74c69d;
-  --border-subtle: rgba(26, 39, 68, 0.1);
-  --overlay-gold: rgba(201, 147, 58, 0.08);
+  --accent-earth: var(--earth);
+  --accent-earth-light: var(--earth-light);
+  --border-subtle: rgba(30, 58, 95, 0.1);
+  --overlay-gold: rgba(201, 168, 76, 0.08);
 
   /* Card & Section - LIGHT MODE */
   --card-bg: #ffffff;
-  --card-border: rgba(26, 39, 68, 0.08);
-  --section-bg-alt: rgba(26, 39, 68, 0.02);
-  --input-bg: rgba(26, 39, 68, 0.03);
-  --input-border: rgba(26, 39, 68, 0.12);
+  --card-border: rgba(30, 58, 95, 0.08);
+  --section-bg-alt: rgba(30, 58, 95, 0.02);
+  --input-bg: rgba(30, 58, 95, 0.03);
+  --input-border: rgba(30, 58, 95, 0.12);
 
   /* CTA Band - LIGHT MODE */
-  --cta-bg: #1a2744;
-  --cta-text: #ffffff;
-  --cta-text-muted: rgba(255, 255, 255, 0.65);
-  --cta-btn-bg: #c9933a;
-  --cta-btn-text: #1a2744;
+  --cta-bg: #ffffff;
+  --cta-text: #0c1163;
+  --cta-text-muted: rgba(30, 58, 95, 0.7);
+  --cta-btn-bg: var(--gold);
+  --cta-btn-text: var(--navy);
 
   /* Modal - LIGHT MODE */
-  --modal-bg: #f8f5ef;
-  --modal-border: rgba(201, 147, 58, 0.25);
+  --modal-bg: #f0f8ff;
+  --modal-border: rgba(201, 168, 76, 0.25);
   --modal-company-text: var(--accent-gold);
+  --modal-overlay-bg: rgba(240, 248, 255, 0.85);
 
   /* Component-specific - LIGHT MODE */
-  --navbar-bg: rgba(248, 245, 239, 0.85);
-  --navbar-bg-scrolled: rgba(255, 255, 255, 0.95);
-  --hero-bg: var(--bg-primary);
-  --hero-overlay: rgba(248, 245, 239, 0.97);
-  --hero-overlay-mid: rgba(248, 245, 239, 0.88);
-  --hero-overlay-mid2: rgba(248, 245, 239, 0.45);
-  --hero-overlay-2: rgba(248, 245, 239, 1);
-  --hero-statement-bg: rgba(201, 147, 58, 0.08);
-  --hero-text: #1a2744;
-  --hero-heading: #1a2744;
-  --hero-heading-primary: #0f1a30;
-  --hero-statement-text: #1a2744;
-  --footer-bg: #ffffff;
-  --footer-text: rgba(26, 39, 68, 0.7);
-  --footer-text-muted: rgba(26, 39, 68, 0.4);
-  --footer-heading: #1a2744;
-  --footer-link: rgba(26, 39, 68, 0.7);
-  --footer-border: rgba(26, 39, 68, 0.08);
+  --navbar-bg: rgba(73, 151, 208, 0.85);
+  --navbar-bg-scrolled: rgba(73, 151, 208, 0.97);
+  --navbar-text: #ffffff;
+  --hero-bg: #f0f8ff;
+  --hero-overlay: rgba(240, 248, 255, 0.97);
+  --hero-overlay-mid: rgba(240, 248, 255, 0.88);
+  --hero-overlay-mid2: rgba(240, 248, 255, 0.45);
+  --hero-overlay-2: rgba(240, 248, 255, 1);
+  --hero-statement-bg: rgba(201, 168, 76, 0.08);
+  --hero-text: #1e3a5f;
+  --hero-heading: #1e3a5f;
+  --hero-heading-primary: #0c1163;
+  --hero-statement-text: #1e3a5f;
+  --footer-bg: rgba(73, 151, 208, 0.85);
+  --footer-text: rgba(255, 255, 255, 0.85);
+  --footer-text-muted: rgba(255, 255, 255, 0.6);
+  --footer-heading: #ffffff;
+  --footer-link: rgba(255, 255, 255, 0.9);
+  --footer-border: rgba(255, 255, 255, 0.15);
 }
 
-/* Reset dasar — menghapus margin/padding bawaan browser */
+/* Reset dasar */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -163,126 +175,60 @@ body {
   font-family: var(--font-primary);
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  overflow-x: hidden; /* Mencegah scroll horizontal */
+  overflow-x: hidden;
 }
 
 /* ===== ANIMASI ELEGANT ===== */
 
-/* Keyframe Animations */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(201, 147, 58, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(201, 147, 58, 0.5);
-  }
+  0%, 100% { box-shadow: 0 0 20px rgba(201, 168, 76, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(201, 168, 76, 0.5); }
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes modalIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.92);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
-/* Utility Classes untuk Animasi */
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
+/* Utility Classes */
+.animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+.animate-fade-in-left { animation: fadeInLeft 0.8s ease-out forwards; }
+.animate-fade-in-right { animation: fadeInRight 0.8s ease-out forwards; }
+.animate-scale-in { animation: scaleIn 0.6s ease-out forwards; }
+.animate-slide-in-up { animation: slideInUp 0.7s ease-out forwards; }
+.animate-glow { animation: glow 2s ease-in-out infinite; }
+.animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
 
-.animate-fade-in-left {
-  animation: fadeInLeft 0.8s ease-out forwards;
-}
-
-.animate-fade-in-right {
-  animation: fadeInRight 0.8s ease-out forwards;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.6s ease-out forwards;
-}
-
-.animate-slide-in-up {
-  animation: slideInUp 0.7s ease-out forwards;
-}
-
-.animate-glow {
-  animation: glow 2s ease-in-out infinite;
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
-}
-
-/* Delay classes untuk staggered animations */
 .animate-delay-100 { animation-delay: 0.1s; }
 .animate-delay-200 { animation-delay: 0.2s; }
 .animate-delay-300 { animation-delay: 0.3s; }
@@ -291,7 +237,6 @@ body {
 .animate-delay-600 { animation-delay: 0.6s; }
 .animate-delay-700 { animation-delay: 0.7s; }
 
-/* Initial state untuk animasi */
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(30px);
@@ -303,12 +248,10 @@ body {
   transform: translateY(0);
 }
 
-/* Smooth transitions untuk semua interactive elements */
 button, a, .card, .service-card, .article-card {
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Grid items animation state */
 .grid-item {
   opacity: 0;
   transform: translateY(30px);
@@ -320,18 +263,9 @@ button, a, .card, .service-card, .article-card {
   transform: translateY(0);
 }
 
-/* Hover effects yang lebih smooth */
-.hover-lift:hover {
-  transform: translateY(-4px);
-}
-
-.hover-glow:hover {
-  box-shadow: 0 10px 30px rgba(201, 147, 58, 0.2);
-}
-
-.hover-scale:hover {
-  transform: scale(1.02);
-}
+.hover-lift:hover { transform: translateY(-4px); }
+.hover-glow:hover { box-shadow: 0 10px 30px rgba(201, 168, 76, 0.2); }
+.hover-scale:hover { transform: scale(1.02); }
 
 .button-primary {
   display: inline-flex;
@@ -357,8 +291,8 @@ button, a, .card, .service-card, .article-card {
   justify-content: center;
   gap: 8px;
   padding: 12px 20px;
-  background: rgba(201,147,58,0.1);
-  border: 1px solid rgba(201,147,58,0.3);
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.3);
   border-radius: 8px;
   color: var(--gold-light);
   text-decoration: none;
@@ -367,35 +301,26 @@ button, a, .card, .service-card, .article-card {
 }
 
 .social-link:hover {
-  background: rgba(201,147,58,0.2);
-  border-color: rgba(201,147,58,0.6);
+  background: rgba(201,168,76,0.2);
+  border-color: rgba(201,168,76,0.6);
 }
 
-/* Loading animation */
 @keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
 
-.loading {
-  animation: pulse 1.5s ease-in-out infinite;
-}
+.loading { animation: pulse 1.5s ease-in-out infinite; }
 
-/* Subtle parallax effect untuk background elements */
 .parallax-slow {
   transform: translateZ(0);
   will-change: transform;
 }
 
-/* Navbar link underline animation */
 .nav-link {
   position: relative;
   display: inline-block;
-  padding-bottom: 6px; /* space for the underline */
+  padding-bottom: 6px;
 }
 
 .nav-link::after {
@@ -417,7 +342,5 @@ button, a, .card, .service-card, .article-card {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .nav-link::after {
-    transition: none;
-  }
+  .nav-link::after { transition: none; }
 }

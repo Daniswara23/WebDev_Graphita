@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 export default function AboutPage() {
   return (
@@ -7,8 +8,9 @@ export default function AboutPage() {
       <Navbar />
       <main style={{ minHeight: "100vh", padding: "120px 56px 96px" }}>
         <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+
           {/* Header */}
-          <div style={{ textAlign: "center", marginBottom: "64px" }}>
+          <div className="animate-on-scroll" style={{ textAlign: "center", marginBottom: "80px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "16px" }}>
               <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
               <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "var(--gold-light)" }}>
@@ -16,12 +18,47 @@ export default function AboutPage() {
               </span>
             </div>
             <h1 style={{ fontFamily: "Goudy Old Style, Georgia, serif", fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 700, lineHeight: 1.1, color: "var(--text-primary)", marginBottom: "24px" }}>
-              Kami bekerja dengan cara yang terasa lebih ringan
+              Menjadi Sahabat Menuju<br />Keberlanjutan yang Maknawi
             </h1>
-            <p style={{ fontSize: "18px", lineHeight: "1.7", color: "var(--text-primary)", maxWidth: "600px", margin: "0 auto" }}>
-              Grahita Adhi Sasmita hadir untuk menjadi teman perjalanan organisasi yang ingin menjelaskan arah keberlanjutan tanpa harus terdengar berlebihan.
+              <p style={{ fontSize: "18px", lineHeight: "1.7", color: "var(--text-secondary)", maxWidth: "700px", margin: "0 auto" }}>
+              PT <span style={{ color: "#0c1163" }}>Grahita</span> <span style={{ color: "#a97b2d" }}>Adhi</span> <span style={{ color: "#0c1163" }}>Sasmita</span> didirikan atas kesadaran akan pentingnya partisipasi sektor swasta dalam mendukung terwujudnya kesejahteraan umum dan mencerdaskan kehidupan bangsa.
             </p>
           </div>
+
+          {/* Filosofi Nama — Etimologi */}
+          <section className="animate-on-scroll animate-delay-100" style={{ marginBottom: "80px" }}>
+            <div style={{ textAlign: "center", marginBottom: "48px" }}>
+              <h2 style={{ fontSize: "32px", fontWeight: 700, color: "var(--text-primary)", marginBottom: "16px" }}>
+                Filosofi Nama{" "}
+                <span style={{ color: "#0c1163" }}>Grahita</span>{" "}
+                <span style={{ color: "#a97b2d" }}>Adhi</span>{" "}
+                <span style={{ color: "#0c1163" }}>Sasmita</span>
+              </h2>
+              <p style={{ fontSize: "16px", color: "var(--text-secondary)", maxWidth: "600px", margin: "0 auto", lineHeight: 1.6 }}>
+                Setiap huruf membawa makna yang menjadi fondasi cara kami bekerja — dari pemahaman yang mendalam, keunggulan yang berkelanjutan, hingga pendekatan yang ramah dan inklusif.
+              </p>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "24px" }}>
+              <div className="hover-lift" style={{ background: "rgba(12, 17, 99, 0.08)", padding: "32px 24px", borderRadius: "16px", border: "1px solid rgba(12, 17, 99, 0.15)", textAlign: "center" }}>
+                <div style={{ width: "56px", height: "56px", borderRadius: "50%", border: "2px solid #0c1163", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: 800, color: "#0c1163", fontFamily: "Times New Roman, serif", margin: "0 auto 16px" }}>G</div>
+                <h3 style={{ fontSize: "22px", fontWeight: 700, color: "#0c1163", marginBottom: "10px" }}>Grahita</h3>
+                <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6 }}><strong>Pemahaman Mendalam</strong><br />Kepercayaan bahwa setiap perubahan dimulai dari pengenalan konteks yang benar — tidak hanya melihat angka, tetapi memahami cerita.</p>
+              </div>
+
+              <div className="hover-lift" style={{ background: "rgba(169, 123, 45, 0.08)", padding: "32px 24px", borderRadius: "16px", border: "1px solid rgba(169, 123, 45, 0.15)", textAlign: "center" }}>
+                <div style={{ width: "56px", height: "56px", borderRadius: "50%", border: "2px solid #a97b2d", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: 800, color: "#a97b2d", fontFamily: "Times New Roman, serif", margin: "0 auto 16px" }}>A</div>
+                <h3 style={{ fontSize: "22px", fontWeight: 700, color: "#a97b2d", marginBottom: "10px" }}>Adhi</h3>
+                <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6 }}><strong>Keunggulan / Pelopor</strong><br />Komitmen untuk selalu hadir sebagai pelopor — mengangkat standar, merancang solusi inovatif, menjadi contoh konkret keberlanjutan.</p>
+              </div>
+
+              <div className="hover-lift" style={{ background: "rgba(12, 17, 99, 0.08)", padding: "32px 24px", borderRadius: "16px", border: "1px solid rgba(12, 17, 99, 0.15)", textAlign: "center" }}>
+                <div style={{ width: "56px", height: "56px", borderRadius: "50%", border: "2px solid #0c1163", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: 800, color: "#0c1163", fontFamily: "Times New Roman, serif", margin: "0 auto 16px" }}>S</div>
+                <h3 style={{ fontSize: "22px", fontWeight: 700, color: "#0c1163", marginBottom: "10px" }}>Sasmita</h3>
+                <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6 }}><strong>Pendekatan Ramah & Inklusif</strong><br />Setiap interaksi adalah kesempatan membangun hubungan lasting — menghormati perbedaan, mendengarkan, dan menciptakan ruang kolaborasi nyaman.</p>
+              </div>
+            </div>
+          </section>
 
           {/* Landasan Cerita */}
           <section className="animate-on-scroll" style={{ marginBottom: "80px" }}>
@@ -52,7 +89,7 @@ export default function AboutPage() {
                     <line x1="2" y1="20" x2="22" y2="20" stroke="var(--green)" />
                   </svg>
                 </div>
-                <h3 style={{ fontSize: "24px", fontWeight: 700, color: "var(--gold)", marginBottom: "16px" }}>Gigih</h3>
+                <h3 style={{ fontSize: "24px", fontWeight: 700, color: "#0c1163", marginBottom: "16px" }}>Gigih</h3>
                 <p style={{ fontSize: "16px", color: "var(--text-secondary)", lineHeight: "1.6" }}>
                   Kami terus mencari jalan yang paling masuk akal, bahkan ketika kondisi terlihat rumit.
                 </p>
@@ -67,7 +104,7 @@ export default function AboutPage() {
                     <path d="M12 10c-2 2-4 4-4 6" opacity="0.4" stroke="var(--green)" />
                   </svg>
                 </div>
-                <h3 style={{ fontSize: "24px", fontWeight: 700, color: "var(--gold)", marginBottom: "16px" }}>Adaptif</h3>
+                <h3 style={{ fontSize: "24px", fontWeight: 700, color: "#0c1163", marginBottom: "16px" }}>Adaptif</h3>
                 <p style={{ fontSize: "16px", color: "var(--text-secondary)", lineHeight: "1.6" }}>
                   Solusi kami disesuaikan dengan ritme organisasi, bukan paksa dalam satu formula yang sama untuk semua.
                 </p>
@@ -82,7 +119,7 @@ export default function AboutPage() {
                     <line x1="9" y1="7" x2="15" y2="17" opacity="0.3" stroke="var(--green)" />
                   </svg>
                 </div>
-                <h3 style={{ fontSize: "24px", fontWeight: 700, color: "var(--gold)", marginBottom: "16px" }}>Sinergi</h3>
+                <h3 style={{ fontSize: "24px", fontWeight: 700, color: "#0c1163", marginBottom: "16px" }}>Sinergi</h3>
                 <p style={{ fontSize: "16px", color: "var(--text-secondary)", lineHeight: "1.6" }}>
                   Kolaborasi jadi pusat. Kami bekerja dengan orang-orang yang punya tujuan serupa untuk kelanjutan yang lebih nyata.
                 </p>

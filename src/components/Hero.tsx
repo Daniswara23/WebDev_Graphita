@@ -153,16 +153,16 @@ export default function Hero() {
             className="animate-on-scroll animate-delay-200"
             style={{
               fontFamily: "var(--font-primary)",
-              fontSize: "var(--text-base)",
+              fontSize: "var(--text-lg)",
               lineHeight: "var(--line-normal)",
               color: "var(--gold)",
               maxWidth: "480px",
               marginBottom: "40px",
-              fontWeight: 300,
+              fontWeight: 500,
+              letterSpacing: "0.5px",
             }}
           >
-            Kami membantu organisasi merancang arah keberlanjutan yang jelas,
-            sederhana, dan mudah dijalankan.
+            Tanggap – Tangguh – Tumbuh
           </p>
 
           <div className="animate-on-scroll animate-delay-400" style={{ display: "flex", gap: "16px", alignItems: "center" }}>
@@ -248,7 +248,7 @@ export default function Hero() {
         }}
       >
         <p style={{ fontFamily: "var(--font-primary)", color: "var(--hero-statement-text)", fontSize: "var(--text-base)", maxWidth: "760px", textAlign: "center", lineHeight: "var(--line-relaxed)" }}>
-          Pernyataan kami tidak bergantung pada daftar nama. Kami menghadirkan pengalaman mitra secara visual, melalui proses yang jelas dan hasil yang dapat ditinjau.
+          Sahabat yang hadir, merasakan, dan menyatu — menciptakan pusaran kebaikan yang terus bertumbuh untuk generasi selanjutnya.
         </p>
       </div>
 

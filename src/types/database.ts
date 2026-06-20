@@ -1,6 +1,6 @@
 /*
   src/types/database.ts — TIPE TYPESCRIPT UNTUK SCHEMA SUPABASE
-  Disesuaikan dengan supabase/schema.sql + 001_portal_admin.sql.
+  Disesuaikan dengan supabase/schema.sql.
 */
 
 export type Json =
@@ -14,17 +14,71 @@ export type Json =
 type WithDefaults<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 type EmptyRelationships = [];
 
+export interface StatRow {
+  id: string;
+  number_text: string;
+  label: string;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface HomeServiceRow {
+  id: string;
+  num: string;
+  title: string;
+  description: string;
+  icon_key: string;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface ServiceDetailRow {
+  id: string;
+  title: string;
+  description: string;
+  features: string[];
+  sort_order: number;
+  created_at: string;
+}
+
+export interface CaseStudyRow {
+  id: string;
+  title: string;
+  client: string;
+  challenge: string;
+  solution: string;
+  result: string;
+  image_url: string | null;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface ProductRow {
+  id: string;
+  name: string;
+  description: string;
+  label: string | null;
+  tokopedia_url: string | null;
+  shopee_url: string | null;
+  image_url: string | null;
+  is_active: boolean;
+  sort_order: number;
+  created_at: string;
+}
+
 export interface ArticleRow {
   id: string;
   title: string;
-  slug: string;
+  slug: string | null;
   excerpt: string;
   content: string | null;
   category: string;
   cover_image: string | null;
   file_url: string | null;
+  external_url: string | null;
   is_published: boolean;
   published_at: string | null;
+  sort_order: number;
   created_at: string;
   updated_at: string;
 }
@@ -32,11 +86,53 @@ export interface ArticleRow {
 export interface ResearchReportRow {
   id: string;
   title: string;
-  subtitle: string | null;
+  subtitle: string;
   year: number;
   category: string;
   file_url: string | null;
   is_published: boolean;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface StandardRow {
+  id: string;
+  title: string;
+  description: string;
+  details: string;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface TestimonialRow {
+  id: string;
+  quote: string;
+  author_name: string;
+  author_title: string | null;
+  company: string | null;
+  is_featured: boolean;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface EcosystemPartnerRow {
+  id: string;
+  category: string;
+  name: string;
+  description: string;
+  icon_svg: string;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface EcosystemCaseStudyRow {
+  id: string;
+  title: string;
+  client: string;
+  sector: string;
+  summary: string;
+  impact: string;
+  sort_order: number;
   created_at: string;
 }
 
@@ -52,79 +148,12 @@ export interface ContactSubmissionRow {
   created_at: string;
 }
 
-export interface TestimonialRow {
-  id: string;
-  quote: string;
-  author_name: string;
-  author_title: string | null;
-  company: string | null;
-  is_featured: boolean;
-  sort_order: number;
-  created_at: string;
-}
-
-export interface ClientRow {
-  id: string;
-  name: string;
-  initials: string | null;
-  logo_url: string | null;
-  is_featured: boolean;
-  sort_order: number;
-}
-
-export interface SiteStatRow {
-  id: string;
-  key: string;
-  value: string;
-  label: string;
-  sort_order: number;
-}
-
-export interface KnowledgeHubFileRow {
+export interface CaseVideoRow {
   id: string;
   title: string;
-  description: string | null;
-  file_url: string;
-  file_type: string | null;
-  file_size_kb: number | null;
-  category: string | null;
-  tags: string[] | null;
-  download_count: number;
-  is_free: boolean;
-  is_published: boolean;
-  published_at: string | null;
-  created_at: string;
-}
-
-export interface SdgMetricRow {
-  id: string;
-  sdg_number: number;
-  sdg_name: string;
-  sdg_icon: string | null;
-  metric_label: string;
-  metric_value: string;
-  metric_unit: string | null;
-  description: string | null;
-  year: number;
-  updated_at: string;
-}
-
-export interface PanganAsliProductRow {
-  id: string;
-  name: string;
-  description: string | null;
-  origin_region: string | null;
-  category: string | null;
-  image_url: string | null;
-  is_featured: boolean;
+  video_url: string;
+  sort_order: number;
   is_active: boolean;
-  created_at: string;
-}
-
-export interface AdminUserRow {
-  id: string;
-  email: string;
-  full_name: string;
   created_at: string;
 }
 
@@ -150,45 +179,32 @@ export interface GalleryImageRow {
   created_at: string;
 }
 
-export interface CaseVideoRow {
+export interface AdminUserRow {
   id: string;
-  title: string;
-  video_url: string;
-  sort_order: number;
-  is_active: boolean;
-  created_at: string;
-}
-
-export interface ProductRow {
-  id: string;
-  name: string;
-  description: string;
-  label: string | null;
-  tokopedia_url: string | null;
-  shopee_url: string | null;
-  image_url: string | null;
-  is_active: boolean;
-  sort_order: number;
+  email: string;
+  full_name: string;
   created_at: string;
 }
 
 export interface Database {
   public: {
     Tables: {
+      stats: { Row: StatRow; Insert: WithDefaults<StatRow, "id" | "sort_order" | "created_at">; Update: Partial<StatRow>; Relationships: EmptyRelationships; };
+      home_services: { Row: HomeServiceRow; Insert: WithDefaults<HomeServiceRow, "id" | "icon_key" | "sort_order" | "created_at">; Update: Partial<HomeServiceRow>; Relationships: EmptyRelationships; };
+      service_details: { Row: ServiceDetailRow; Insert: WithDefaults<ServiceDetailRow, "id" | "features" | "sort_order" | "created_at">; Update: Partial<ServiceDetailRow>; Relationships: EmptyRelationships; };
+      case_studies: { Row: CaseStudyRow; Insert: WithDefaults<CaseStudyRow, "id" | "image_url" | "sort_order" | "created_at">; Update: Partial<CaseStudyRow>; Relationships: EmptyRelationships; };
+      products: { Row: ProductRow; Insert: WithDefaults<ProductRow, "id" | "label" | "tokopedia_url" | "shopee_url" | "image_url" | "is_active" | "sort_order" | "created_at">; Update: Partial<ProductRow>; Relationships: EmptyRelationships; };
+      articles: { Row: ArticleRow; Insert: WithDefaults<ArticleRow, "id" | "slug" | "content" | "cover_image" | "file_url" | "external_url" | "is_published" | "published_at" | "sort_order" | "created_at" | "updated_at">; Update: Partial<ArticleRow>; Relationships: EmptyRelationships; };
+      research_reports: { Row: ResearchReportRow; Insert: WithDefaults<ResearchReportRow, "id" | "subtitle" | "file_url" | "is_published" | "sort_order" | "created_at">; Update: Partial<ResearchReportRow>; Relationships: EmptyRelationships; };
+      standards: { Row: StandardRow; Insert: WithDefaults<StandardRow, "id" | "sort_order" | "created_at">; Update: Partial<StandardRow>; Relationships: EmptyRelationships; };
+      testimonials: { Row: TestimonialRow; Insert: WithDefaults<TestimonialRow, "id" | "author_title" | "company" | "is_featured" | "sort_order" | "created_at">; Update: Partial<TestimonialRow>; Relationships: EmptyRelationships; };
+      ecosystem_partners: { Row: EcosystemPartnerRow; Insert: WithDefaults<EcosystemPartnerRow, "id" | "icon_svg" | "sort_order" | "created_at">; Update: Partial<EcosystemPartnerRow>; Relationships: EmptyRelationships; };
+      ecosystem_case_studies: { Row: EcosystemCaseStudyRow; Insert: WithDefaults<EcosystemCaseStudyRow, "id" | "sort_order" | "created_at">; Update: Partial<EcosystemCaseStudyRow>; Relationships: EmptyRelationships; };
+      contact_submissions: { Row: ContactSubmissionRow; Insert: WithDefaults<ContactSubmissionRow, "id" | "organization" | "phone" | "service_interest" | "status" | "created_at">; Update: Partial<ContactSubmissionRow>; Relationships: EmptyRelationships; };
+      case_videos: { Row: CaseVideoRow; Insert: WithDefaults<CaseVideoRow, "id" | "sort_order" | "is_active" | "created_at">; Update: Partial<CaseVideoRow>; Relationships: EmptyRelationships; };
       photo_galleries: { Row: PhotoGalleryRow; Insert: WithDefaults<PhotoGalleryRow, "id" | "slug" | "description" | "location" | "event_date" | "is_published" | "sort_order" | "created_at" | "updated_at">; Update: Partial<PhotoGalleryRow>; Relationships: EmptyRelationships; };
       gallery_images: { Row: GalleryImageRow; Insert: WithDefaults<GalleryImageRow, "id" | "caption" | "sort_order" | "created_at">; Update: Partial<GalleryImageRow>; Relationships: EmptyRelationships; };
-      articles: { Row: ArticleRow; Insert: WithDefaults<ArticleRow, "id" | "is_published" | "published_at" | "content" | "cover_image" | "created_at" | "updated_at">; Update: Partial<ArticleRow>; Relationships: EmptyRelationships; };
-      research_reports: { Row: ResearchReportRow; Insert: WithDefaults<ResearchReportRow, "id" | "subtitle" | "category" | "file_url" | "is_published" | "created_at">; Update: Partial<ResearchReportRow>; Relationships: EmptyRelationships; };
-      contact_submissions: { Row: ContactSubmissionRow; Insert: WithDefaults<ContactSubmissionRow, "id" | "organization" | "phone" | "service_interest" | "status" | "created_at">; Update: Partial<ContactSubmissionRow>; Relationships: EmptyRelationships; };
-      testimonials: { Row: TestimonialRow; Insert: WithDefaults<TestimonialRow, "id" | "author_title" | "company" | "is_featured" | "sort_order" | "created_at">; Update: Partial<TestimonialRow>; Relationships: EmptyRelationships; };
-      clients: { Row: ClientRow; Insert: WithDefaults<ClientRow, "id" | "initials" | "logo_url" | "is_featured" | "sort_order">; Update: Partial<ClientRow>; Relationships: EmptyRelationships; };
-      site_stats: { Row: SiteStatRow; Insert: WithDefaults<SiteStatRow, "id" | "sort_order">; Update: Partial<SiteStatRow>; Relationships: EmptyRelationships; };
-      knowledge_hub_files: { Row: KnowledgeHubFileRow; Insert: WithDefaults<KnowledgeHubFileRow, "id" | "description" | "file_type" | "file_size_kb" | "category" | "tags" | "download_count" | "is_free" | "is_published" | "published_at" | "created_at">; Update: Partial<KnowledgeHubFileRow>; Relationships: EmptyRelationships; };
-      sdg_metrics: { Row: SdgMetricRow; Insert: WithDefaults<SdgMetricRow, "id" | "sdg_icon" | "metric_unit" | "description" | "year" | "updated_at">; Update: Partial<SdgMetricRow>; Relationships: EmptyRelationships; };
-      pangan_asli_products: { Row: PanganAsliProductRow; Insert: WithDefaults<PanganAsliProductRow, "id" | "description" | "origin_region" | "category" | "image_url" | "is_featured" | "is_active" | "created_at">; Update: Partial<PanganAsliProductRow>; Relationships: EmptyRelationships; };
       admin_users: { Row: AdminUserRow; Insert: WithDefaults<AdminUserRow, "id" | "created_at">; Update: Partial<AdminUserRow>; Relationships: EmptyRelationships; };
-      products: { Row: ProductRow; Insert: WithDefaults<ProductRow, "id" | "label" | "tokopedia_url" | "shopee_url" | "image_url" | "is_active" | "sort_order" | "created_at">; Update: Partial<ProductRow>; Relationships: EmptyRelationships; };
-      case_videos: { Row: CaseVideoRow; Insert: WithDefaults<CaseVideoRow, "id" | "sort_order" | "is_active" | "created_at">; Update: Partial<CaseVideoRow>; Relationships: EmptyRelationships; };
     };
     Views: { [_ in never]: never };
     Functions: { [_ in never]: never };

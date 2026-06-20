@@ -44,7 +44,7 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
           left: 0,
           right: 0,
           bottom: 0,
-          background: "var(--modal-bg)",
+          background: "var(--modal-overlay-bg, var(--modal-bg))",
           zIndex: 999,
           backdropFilter: "blur(4px)",
           opacity: mounted ? 1 : 0,
@@ -70,7 +70,7 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
           maxWidth: "900px",
           width: "90%",
           maxHeight: "80vh",
-          overflowY: "auto",
+          overflowY: "scroll",
           zIndex: 1000,
           backdropFilter: "blur(12px)",
         }}

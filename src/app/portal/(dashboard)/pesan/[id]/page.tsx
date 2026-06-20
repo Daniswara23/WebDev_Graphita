@@ -39,6 +39,16 @@ export default async function PesanDetailPage({ params }: { params: Promise<{ id
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Perusahaan</span>
           <span style={{ fontSize: "14px", color: "var(--text-primary)" }}>{msg.company || <span style={{ color: "var(--text-secondary)" }}>—</span>}</span>
 
+          <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Jenis Permintaan</span>
+          <span style={{ fontSize: "14px", color: "var(--gold)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
+            {msg.request_type === "konsultasi" ? "Konsultasi Awal" : msg.request_type === "kolaborasi" ? "Kolaborasi Proyek" : msg.request_type === "umum" ? "Pesan Umum" : msg.request_type || "—"}
+          </span>
+
+          <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Minat Layanan</span>
+          <span style={{ fontSize: "14px", color: "var(--text-primary)" }}>
+            {msg.service_interest === "pemetaan" ? "Pemetaan Terpadu" : msg.service_interest === "pendampingan" ? "Pendampingan" : msg.service_interest === "solusi_tekno" ? "Solusi Tekno-Sosial" : msg.service_interest === "publikasi" ? "Publikasi & Penelitian" : msg.service_interest === "lainnya" ? "Lainnya" : msg.service_interest || <span style={{ color: "var(--text-secondary)" }}>—</span>}
+          </span>
+
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Tanggal</span>
           <span style={{ fontSize: "13px", color: "var(--text-secondary)" }}>{formatDate(msg.created_at)}</span>
         </div>

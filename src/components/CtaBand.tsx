@@ -13,19 +13,20 @@ import { useRouter } from "next/navigation";
 
 export default function CtaBand() {
   const router = useRouter();
+
   const goToContact = () => {
     router.push("/contact");
   };
   return (
     <div
       style={{
-        background: "var(--gold)",      // Background emas mencolok
+        background: "var(--cta-bg, #ffffff)",
         padding: "56px",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
         gap: "32px",
-        flexWrap: "wrap",               // Wrap ke bawah di layar kecil
+        flexWrap: "wrap",
       }}
     >
       {/* Teks kiri */}
@@ -35,20 +36,20 @@ export default function CtaBand() {
             fontFamily: "var(--font-primary)",
             fontSize: "var(--text-3xl)",
             fontWeight: 700,
-            color: "var(--navy-dark)",  // Teks gelap di background terang
+            color: "var(--cta-text, #0c1163)",
             marginBottom: "8px",
           }}
         >
-        Siap menyelesaikan tantangan keberlanjutan Anda?
+        Mari Berkolaborasi untuk Membangun Ekosistem yang Berdaya
         </h3>
         <p
           style={{
             fontSize: "var(--text-base)",
-            color: "var(--cta-text-muted)",
+            color: "var(--cta-text-muted, rgba(30, 58, 95, 0.7))",
             fontWeight: 300,
           }}
         >
-        Dapatkan saran ahli gratis. Mulai kolaborasi hari ini.
+        Hubungi kami untuk konsultasi awal — bersama kita wujudkan dampak yang berkelanjutan.
         </p>
       </div>
 
@@ -57,8 +58,8 @@ export default function CtaBand() {
         onClick={goToContact}
         style={{
           padding: "14px 40px",
-          background: "var(--navy-dark)",
-          color: "var(--gold-light)",
+          background: "var(--cta-btn-bg, #c9a84c)",
+          color: "var(--cta-btn-text, #0c1163)",
           fontFamily: "var(--font-primary)",
           fontSize: "var(--text-sm)",
           fontWeight: 500,
@@ -67,11 +68,12 @@ export default function CtaBand() {
           cursor: "pointer",
           border: "none",
           borderRadius: "2px",
-          whiteSpace: "nowrap",        // Cegah teks tombol terpotong
+          whiteSpace: "nowrap",
         }}
       >
         Mulai Kolaborasi
       </button>
+
     </div>
   );
 }

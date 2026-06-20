@@ -7,6 +7,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { uploadResearchPdf, deleteFile } from "@/lib/supabase/fileUpload";
 
 export async function createReport(formData: FormData) {
   const supabase = await createClient();
@@ -25,31 +26,7 @@ export async function createReport(formData: FormData) {
 
   // Upload PDF to Supabase Storage if file provided
   if (file && file.size > 0) {
-    if (file.type !== "application/pdf") {
-      throw new Error("Hanya file PDF yang diizinkan.");
-    }
-    if (file.size > 10 * 1024 * 1024) {
-      throw new Error("Ukuran file maksimal 10 MB.");
-    }
-
-    const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
-    const filePath = `research-reports/${fileName}`;
-
-    const { error: uploadError } = await supabase.storage
-      .from("research-reports")
-      .upload(filePath, file, {
-        contentType: "application/pdf",
-        upsert: false,
-      });
-
-    if (uploadError) throw new Error("Gagal upload file: " + uploadError.message);
-
-    // Get public URL
-    const { data: urlData } = supabase.storage
-      .from("research-reports")
-      .getPublicUrl(filePath);
-
-    fileUrl = urlData.publicUrl;
+    fileUrl = await uploadResearchPdf(file);
   }
 
   // subtitle: kolom NOT NULL di DB — simpan string kosong jika tidak diisi
@@ -85,30 +62,7 @@ export async function updateReport(id: string, formData: FormData) {
 
   // Upload new PDF if provided
   if (file && file.size > 0) {
-    if (file.type !== "application/pdf") {
-      throw new Error("Hanya file PDF yang diizinkan.");
-    }
-    if (file.size > 10 * 1024 * 1024) {
-      throw new Error("Ukuran file maksimal 10 MB.");
-    }
-
-    const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
-    const filePath = `research-reports/${fileName}`;
-
-    const { error: uploadError } = await supabase.storage
-      .from("research-reports")
-      .upload(filePath, file, {
-        contentType: "application/pdf",
-        upsert: false,
-      });
-
-    if (uploadError) throw new Error("Gagal upload file: " + uploadError.message);
-
-    const { data: urlData } = supabase.storage
-      .from("research-reports")
-      .getPublicUrl(filePath);
-
-    fileUrl = urlData.publicUrl;
+    fileUrl = await uploadResearchPdf(file);
   }
 
   // subtitle: kolom NOT NULL di DB — simpan string kosong jika tidak diisi
@@ -140,12 +94,7 @@ export async function deleteReport(id: string) {
     .single();
 
   if (report?.file_url) {
-    // Extract path from URL
-    const urlParts = report.file_url.split("/research-reports/");
-    if (urlParts.length > 1) {
-      const filePath = `research-reports/${urlParts[1]}`;
-      await supabase.storage.from("research-reports").remove([filePath]);
-    }
+    await deleteFile("research", report.file_url);
   }
 
   const { error } = await supabase.from("research_reports").delete().eq("id", id);

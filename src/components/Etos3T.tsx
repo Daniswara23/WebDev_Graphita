@@ -34,6 +34,8 @@ export default function Etos3T() {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
 
+  const cardColors = ["#52b788", "#4997d0", "#a0785a"];
+
   return (
     <section style={{ padding: "96px 56px" }}>
       <div style={{ textAlign: "center", marginBottom: "64px" }}>
@@ -68,13 +70,13 @@ export default function Etos3T() {
             }}
             onMouseEnter={(e) => {
               if (expandedIndex !== index) {
-                e.currentTarget.style.background = "var(--section-bg-alt)";
+                e.currentTarget.style.borderColor = "rgba(201, 168, 76, 0.4)";
                 e.currentTarget.style.transform = "translateY(-4px)";
               }
             }}
             onMouseLeave={(e) => {
               if (expandedIndex !== index) {
-                e.currentTarget.style.background = "var(--card-bg)";
+                e.currentTarget.style.borderColor = "var(--card-border)";
                 e.currentTarget.style.transform = "translateY(0)";
               }
             }}

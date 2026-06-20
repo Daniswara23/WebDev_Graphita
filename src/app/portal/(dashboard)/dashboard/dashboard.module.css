@@ -32,7 +32,7 @@
 
 .cardLink:hover {
   background: var(--bg-secondary);
-  border-color: rgba(201,147,58,0.3);
+  border-color: var(--border-subtle);
   transform: translateY(-2px);
 }
 
@@ -72,9 +72,9 @@
 .actionLink {
   padding: 12px 20px;
   background: var(--overlay-gold);
-  border: 1px solid rgba(201,147,58,0.25);
+  border: 1px solid var(--border-subtle);
   border-radius: 8px;
-  color: var(--gold-light);
+  color: var(--accent-gold);
   text-decoration: none;
   font-size: 13px;
   font-weight: 600;
@@ -82,6 +82,6 @@
 }
 
 .actionLink:hover {
-  background: rgba(201,147,58,0.2);
-  border-color: rgba(201,147,58,0.4);
+  background: var(--overlay-gold);
+  border-color: var(--border-subtle);
 }

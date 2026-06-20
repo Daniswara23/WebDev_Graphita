@@ -9,6 +9,16 @@
 import { useRef, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
+function FormButtonText() {
+  const type = typeof window !== "undefined"
+    ? (document.getElementById("request_type") as HTMLSelectElement | null)?.value
+    : "umum";
+
+  if (type === "konsultasi") return <span>Minta Konsultasi Gratis →</span>;
+  if (type === "kolaborasi") return <span>Propose Kolaborasi →</span>;
+  return <span>Kirim Pesan</span>;
+}
+
 export default function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -18,23 +28,25 @@ export default function ContactForm() {
     if (!formRef.current) return;
 
     const formData = new FormData(formRef.current);
-    const name    = formData.get("name")    as string;
-    const email   = formData.get("email")   as string;
-    const company = formData.get("company") as string;
-    const message = formData.get("message") as string;
+    const name             = formData.get("name")             as string;
+    const email            = formData.get("email")            as string;
+    const company          = formData.get("company")          as string;
+    const message          = formData.get("message")          as string;
+    const requestType      = formData.get("request_type")     as string;
+    const serviceInterest  = formData.get("service_interest") as string;
 
     setSubmitting(true);
 
     const { error } = await supabase
       .from("contact_submissions")
-      .insert({ name, email, company, message });
+      .insert({ name, email, company, message, request_type: requestType, service_interest: serviceInterest });
 
     setSubmitting(false);
 
     if (error) {
       alert("Terjadi kesalahan. Silakan coba lagi.");
     } else {
-      alert("Terima kasih! Kami akan menghubungi Anda segera.");
+      alert("Pesan Anda telah terkirim. Tim kami akan menghubungi Anda segera.");
       formRef.current.reset();
     }
   };
@@ -83,6 +95,29 @@ export default function ContactForm() {
             placeholder="Perusahaan/Organisasi"
             style={{ padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
           />
+          <div style={{ display: "flex", gap: "16px" }}>
+            <select
+              id="request_type"
+              name="request_type"
+              defaultValue="umum"
+              style={{ flex: 1, padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
+            >
+              <option value="konsultasi">Konsultasi Awal (Gratis)</option>
+              <option value="kolaborasi">Kolaborasi Proyek</option>
+              <option value="umum">Pesan Umum</option>
+            </select>
+            <select
+              name="service_interest"
+              style={{ flex: 1, padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
+            >
+              <option value="">-- Minat Layanan --</option>
+              <option value="pemetaan">Pemetaan Terpadu</option>
+              <option value="pendampingan">Pendampingan</option>
+              <option value="solusi_tekno">Solusi Tekno-Sosial</option>
+              <option value="publikasi">Publikasi & Penelitian</option>
+              <option value="lainnya">Lainnya</option>
+            </select>
+          </div>
           <textarea
             name="message"
             placeholder="Ceritakan tentang tantangan Anda..."
@@ -120,7 +155,7 @@ export default function ContactForm() {
               e.currentTarget.style.transform = "translateY(0)";
             }}
           >
-            {submitting ? "Mengirim..." : "Kirim Pesan"}
+            {submitting ? "Mengirim..." : <FormButtonText />}
           </button>
         </form>
         <p style={{ fontSize: "var(--text-sm)", color: "var(--text-secondary)", marginTop: "28px", textAlign: "center" }}>

@@ -7,6 +7,8 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { slugify, validateExternalUrl } from "@/lib/supabase/formatHelpers";
+import { uploadPdf, deleteFile } from "@/lib/supabase/fileUpload";
 
 /* ───── Helpers ───── */
 
@@ -14,66 +16,6 @@ function validateSourceType(sourceType: string): asserts sourceType is "pdf" | "
   if (!sourceType || (sourceType !== "pdf" && sourceType !== "link")) {
     throw new Error("Pilih format artikel: PDF atau Link External.");
   }
-}
-
-function validatePdfFile(file: File | null) {
-  if (!file || file.size === 0) {
-    throw new Error("File PDF wajib diupload.");
-  }
-  if (file.type !== "application/pdf") {
-    throw new Error("Hanya file PDF yang diizinkan.");
-  }
-  if (file.size > 10 * 1024 * 1024) {
-    throw new Error("Ukuran file maksimal 10 MB.");
-  }
-}
-
-function generateSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .slice(0, 100);
-}
-
-function validateExternalUrl(url: string): void {
-  if (!url) {
-    throw new Error("URL External wajib diisi.");
-  }
-  try {
-    new URL(url);
-  } catch {
-    throw new Error("URL External tidak valid.");
-  }
-}
-
-async function uploadPdfToStorage(
-  supabase: Awaited<ReturnType<typeof createClient>>,
-  file: File | null
-): Promise<string> {
-  if (!file) {
-    throw new Error("File PDF tidak valid.");
-  }
-  const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
-  const filePath = `articles/${fileName}`;
-
-  const { error: uploadError } = await supabase.storage
-    .from("articles")
-    .upload(filePath, file, {
-      contentType: "application/pdf",
-      upsert: false,
-    });
-
-  if (uploadError) {
-    throw new Error("Gagal upload file: " + uploadError.message);
-  }
-
-  const { data: urlData } = supabase.storage
-    .from("articles")
-    .getPublicUrl(filePath);
-
-  return urlData.publicUrl;
 }
 
 /* ───── Actions ───── */
@@ -100,14 +42,14 @@ export async function createArticle(formData: FormData) {
   let externalUrlValue: string | null = null;
 
   if (sourceType === "pdf") {
-      validatePdfFile(file);
-      fileUrl = await uploadPdfToStorage(supabase, file);
+      if (!file) throw new Error("File PDF wajib diupload.");
+      fileUrl = await uploadPdf(file);
   } else {
     validateExternalUrl(externalUrl);
     externalUrlValue = externalUrl;
   }
 
-  const slug = generateSlug(title);
+  const slug = slugify(title);
 
   const { error } = await supabase.from("articles").insert({
     title,
@@ -152,8 +94,7 @@ export async function updateArticle(id: string, formData: FormData) {
 
   if (sourceType === "pdf") {
     if (file && file.size > 0) {
-    validatePdfFile(file);
-    fileUrl = await uploadPdfToStorage(supabase, file);
+      fileUrl = await uploadPdf(file);
     } else {
       fileUrl = existingFileUrl || null;
     }
@@ -196,12 +137,7 @@ export async function deleteArticle(id: string) {
     .single();
 
   if (article?.file_url) {
-    // Extract path from URL
-    const urlParts = article.file_url.split("/articles/");
-    if (urlParts.length > 1) {
-      const filePath = `articles/${urlParts[1]}`;
-      await supabase.storage.from("articles").remove([filePath]);
-    }
+    await deleteFile("pdf", article.file_url);
   }
 
   const { error } = await supabase.from("articles").delete().eq("id", id);

@@ -1,22 +1,10 @@
-# Task: Translate Testimonials Section to Bahasa Indonesia
+# TODO
 
-## Steps:
-- [ ] Step 1: Create this TODO.md
-- [ ] Step 2: Edit src/components/Testimonials.tsx with translations
-- [ ] Step 3: Verify and complete task
+- [ ] Inspect CtaBand component (already inspected via tool) and identify light-mode background behavior.
+- [ ] Propose edit plan: ensure CTA band background is white in light mode.
+- [ ] Apply code change in `src/components/CtaBand.tsx`.
+- [ ] (Optional) Run dev/build command to verify no TypeScript errors.
+- [x] (Optional) Run dev/build command to verify no TypeScript errors (failed due to shell `&&` separator issue in this environment).
 
-✅ Step 1: TODO.md created
-- [x] Step 1: Create this TODO.md
-✅ Step 2: src/components/Testimonials.tsx translated (used create_file for exact content preservation)
-- [ ] Step 3: Verify and complete task
+- [ ] Summarize changes.
 
----
-
-# Task: Navigasi Tombol "Semua Layanan →" ke /services
-
-## Steps:
-- [x] Step 1: Tambah `import Link from "next/link"` di `src/components/Services.tsx`
-- [x] Step 2: Ganti `<button>` jadi `<Link href="/services">` dengan style yang sama
-- [x] Step 3: Update TODO.md dan complete task
-
-✅ Step 1 & 2: File `src/components/Services.tsx` diupdate — tombol "Semua Layanan →" sekarang menggunakan Next.js `<Link>` yang navigate ke `/services`

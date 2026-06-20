@@ -7,29 +7,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-
-const BUCKET_NAME = "product-images";
-
-async function uploadProductImage(supabase: Awaited<ReturnType<typeof createClient>>, file: File | null): Promise<string | null> {
-  if (!file || file.size === 0) {
-    return null;
-  }
-
-  const fileExt = file.name.split(".").pop();
-  const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
-
-  const { data: uploadData, error: uploadError } = await supabase.storage.from(BUCKET_NAME).upload(fileName, file, {
-    cacheControl: "3600",
-    upsert: false,
-  });
-
-  if (uploadError) {
-    return null;
-  }
-
-  const { data: urlData } = supabase.storage.from(BUCKET_NAME).getPublicUrl(fileName);
-  return urlData.publicUrl;
-}
+import { uploadImage } from "@/lib/supabase/fileUpload";
 
 export async function createProduct(formData: FormData) {
   const supabase = await createClient();
@@ -46,7 +24,7 @@ export async function createProduct(formData: FormData) {
     throw new Error("Nama dan deskripsi wajib diisi.");
   }
 
-  const imageUrl = await uploadProductImage(supabase, imageFile);
+  const imageUrl = imageFile ? await uploadImage(imageFile) : null;
 
   const { error } = await supabase.from("products").insert({
     name,
@@ -80,7 +58,7 @@ export async function updateProduct(id: string, formData: FormData) {
     throw new Error("Nama dan deskripsi wajib diisi.");
   }
 
-  const imageUrl = await uploadProductImage(supabase, imageFile);
+  const imageUrl = imageFile && imageFile.size > 0 ? await uploadImage(imageFile) : null;
 
   const updateData: Record<string, unknown> = {
     name,

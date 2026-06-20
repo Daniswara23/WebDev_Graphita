@@ -86,7 +86,7 @@ export default function Navbar() {
           Kita map array menu agar tidak perlu tulis <li> berulang.
           map() = looping di React untuk membuat elemen dari array.
         */}
-        {["Home", "Tentang Kami", "Ragam Layanan", "Galeri Kegiatan", "Toko", "Riset dan Publikasi", "Kontak"].map((item) => {
+        {["Home", "Tentang Kami", "Ragam Layanan", "Galeri Kegiatan", "Toko", "Wawasan Keberlanjutan", "Kontak"].map((item) => {
           const href =
             item === "Home"
               ? "/"
@@ -96,7 +96,7 @@ export default function Navbar() {
               ? "/services"
               : item === "Toko"
               ? "/toko"
-              : item === "Riset dan Publikasi"
+              : item === "Wawasan Keberlanjutan"
               ? "/insights"
               : item === "Kontak"
               ? "/contact"
@@ -108,7 +108,7 @@ export default function Navbar() {
           const isActive = pathname === href;
 
           const linkStyle = {
-            color: "var(--text-secondary)",
+            color: "var(--navbar-text)",
             textDecoration: "none",
             fontSize: "var(--text-sm)",
             letterSpacing: "1.5px",
@@ -134,9 +134,9 @@ export default function Navbar() {
       {/* TOMBOL AKSI */}
       <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
         <ThemeToggle />
-        <Link href="/portal/login" style={{ fontSize: "11px", color: "var(--footer-text-muted)", textDecoration: "none", letterSpacing: "1px", textTransform: "uppercase", transition: "color 0.2s", marginRight: "4px" }}
-          onMouseEnter={(e) => e.currentTarget.style.color = "var(--accent-gold)"}
-          onMouseLeave={(e) => e.currentTarget.style.color = "var(--footer-text-muted)"}
+        <Link href="/portal/login" style={{ fontSize: "11px", color: "var(--navbar-text)", textDecoration: "none", letterSpacing: "1px", textTransform: "uppercase", transition: "color 0.2s", marginRight: "4px" }}
+          onMouseEnter={(e) => e.currentTarget.style.color = "var(--gold-light)"}
+          onMouseLeave={(e) => e.currentTarget.style.color = "var(--navbar-text)"}
         >
           Admin
         </Link>

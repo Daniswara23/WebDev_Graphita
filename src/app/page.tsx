@@ -12,6 +12,7 @@ const AboutOverview = lazy(() => import("@/components/AboutOverview"));
 const Services = lazy(() => import("@/components/Services"));
 const StorePreview = lazy(() => import("@/components/StorePreview"));
 const Etos3T = lazy(() => import("@/components/Etos3T"));
+const EcosystemHub = lazy(() => import("@/components/EcosystemHub"));
 const CtaBand = lazy(() => import("@/components/CtaBand"));
 const TestimonialsModal = lazy(() => import("@/components/TestimonialsModal"));
 
@@ -75,6 +76,11 @@ export default function HomePage() {
         {/* 5. Etos */}
         <Suspense fallback={<SectionSkeleton />}>
           <Etos3T />
+        </Suspense>
+
+        {/* 5b. Ecosystem & Kolaborasi */}
+        <Suspense fallback={<SectionSkeleton />}>
+          <EcosystemHub />
         </Suspense>
 
         {/* 6. CTA */}

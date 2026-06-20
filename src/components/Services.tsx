@@ -21,6 +21,7 @@ type HomeService = {
 
 // Peta ikon berdasarkan icon_key yang tersimpan di DB
 const iconMap: Record<string, React.ReactNode> = {
+  // Ikon LAMA (kompatibel dengan database existing)
   layers: (
     <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="24" height="24">
       <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
@@ -53,6 +54,42 @@ const iconMap: Record<string, React.ReactNode> = {
     <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="24" height="24">
       <circle cx="12" cy="12" r="3" />
       <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+    </svg>
+  ),
+
+  // Ikon BARU (untuk 5 pilar layanan)
+  barChart: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="24" height="24">
+      <path d="M3 3v18h18" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M7 16l4-6 4 4 4-8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  checkCircle: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="24" height="24">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M8 12l3 3 5-6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  userGroup: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="24" height="24">
+      <circle cx="9" cy="7" r="4" />
+      <path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2" />
+      <circle cx="17" cy="10" r="3" />
+      <path d="M21 21v-1.5a3 3 0 00-2-2.5" />
+    </svg>
+  ),
+  network: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="24" height="24">
+      <circle cx="12" cy="5" r="2" />
+      <circle cx="5" cy="19" r="2" />
+      <circle cx="19" cy="19" r="2" />
+      <path d="M12 7v4M7.5 17.5l3-3 3 3M12 12l-5 4M12 12l5 4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  documentText: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="24" height="24">
+      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
+      <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
   default: (
@@ -164,7 +201,7 @@ export default function Services() {
               style={{
                 fontFamily: "'Times New Roman', serif",
                 fontSize: "var(--text-xs)",
-                  color: "var(--overlay-gold)",
+                  color: "var(--gold-light)",
                 letterSpacing: "2px",
                 display: "block",
                 marginBottom: "24px",

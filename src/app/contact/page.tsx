@@ -24,7 +24,7 @@ export default function ContactPage() {
             </span>
           </div>
           <h1 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-5xl)", fontWeight: 700, lineHeight: 1.1, color: "var(--text-primary)", marginBottom: "24px" }}>
-            Ayo ngobrol tentang arah keberlanjutan Anda
+            Mari Berkolaborasi untuk Membangun Ekosistem yang Berdaya
           </h1>
           <p style={{ fontSize: "var(--text-lg)", lineHeight: "var(--line-relaxed)", color: "var(--text-primary)", maxWidth: "700px", margin: "0 auto" }}>
             Sampaikan ide, tantangan, atau rencana Anda. Semua masukan ditangani dengan hati-hati dan diberi perlindungan data yang baik.
@@ -32,19 +32,34 @@ export default function ContactPage() {
         </div>
 
         {/* Contact Form Section */}
-        <ContactForm />
+        <div style={{ background: "var(--section-bg-alt)", padding: "80px 56px" }}>
+          <div
+            style={{
+              background: "var(--card-bg)",
+              border: "1px solid var(--card-border)",
+              borderRadius: "16px",
+              padding: "0",
+              overflow: "hidden",
+            }}
+          >
+            <ContactForm />
+          </div>
+        </div>
+
+
+
 
         {/* Office & Social Media Section */}
         <div className="animate-on-scroll" style={{ padding: "80px 56px", background: "var(--section-bg-alt)" }}>
           <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "48px" }}>
-              {/* Kantor */}
+               {/* Kantor */}
               <div className="grid-item animate-delay-100" style={{
                 textAlign: "center",
                 padding: "40px 32px",
-                border: "1px solid rgba(201,147,58,0.3)",
+                border: "1px solid var(--card-border)",
                 borderRadius: "12px",
-                background: "var(--overlay-gold)"
+                background: "var(--card-bg)"
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-4px)";
@@ -85,13 +100,13 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Media Sosial */}
+               {/* Media Sosial */}
               <div className="grid-item animate-delay-100" style={{
                 textAlign: "center",
                 padding: "40px 32px",
-                border: "1px solid rgba(201,147,58,0.3)",
+                border: "1px solid var(--card-border)",
                 borderRadius: "12px",
-                background: "var(--overlay-gold)"
+                background: "var(--card-bg)"
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-4px)";
@@ -106,7 +121,7 @@ export default function ContactPage() {
                   height: "48px",
                   margin: "0 auto 24px",
                   borderRadius: "4px",
-                  background: "rgba(45,106,79,0.2)",
+                  background: "rgba(12, 17, 99, 0.08)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
