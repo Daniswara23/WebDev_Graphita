@@ -73,7 +73,7 @@ export default function ContactForm() {
         </div>
 
         <form ref={formRef} onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          <div style={{ display: "flex", gap: "16px" }}>
+          <div className="contact-form-row">
             <input
               name="name"
               type="text"
@@ -93,9 +93,10 @@ export default function ContactForm() {
             name="company"
             type="text"
             placeholder="Perusahaan/Organisasi"
+            className="contact-form-input"
             style={{ padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
           />
-          <div style={{ display: "flex", gap: "16px" }}>
+          <div className="contact-form-row">
             <select
               id="request_type"
               name="request_type"
@@ -108,7 +109,8 @@ export default function ContactForm() {
             </select>
             <select
               name="service_interest"
-              style={{ flex: 1, padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
+              className="contact-form-input"
+              style={{ padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
             >
               <option value="">-- Minat Layanan --</option>
               <option value="pemetaan">Pemetaan Terpadu</option>

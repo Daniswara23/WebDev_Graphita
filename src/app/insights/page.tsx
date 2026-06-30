@@ -80,7 +80,7 @@ function ArticlesSection() {
   }
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", gap: "32px" }}>
+    <div className="insights-articles-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", gap: "32px" }}>
       {articles.map((article: Article, index: number) => (
         <article
           key={article.id}
@@ -146,7 +146,7 @@ function ReportsSection() {
   }
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(450px, 1fr))", gap: "28px" }}>
+    <div className="insights-reports-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(450px, 1fr))", gap: "28px" }}>
       {reports.map((report: ResearchReport) => (
         <div
           key={report.id}

@@ -80,7 +80,7 @@ export default function AboutOverview() {
       word: "Grahita",
       meaning: "Pemahaman Mendalam",
       detail: "Kepercayaan bahwa setiap perubahan dimulai dari pengenalan konteks yang benar — tidak hanya melihat angka, tetapi memahami cerita yang melatarbelakangi setiap tantangan.",
-      color: "#0c1163",
+      color: "var(--brand-grahita)",
       bgColor: "rgba(12, 17, 99, 0.08)"
     },
     {
@@ -96,7 +96,7 @@ export default function AboutOverview() {
       word: "Sasmita",
       meaning: "Pendekatan Ramah & Inklusif",
       detail: "Setiap interaksi adalah kesempatan untuk membangun hubungan yang lasting — menghormati perbedaan, mendengarkan kebutuhan, dan menciptakan ruang kolaborasi yang nyaman.",
-      color: "#0c1163",
+      color: "var(--brand-sasmita)",
       bgColor: "rgba(12, 17, 99, 0.08)"
     }
   ];
@@ -114,13 +114,13 @@ export default function AboutOverview() {
           <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
         </div>
         <h2 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-4xl)", fontWeight: 700, lineHeight: 1.1, color: "var(--text-primary)", marginBottom: "24px" }}>
-          <span style={{ color: "#0c1163" }}>Grahita</span> <span style={{ color: "#a97b2d" }}>Adhi</span> <span style={{ color: "#0c1163" }}>Sasmita</span>
+          <span style={{ color: "var(--brand-grahita)" }}>Grahita</span> <span style={{ color: "#a97b2d" }}>Adhi</span> <span style={{ color: "var(--brand-sasmita)" }}>Sasmita</span>
         </h2>
         <p style={{ fontSize: "var(--text-base)", color: "var(--text-secondary)", maxWidth: "640px", margin: "0 auto 48px", lineHeight: 1.6 }}>
           Setiap huruf membawa makna yang menjadi fondasi cara kami bekerja — dari pemahaman yang mendalam, keunggulan yang berkelanjutan, hingga pendekatan yang ramah dan inklusif.
         </p>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px", maxWidth: "960px", margin: "0 auto" }}>
+        <div className="etymology-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px", maxWidth: "960px", margin: "0 auto" }}>
           {etymologyItems.map((item, index) => (
             <div
               key={item.letter}
@@ -219,7 +219,7 @@ export default function AboutOverview() {
         </Link>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "32px" }}>
+      <div className="case-studies-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "32px" }}>
         {caseStudies.map((cs, index) => (
           <div key={cs.id} className="grid-item hover-lift hover-glow" style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "16px", padding: "40px", animationDelay: `${index * 0.15}s` }}>
 

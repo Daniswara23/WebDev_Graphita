@@ -21,7 +21,7 @@ export default function AboutPage() {
               Menjadi Sahabat Menuju<br />Keberlanjutan yang Maknawi
             </h1>
               <p style={{ fontSize: "18px", lineHeight: "1.7", color: "var(--text-secondary)", maxWidth: "700px", margin: "0 auto" }}>
-              PT <span style={{ color: "#0c1163" }}>Grahita</span> <span style={{ color: "#a97b2d" }}>Adhi</span> <span style={{ color: "#0c1163" }}>Sasmita</span> didirikan atas kesadaran akan pentingnya partisipasi sektor swasta dalam mendukung terwujudnya kesejahteraan umum dan mencerdaskan kehidupan bangsa.
+              PT <span style={{ color: "var(--brand-grahita)" }}>Grahita</span> <span style={{ color: "#a97b2d" }}>Adhi</span> <span style={{ color: "var(--brand-sasmita)" }}>Sasmita</span> didirikan atas kesadaran akan pentingnya partisipasi sektor swasta dalam mendukung terwujudnya kesejahteraan umum dan mencerdaskan kehidupan bangsa.
             </p>
           </div>
 
@@ -30,9 +30,9 @@ export default function AboutPage() {
             <div style={{ textAlign: "center", marginBottom: "48px" }}>
               <h2 style={{ fontSize: "32px", fontWeight: 700, color: "var(--text-primary)", marginBottom: "16px" }}>
                 Filosofi Nama{" "}
-                <span style={{ color: "#0c1163" }}>Grahita</span>{" "}
+                <span style={{ color: "var(--brand-grahita)" }}>Grahita</span>{" "}
                 <span style={{ color: "#a97b2d" }}>Adhi</span>{" "}
-                <span style={{ color: "#0c1163" }}>Sasmita</span>
+                <span style={{ color: "var(--brand-sasmita)" }}>Sasmita</span>
               </h2>
               <p style={{ fontSize: "16px", color: "var(--text-secondary)", maxWidth: "600px", margin: "0 auto", lineHeight: 1.6 }}>
                 Setiap huruf membawa makna yang menjadi fondasi cara kami bekerja — dari pemahaman yang mendalam, keunggulan yang berkelanjutan, hingga pendekatan yang ramah dan inklusif.
@@ -40,9 +40,9 @@ export default function AboutPage() {
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "24px" }}>
-              <div className="hover-lift" style={{ background: "rgba(12, 17, 99, 0.08)", padding: "32px 24px", borderRadius: "16px", border: "1px solid rgba(12, 17, 99, 0.15)", textAlign: "center" }}>
-                <div style={{ width: "56px", height: "56px", borderRadius: "50%", border: "2px solid #0c1163", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: 800, color: "#0c1163", fontFamily: "Times New Roman, serif", margin: "0 auto 16px" }}>G</div>
-                <h3 style={{ fontSize: "22px", fontWeight: 700, color: "#0c1163", marginBottom: "10px" }}>Grahita</h3>
+              <div className="hover-lift" style={{ background: "var(--brand-grahita-bg)", padding: "32px 24px", borderRadius: "16px", border: "1px solid var(--brand-grahita-border)", textAlign: "center" }}>
+                <div style={{ width: "56px", height: "56px", borderRadius: "50%", border: "2px solid var(--brand-grahita)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: 800, color: "var(--brand-grahita)", fontFamily: "Times New Roman, serif", margin: "0 auto 16px" }}>G</div>
+                <h3 style={{ fontSize: "22px", fontWeight: 700, color: "var(--brand-grahita)", marginBottom: "10px" }}>Grahita</h3>
                 <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6 }}><strong>Pemahaman Mendalam</strong><br />Kepercayaan bahwa setiap perubahan dimulai dari pengenalan konteks yang benar — tidak hanya melihat angka, tetapi memahami cerita.</p>
               </div>
 
@@ -52,9 +52,9 @@ export default function AboutPage() {
                 <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6 }}><strong>Keunggulan / Pelopor</strong><br />Komitmen untuk selalu hadir sebagai pelopor — mengangkat standar, merancang solusi inovatif, menjadi contoh konkret keberlanjutan.</p>
               </div>
 
-              <div className="hover-lift" style={{ background: "rgba(12, 17, 99, 0.08)", padding: "32px 24px", borderRadius: "16px", border: "1px solid rgba(12, 17, 99, 0.15)", textAlign: "center" }}>
-                <div style={{ width: "56px", height: "56px", borderRadius: "50%", border: "2px solid #0c1163", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: 800, color: "#0c1163", fontFamily: "Times New Roman, serif", margin: "0 auto 16px" }}>S</div>
-                <h3 style={{ fontSize: "22px", fontWeight: 700, color: "#0c1163", marginBottom: "10px" }}>Sasmita</h3>
+              <div className="hover-lift" style={{ background: "var(--brand-grahita-bg)", padding: "32px 24px", borderRadius: "16px", border: "1px solid var(--brand-grahita-border)", textAlign: "center" }}>
+                <div style={{ width: "56px", height: "56px", borderRadius: "50%", border: "2px solid var(--brand-sasmita)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: 800, color: "var(--brand-sasmita)", fontFamily: "Times New Roman, serif", margin: "0 auto 16px" }}>S</div>
+                <h3 style={{ fontSize: "22px", fontWeight: 700, color: "var(--brand-sasmita)", marginBottom: "10px" }}>Sasmita</h3>
                 <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6 }}><strong>Pendekatan Ramah & Inklusif</strong><br />Setiap interaksi adalah kesempatan membangun hubungan lasting — menghormati perbedaan, mendengarkan, dan menciptakan ruang kolaborasi nyaman.</p>
               </div>
             </div>
@@ -81,7 +81,7 @@ export default function AboutPage() {
               Nilai Inti Kami
             </h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "32px" }}>
-              <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "var(--card-bg)", padding: "32px", borderRadius: "12px", border: "1px solid var(--card-border)", textAlign: "center" }}>
+<div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "var(--card-bg)", padding: "32px", borderRadius: "12px", border: "1px solid var(--card-border)", textAlign: "center" }}>
                 <div style={{ width: "52px", height: "52px", margin: "0 auto 16px", borderRadius: "16px", background: "rgba(45,106,79,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     {/* Gunung — Gigih: 3 puncak bertingkat */}
@@ -89,7 +89,7 @@ export default function AboutPage() {
                     <line x1="2" y1="20" x2="22" y2="20" stroke="var(--green)" />
                   </svg>
                 </div>
-                <h3 style={{ fontSize: "24px", fontWeight: 700, color: "#0c1163", marginBottom: "16px" }}>Gigih</h3>
+                <h3 style={{ fontSize: "24px", fontWeight: 700, color: "var(--about-card-title)", marginBottom: "16px" }}>Gigih</h3>
                 <p style={{ fontSize: "16px", color: "var(--text-secondary)", lineHeight: "1.6" }}>
                   Kami terus mencari jalan yang paling masuk akal, bahkan ketika kondisi terlihat rumit.
                 </p>
@@ -104,7 +104,7 @@ export default function AboutPage() {
                     <path d="M12 10c-2 2-4 4-4 6" opacity="0.4" stroke="var(--green)" />
                   </svg>
                 </div>
-                <h3 style={{ fontSize: "24px", fontWeight: 700, color: "#0c1163", marginBottom: "16px" }}>Adaptif</h3>
+                <h3 style={{ fontSize: "24px", fontWeight: 700, color: "var(--about-card-title)", marginBottom: "16px" }}>Adaptif</h3>
                 <p style={{ fontSize: "16px", color: "var(--text-secondary)", lineHeight: "1.6" }}>
                   Solusi kami disesuaikan dengan ritme organisasi, bukan paksa dalam satu formula yang sama untuk semua.
                 </p>
@@ -119,7 +119,7 @@ export default function AboutPage() {
                     <line x1="9" y1="7" x2="15" y2="17" opacity="0.3" stroke="var(--green)" />
                   </svg>
                 </div>
-                <h3 style={{ fontSize: "24px", fontWeight: 700, color: "#0c1163", marginBottom: "16px" }}>Sinergi</h3>
+                <h3 style={{ fontSize: "24px", fontWeight: 700, color: "var(--about-card-title)", marginBottom: "16px" }}>Sinergi</h3>
                 <p style={{ fontSize: "16px", color: "var(--text-secondary)", lineHeight: "1.6" }}>
                   Kolaborasi jadi pusat. Kami bekerja dengan orang-orang yang punya tujuan serupa untuk kelanjutan yang lebih nyata.
                 </p>

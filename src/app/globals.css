@@ -49,6 +49,13 @@ globals.css
   --earth-dark: #7a5e42;
 
   /* Semantic Variables - DARK MODE */
+  --about-card-title: var(--gold-light);
+  --brand-grahita: #5b8cff;
+  --brand-adhi: #a97b2d;
+  --brand-sasmita: #5b8cff;
+  --brand-grahita-bg: rgba(91, 140, 255, 0.08);
+  --brand-grahita-border: rgba(91, 140, 255, 0.15);
+  --mobile-drawer-bg: var(--navy-dark);
   --bg-primary: var(--navy-dark);
   --bg-secondary: rgba(30, 58, 95, 0.5);
   --text-primary: #ffffff;
@@ -122,6 +129,16 @@ html.light-mode {
   --border-subtle: rgba(30, 58, 95, 0.1);
   --overlay-gold: rgba(201, 168, 76, 0.08);
 
+  /* Brand colors */
+  --brand-grahita: #0c1163;
+  --brand-adhi: #a97b2d;
+  --brand-sasmita: #0c1163;
+  --brand-grahita-bg: rgba(12, 17, 99, 0.08);
+  --brand-grahita-border: rgba(12, 17, 99, 0.15);
+
+  /* About page - LIGHT MODE */
+  --about-card-title: #0c1163;
+
   /* Card & Section - LIGHT MODE */
   --card-bg: #ffffff;
   --card-border: rgba(30, 58, 95, 0.08);
@@ -141,6 +158,9 @@ html.light-mode {
   --modal-border: rgba(201, 168, 76, 0.25);
   --modal-company-text: var(--accent-gold);
   --modal-overlay-bg: rgba(240, 248, 255, 0.85);
+
+  /* Mobile drawer */
+  --mobile-drawer-bg: var(--bg-primary);
 
   /* Component-specific - LIGHT MODE */
   --navbar-bg: rgba(73, 151, 208, 0.85);
@@ -343,4 +363,177 @@ button, a, .card, .service-card, .article-card {
 
 @media (prefers-reduced-motion: reduce) {
   .nav-link::after { transition: none; }
+}
+
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+
+/* Tablet & Mobile: max-width 768px */
+@media (max-width: 768px) {
+  .navbar-desktop-menu {
+    display: none !important;
+  }
+
+  .navbar-hamburger {
+    display: flex !important;
+  }
+
+  /* Section padding untuk mobile */
+  section,
+  div[style*="padding: 96px 56px"],
+  div[style*="padding: 80px 56px"],
+  div[style*="padding: 120px 56px"] {
+    padding-left: clamp(16px, 5vw, 32px) !important;
+    padding-right: clamp(16px, 5vw, 32px) !important;
+  }
+
+  /* Footer mobile */
+  footer {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+}
+
+/* Mobile kecil: max-width 480px */
+@media (max-width: 480px) {
+  section,
+  div[style*="padding: 96px 56px"],
+  div[style*="padding: 80px 56px"],
+  div[style*="padding: 120px 56px"] {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
+/* Desktop: pastikan hamburger tersembunyi */
+@media (min-width: 769px) {
+  .navbar-hamburger {
+    display: none !important;
+  }
+}
+
+/* StatsBar responsive */
+@media (max-width: 768px) {
+  .stats-bar-container {
+    gap: 12px !important;
+    padding: 20px 16px !important;
+  }
+
+  .stats-bar-item {
+    border-right: none !important;
+    min-width: calc(50% - 24px) !important;
+    padding: 12px 16px !important;
+  }
+
+  .stats-bar-item:nth-child(odd) {
+    border-right: 1px solid var(--border-subtle) !important;
+  }
+
+  .stats-bar-item:last-child {
+    border-right: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-bar-container {
+    gap: 8px !important;
+    padding: 16px 12px !important;
+  }
+
+  .stats-bar-item {
+    min-width: 100% !important;
+    border-right: none !important;
+    padding: 16px 12px !important;
+  }
+}
+
+/* Services grid responsive */
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+/* AboutOverview grids responsive */
+@media (max-width: 768px) {
+  .etymology-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .case-studies-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+/* ContactForm responsive */
+@media (max-width: 768px) {
+  .contact-form-row {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .contact-form-input {
+    width: 100% !important;
+  }
+}
+
+/* EcosystemHub grids responsive */
+@media (max-width: 768px) {
+  .partners-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .case-studies-ecosystem-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+/* Footer responsive */
+@media (max-width: 768px) {
+  .site-footer {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  .site-footer > div:first-child {
+    flex-direction: column !important;
+    gap: 32px !important;
+  }
+
+  .site-footer > div:first-child > div {
+    max-width: 100% !important;
+  }
+}
+
+/* Insights pages grids responsive */
+@media (max-width: 768px) {
+  .insights-articles-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .insights-reports-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+/* Toko page responsive */
+@media (max-width: 768px) {
+  .toko-products-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+/* Dokumentasi Swiper height */
+@media (max-width: 768px) {
+  [class*="swiper-wrapper"] > [class*="swiper-slide"] > div[style*="height: 400px"],
+  div[style*="height: 400px"][style*="align-items: center"] {
+    height: 280px !important;
+  }
 }

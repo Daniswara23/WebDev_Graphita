@@ -28,13 +28,13 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer style={{ background: "var(--footer-bg)", padding: "48px 56px 24px", borderTop: "1px solid var(--footer-border)" }}>
+    <footer className="site-footer" style={{ background: "var(--footer-bg)", padding: "48px 56px 24px", borderTop: "1px solid var(--footer-border)" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "32px", maxWidth: "1200px", margin: "0 auto" }}>
         <div style={{ maxWidth: "300px" }}>
           <div style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-2xl)", fontWeight: 700, letterSpacing: "0.5px", marginBottom: "12px" }}>
-            <span style={{ color: "#0c1163" }}>Grahita</span>{" "}
+            <span style={{ color: "var(--brand-grahita)" }}>Grahita</span>{" "}
             <span style={{ color: "#a97b2d" }}>Adhi</span>{" "}
-            <span style={{ color: "#0c1163" }}>Sasmita</span>
+            <span style={{ color: "var(--brand-sasmita)" }}>Sasmita</span>
           </div>
           <p style={{ fontSize: "var(--text-base)", color: "var(--footer-text)", lineHeight: "var(--line-normal)" }}>
             Mitra keberlanjutan strategis untuk aksi profesional, ilmiah, dan teknis.

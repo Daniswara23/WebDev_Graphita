@@ -90,7 +90,7 @@ export default function TokoPage() {
 
         <section style={SHARED_STYLES.sectionPadding}>
           <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-            <div className="animate-on-scroll" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "32px" }}>
+            <div className="toko-products-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "32px" }}>
               {products.map((product) => (
                 <div
                   key={product.id}

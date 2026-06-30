@@ -144,7 +144,7 @@ export default function EcosystemHub() {
               {activePartners[0]?.description}
             </p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px" }}>
+            <div className="partners-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px" }}>
               {activePartners.map((partner) => (
                 <div
                   key={partner.id}
@@ -161,10 +161,10 @@ export default function EcosystemHub() {
                   <div style={{ display: "flex", justifyContent: "center", marginBottom: "12px" }}>
                     {iconMap[partner.icon_svg] ?? iconMap.default}
                   </div>
-                  <h4 style={{ fontSize: "var(--text-lg)", fontWeight: 700, color: "var(--text-primary)", marginBottom: "6px" }}>
+                  <h4 style={{ fontSize: "var(--text-lg)", fontWeight: 700, color: "var(--text-primary)", marginBottom: "6px", wordBreak: "break-word", overflowWrap: "anywhere" }}>
                     {partner.name}
                   </h4>
-                  <p style={{ fontSize: "var(--text-sm)", color: "var(--text-secondary)", lineHeight: 1.5 }}>
+                  <p style={{ fontSize: "var(--text-sm)", color: "var(--text-secondary)", lineHeight: 1.5, wordBreak: "break-word", overflowWrap: "anywhere" }}>
                     {partner.description}
                   </p>
                 </div>
@@ -185,7 +185,7 @@ export default function EcosystemHub() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "28px", maxWidth: "1200px", margin: "0 auto" }}>
+        <div className="case-studies-ecosystem-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "28px", maxWidth: "1200px", margin: "0 auto" }}>
           {uniqueCaseStudies.map((cs) => {
             const isExpanded = expandedCase === cs.id;
             return (
@@ -220,13 +220,13 @@ export default function EcosystemHub() {
                   </span>
                 </div>
 
-                <h3 style={{ fontSize: "var(--text-xl)", fontWeight: 700, color: "var(--text-primary)", marginBottom: "8px", lineHeight: 1.3 }}>
+                <h3 style={{ fontSize: "var(--text-xl)", fontWeight: 700, color: "var(--text-primary)", marginBottom: "8px", lineHeight: 1.3, wordBreak: "break-word", overflowWrap: "anywhere" }}>
                   {cs.title}
                 </h3>
-                <p style={{ fontSize: "13px", color: "var(--text-secondary)", marginBottom: "14px", fontStyle: "italic" }}>
+                <p style={{ fontSize: "13px", color: "var(--text-secondary)", marginBottom: "14px", fontStyle: "italic", wordBreak: "break-word", overflowWrap: "anywhere" }}>
                   {cs.client}
                 </p>
-                <p style={{ fontSize: "var(--text-sm)", color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: isExpanded ? "16px" : "0" }}>
+                <p style={{ fontSize: "var(--text-sm)", color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: isExpanded ? "16px" : "0", wordBreak: "break-word" }}>
                   {cs.summary}
                 </p>
 
@@ -239,7 +239,7 @@ export default function EcosystemHub() {
                   }}
                 >
                   <div style={{ paddingTop: "14px", borderTop: `1px solid ${"var(--gold)"}33`, marginTop: "4px" }}>
-                    <p style={{ fontSize: "var(--text-sm)", color: "var(--text-primary)", lineHeight: 1.6, marginBottom: "6px" }}>
+                    <p style={{ fontSize: "var(--text-sm)", color: "var(--text-primary)", lineHeight: 1.6, marginBottom: "6px", wordBreak: "break-word", overflowWrap: "anywhere" }}>
                       <strong>Dampak:</strong> {cs.impact}
                     </p>
                   </div>

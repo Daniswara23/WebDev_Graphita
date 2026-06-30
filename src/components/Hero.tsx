@@ -119,7 +119,7 @@ export default function Hero() {
           display: "flex",
           justifyContent: "flex-start",
           alignItems: "center",
-          padding: "96px 56px 0",
+          padding: "clamp(60px, 10vw, 96px) clamp(16px, 5vw, 56px) 0",
           zIndex: 5,
           position: "relative",
         }}
@@ -240,7 +240,7 @@ export default function Hero() {
         style={{
           display: "flex",
           justifyContent: "center",
-          padding: "40px 56px",
+          padding: "clamp(24px, 5vw, 40px) clamp(16px, 5vw, 56px)",
           backgroundColor: "var(--hero-statement-bg)",
           zIndex: 5,
           position: "relative",

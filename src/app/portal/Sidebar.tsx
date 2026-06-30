@@ -19,6 +19,7 @@ const NAV_ITEMS = [
   { label: "Toko", href: "/portal/toko", icon: "🏪" },
   { label: "Pesan", href: "/portal/pesan", icon: "✉" },
   { label: "Feedback", href: "/portal/testimoni", icon: "💬" },
+  { label: "Ekosistem", href: "/portal/ekosistem", icon: "🔗" },
 ];
 
 export default function Sidebar({ adminName }: { adminName: string }) {

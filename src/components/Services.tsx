@@ -178,6 +178,7 @@ export default function Services() {
       </div>
 
       <div
+        className="services-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(3, 1fr)",

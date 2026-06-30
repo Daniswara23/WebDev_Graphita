@@ -29,10 +29,11 @@ export default function StatsBar() {
         .select("id, number_text, label")
         .order("sort_order");
 
-      // Hitung jumlah portofolio dari articles + research_reports
-      const [articlesResult, researchResult] = await Promise.all([
+      // Hitung jumlah portofolio visual dari articles + research_reports + photo_galleries
+      const [articlesResult, researchResult, galleriesResult] = await Promise.all([
         supabase.from("articles").select("id", { count: "exact", head: true }).eq("is_published", true),
         supabase.from("research_reports").select("id", { count: "exact", head: true }),
+        supabase.from("photo_galleries").select("id", { count: "exact", head: true }).eq("is_published", true),
       ]);
 
       // Hitung jumlah layanan dari home_services
@@ -46,7 +47,10 @@ export default function StatsBar() {
         .select("id", { count: "exact", head: true })
         .eq("is_active", true);
 
-      const totalPortofolio = (articlesResult.count ?? 0) + (researchResult.count ?? 0);
+      const totalPortofolio =
+        (articlesResult.count ?? 0) +
+        (researchResult.count ?? 0) +
+        (galleriesResult.count ?? 0);
       const totalServices = servicesResult.count ?? 0;
       const totalProducts = productsResult.count ?? 0;
 
@@ -88,6 +92,7 @@ export default function StatsBar() {
 
   return (
     <div
+      className="stats-bar-container"
       style={{
         background: "var(--overlay-gold)",
         borderTop: "1px solid rgba(201,147,58,0.2)",
@@ -103,6 +108,7 @@ export default function StatsBar() {
       {stats.map((item, index) => (
         <div
           key={item.id}
+          className="stats-bar-item"
           style={{
             textAlign: "center",
             padding: "8px 24px",
