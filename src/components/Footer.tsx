@@ -55,7 +55,7 @@ export default function Footer() {
         <div>
           <h4 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-lg)", color: "var(--footer-heading)", marginBottom: "16px" }}>Kontak</h4>
           <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="#4997d0" strokeWidth="1.5" width="16" height="16" style={{ flexShrink: 0 }}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--green-light)" strokeWidth="1.5" width="16" height="16" style={{ flexShrink: 0 }}>
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
               <circle cx="12" cy="9" r="2.5" />
             </svg>

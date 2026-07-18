@@ -2,8 +2,9 @@
 
 /*
   toko/page.tsx — Halaman /toko
-  Data diambil dari tabel `products` di Supabase.
-  Tampilan tidak berubah.
+  Data diambil dari tabel `products` dan `marketplace_links` di Supabase.
+  Marketplace global menampilkan "Segera Hadir" jika url null.
+  Tombol per produk tetap di-"hitamkan" (disabled) jika url null.
 */
 
 import { useState, useEffect, useMemo } from "react";
@@ -21,10 +22,13 @@ type Product = {
   shopee_url: string | null;
 };
 
-const marketplaces = [
-  { name: "Tokopedia", href: "https://www.tokopedia.com/" },
-  { name: "Shopee",    href: "https://shopee.co.id/" },
-];
+type MarketplaceLink = {
+  id: string;
+  platform: string;
+  url: string | null;
+  is_active: boolean;
+  sort_order: number;
+};
 
 // Styles constants
 const SHARED_STYLES = {
@@ -37,6 +41,7 @@ const SHARED_STYLES = {
 
 export default function TokoPage() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [marketplaceLinks, setMarketplaceLinks] = useState<MarketplaceLink[]>([]);
   const [hoveredProduct, setHoveredProduct] = useState<string | null>(null);
 
   useEffect(() => {
@@ -52,6 +57,18 @@ export default function TokoPage() {
         }
         console.log("[DEBUG] Products data from Supabase:", data);
         if (data) setProducts(data);
+      });
+
+    supabase
+      .from("marketplace_links")
+      .select("*")
+      .eq("is_active", true)
+      .order("sort_order")
+      .then(({ data, error }) => {
+        if (error) {
+          console.error("[Supabase] marketplace_links error:", error.message);
+        }
+        if (data) setMarketplaceLinks(data);
       });
   }, []);
 
@@ -278,34 +295,59 @@ export default function TokoPage() {
               Beli produk asli lewat marketplace resmi, dengan pilihan checkout cepat dan transparansi harga. Ideal untuk pembeli yang ingin belanja praktis dan terpercaya.
             </p>
             <div className="animate-on-scroll animate-delay-300" style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "24px" }}>
-              {marketplaces.map((market) => (
-                <a
-                  key={market.name}
-                  href={market.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover-lift"
-                  style={marketplaceButtonStyles.base}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateY(-4px)";
-                    e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.3)";
-                    e.currentTarget.style.background = "var(--bg-secondary)";
-                    e.currentTarget.style.borderColor = "var(--border-subtle)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "none";
-                    e.currentTarget.style.background = "var(--card-bg)";
-                    e.currentTarget.style.borderColor = "var(--border-subtle)";
-                  }}
-                >
-                  <img
-                    src={`/images/${market.name.toLowerCase()}-logo.png`}
-                    alt={market.name}
-                    style={{ height: "48px", objectFit: "contain" }}
-                  />
-                </a>
-              ))}
+              {marketplaceLinks.map((link) => {
+                const hasUrl = !!link.url;
+                const platformLabel = link.platform === "tokopedia" ? "Tokopedia" : "Shopee";
+                const logoSrc = `/images/${link.platform}-logo.png`;
+                return hasUrl ? (
+                  <a
+                    key={link.id}
+                    href={link.url!}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover-lift"
+                    style={marketplaceButtonStyles.base}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-4px)";
+                      e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.3)";
+                      e.currentTarget.style.background = "var(--bg-secondary)";
+                      e.currentTarget.style.borderColor = "var(--border-subtle)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "none";
+                      e.currentTarget.style.background = "var(--card-bg)";
+                      e.currentTarget.style.borderColor = "var(--border-subtle)";
+                    }}
+                  >
+                    <img
+                      src={logoSrc}
+                      alt={platformLabel}
+                      style={{ height: "48px", objectFit: "contain" }}
+                    />
+                  </a>
+                ) : (
+                  <div
+                    key={link.id}
+                    style={{
+                      ...marketplaceButtonStyles.base,
+                      flexDirection: "column",
+                      gap: "8px",
+                      cursor: "default",
+                      opacity: 0.6,
+                    }}
+                  >
+                    <img
+                      src={logoSrc}
+                      alt={platformLabel}
+                      style={{ height: "48px", objectFit: "contain", filter: "grayscale(0.5)" }}
+                    />
+                    <span style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600, letterSpacing: "1px", textTransform: "uppercase" }}>
+                      Segera Hadir
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>

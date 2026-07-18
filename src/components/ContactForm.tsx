@@ -30,7 +30,7 @@ export default function ContactForm() {
     const formData = new FormData(formRef.current);
     const name             = formData.get("name")             as string;
     const email            = formData.get("email")            as string;
-    const company          = formData.get("company")          as string;
+    const organization     = formData.get("company")          as string;
     const message          = formData.get("message")          as string;
     const requestType      = formData.get("request_type")     as string;
     const serviceInterest  = formData.get("service_interest") as string;
@@ -39,7 +39,7 @@ export default function ContactForm() {
 
     const { error } = await supabase
       .from("contact_submissions")
-      .insert({ name, email, company, message, request_type: requestType, service_interest: serviceInterest });
+      .insert({ name, email, organization, message, request_type: requestType, service_interest: serviceInterest });
 
     setSubmitting(false);
 
@@ -97,28 +97,29 @@ export default function ContactForm() {
             style={{ padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
           />
           <div className="contact-form-row">
-            <select
-              id="request_type"
-              name="request_type"
-              defaultValue="umum"
-              style={{ flex: 1, padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
-            >
-              <option value="konsultasi">Konsultasi Awal (Gratis)</option>
-              <option value="kolaborasi">Kolaborasi Proyek</option>
-              <option value="umum">Pesan Umum</option>
-            </select>
-            <select
-              name="service_interest"
-              className="contact-form-input"
-              style={{ padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
-            >
-              <option value="">-- Minat Layanan --</option>
-              <option value="pemetaan">Pemetaan Terpadu</option>
-              <option value="pendampingan">Pendampingan</option>
-              <option value="solusi_tekno">Solusi Tekno-Sosial</option>
-              <option value="publikasi">Publikasi & Penelitian</option>
-              <option value="lainnya">Lainnya</option>
-            </select>
+<select
+  id="request_type"
+  name="request_type"
+  defaultValue="umum"
+  className="contact-form-select"
+  style={{ flex: 1, padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
+>
+  <option value="konsultasi">Konsultasi Awal (Gratis)</option>
+  <option value="kolaborasi">Kolaborasi Proyek</option>
+  <option value="umum">Pesan Umum</option>
+</select>
+<select
+  name="service_interest"
+  className="contact-form-select"
+  style={{ padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
+>
+  <option value="">-- Minat Layanan --</option>
+  <option value="pemetaan">Pemetaan Terpadu</option>
+  <option value="pendampingan">Pendampingan</option>
+  <option value="solusi_tekno">Solusi Tekno-Sosial</option>
+  <option value="publikasi">Publikasi & Penelitian</option>
+  <option value="lainnya">Lainnya</option>
+</select>
           </div>
           <textarea
             name="message"

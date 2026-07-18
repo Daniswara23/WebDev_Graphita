@@ -158,19 +158,31 @@ function GalleryCard({ gallery }: { gallery: Gallery }) {
             marginBottom: "16px",
           }}
         >
-          {gallery.event_date && (
-            <span
-              style={{
-                fontSize: "12px",
-                color: "var(--gold-light)",
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-              }}
-            >
-              📅 {formatDate(gallery.event_date)}
-            </span>
-          )}
+           {gallery.event_date && (
+             <span
+               style={{
+                 fontSize: "12px",
+                 color: "var(--gold-light)",
+                 display: "flex",
+                 alignItems: "center",
+                 gap: "6px",
+               }}
+             >
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                 <path d="M8 2v4"/>
+                 <path d="M16 2v4"/>
+                 <rect width="18" height="18" x="3" y="4" rx="2"/>
+                 <path d="M3 10h18"/>
+                 <path d="M8 14h.01"/>
+                 <path d="M12 14h.01"/>
+                 <path d="M16 14h.01"/>
+                 <path d="M8 18h.01"/>
+                 <path d="M12 18h.01"/>
+                 <path d="M16 18h.01"/>
+               </svg>
+               {formatDate(gallery.event_date)}
+             </span>
+           )}
           {gallery.location && (
             <span
               style={{
@@ -181,7 +193,11 @@ function GalleryCard({ gallery }: { gallery: Gallery }) {
                 gap: "6px",
               }}
             >
-              📍 {gallery.location}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              {gallery.location}
             </span>
           )}
           <span
@@ -193,7 +209,11 @@ function GalleryCard({ gallery }: { gallery: Gallery }) {
               gap: "6px",
             }}
           >
-            📸 {gallery.images.length} foto
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"/>
+              <circle cx="12" cy="13" r="3"/>
+            </svg>
+            {gallery.images.length} foto
           </span>
         </div>
 

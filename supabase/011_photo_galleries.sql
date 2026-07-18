@@ -66,36 +66,11 @@ CREATE POLICY "anon_read_gallery_images" ON gallery_images
     )
   );
 
--- Admin (authenticated) — CRUD penuh
-DROP POLICY IF EXISTS "admin_select_photo_galleries" ON photo_galleries;
-CREATE POLICY "admin_select_photo_galleries" ON photo_galleries
-  FOR SELECT USING (auth.role() = 'authenticated');
+-- ============================================================
+-- GRANTS (cocokkan dengan 006_GRANT_PRIVILEGES.sql)
+-- ============================================================
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.photo_galleries TO authenticated;
+GRANT SELECT ON public.photo_galleries TO anon;
 
-DROP POLICY IF EXISTS "admin_insert_photo_galleries" ON photo_galleries;
-CREATE POLICY "admin_insert_photo_galleries" ON photo_galleries
-  FOR INSERT WITH CHECK (auth.role() = 'authenticated');
-
-DROP POLICY IF EXISTS "admin_update_photo_galleries" ON photo_galleries;
-CREATE POLICY "admin_update_photo_galleries" ON photo_galleries
-  FOR UPDATE USING (auth.role() = 'authenticated');
-
-DROP POLICY IF EXISTS "admin_delete_photo_galleries" ON photo_galleries;
-CREATE POLICY "admin_delete_photo_galleries" ON photo_galleries
-  FOR DELETE USING (auth.role() = 'authenticated');
-
--- Admin CRUD for gallery_images
-DROP POLICY IF EXISTS "admin_select_gallery_images" ON gallery_images;
-CREATE POLICY "admin_select_gallery_images" ON gallery_images
-  FOR SELECT USING (auth.role() = 'authenticated');
-
-DROP POLICY IF EXISTS "admin_insert_gallery_images" ON gallery_images;
-CREATE POLICY "admin_insert_gallery_images" ON gallery_images
-  FOR INSERT WITH CHECK (auth.role() = 'authenticated');
-
-DROP POLICY IF EXISTS "admin_update_gallery_images" ON gallery_images;
-CREATE POLICY "admin_update_gallery_images" ON gallery_images
-  FOR UPDATE USING (auth.role() = 'authenticated');
-
-DROP POLICY IF EXISTS "admin_delete_gallery_images" ON gallery_images;
-CREATE POLICY "admin_delete_gallery_images" ON gallery_images
-  FOR DELETE USING (auth.role() = 'authenticated');
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.gallery_images TO authenticated;
+GRANT SELECT ON public.gallery_images TO anon;

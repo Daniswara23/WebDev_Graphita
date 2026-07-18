@@ -22,51 +22,55 @@ type ServiceDetail = {
 // Mapping ikon berdasarkan title layanan
 const serviceIcons: Record<string, React.ReactNode> = {
   "Riset & Pemetaan Sosial Terintegrasi": (
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      {/* Globe + chart overlay — riset terintegrasi */}
-      <circle cx="12" cy="12" r="9" stroke="var(--green)" />
-      <path d="M12 3v18M3 12h18M3.5 7.5l3.5 9M17 7.5l-3.5 9" opacity="0.3" stroke="var(--green)" />
-      <path d="M3 12h9M12 8v8" stroke="var(--green)" />
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--green-light)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      {/* Globe + bold chart overlay — riset terintegrasi */}
+      <circle cx="12" cy="12" r="9" stroke="var(--green-light)" />
+      <path d="M12 3v18" opacity="0.35" stroke="var(--green-light)" />
+      <path d="M3 12h18" opacity="0.35" stroke="var(--green-light)" />
+      <rect x="6" y="11" width="3" height="6" rx="0.75" fill="var(--green-light)" opacity="0.25" />
+      <rect x="10.5" y="8" width="3" height="9" rx="0.75" fill="var(--green-light)" opacity="0.25" />
+      <rect x="15" y="14" width="3" height="3" rx="0.75" fill="var(--green-light)" opacity="0.25" />
+      <path d="M6 14h3M10.5 11h3M15 16h3" stroke="var(--green-light)" strokeLinecap="round" />
     </svg>
   ),
   "Perencanaan Strategis & Konsultasi Keberlanjutan": (
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--green-light)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       {/* Clipboard with roadmap lines — strategic planning */}
-      <rect x="5" y="2" width="14" height="20" rx="2" stroke="var(--green)" />
-      <line x1="8" y1="7" x2="16" y2="7" stroke="var(--green)" />
-      <line x1="8" y1="11" x2="14" y2="11" stroke="var(--green)" opacity="0.5" />
-      <line x1="8" y1="15" x2="16" y2="15" stroke="var(--green)" />
-      <circle cx="8" cy="18" r="1" fill="var(--green)" />
-      <circle cx="12" cy="18" r="1" fill="var(--green)" />
-      <circle cx="16" cy="18" r="1" fill="var(--green)" />
+      <rect x="5" y="2" width="14" height="20" rx="2" stroke="var(--green-light)" />
+      <line x1="8" y1="7" x2="16" y2="7" stroke="var(--green-light)" />
+      <line x1="8" y1="11" x2="16" y2="11" stroke="var(--green-light)" />
+      <line x1="8" y1="15" x2="16" y2="15" stroke="var(--green-light)" />
+      <circle cx="8" cy="19" r="1" fill="var(--green-light)" />
+      <circle cx="12" cy="19" r="1" fill="var(--green-light)" />
+      <circle cx="16" cy="19" r="1" fill="var(--green-light)" />
     </svg>
   ),
   "Pengembangan Kapasitas & Pemberdayaan Komunitas": (
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--green-light)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       {/* Users group — capacity building */}
-      <circle cx="9" cy="6" r="3" stroke="var(--green)" />
-      <path d="M3 21v-2a4 4 0 014-4h2a4 4 0 014 4v2" stroke="var(--green)" />
-      <circle cx="17" cy="8" r="2.5" stroke="var(--green)" />
-      <path d="M21 21v-1.5a3 3 0 00-2-2.5" stroke="var(--green)" opacity="0.6" />
+      <circle cx="9" cy="7" r="3" stroke="var(--green-light)" />
+      <path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2" stroke="var(--green-light)" />
+      <circle cx="17" cy="8" r="2.5" stroke="var(--green-light)" />
+      <path d="M21 21v-2a3 3 0 00-3-3h-1a3 3 0 00-3 3v2" stroke="var(--green-light)" opacity="0.6" />
     </svg>
   ),
   "Fasilitasi Kolaborasi Multipihak": (
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="30" height="30" viewBox="-2 0 28 24" fill="none" stroke="var(--green-light)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       {/* Network nodes — multi-stakeholder collaboration */}
-      <circle cx="12" cy="4" r="2.5" fill="var(--green)" />
-      <circle cx="4" cy="18" r="2.5" stroke="var(--green)" />
-      <circle cx="20" cy="18" r="2.5" stroke="var(--green)" />
-      <line x1="12" y1="7" x2="4" y2="15.5" stroke="var(--green)" />
-      <line x1="12" y1="7" x2="20" y2="15.5" stroke="var(--green)" />
-      <line x1="6.5" y1="19" x2="17.5" y2="19" stroke="var(--green)" opacity="0.4" />
+      <circle cx="12" cy="4" r="2.5" fill="var(--green-light)" />
+      <circle cx="2" cy="18" r="2.5" fill="var(--green-light)" />
+      <circle cx="22" cy="18" r="2.5" fill="var(--green-light)" />
+      <line x1="12" y1="7" x2="2" y2="15.5" stroke="var(--green-light)" />
+      <line x1="12" y1="7" x2="22" y2="15.5" stroke="var(--green-light)" />
+      <line x1="4.5" y1="19" x2="19.5" y2="19" stroke="var(--green-light)" strokeWidth="2.5" opacity="0.4" />
     </svg>
   ),
   "Publikasi & Diseminasi Ilmu Pengetahuan": (
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--green-light)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       {/* Document with share arrows — knowledge dissemination */}
-      <path d="M14 2H8a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V8l-6-6z" stroke="var(--green)" />
-      <path d="M14 2v6h6" stroke="var(--green)" />
-      <path d="M9 13h6M9 17h4M13 17v-4M13 17h2" strokeLinecap="round" stroke="var(--green)" opacity="0.6" />
+      <path d="M14 2H8a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V8l-6-6z" stroke="var(--green-light)" />
+      <path d="M14 2v6h6" stroke="var(--green-light)" />
+      <path d="M10 14h4M12 16v-4" strokeLinecap="round" stroke="var(--green-light)" opacity="0.6" />
     </svg>
   ),
 };

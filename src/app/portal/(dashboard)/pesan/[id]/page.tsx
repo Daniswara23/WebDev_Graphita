@@ -37,7 +37,7 @@ export default async function PesanDetailPage({ params }: { params: Promise<{ id
           <span style={{ fontSize: "14px", color: "var(--gold-light)" }}>{msg.email}</span>
 
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Perusahaan</span>
-          <span style={{ fontSize: "14px", color: "var(--text-primary)" }}>{msg.company || <span style={{ color: "var(--text-secondary)" }}>—</span>}</span>
+          <span style={{ fontSize: "14px", color: "var(--text-primary)" }}>{msg.organization || <span style={{ color: "var(--text-secondary)" }}>—</span>}</span>
 
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Jenis Permintaan</span>
           <span style={{ fontSize: "14px", color: "var(--gold)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>

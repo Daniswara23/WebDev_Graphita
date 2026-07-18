@@ -12,9 +12,8 @@
     └──────────────────────────────────────────┘
 */
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
 
 type CaseStudy = {
   id: string;
@@ -31,32 +30,18 @@ type CaseVideo = {
   title: string;
   video_url: string;
   sort_order: number;
-  is_active: boolean;
 };
 
-export default function AboutOverview() {
-  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
-  const [videos, setVideos] = useState<CaseVideo[]>([]);
+export default function AboutOverview({ 
+  caseStudies: initialCaseStudies = [],
+  videos: initialVideos = []
+}: { 
+  caseStudies?: CaseStudy[];
+  videos?: CaseVideo[];
+}) {
+  const [caseStudies] = useState<CaseStudy[]>(initialCaseStudies);
+  const [videos] = useState<CaseVideo[]>(initialVideos);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-
-  useEffect(() => {
-    supabase
-      .from("case_studies")
-      .select("id, title, client, challenge, solution, result, image_url")
-      .order("sort_order")
-      .then(({ data }) => {
-        if (data) setCaseStudies(data);
-      });
-
-    supabase
-      .from("case_videos")
-      .select("id, title, video_url, sort_order, is_active")
-      .eq("is_active", true)
-      .order("sort_order")
-      .then(({ data }) => {
-        if (data) setVideos(data);
-      });
-  }, []);
 
   const goToPrev = () => {
     setCurrentVideoIndex((prev) => (prev - 1 + videos.length) % videos.length);

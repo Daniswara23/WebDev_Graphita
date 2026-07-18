@@ -5,6 +5,7 @@
 -- ============================================================
 
 -- Hapus data lama sebelum insert data baru (hindari duplikasi)
+DELETE FROM social_links;
 DELETE FROM standards;
 DELETE FROM testimonials;
 DELETE FROM ecosystem_case_studies;
@@ -26,7 +27,17 @@ INSERT INTO stats (number_text, label, sort_order) VALUES
 
 
 -- ─────────────────────────────────────────────────────────────
--- 2. HOME_SERVICES
+-- 2. SOCIAL_LINKS (Ikuti Kami - halaman /contact)
+-- ─────────────────────────────────────────────────────────────
+INSERT INTO social_links (platform, url, icon_path, is_active, sort_order) VALUES
+  ('linkedin', 'https://www.linkedin.com', '/images/LinkedIn-logo.png', true, 1),
+  ('instagram', 'https://www.instagram.com', '/images/Instagram-icon.png', true, 2),
+  ('twitter', 'https://www.twitter.com', '/images/X-logo.png', true, 3),
+  ('facebook', 'https://www.facebook.com', '/images/Facebook-Logo.png', true, 4);
+
+
+-- ─────────────────────────────────────────────────────────────
+-- 3. HOME_SERVICES
 -- icon_key dipetakan ke SVG di Services.tsx (tidak disimpan di DB)
 -- ─────────────────────────────────────────────────────────────
 INSERT INTO home_services (num, title, description, icon_key, sort_order) VALUES

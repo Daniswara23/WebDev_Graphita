@@ -113,17 +113,6 @@ export default async function PublikasiPage() {
                           Open Link
                         </a>
                       )}
-                      <a href={`/insights/${article.slug}`} target="_blank" rel="noopener noreferrer" style={{
-                        padding: "6px 14px",
-                        background: "var(--bg-secondary)",
-                        border: "1px solid var(--border-subtle)",
-                        borderRadius: "6px",
-                        color: "var(--text-primary)",
-                        textDecoration: "none",
-                        fontSize: "12px",
-                      }}>
-                        Read
-                      </a>
                       <Link href={`/portal/publikasi/${article.id}/edit`} style={{
                         padding: "6px 14px",
                         background: "var(--bg-secondary)",

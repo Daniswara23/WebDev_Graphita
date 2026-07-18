@@ -83,10 +83,10 @@ export default function AboutPage() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "32px" }}>
 <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "var(--card-bg)", padding: "32px", borderRadius: "12px", border: "1px solid var(--card-border)", textAlign: "center" }}>
                 <div style={{ width: "52px", height: "52px", margin: "0 auto 16px", borderRadius: "16px", background: "rgba(45,106,79,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green-light)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     {/* Gunung — Gigih: 3 puncak bertingkat */}
-                    <polyline points="2,20 8,8 12,14 16,4 22,20" stroke="var(--green)" />
-                    <line x1="2" y1="20" x2="22" y2="20" stroke="var(--green)" />
+                    <polyline points="2,20 8,8 12,14 16,4 22,20" stroke="var(--green-light)" />
+                    <line x1="2" y1="20" x2="22" y2="20" stroke="var(--green-light)" />
                   </svg>
                 </div>
                 <h3 style={{ fontSize: "24px", fontWeight: 700, color: "var(--about-card-title)", marginBottom: "16px" }}>Gigih</h3>
@@ -97,11 +97,11 @@ export default function AboutPage() {
 
               <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "var(--card-bg)", padding: "32px", borderRadius: "12px", border: "1px solid var(--card-border)", textAlign: "center" }}>
                 <div style={{ width: "52px", height: "52px", margin: "0 auto 16px", borderRadius: "16px", background: "rgba(45,106,79,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green-light)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     {/* Daun — Adaptif: garis kontinu melengkung */}
-                    <path d="M12 2C8 6 4 10 4 14c0 4 3 8 8 8s8-4 8-8C20 10 16 6 12 2z" stroke="var(--green)" />
-                    <path d="M12 2v20" opacity="0.4" stroke="var(--green)" />
-                    <path d="M12 10c-2 2-4 4-4 6" opacity="0.4" stroke="var(--green)" />
+                    <path d="M12 2C8 6 4 10 4 14c0 4 3 8 8 8s8-4 8-8C20 10 16 6 12 2z" stroke="var(--green-light)" />
+                    <path d="M12 2v20" opacity="0.4" stroke="var(--green-light)" />
+                    <path d="M12 10c-2 2-4 4-4 6" opacity="0.4" stroke="var(--green-light)" />
                   </svg>
                 </div>
                 <h3 style={{ fontSize: "24px", fontWeight: 700, color: "var(--about-card-title)", marginBottom: "16px" }}>Adaptif</h3>
@@ -112,11 +112,11 @@ export default function AboutPage() {
 
               <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "var(--card-bg)", padding: "32px", borderRadius: "12px", border: "1px solid var(--card-border)", textAlign: "center" }}>
                 <div style={{ width: "52px", height: "52px", margin: "0 auto 16px", borderRadius: "16px", background: "rgba(45,106,79,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green-light)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     {/* Cincin Bertaut — Sinergi: dua lingkaran interlock */}
-                    <circle cx="10" cy="12" r="7" stroke="var(--green)" />
-                    <circle cx="14" cy="12" r="7" stroke="var(--green)" />
-                    <line x1="9" y1="7" x2="15" y2="17" opacity="0.3" stroke="var(--green)" />
+                    <circle cx="10" cy="12" r="7" stroke="var(--green-light)" />
+                    <circle cx="14" cy="12" r="7" stroke="var(--green-light)" />
+                    <line x1="9" y1="7" x2="15" y2="17" opacity="0.3" stroke="var(--green-light)" />
                   </svg>
                 </div>
                 <h3 style={{ fontSize: "24px", fontWeight: 700, color: "var(--about-card-title)", marginBottom: "16px" }}>Sinergi</h3>

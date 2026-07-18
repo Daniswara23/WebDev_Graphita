@@ -1,0 +1,10 @@
+/*
+  supabase/015_revert_aboutoverview.tsx
+  -- Script untuk kembalikan AboutOverview.tsx ke versi client-side
+  -- Karena kita sudah punya SQL fix, client-side akan jalan kalau grants di Supabase sudah dijalankan
+*/
+
+-- TIDAK PERLU dijalankan, ini hanya catatan
+
+-- Untuk menjalankan fix RLS grants, jalankan di Supabase SQL Editor:
+-- File: supabase/014_fix_rls_grants_for_anon.sql

@@ -83,7 +83,7 @@ const iconMap: Record<string, React.ReactNode> = {
       <circle cx="12" cy="5" r="2" />
       <circle cx="5" cy="19" r="2" />
       <circle cx="19" cy="19" r="2" />
-      <path d="M12 7v4M7.5 17.5l3-3 3 3M12 12l-5 4M12 12l5 4" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 7v4M12 12l-5 4M12 12l5 4" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
   documentText: (

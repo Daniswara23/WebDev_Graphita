@@ -142,6 +142,7 @@ export interface ContactSubmissionRow {
   email: string;
   organization: string | null;
   phone: string | null;
+  request_type: string;
   service_interest: string | null;
   message: string;
   status: string;
@@ -186,6 +187,27 @@ export interface AdminUserRow {
   created_at: string;
 }
 
+export interface SocialLinkRow {
+  id: string;
+  platform: string;
+  url: string;
+  icon_path: string;
+  is_active: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface MarketplaceLinkRow {
+  id: string;
+  platform: string;
+  url: string | null;
+  is_active: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -200,11 +222,13 @@ export interface Database {
       testimonials: { Row: TestimonialRow; Insert: WithDefaults<TestimonialRow, "id" | "author_title" | "company" | "is_featured" | "sort_order" | "created_at">; Update: Partial<TestimonialRow>; Relationships: EmptyRelationships; };
       ecosystem_partners: { Row: EcosystemPartnerRow; Insert: WithDefaults<EcosystemPartnerRow, "id" | "icon_svg" | "sort_order" | "created_at">; Update: Partial<EcosystemPartnerRow>; Relationships: EmptyRelationships; };
       ecosystem_case_studies: { Row: EcosystemCaseStudyRow; Insert: WithDefaults<EcosystemCaseStudyRow, "id" | "sort_order" | "created_at">; Update: Partial<EcosystemCaseStudyRow>; Relationships: EmptyRelationships; };
-      contact_submissions: { Row: ContactSubmissionRow; Insert: WithDefaults<ContactSubmissionRow, "id" | "organization" | "phone" | "service_interest" | "status" | "created_at">; Update: Partial<ContactSubmissionRow>; Relationships: EmptyRelationships; };
+      contact_submissions: { Row: ContactSubmissionRow; Insert: WithDefaults<ContactSubmissionRow, "id" | "organization" | "phone" | "request_type" | "service_interest" | "status" | "created_at">; Update: Partial<ContactSubmissionRow>; Relationships: EmptyRelationships; };
       case_videos: { Row: CaseVideoRow; Insert: WithDefaults<CaseVideoRow, "id" | "sort_order" | "is_active" | "created_at">; Update: Partial<CaseVideoRow>; Relationships: EmptyRelationships; };
       photo_galleries: { Row: PhotoGalleryRow; Insert: WithDefaults<PhotoGalleryRow, "id" | "slug" | "description" | "location" | "event_date" | "is_published" | "sort_order" | "created_at" | "updated_at">; Update: Partial<PhotoGalleryRow>; Relationships: EmptyRelationships; };
       gallery_images: { Row: GalleryImageRow; Insert: WithDefaults<GalleryImageRow, "id" | "caption" | "sort_order" | "created_at">; Update: Partial<GalleryImageRow>; Relationships: EmptyRelationships; };
       admin_users: { Row: AdminUserRow; Insert: WithDefaults<AdminUserRow, "id" | "created_at">; Update: Partial<AdminUserRow>; Relationships: EmptyRelationships; };
+      social_links: { Row: SocialLinkRow; Insert: WithDefaults<SocialLinkRow, "id" | "icon_path" | "is_active" | "sort_order" | "created_at" | "updated_at">; Update: Partial<SocialLinkRow>; Relationships: EmptyRelationships; };
+      marketplace_links: { Row: MarketplaceLinkRow; Insert: WithDefaults<MarketplaceLinkRow, "id" | "url" | "is_active" | "sort_order" | "created_at" | "updated_at">; Update: Partial<MarketplaceLinkRow>; Relationships: EmptyRelationships; };
     };
     Views: { [_ in never]: never };
     Functions: { [_ in never]: never };

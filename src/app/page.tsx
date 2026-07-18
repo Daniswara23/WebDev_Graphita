@@ -1,20 +1,17 @@
-"use client";
-
-import { useState, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
-import TestimonialTrigger from "@/components/TestimonialTrigger";
+import AboutOverviewContainer from "@/components/AboutOverviewContainer";
+import HomeClient from "./HomeClient";
+import { lazy, Suspense } from "react";
 
 // Dynamic imports untuk komponen non-kritis (below-the-fold)
 const StatsBar = lazy(() => import("@/components/StatsBar"));
-const AboutOverview = lazy(() => import("@/components/AboutOverview"));
 const Services = lazy(() => import("@/components/Services"));
 const StorePreview = lazy(() => import("@/components/StorePreview"));
 const Etos3T = lazy(() => import("@/components/Etos3T"));
 const EcosystemHub = lazy(() => import("@/components/EcosystemHub"));
 const CtaBand = lazy(() => import("@/components/CtaBand"));
-const TestimonialsModal = lazy(() => import("@/components/TestimonialsModal"));
 
 // Skeleton loading components
 function SectionSkeleton() {
@@ -32,24 +29,11 @@ function SectionSkeleton() {
   );
 }
 
-function HeroSkeleton() {
-  return (
-    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <div className="animate-pulse" style={{ textAlign: "center" }}>
-        <div style={{ height: "80px", width: "600px", background: "var(--card-bg)", borderRadius: "8px", margin: "0 auto 24px" }} />
-        <div style={{ height: "24px", width: "400px", background: "var(--card-bg)", borderRadius: "8px", margin: "0 auto" }} />
-      </div>
-    </div>
-  );
-}
-
-export default function HomePage() {
-  const [showTestimonials, setShowTestimonials] = useState(false);
-
+export default async function HomePage() {
   return (
     <>
       <Navbar />
-
+      
       <main>
         {/* 1. Hook - Critical, load immediately */}
         <Hero />
@@ -59,10 +43,9 @@ export default function HomePage() {
           <StatsBar />
         </Suspense>
 
-        <TestimonialTrigger onViewTestimonials={() => setShowTestimonials(true)} />
-
+        {/* 3. About - Video carousel, server-side fetch */}
         <Suspense fallback={<SectionSkeleton />}>
-          <AboutOverview />
+          <AboutOverviewContainer />
         </Suspense>
 
         {/* 4. Value */}
@@ -91,11 +74,7 @@ export default function HomePage() {
         <Footer />
       </main>
 
-      {showTestimonials && (
-        <Suspense fallback={<div style={{ minHeight: "400px" }} />}>
-          <TestimonialsModal onClose={() => setShowTestimonials(false)} />
-        </Suspense>
-      )}
+      <HomeClient />
     </>
   );
 }

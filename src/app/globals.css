@@ -77,7 +77,13 @@ globals.css
   --section-bg-alt: rgba(255, 255, 255, 0.02);
   --input-bg: rgba(255, 255, 255, 0.05);
   --input-border: rgba(255, 255, 255, 0.1);
-
+  
+  /* Select/Dropdown options - DARK MODE */
+  --select-option-bg: #2a3a5c;
+  --select-option-text: #ffffff;
+  --select-option-bg-hover: #3a4a6c;
+  --select-option-text-hover: #ffffff;
+  
   /* CTA Band - DARK MODE */
   --cta-bg: var(--gold);
   --cta-text: var(--navy-dark);
@@ -323,6 +329,44 @@ button, a, .card, .service-card, .article-card {
 .social-link:hover {
   background: rgba(201,168,76,0.2);
   border-color: rgba(201,168,76,0.6);
+}
+
+/* ===== SELECT/DROPDOWN DARK MODE FIX ===== */
+/* Use color-scheme to tell browser to use dark styling for native form controls */
+/* Only apply dark color-scheme when NOT in light mode */
+html:not(.light-mode) select {
+  color-scheme: dark;
+  background-color: var(--input-bg) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--input-border) !important;
+}
+
+/* Styling untuk option di dropdown popup - ALL browsers (Chromium, WebKit, Firefox) */
+html:not(.light-mode) select option {
+  background-color: var(--select-option-bg) !important;
+  color: var(--select-option-text) !important;
+}
+
+/* Firefox specific styling for select dropdown */
+@-moz-document url-prefix() {
+  html:not(.light-mode) select option {
+    background-color: var(--select-option-bg) !important;
+    color: var(--select-option-text) !important;
+  }
+}
+
+/* Light mode - ensure normal styling for select */
+html.light-mode select {
+  color-scheme: light;
+}
+
+/* Additional styling for select to ensure dropdown popup contrast */
+html:not(.light-mode) .contact-form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 20px;
+  padding-right: 40px !important;
 }
 
 @keyframes pulse {

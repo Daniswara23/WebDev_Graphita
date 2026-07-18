@@ -26,4 +26,7 @@ GRANT SELECT ON public.case_studies        TO anon;
 GRANT SELECT ON public.testimonials        TO anon;
 GRANT SELECT ON public.standards           TO anon;
 GRANT SELECT ON public.stats               TO anon;
+GRANT SELECT ON public.social_links  TO anon;
+GRANT SELECT ON public.ecosystem_partners  TO anon;
+GRANT SELECT ON public.ecosystem_case_studies TO anon;
 GRANT INSERT ON public.contact_submissions TO anon;

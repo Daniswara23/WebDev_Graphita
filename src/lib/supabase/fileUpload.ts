@@ -1,6 +1,8 @@
 /*
   src/lib/supabase/fileUpload.ts — Shared helper untuk upload file ke Supabase Storage.
   Consolidate semua upload logic yang sebelumnya redundant di actions files.
+  NOTE: Gunakan service_role key untuk bypass RLS di Storage (server-side only).
+        Aman karena fungsi ini hanya dipanggil dari Server Actions.
 */
 
 import { createClient } from "@supabase/supabase-js";
@@ -12,6 +14,14 @@ const BUCKETS = {
 } as const;
 
 type BucketName = keyof typeof BUCKETS;
+
+// Buat client khusus storage dengan service_role key (bypass RLS)
+function getStorageClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
 /**
  * Validate file type and size
@@ -42,15 +52,11 @@ export async function uploadFile(
   file: File,
   path?: string
 ): Promise<string> {
+  const supabase = getStorageClient();
   const bucketName = BUCKETS[bucket];
   const fileExt = file.name.split(".").pop();
   const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
   const filePath = path ? `${path}/${fileName}` : fileName;
-
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
 
   const { error: uploadError } = await supabase.storage
     .from(bucketName)
@@ -78,22 +84,16 @@ export async function deleteFile(
   fileUrl: string
 ): Promise<void> {
   try {
+    const supabase = getStorageClient();
     const bucketName = BUCKETS[bucket];
     const urlParts = fileUrl.split(`/${bucketName}/`);
     
     if (urlParts.length > 1) {
       const filePath = `${bucketName}/${urlParts[1]}`;
-      
-      const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-      );
-
       await supabase.storage.from(bucketName).remove([filePath]);
     }
   } catch (error) {
     console.error("Error deleting file:", error);
-    // Don't throw - file deletion failure shouldn't block the main operation
   }
 }
 

@@ -69,7 +69,7 @@ export default async function PesanPage() {
                       {msg.email}
                     </td>
                     <td style={{ padding: "16px 20px", fontSize: "13px", color: "var(--text-secondary)" }}>
-                      {msg.company || <span style={{ color: "var(--text-secondary)" }}>—</span>}
+                      {msg.organization || <span style={{ color: "var(--text-secondary)" }}>—</span>}
                     </td>
                     <td style={{ padding: "16px 20px", fontSize: "12px", color: "var(--gold)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       {requestTypeMap[msg.request_type] || msg.request_type || "—"}
