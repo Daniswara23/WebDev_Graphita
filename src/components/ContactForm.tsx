@@ -79,14 +79,14 @@ export default function ContactForm() {
               type="text"
               placeholder="Nama Anda"
               required
-              style={{ flex: 1, padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
+              style={{ flex: 1, padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "var(--text-base)" }}
             />
             <input
               name="email"
               type="email"
               placeholder="Alamat Email"
               required
-              style={{ flex: 1, padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
+              style={{ flex: 1, padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "var(--text-base)" }}
             />
           </div>
           <input
@@ -94,7 +94,7 @@ export default function ContactForm() {
             type="text"
             placeholder="Perusahaan/Organisasi"
             className="contact-form-input"
-            style={{ padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
+            style={{ padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "var(--text-base)" }}
           />
           <div className="contact-form-row">
 <select
@@ -102,7 +102,7 @@ export default function ContactForm() {
   name="request_type"
   defaultValue="umum"
   className="contact-form-select"
-  style={{ flex: 1, padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
+  style={{ flex: 1, padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "var(--text-base)" }}
 >
   <option value="konsultasi">Konsultasi Awal (Gratis)</option>
   <option value="kolaborasi">Kolaborasi Proyek</option>
@@ -111,7 +111,7 @@ export default function ContactForm() {
 <select
   name="service_interest"
   className="contact-form-select"
-  style={{ padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)" }}
+  style={{ padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "var(--text-base)" }}
 >
   <option value="">-- Minat Layanan --</option>
   <option value="pemetaan">Pemetaan Terpadu</option>
@@ -126,7 +126,7 @@ export default function ContactForm() {
             placeholder="Ceritakan tentang tantangan Anda..."
             rows={4}
             required
-            style={{ padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "4px", fontSize: "var(--text-base)", resize: "vertical" }}
+            style={{ padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "var(--text-base)", resize: "vertical" }}
           />
           <button
             type="submit"
@@ -142,7 +142,7 @@ export default function ContactForm() {
               textTransform: "uppercase",
               cursor: submitting ? "not-allowed" : "pointer",
               border: "none",
-              borderRadius: "8px",
+              borderRadius: "var(--radius-lg)",
               transition: "all 0.3s ease",
               alignSelf: "center",
               opacity: submitting ? 0.7 : 1,

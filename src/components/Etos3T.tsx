@@ -59,7 +59,7 @@ export default function Etos3T() {
               padding: "40px 24px",
               background: expandedIndex === index ? "var(--overlay-gold)" : "var(--card-bg)",
               border: expandedIndex === index ? "1px solid rgba(201,147,58,0.4)" : "1px solid var(--card-border)",
-              borderRadius: "12px",
+              borderRadius: "var(--radius-lg)",
               textAlign: "center",
               cursor: "pointer",
               transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
@@ -86,7 +86,7 @@ export default function Etos3T() {
                 style={{
                   width: "52px",
                   height: "52px",
-                  borderRadius: "16px",
+                  borderRadius: "var(--radius-lg)",
                   background: expandedIndex === index ? "var(--overlay-gold)" : "rgba(201,147,58,0.12)",
                   transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                   display: "flex",

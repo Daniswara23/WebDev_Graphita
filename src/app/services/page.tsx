@@ -127,12 +127,12 @@ export default function ServicesPage() {
                   style={{
                     background: "var(--card-bg)",
                     padding: "48px",
-                    borderRadius: "12px",
+                    borderRadius: "var(--radius-lg)",
                     border: "1px solid var(--card-border)",
                     animationDelay: `${index * 0.1}s`,
                   }}
                 >
-                  <div style={{ width: "60px", height: "60px", margin: "0 auto 24px", borderRadius: "12px", background: "rgba(45,106,79,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <div style={{ width: "60px", height: "60px", margin: "0 auto 24px", borderRadius: "var(--radius-lg)", background: "rgba(45,106,79,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     {getIcon(service.title)}
                   </div>
                   <h3 style={{ fontSize: "var(--text-3xl)", fontWeight: 700, color: "var(--text-primary)", marginBottom: "16px" }}>
@@ -144,7 +144,7 @@ export default function ServicesPage() {
                   <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                     {service.features.map((feature, fi) => (
                       <div key={fi} style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                        <div style={{ width: "8px", height: "8px", background: "var(--gold)", borderRadius: "50%", flexShrink: 0 }} />
+                        <div style={{ width: "8px", height: "8px", background: "var(--gold)", borderRadius: "var(--radius-full)", flexShrink: 0 }} />
                         <span style={{ fontSize: "var(--text-base)", color: "var(--text-primary)" }}>{feature}</span>
                       </div>
                     ))}
@@ -176,7 +176,7 @@ export default function ServicesPage() {
               textTransform: "uppercase",
               cursor: "pointer",
               border: "none",
-              borderRadius: "2px",
+              borderRadius: "var(--radius-md)",
               whiteSpace: "nowrap",
             }}
           >

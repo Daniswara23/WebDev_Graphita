@@ -19,32 +19,32 @@ export default function CreateCaseStudyPage() {
       <form action={createCaseStudy} style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "20px" }}>
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Judul *</span>
-          <input type="text" name="title" required placeholder="Transformasi ESG di Sektor Pertambangan" style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }} />
+          <input type="text" name="title" required placeholder="Transformasi ESG di Sektor Pertambangan" style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
         </label>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Klien *</span>
-          <input type="text" name="client" required placeholder="PT Tambang Berkelanjutan" style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }} />
+          <input type="text" name="client" required placeholder="PT Tambang Berkelanjutan" style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
         </label>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Sektor</span>
-          <input type="text" name="sector" placeholder="Mining & Energy" style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }} />
+          <input type="text" name="sector" placeholder="Mining & Energy" style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
         </label>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Ringkasan</span>
-          <textarea name="summary" rows={4} placeholder="Deskripsi singkat proyek..." style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px", resize: "vertical" }} />
+          <textarea name="summary" rows={4} placeholder="Deskripsi singkat proyek..." style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px", resize: "vertical" }} />
         </label>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Dampak</span>
-          <textarea name="impact" rows={3} placeholder="Hasil/dampak yang tercapai..." style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px", resize: "vertical" }} />
+          <textarea name="impact" rows={3} placeholder="Hasil/dampak yang tercapai..." style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px", resize: "vertical" }} />
         </label>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Urutan Tampil</span>
-          <input type="number" name="sort_order" defaultValue={0} min={0} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px", width: "120px" }} />
+          <input type="number" name="sort_order" defaultValue={0} min={0} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px", width: "120px" }} />
           <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>Semakin kecil angka, semakin atas tampilnya.</span>
         </label>
 
@@ -54,7 +54,7 @@ export default function CreateCaseStudyPage() {
             background: "var(--gold)",
             color: "var(--navy-dark)",
             border: "none",
-            borderRadius: "8px",
+            borderRadius: "var(--radius-lg)",
             fontSize: "13px",
             fontWeight: 700,
             letterSpacing: "1.5px",
@@ -68,7 +68,7 @@ export default function CreateCaseStudyPage() {
             background: "transparent",
             border: "1px solid var(--border-subtle)",
             color: "var(--text-secondary)",
-            borderRadius: "8px",
+            borderRadius: "var(--radius-lg)",
             fontSize: "13px",
             textDecoration: "none",
           }}>

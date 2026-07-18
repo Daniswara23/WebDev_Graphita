@@ -32,7 +32,7 @@ export default async function EditCaseVideoPage({ params }: { params: Promise<{ 
             name="title"
             defaultValue={video.title}
             required
-            style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }}
+            style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }}
           />
         </label>
 
@@ -43,7 +43,7 @@ export default async function EditCaseVideoPage({ params }: { params: Promise<{ 
             name="video_url"
             defaultValue={video.video_url}
             required
-            style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }}
+            style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }}
           />
           <span style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "4px" }}>
             Link akan otomatis dikonversi ke format embed. Salin link YouTube/Vimeo di sini.
@@ -58,7 +58,7 @@ export default async function EditCaseVideoPage({ params }: { params: Promise<{ 
               name="sort_order"
               defaultValue={video.sort_order}
               min="0"
-              style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }}
+              style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }}
             />
             <span style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "4px" }}>
               Angka kecil = tampil lebih awal
@@ -67,7 +67,7 @@ export default async function EditCaseVideoPage({ params }: { params: Promise<{ 
 
           <label style={{ display: "flex", flexDirection: "column", gap: "6px", justifyContent: "flex-end" }}>
             <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Status</span>
-            <label style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", borderRadius: "6px" }}>
+            <label style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", borderRadius: "var(--radius-md)" }}>
               <input
                 type="checkbox"
                 name="is_active"
@@ -85,7 +85,7 @@ export default async function EditCaseVideoPage({ params }: { params: Promise<{ 
             background: "var(--gold)",
             color: "var(--navy-dark)",
             border: "none",
-            borderRadius: "8px",
+            borderRadius: "var(--radius-lg)",
             fontSize: "13px",
             fontWeight: 700,
             letterSpacing: "1.5px",
@@ -99,7 +99,7 @@ export default async function EditCaseVideoPage({ params }: { params: Promise<{ 
             background: "transparent",
             border: "1px solid var(--border-subtle)",
             color: "var(--text-secondary)",
-            borderRadius: "8px",
+            borderRadius: "var(--radius-lg)",
             fontSize: "13px",
             textDecoration: "none",
           }}>

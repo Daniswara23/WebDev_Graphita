@@ -116,7 +116,7 @@ export default function EcosystemHub() {
                 padding: "12px 24px",
                 background: activeCategory === cat ? "var(--overlay-gold)" : "var(--card-bg)",
                 border: `1px solid ${activeCategory === cat ? "var(--gold)" : "var(--card-border)"}`,
-                borderRadius: "100px",
+                borderRadius: "var(--radius-full)",
                 cursor: "pointer",
                 fontFamily: "var(--font-primary)",
                 fontSize: "var(--text-sm)",
@@ -152,7 +152,7 @@ export default function EcosystemHub() {
                   style={{
                     background: "var(--card-bg)",
                     border: "1px solid var(--card-border)",
-                    borderRadius: "12px",
+                    borderRadius: "var(--radius-lg)",
                     padding: "28px 24px",
                     textAlign: "center",
                     transition: "all 0.3s ease",
@@ -196,7 +196,7 @@ export default function EcosystemHub() {
                 style={{
                   background: "var(--card-bg)",
                   border: `1px solid ${isExpanded ? "var(--gold)" : "var(--card-border)"}`,
-                  borderRadius: "16px",
+                  borderRadius: "var(--radius-lg)",
                   padding: isExpanded ? "36px 28px" : "32px 24px",
                   cursor: "pointer",
                   textAlign: "left",
@@ -213,7 +213,7 @@ export default function EcosystemHub() {
                       color: "var(--gold-light)",
                       background: "var(--overlay-gold)",
                       padding: "4px 10px",
-                      borderRadius: "4px",
+                      borderRadius: "var(--radius-md)",
                     }}
                   >
                     {cs.sector}

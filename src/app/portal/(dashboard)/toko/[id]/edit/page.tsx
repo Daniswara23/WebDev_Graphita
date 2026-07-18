@@ -36,39 +36,39 @@ export default async function EditProdukPage({ params }: { params: Promise<{ id:
       <form action={updateProduct.bind(null, id)} style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "20px" }}>
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Nama Produk *</span>
-          <input type="text" name="name" defaultValue={product.name} required style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }} />
+          <input type="text" name="name" defaultValue={product.name} required style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
         </label>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Deskripsi *</span>
-          <textarea name="description" defaultValue={product.description} required rows={3} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px", resize: "vertical" }} />
+          <textarea name="description" defaultValue={product.description} required rows={3} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px", resize: "vertical" }} />
         </label>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Label (opsional)</span>
-          <input type="text" name="label" defaultValue={product.label ?? ""} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }} />
+          <input type="text" name="label" defaultValue={product.label ?? ""} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
         </label>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Foto Produk</span>
           {product.image_url && (
             <div style={{ marginBottom: "8px" }}>
-              <img src={product.image_url} alt={product.name} style={{ width: "120px", height: "120px", objectFit: "cover", borderRadius: "8px", border: "1px solid var(--border-subtle)" }} />
+              <img src={product.image_url} alt={product.name} style={{ width: "120px", height: "120px", objectFit: "cover", borderRadius: "var(--radius-lg)", border: "1px solid var(--border-subtle)" }} />
               <p style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "4px" }}>Foto saat ini</p>
             </div>
           )}
-          <input type="file" name="image" accept="image/*" style={{ padding: "10px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }} />
+          <input type="file" name="image" accept="image/*" style={{ padding: "10px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
           <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>Format: JPG, PNG, WebP. Kosongkan jika tidak ingin mengubah foto.</span>
         </label>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Link Tokopedia (opsional)</span>
-          <input type="url" name="tokopedia_url" defaultValue={product.tokopedia_url ?? ""} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }} />
+          <input type="url" name="tokopedia_url" defaultValue={product.tokopedia_url ?? ""} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
         </label>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Link Shopee (opsional)</span>
-          <input type="url" name="shopee_url" defaultValue={product.shopee_url ?? ""} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }} />
+          <input type="url" name="shopee_url" defaultValue={product.shopee_url ?? ""} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
         </label>
 
         <label style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -82,7 +82,7 @@ export default async function EditProdukPage({ params }: { params: Promise<{ id:
             background: "var(--gold)",
             color: "var(--navy-dark)",
             border: "none",
-            borderRadius: "8px",
+            borderRadius: "var(--radius-lg)",
             fontSize: "13px",
             fontWeight: 700,
             letterSpacing: "1.5px",
@@ -96,7 +96,7 @@ export default async function EditProdukPage({ params }: { params: Promise<{ id:
             background: "transparent",
             border: "1px solid var(--border-subtle)",
             color: "var(--text-secondary)",
-            borderRadius: "8px",
+            borderRadius: "var(--radius-lg)",
             fontSize: "13px",
             textDecoration: "none",
           }}>

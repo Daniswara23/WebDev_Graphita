@@ -13,7 +13,7 @@ export default function ThemeToggle() {
         position: "relative",
         width: "52px",
         height: "26px",
-        borderRadius: "13px",
+        borderRadius: "var(--radius-full)",
         border: "1px solid rgba(201,147,58,0.3)",
         background: isDarkMode
           ? "rgba(255,255,255,0.08)"
@@ -107,7 +107,7 @@ export default function ThemeToggle() {
           left: isDarkMode ? "calc(100% - 22px)" : "2px",
           width: "20px",
           height: "20px",
-          borderRadius: "50%",
+          borderRadius: "var(--radius-full)",
           background: "var(--green)",
           boxShadow: isDarkMode
             ? "0 1px 4px rgba(0,0,0,0.3)"

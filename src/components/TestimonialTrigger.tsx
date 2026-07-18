@@ -60,7 +60,7 @@ export default function TestimonialTrigger({ onViewTestimonials }: { onViewTesti
             letterSpacing: "1px",
             textTransform: "uppercase",
             cursor: "pointer",
-            borderRadius: "4px",
+            borderRadius: "var(--radius-md)",
             whiteSpace: "nowrap",
             transition: "all 0.3s ease",
           }}

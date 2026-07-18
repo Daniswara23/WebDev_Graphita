@@ -53,7 +53,7 @@ export default async function EditSocialLinkPage({ params }: { params: Promise<{
               background: "var(--input-bg)", 
               border: "1px solid var(--input-border)", 
               color: "var(--text-primary)", 
-              borderRadius: "6px", 
+              borderRadius: "var(--radius-md)", 
               fontSize: "15px" 
             }}
           >
@@ -78,7 +78,7 @@ export default async function EditSocialLinkPage({ params }: { params: Promise<{
               background: "var(--input-bg)", 
               border: "1px solid var(--input-border)", 
               color: "var(--text-primary)", 
-              borderRadius: "6px", 
+              borderRadius: "var(--radius-md)", 
               fontSize: "15px" 
             }} 
           />
@@ -96,7 +96,7 @@ export default async function EditSocialLinkPage({ params }: { params: Promise<{
               background: "var(--input-bg)", 
               border: "1px solid var(--input-border)", 
               color: "var(--text-primary)", 
-              borderRadius: "6px", 
+              borderRadius: "var(--radius-md)", 
               fontSize: "15px", 
               width: "120px" 
             }} 
@@ -115,7 +115,7 @@ export default async function EditSocialLinkPage({ params }: { params: Promise<{
             background: "var(--gold)",
             color: "var(--navy-dark)",
             border: "none",
-            borderRadius: "8px",
+            borderRadius: "var(--radius-lg)",
             fontSize: "13px",
             fontWeight: 700,
             letterSpacing: "1.5px",
@@ -129,7 +129,7 @@ export default async function EditSocialLinkPage({ params }: { params: Promise<{
             background: "transparent",
             border: "1px solid var(--border-subtle)",
             color: "var(--text-secondary)",
-            borderRadius: "8px",
+            borderRadius: "var(--radius-lg)",
             fontSize: "13px",
             textDecoration: "none",
           }}>

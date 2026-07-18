@@ -35,7 +35,7 @@ function ImageInputRow({
   const showPreview = entry.url.trim().length > 0 && directUrl !== null;
 
   return (
-    <div style={{ padding: "16px", border: "1px solid var(--card-border)", borderRadius: "8px", background: "var(--bg-secondary)" }}>
+    <div style={{ padding: "16px", border: "1px solid var(--card-border)", borderRadius: "var(--radius-lg)", background: "var(--bg-secondary)" }}>
       <div style={{ display: "flex", gap: "12px", marginBottom: "8px" }}>
         <div style={{ flex: 1 }}>
           <label style={{ fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px", display: "block", marginBottom: "4px" }}>
@@ -47,7 +47,7 @@ function ImageInputRow({
             value={entry.url}
             onChange={(e) => onChange(entry.id, "url", e.target.value)}
             placeholder="https://i.ibb.co/xxxxx/nama.jpg (ImgBB, dll.)"
-            style={{ width: "100%", padding: "10px 14px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "14px" }}
+            style={{ width: "100%", padding: "10px 14px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "14px" }}
           />
         </div>
         <div style={{ flex: 1 }}>
@@ -60,7 +60,7 @@ function ImageInputRow({
             value={entry.caption}
             onChange={(e) => onChange(entry.id, "caption", e.target.value)}
             placeholder="Keterangan singkat foto..."
-            style={{ width: "100%", padding: "10px 14px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "14px" }}
+            style={{ width: "100%", padding: "10px 14px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "14px" }}
           />
         </div>
         <button
@@ -72,7 +72,7 @@ function ImageInputRow({
             background: "transparent",
             border: "1px solid rgba(255, 80, 80, 0.3)",
             color: "#ff5050",
-            borderRadius: "6px",
+            borderRadius: "var(--radius-md)",
             cursor: "pointer",
             fontSize: "13px",
             whiteSpace: "nowrap",
@@ -84,12 +84,12 @@ function ImageInputRow({
       {showPreview && (
         <div style={{ marginTop: "8px" }}>
           <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>
-            Preview: <code style={{ fontSize: "10px", wordBreak: "break-all", background: "var(--card-bg)", padding: "2px 6px", borderRadius: "4px" }}>{directUrl}</code>
+            Preview: <code style={{ fontSize: "10px", wordBreak: "break-all", background: "var(--card-bg)", padding: "2px 6px", borderRadius: "var(--radius-md)" }}>{directUrl}</code>
           </div>
           <img
             src={directUrl!}
             alt="Preview"
-            style={{ maxHeight: "180px", maxWidth: "100%", borderRadius: "6px", border: "1px solid var(--card-border)" }}
+            style={{ maxHeight: "180px", maxWidth: "100%", borderRadius: "var(--radius-md)", border: "1px solid var(--card-border)" }}
             onError={(e) => {
               (e.target as HTMLImageElement).style.display = "none";
               const parent = (e.target as HTMLImageElement).parentElement;
@@ -110,7 +110,7 @@ function ImageInputRow({
                 errMsg.style.lineHeight = "1.6";
                 errMsg.style.padding = "16px";
                 errMsg.style.background = "rgba(255,80,80,0.08)";
-                errMsg.style.borderRadius = "8px";
+                errMsg.style.borderRadius = "var(--radius-md)";
                 errMsg.style.border = "1px solid rgba(255,80,80,0.2)";
                 parent.appendChild(errMsg);
               }
@@ -166,7 +166,7 @@ export default function CreateDokumentasiPage() {
       </h1>
 
       {error && (
-        <div style={{ padding: "12px 16px", background: "rgba(255,80,80,0.1)", border: "1px solid rgba(255,80,80,0.3)", borderRadius: "8px", color: "#ff5050", fontSize: "14px", marginBottom: "24px" }}>
+        <div style={{ padding: "12px 16px", background: "rgba(255,80,80,0.1)", border: "1px solid rgba(255,80,80,0.3)", borderRadius: "var(--radius-lg)", color: "#ff5050", fontSize: "14px", marginBottom: "24px" }}>
           {error}
         </div>
       )}
@@ -175,28 +175,28 @@ export default function CreateDokumentasiPage() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
           <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Judul Event *</span>
-            <input type="text" name="title" required style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }} />
+            <input type="text" name="title" required style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
           </label>
 
           <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Tanggal Event</span>
-            <input type="date" name="event_date" style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }} />
+            <input type="date" name="event_date" style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
           </label>
 
           <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Lokasi (opsional)</span>
-            <input type="text" name="location" placeholder="Contoh: Jakarta, Indonesia" style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }} />
+            <input type="text" name="location" placeholder="Contoh: Jakarta, Indonesia" style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
           </label>
 
           <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Urutan</span>
-            <input type="number" name="sort_order" defaultValue={0} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }} />
+            <input type="number" name="sort_order" defaultValue={0} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
           </label>
         </div>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Deskripsi (opsional)</span>
-          <textarea name="description" rows={3} placeholder="Cerita singkat tentang kegiatan ini..." style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px", resize: "vertical" }} />
+          <textarea name="description" rows={3} placeholder="Cerita singkat tentang kegiatan ini..." style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px", resize: "vertical" }} />
         </label>
 
         <label style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -223,7 +223,7 @@ export default function CreateDokumentasiPage() {
                 background: "var(--bg-secondary)",
                 border: "1px solid var(--border-subtle)",
                 color: "var(--text-primary)",
-                borderRadius: "6px",
+                borderRadius: "var(--radius-md)",
                 cursor: "pointer",
                 fontSize: "13px",
                 fontWeight: 600,
@@ -254,7 +254,7 @@ export default function CreateDokumentasiPage() {
               background: "var(--gold)",
               color: "var(--navy-dark)",
               border: "none",
-              borderRadius: "8px",
+              borderRadius: "var(--radius-lg)",
               fontSize: "13px",
               fontWeight: 700,
               letterSpacing: "1.5px",
@@ -270,7 +270,7 @@ export default function CreateDokumentasiPage() {
             background: "transparent",
             border: "1px solid var(--border-subtle)",
             color: "var(--text-secondary)",
-            borderRadius: "8px",
+            borderRadius: "var(--radius-lg)",
             fontSize: "13px",
             textDecoration: "none",
           }}>

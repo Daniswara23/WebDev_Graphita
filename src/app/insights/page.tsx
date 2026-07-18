@@ -31,25 +31,25 @@ function formatDate(dateStr: string): string {
 
 function ArticleCardSkeleton() {
   return (
-    <div className="animate-pulse" style={{ background: "var(--card-bg)", padding: "32px", borderRadius: "12px", border: "1px solid var(--card-border)" }}>
+    <div className="animate-pulse" style={{ background: "var(--card-bg)", padding: "32px", borderRadius: "var(--radius-lg)", border: "1px solid var(--card-border)" }}>
       <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "16px" }}>
-        <div style={{ height: "16px", width: "100px", background: "var(--border-subtle)", borderRadius: "4px" }} />
-        <div style={{ height: "16px", width: "80px", background: "var(--border-subtle)", borderRadius: "4px" }} />
+        <div style={{ height: "16px", width: "100px", background: "var(--border-subtle)", borderRadius: "var(--radius-md)" }} />
+        <div style={{ height: "16px", width: "80px", background: "var(--border-subtle)", borderRadius: "var(--radius-md)" }} />
       </div>
-      <div style={{ height: "28px", width: "80%", background: "var(--border-subtle)", borderRadius: "4px", marginBottom: "12px" }} />
-      <div style={{ height: "16px", width: "100%", background: "var(--border-subtle)", borderRadius: "4px", marginBottom: "8px" }} />
-      <div style={{ height: "16px", width: "60%", background: "var(--border-subtle)", borderRadius: "4px" }} />
+      <div style={{ height: "28px", width: "80%", background: "var(--border-subtle)", borderRadius: "var(--radius-md)", marginBottom: "12px" }} />
+      <div style={{ height: "16px", width: "100%", background: "var(--border-subtle)", borderRadius: "var(--radius-md)", marginBottom: "8px" }} />
+      <div style={{ height: "16px", width: "60%", background: "var(--border-subtle)", borderRadius: "var(--radius-md)" }} />
     </div>
   );
 }
 
 function ReportCardSkeleton() {
   return (
-    <div className="animate-pulse" style={{ background: "var(--overlay-gold)", padding: "36px", borderRadius: "12px", border: "1px solid rgba(201,147,58,0.2)" }}>
-      <div style={{ height: "16px", width: "120px", background: "rgba(201,147,58,0.3)", borderRadius: "4px", marginBottom: "16px" }} />
-      <div style={{ height: "28px", width: "90%", background: "var(--border-subtle)", borderRadius: "4px", marginBottom: "12px" }} />
-      <div style={{ height: "16px", width: "100%", background: "var(--border-subtle)", borderRadius: "4px", marginBottom: "8px" }} />
-      <div style={{ height: "40px", width: "200px", background: "var(--border-subtle)", borderRadius: "4px", marginTop: "24px" }} />
+    <div className="animate-pulse" style={{ background: "var(--overlay-gold)", padding: "36px", borderRadius: "var(--radius-lg)", border: "1px solid rgba(201,147,58,0.2)" }}>
+      <div style={{ height: "16px", width: "120px", background: "rgba(201,147,58,0.3)", borderRadius: "var(--radius-md)", marginBottom: "16px" }} />
+      <div style={{ height: "28px", width: "90%", background: "var(--border-subtle)", borderRadius: "var(--radius-md)", marginBottom: "12px" }} />
+      <div style={{ height: "16px", width: "100%", background: "var(--border-subtle)", borderRadius: "var(--radius-md)", marginBottom: "8px" }} />
+      <div style={{ height: "40px", width: "200px", background: "var(--border-subtle)", borderRadius: "var(--radius-md)", marginTop: "24px" }} />
     </div>
   );
 }
@@ -88,7 +88,7 @@ function ArticlesSection() {
           style={{
             background: "var(--card-bg)",
             padding: "32px",
-            borderRadius: "12px",
+            borderRadius: "var(--radius-lg)",
             border: "1px solid var(--card-border)",
             transition: "all 0.3s ease",
             cursor: article.file_url || article.external_url ? "pointer" : "default",
@@ -153,7 +153,7 @@ function ReportsSection() {
           style={{
             background: "var(--overlay-gold)",
             padding: "36px",
-            borderRadius: "12px",
+            borderRadius: "var(--radius-lg)",
             border: "1px solid rgba(201,147,58,0.2)",
             transition: "all 0.3s ease",
           }}
@@ -274,8 +274,8 @@ export default function InsightsPage() {
           <div style={{ padding: "80px 56px", background: "var(--section-bg-alt)" }}>
             <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
               <div style={{ textAlign: "center", marginBottom: "64px" }}>
-                <div style={{ height: "40px", width: "300px", background: "var(--card-bg)", borderRadius: "8px", margin: "0 auto 16px" }} />
-                <div style={{ height: "20px", width: "400px", background: "var(--card-bg)", borderRadius: "8px", margin: "0 auto" }} />
+                <div style={{ height: "40px", width: "300px", background: "var(--card-bg)", borderRadius: "var(--radius-lg)", margin: "0 auto 16px" }} />
+                <div style={{ height: "20px", width: "400px", background: "var(--card-bg)", borderRadius: "var(--radius-lg)", margin: "0 auto" }} />
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", gap: "32px" }}>
                 <ArticleCardSkeleton />
@@ -304,8 +304,8 @@ export default function InsightsPage() {
           <div style={{ padding: "80px 56px", background: "var(--bg-primary)" }}>
             <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
               <div style={{ textAlign: "center", marginBottom: "64px" }}>
-                <div style={{ height: "40px", width: "300px", background: "var(--card-bg)", borderRadius: "8px", margin: "0 auto 16px" }} />
-                <div style={{ height: "20px", width: "400px", background: "var(--card-bg)", borderRadius: "8px", margin: "0 auto" }} />
+                <div style={{ height: "40px", width: "300px", background: "var(--card-bg)", borderRadius: "var(--radius-lg)", margin: "0 auto 16px" }} />
+                <div style={{ height: "20px", width: "400px", background: "var(--card-bg)", borderRadius: "var(--radius-lg)", margin: "0 auto" }} />
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(450px, 1fr))", gap: "28px" }}>
                 <ReportCardSkeleton />
@@ -347,7 +347,7 @@ export default function InsightsPage() {
               fontSize: "16px",
               fontWeight: 600,
               textDecoration: "none",
-              borderRadius: "8px",
+              borderRadius: "var(--radius-lg)",
               transition: "all 0.3s ease",
             }}
             onMouseEnter={(e) => {

@@ -24,7 +24,7 @@
   text-decoration: none;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   padding: 28px 24px;
   transition: all 0.2s ease;
   display: block;
@@ -52,7 +52,7 @@
 .quickActionsSection {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   padding: 28px 32px;
 }
 
@@ -73,7 +73,7 @@
   padding: 12px 20px;
   background: var(--overlay-gold);
   border: 1px solid var(--border-subtle);
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   color: var(--accent-gold);
   text-decoration: none;
   font-size: 13px;

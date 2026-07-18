@@ -19,7 +19,7 @@ export default function PortalLoginPage() {
         <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "16px" }}>
           <ThemeToggle />
         </div>
-        <div style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "16px", padding: "48px 36px" }}>
+        <div style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "var(--radius-lg)", padding: "48px 36px" }}>
           <div style={{ textAlign: "center", marginBottom: "32px" }}>
             <Link href="/">
               <img src="/images/logo-GAS.png" alt="Grahita Adhi Sasmita" style={{ maxWidth: "200px", height: "auto" }} />

@@ -178,7 +178,7 @@ export default function DokumentasiPage() {
               fontSize: "16px",
               fontWeight: 600,
               textDecoration: "none",
-              borderRadius: "8px",
+              borderRadius: "var(--radius-lg)",
               transition: "all 0.3s ease",
             }}
           >

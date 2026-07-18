@@ -25,7 +25,7 @@ export default function DeleteButton({ action, confirmMessage }: DeleteButtonPro
           padding: "6px 14px",
           background: "rgba(220,38,38,0.1)",
           border: "1px solid rgba(220,38,38,0.3)",
-          borderRadius: "6px",
+          borderRadius: "var(--radius-md)",
           color: "#fca5a5",
           fontSize: "12px",
           cursor: "pointer",

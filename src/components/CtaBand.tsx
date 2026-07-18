@@ -67,7 +67,7 @@ export default function CtaBand() {
           textTransform: "uppercase",
           cursor: "pointer",
           border: "none",
-          borderRadius: "2px",
+          borderRadius: "var(--radius-md)",
           whiteSpace: "nowrap",
         }}
       >

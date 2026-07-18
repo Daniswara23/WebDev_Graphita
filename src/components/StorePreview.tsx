@@ -60,7 +60,7 @@ export default function StorePreview() {
               <div
                 style={{
                   padding: "40px 28px",
-                  borderRadius: "16px",
+                  borderRadius: "var(--radius-lg)",
                   border: "1px solid rgba(201,147,58,0.25)",
                   background: "var(--card-bg)",
                   transition: "transform 0.3s ease, background 0.3s ease, border-color 0.3s ease",
@@ -105,7 +105,7 @@ export default function StorePreview() {
                 color: "var(--navy-dark)",
                 fontWeight: 700,
                 fontFamily: "var(--font-primary)",
-                borderRadius: "10px",
+                borderRadius: "var(--radius-lg)",
                 cursor: "pointer",
                 textTransform: "uppercase",
                 letterSpacing: "1px",

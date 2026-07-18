@@ -144,7 +144,7 @@ export function SocialIconWrapper({ href, icon, label }: SocialIconWrapperProps)
         justifyContent: "center",
         width: "48px",
         height: "48px",
-        borderRadius: "4px",
+        borderRadius: "var(--radius-full)",
         background: "rgba(45,106,79,0.2)",
         transition: "all 0.3s ease",
         textDecoration: "none",

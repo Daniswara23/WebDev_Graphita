@@ -171,7 +171,7 @@ export default function Navbar() {
                 letterSpacing: "1px",
                 textTransform: "uppercase",
                 cursor: "pointer",
-                borderRadius: "8px",
+                borderRadius: "var(--radius-lg)",
               }}
             >
               Mulai Kolaborasi
@@ -206,7 +206,7 @@ export default function Navbar() {
               width: "26px",
               height: "2px",
               background: "var(--gold-light)",
-              borderRadius: "2px",
+              borderRadius: "var(--radius-md)",
               transition: "all 0.3s ease",
               transform: mobileMenuOpen ? "translateY(8px) rotate(45deg)" : "none",
             }}
@@ -217,7 +217,7 @@ export default function Navbar() {
               width: "26px",
               height: "2px",
               background: "var(--gold-light)",
-              borderRadius: "2px",
+              borderRadius: "var(--radius-md)",
               transition: "all 0.3s ease",
               opacity: mobileMenuOpen ? 0 : 1,
             }}
@@ -228,7 +228,7 @@ export default function Navbar() {
               width: "26px",
               height: "2px",
               background: "var(--gold-light)",
-              borderRadius: "2px",
+              borderRadius: "var(--radius-md)",
               transition: "all 0.3s ease",
               transform: mobileMenuOpen ? "translateY(-8px) rotate(-45deg)" : "none",
             }}
@@ -285,7 +285,7 @@ export default function Navbar() {
                 height: "40px",
                 background: "var(--input-bg)",
                 border: "1px solid var(--border-subtle)",
-                borderRadius: "8px",
+                borderRadius: "var(--radius-lg)",
                 color: "var(--text-secondary)",
                 fontSize: "20px",
                 cursor: "pointer",
@@ -337,7 +337,7 @@ export default function Navbar() {
                 textTransform: "uppercase",
                 display: "block",
                 padding: "14px 16px",
-                borderRadius: "8px",
+                borderRadius: "var(--radius-lg)",
                 transition: "all 0.2s ease",
                 background: isActive ? "var(--overlay-gold)" : "transparent",
                 fontWeight: isActive ? 600 : 400,
@@ -372,7 +372,7 @@ export default function Navbar() {
                 textTransform: "uppercase",
                 display: "block",
                 padding: "12px 16px",
-                borderRadius: "8px",
+                borderRadius: "var(--radius-lg)",
                 transition: "all 0.2s ease",
               }}
               onClick={handleLinkClick}
@@ -389,7 +389,7 @@ export default function Navbar() {
                   background: "var(--gold)",
                   color: "var(--navy-dark)",
                   border: "none",
-                  borderRadius: "8px",
+                  borderRadius: "var(--radius-lg)",
                   fontFamily: "var(--font-primary)",
                   fontSize: "14px",
                   fontWeight: 600,

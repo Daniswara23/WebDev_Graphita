@@ -36,7 +36,7 @@ export default function ContactSection({ socialLinks }: { socialLinks: SocialLin
             textAlign: "center",
             padding: "40px 32px",
             border: "1px solid var(--card-border)",
-            borderRadius: "12px",
+            borderRadius: "var(--radius-lg)",
             background: "var(--card-bg)"
           }}
           onMouseEnter={(e) => {
@@ -51,7 +51,7 @@ export default function ContactSection({ socialLinks }: { socialLinks: SocialLin
               width: "48px",
               height: "48px",
               margin: "0 auto 24px",
-              borderRadius: "4px",
+              borderRadius: "var(--radius-md)",
               background: "rgba(45,106,79,0.2)",
               display: "flex",
               alignItems: "center",
@@ -86,7 +86,7 @@ export default function ContactSection({ socialLinks }: { socialLinks: SocialLin
             <p style={{ fontSize: "var(--text-lg)", color: "var(--text-secondary)", lineHeight: "var(--line-relaxed)", marginBottom: "16px" }}>
               Jakarta, Indonesia
             </p>
-            <div style={{ background: "var(--overlay-gold)", padding: "16px", borderRadius: "8px", border: "1px solid rgba(201,147,58,0.2)" }}>
+            <div style={{ background: "var(--overlay-gold)", padding: "16px", borderRadius: "var(--radius-lg)", border: "1px solid rgba(201,147,58,0.2)" }}>
               <p style={{ fontSize: "var(--text-base)", color: "var(--text-primary)", margin: "0" }}>
                 hello@grahitaadhisasmita.com
               </p>
@@ -101,7 +101,7 @@ export default function ContactSection({ socialLinks }: { socialLinks: SocialLin
             textAlign: "center",
             padding: "40px 32px",
             border: "1px solid var(--card-border)",
-            borderRadius: "12px",
+            borderRadius: "var(--radius-lg)",
             background: "var(--card-bg)"
           }}
           onMouseEnter={(e) => {
@@ -116,7 +116,7 @@ export default function ContactSection({ socialLinks }: { socialLinks: SocialLin
               width: "48px",
               height: "48px",
               margin: "0 auto 24px",
-              borderRadius: "4px",
+              borderRadius: "var(--radius-md)",
               background: "rgba(12, 17, 99, 0.08)",
               display: "flex",
               alignItems: "center",

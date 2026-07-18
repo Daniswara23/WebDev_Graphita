@@ -26,7 +26,7 @@ function TestimonialTrigger({ onClick }: { onClick: () => void }) {
         background: "var(--gold)",
         color: "var(--navy-dark)",
         border: "none",
-        borderRadius: "50%",
+        borderRadius: "var(--radius-full)",
         width: "56px",
         height: "56px",
         fontSize: "24px",

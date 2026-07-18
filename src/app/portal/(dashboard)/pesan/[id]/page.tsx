@@ -29,7 +29,7 @@ export default async function PesanDetailPage({ params }: { params: Promise<{ id
       </h1>
 
       <div style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "16px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: "12px", padding: "16px 20px", background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "8px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: "12px", padding: "16px 20px", background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "var(--radius-lg)" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Nama</span>
           <span style={{ fontSize: "15px", color: "var(--text-primary)", fontWeight: 600 }}>{msg.name}</span>
 
@@ -53,7 +53,7 @@ export default async function PesanDetailPage({ params }: { params: Promise<{ id
           <span style={{ fontSize: "13px", color: "var(--text-secondary)" }}>{formatDate(msg.created_at)}</span>
         </div>
 
-        <div style={{ padding: "20px 24px", background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "8px" }}>
+        <div style={{ padding: "20px 24px", background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "var(--radius-lg)" }}>
           <h3 style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "12px" }}>
             Isi Pesan
           </h3>

@@ -61,7 +61,7 @@ export default async function EkosistemAdminPage() {
             padding: "10px 20px",
             background: "var(--gold)",
             color: "var(--navy-dark)",
-            borderRadius: "8px",
+            borderRadius: "var(--radius-lg)",
             textDecoration: "none",
             fontSize: "13px",
             fontWeight: 700,
@@ -72,7 +72,7 @@ export default async function EkosistemAdminPage() {
           </Link>
         </div>
 
-        <div style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "12px", overflow: "hidden" }}>
+        <div style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "var(--radius-lg)", overflow: "hidden" }}>
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr style={{ borderBottom: "1px solid var(--card-border)", textAlign: "left" }}>
@@ -105,7 +105,7 @@ export default async function EkosistemAdminPage() {
                           padding: "6px 14px",
                           background: "var(--bg-secondary)",
                           border: "1px solid var(--border-subtle)",
-                          borderRadius: "6px",
+                          borderRadius: "var(--radius-md)",
                           color: "var(--text-primary)",
                           textDecoration: "none",
                           fontSize: "12px",
@@ -137,7 +137,7 @@ export default async function EkosistemAdminPage() {
             padding: "10px 20px",
             background: "var(--gold)",
             color: "var(--navy-dark)",
-            borderRadius: "8px",
+            borderRadius: "var(--radius-lg)",
             textDecoration: "none",
             fontSize: "13px",
             fontWeight: 700,
@@ -148,7 +148,7 @@ export default async function EkosistemAdminPage() {
           </Link>
         </div>
 
-        <div style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "12px", overflow: "hidden" }}>
+        <div style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "var(--radius-lg)", overflow: "hidden" }}>
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr style={{ borderBottom: "1px solid var(--card-border)", textAlign: "left" }}>
@@ -177,7 +177,7 @@ export default async function EkosistemAdminPage() {
                           padding: "6px 14px",
                           background: "var(--bg-secondary)",
                           border: "1px solid var(--border-subtle)",
-                          borderRadius: "6px",
+                          borderRadius: "var(--radius-md)",
                           color: "var(--text-primary)",
                           textDecoration: "none",
                           fontSize: "12px",

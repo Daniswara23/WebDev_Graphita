@@ -7,6 +7,7 @@ import { lazy, Suspense } from "react";
 
 // Dynamic imports untuk komponen non-kritis (below-the-fold)
 const StatsBar = lazy(() => import("@/components/StatsBar"));
+const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
 const Services = lazy(() => import("@/components/Services"));
 const StorePreview = lazy(() => import("@/components/StorePreview"));
 const Etos3T = lazy(() => import("@/components/Etos3T"));
@@ -18,10 +19,10 @@ function SectionSkeleton() {
   return (
     <div className="animate-pulse" style={{ padding: "80px 56px", background: "var(--section-bg-alt)" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <div style={{ height: "40px", width: "300px", background: "var(--card-bg)", borderRadius: "8px", margin: "0 auto 64px" }} />
+        <div style={{ height: "40px", width: "300px", background: "var(--card-bg)", borderRadius: "var(--radius-lg)", margin: "0 auto 64px" }} />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "32px" }}>
           {[1, 2, 3].map((i) => (
-            <div key={i} style={{ height: "200px", background: "var(--card-bg)", borderRadius: "12px" }} />
+            <div key={i} style={{ height: "200px", background: "var(--card-bg)", borderRadius: "var(--radius-lg)" }} />
           ))}
         </div>
       </div>
@@ -41,6 +42,11 @@ export default async function HomePage() {
         {/* 2. Trust - Load after initial paint */}
         <Suspense fallback={<SectionSkeleton />}>
           <StatsBar />
+        </Suspense>
+
+        {/* 2b. Testimonials */}
+        <Suspense fallback={null}>
+          <TestimonialsSection />
         </Suspense>
 
         {/* 3. About - Video carousel, server-side fetch */}

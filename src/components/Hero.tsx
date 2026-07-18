@@ -180,7 +180,7 @@ export default function Hero() {
                 textTransform: "capitalize",
                 cursor: "pointer",
                 border: "none",
-                borderRadius: "8px",
+                borderRadius: "var(--radius-lg)",
               }}
             >
               Mulai Kolaborasi
@@ -221,7 +221,7 @@ export default function Hero() {
                   width: "30px",
                   height: "30px",
                   border: "1px solid var(--gold-light)",
-                  borderRadius: "50%",
+                  borderRadius: "var(--radius-full)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",

@@ -40,7 +40,7 @@ function GalleryCard({ gallery }: { gallery: Gallery }) {
     <div
       className="grid-item hover-lift"
       style={{
-        borderRadius: "20px",
+        borderRadius: "var(--radius-xl)",
         overflow: "hidden",
         background: "var(--card-bg)",
         border: "1px solid rgba(201,147,58,0.2)",
@@ -249,7 +249,7 @@ function GalleryCardSkeleton() {
     <div
       className="animate-pulse"
       style={{
-        borderRadius: "20px",
+        borderRadius: "var(--radius-xl)",
         overflow: "hidden",
         background: "var(--card-bg)",
         border: "1px solid var(--card-border)",
@@ -268,7 +268,7 @@ function GalleryCardSkeleton() {
             height: "28px",
             width: "70%",
             background: "var(--border-subtle)",
-            borderRadius: "4px",
+            borderRadius: "var(--radius-md)",
             marginBottom: "12px",
           }}
         />
@@ -277,7 +277,7 @@ function GalleryCardSkeleton() {
             height: "16px",
             width: "50%",
             background: "var(--border-subtle)",
-            borderRadius: "4px",
+            borderRadius: "var(--radius-md)",
             marginBottom: "16px",
           }}
         />
@@ -293,7 +293,7 @@ function GalleryCardSkeleton() {
             height: "14px",
             width: "100%",
             background: "var(--border-subtle)",
-            borderRadius: "4px",
+            borderRadius: "var(--radius-md)",
             marginBottom: "8px",
           }}
         />
@@ -302,7 +302,7 @@ function GalleryCardSkeleton() {
             height: "14px",
             width: "80%",
             background: "var(--border-subtle)",
-            borderRadius: "4px",
+            borderRadius: "var(--radius-md)",
           }}
         />
       </div>

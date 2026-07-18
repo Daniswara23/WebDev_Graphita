@@ -43,7 +43,7 @@ export default async function EditPartnerPage({ params }: { params: Promise<{ id
       <form action={updatePartner.bind(null, id)} style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "20px" }}>
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Kategori *</span>
-          <select name="category" required defaultValue={p.category} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }}>
+          <select name="category" required defaultValue={p.category} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }}>
             <option value="donor" style={{ background: "var(--bg-primary)" }}>Penyandang Dana</option>
             <option value="technical" style={{ background: "var(--bg-primary)" }}>Mitra Teknis</option>
             <option value="government" style={{ background: "var(--bg-primary)" }}>Pemerintah & LSM</option>
@@ -52,17 +52,17 @@ export default async function EditPartnerPage({ params }: { params: Promise<{ id
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Nama Partner *</span>
-          <input type="text" name="name" required defaultValue={p.name} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }} />
+          <input type="text" name="name" required defaultValue={p.name} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
         </label>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Deskripsi</span>
-          <textarea name="description" rows={3} defaultValue={p.description} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px", resize: "vertical" }} />
+          <textarea name="description" rows={3} defaultValue={p.description} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px", resize: "vertical" }} />
         </label>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Ikon SVG</span>
-          <select name="icon_svg" defaultValue={p.icon_svg} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }}>
+          <select name="icon_svg" defaultValue={p.icon_svg} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }}>
             <option value="handHeart" style={{ background: "var(--bg-primary)" }}>handHeart (Donor)</option>
             <option value="microscope" style={{ background: "var(--bg-primary)" }}>microscope (Teknis)</option>
             <option value="building" style={{ background: "var(--bg-primary)" }}>building (Pemerintah/LSM)</option>
@@ -72,7 +72,7 @@ export default async function EditPartnerPage({ params }: { params: Promise<{ id
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Urutan Tampil</span>
-          <input type="number" name="sort_order" defaultValue={p.sort_order} min={0} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px", width: "120px" }} />
+          <input type="number" name="sort_order" defaultValue={p.sort_order} min={0} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px", width: "120px" }} />
           <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>Semakin kecil angka, semakin atas tampilnya.</span>
         </label>
 
@@ -82,7 +82,7 @@ export default async function EditPartnerPage({ params }: { params: Promise<{ id
             background: "var(--gold)",
             color: "var(--navy-dark)",
             border: "none",
-            borderRadius: "8px",
+            borderRadius: "var(--radius-lg)",
             fontSize: "13px",
             fontWeight: 700,
             letterSpacing: "1.5px",
@@ -96,7 +96,7 @@ export default async function EditPartnerPage({ params }: { params: Promise<{ id
             background: "transparent",
             border: "1px solid var(--border-subtle)",
             color: "var(--text-secondary)",
-            borderRadius: "8px",
+            borderRadius: "var(--radius-lg)",
             fontSize: "13px",
             textDecoration: "none",
           }}>

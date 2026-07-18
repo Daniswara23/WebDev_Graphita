@@ -192,7 +192,7 @@ export default function Services() {
             style={{
               background: "var(--card-bg)",
               border: "1px solid var(--card-border)",
-              borderRadius: "16px",
+              borderRadius: "var(--radius-lg)",
               padding: "40px 32px",
               cursor: "pointer",
               animationDelay: `${index * 0.1}s`,
@@ -221,7 +221,7 @@ export default function Services() {
                 alignItems: "center",
                 justifyContent: "center",
                 background: "var(--overlay-gold)",
-                borderRadius: "4px",
+                borderRadius: "var(--radius-lg)",
               }}
             >
               {iconMap[service.icon_key] ?? iconMap.default}

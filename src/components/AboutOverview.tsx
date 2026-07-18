@@ -114,7 +114,7 @@ export default function AboutOverview({
                 padding: "36px 24px 28px",
                 background: etymologyIndex === index ? item.bgColor : "var(--card-bg)",
                 border: `1px solid ${etymologyIndex === index ? item.color : "var(--card-border)"}`,
-                borderRadius: "16px",
+                borderRadius: "var(--radius-lg)",
                 cursor: "pointer",
                 transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                 textAlign: "center",
@@ -139,7 +139,7 @@ export default function AboutOverview({
               <div style={{
                 width: "56px",
                 height: "56px",
-                borderRadius: "50%",
+                borderRadius: "var(--radius-full)",
                 background: item.bgColor,
                 border: `2px solid ${item.color}`,
                 display: "flex",
@@ -206,30 +206,30 @@ export default function AboutOverview({
 
       <div className="case-studies-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "32px" }}>
         {caseStudies.map((cs, index) => (
-          <div key={cs.id} className="grid-item hover-lift hover-glow" style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "16px", padding: "40px", animationDelay: `${index * 0.15}s` }}>
+          <div key={cs.id} className="grid-item hover-lift hover-glow" style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "var(--radius-lg)", padding: "40px", animationDelay: `${index * 0.15}s` }}>
 
             {/* ===== BARIS ATAS: GAMBAR KIRI + VIDEO KANAN ===== */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "24px" }}>
 
               {/* Kiri: Gambar Statis */}
-              <div style={{ position: "relative", borderRadius: "8px", overflow: "hidden" }}>
+              <div style={{ position: "relative", borderRadius: "var(--radius-lg)", overflow: "hidden" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/images/sdg.jpg"
                   alt="SDGs"
-                  style={{ width: "100%", height: "100%", minHeight: "200px", objectFit: "cover", borderRadius: "8px", display: "block" }}
+                  style={{ width: "100%", height: "100%", minHeight: "200px", objectFit: "cover", borderRadius: "var(--radius-lg)", display: "block" }}
                 />
               </div>
 
               {/* Kanan: Video Carousel */}
-              <div style={{ position: "relative", borderRadius: "8px", overflow: "hidden", background: "var(--bg-secondary)", minHeight: "200px" }}>
+              <div style={{ position: "relative", borderRadius: "var(--radius-lg)", overflow: "hidden", background: "var(--bg-secondary)", minHeight: "200px" }}>
                 {videos.length > 0 && currentVideo ? (
                   <>
                     <iframe
                       key={currentVideo.id}
                       src={currentVideo.video_url}
                       title={currentVideo.title}
-                      style={{ width: "100%", height: "100%", minHeight: "200px", border: "none", borderRadius: "8px", display: "block" }}
+                      style={{ width: "100%", height: "100%", minHeight: "200px", border: "none", borderRadius: "var(--radius-lg)", display: "block" }}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                     />
@@ -246,7 +246,7 @@ export default function AboutOverview({
                           transform: "translateY(-50%)",
                           width: "32px",
                           height: "32px",
-                          borderRadius: "50%",
+                          borderRadius: "var(--radius-full)",
                           background: "var(--bg-primary)",
                           color: "var(--text-primary)",
                           border: "1px solid var(--border-subtle)",
@@ -276,7 +276,7 @@ export default function AboutOverview({
                           transform: "translateY(-50%)",
                           width: "32px",
                           height: "32px",
-                          borderRadius: "50%",
+                          borderRadius: "var(--radius-full)",
                           background: "var(--bg-primary)",
                           color: "var(--text-primary)",
                           border: "1px solid var(--border-subtle)",
@@ -304,7 +304,7 @@ export default function AboutOverview({
                         background: "var(--bg-primary)",
                         color: "var(--text-primary)",
                         padding: "2px 10px",
-                        borderRadius: "10px",
+                        borderRadius: "var(--radius-lg)",
                         fontSize: "11px",
                         fontWeight: 600,
                         zIndex: 5,

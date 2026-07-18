@@ -20,7 +20,7 @@ export default function ArticleFormatSelector({
   const [sourceType, setSourceType] = useState<"" | "pdf" | "link">(defaultSourceType);
 
   return (
-    <div style={{ background: "var(--card-bg)", padding: "20px", borderRadius: "8px", border: "1px solid var(--card-border)" }}>
+    <div style={{ background: "var(--card-bg)", padding: "20px", borderRadius: "var(--radius-lg)", border: "1px solid var(--card-border)" }}>
       <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "12px", display: "block" }}>
         Format Artikel *
       </span>
@@ -72,7 +72,7 @@ export default function ArticleFormatSelector({
               name="file"
               accept="application/pdf"
               required={mode === "create"}
-              style={{ padding: "10px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "14px" }}
+              style={{ padding: "10px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "14px" }}
             />
           </label>
           {mode === "edit" && <input type="hidden" name="existing_file_url" value={existingFileUrl ?? ""} />}
@@ -97,7 +97,7 @@ export default function ArticleFormatSelector({
               defaultValue={existingExternalUrl ?? ""}
               placeholder="https://"
               required={mode === "create"}
-              style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }}
+              style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }}
             />
           </label>
           {mode === "edit" && <input type="hidden" name="existing_external_url" value={existingExternalUrl ?? ""} />}

@@ -31,12 +31,12 @@ export default async function EditArtikelPage({ params }: { params: Promise<{ id
       <form action={updateArticle.bind(null, id)} style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "20px" }}>
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Judul *</span>
-          <input type="text" name="title" defaultValue={article.title} required style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }} />
+          <input type="text" name="title" defaultValue={article.title} required style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
         </label>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Kategori *</span>
-          <select name="category" defaultValue={article.category} required style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }}>
+          <select name="category" defaultValue={article.category} required style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }}>
             {["Keberlanjutan", "Riset", "Pangan", "SDGs", "UMKM", "Lingkungan", "Lainnya"].map((cat) => (
               <option key={cat} value={cat} style={{ background: "var(--bg-primary)" }}>{cat}</option>
             ))}
@@ -45,12 +45,12 @@ export default async function EditArtikelPage({ params }: { params: Promise<{ id
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Ringkasan (excerpt) *</span>
-          <textarea name="excerpt" defaultValue={article.excerpt} required rows={3} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px", resize: "vertical" }} />
+          <textarea name="excerpt" defaultValue={article.excerpt} required rows={3} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px", resize: "vertical" }} />
         </label>
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Konten (opsional)</span>
-          <textarea name="content" defaultValue={article.content ?? ""} rows={10} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px", resize: "vertical", fontFamily: "monospace" }} />
+          <textarea name="content" defaultValue={article.content ?? ""} rows={10} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px", resize: "vertical", fontFamily: "monospace" }} />
         </label>
 
         {/* Pilihan Format Artikel */}
@@ -63,7 +63,7 @@ export default async function EditArtikelPage({ params }: { params: Promise<{ id
 
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Tanggal Publikasi *</span>
-          <input type="date" name="published_at" defaultValue={article.published_at ?? ""} required style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "6px", fontSize: "15px" }} />
+          <input type="date" name="published_at" defaultValue={article.published_at ?? ""} required style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
         </label>
 
         <div style={{ display: "flex", gap: "12px", marginTop: "12px" }}>
@@ -72,7 +72,7 @@ export default async function EditArtikelPage({ params }: { params: Promise<{ id
             background: "var(--gold)",
             color: "var(--navy-dark)",
             border: "none",
-            borderRadius: "8px",
+            borderRadius: "var(--radius-lg)",
             fontSize: "13px",
             fontWeight: 700,
             letterSpacing: "1.5px",
@@ -86,7 +86,7 @@ export default async function EditArtikelPage({ params }: { params: Promise<{ id
             background: "transparent",
             border: "1px solid var(--border-subtle)",
             color: "var(--text-secondary)",
-            borderRadius: "8px",
+            borderRadius: "var(--radius-lg)",
             fontSize: "13px",
             textDecoration: "none",
           }}>

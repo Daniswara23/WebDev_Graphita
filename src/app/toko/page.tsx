@@ -78,7 +78,7 @@ export default function TokoPage() {
       alignItems:     "center" as const,
       justifyContent: "center" as const,
       padding:        "20px 48px",
-      borderRadius:   "16px",
+      borderRadius:   "var(--radius-lg)",
       textDecoration: "none" as const,
       transition:     "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
       border:         "1px solid var(--border-subtle)",
@@ -115,7 +115,7 @@ export default function TokoPage() {
                   onMouseLeave={() => setHoveredProduct(null)}
                   className="grid-item hover-lift"
                   style={{
-                    borderRadius: "20px",
+                    borderRadius: "var(--radius-xl)",
                     overflow: "hidden",
                     background: "var(--card-bg)",
                     border: "1px solid rgba(201,147,58,0.2)",
@@ -175,7 +175,7 @@ export default function TokoPage() {
                         style={{
                           display: "inline-block",
                           padding: "6px 14px",
-                          borderRadius: "999px",
+                          borderRadius: "var(--radius-full)",
                           background: hoveredProduct === product.id ? "rgba(201,147,58,0.25)" : "rgba(201,147,58,0.15)",
                           color: "var(--gold-light)",
                           fontSize: "11px",
@@ -200,7 +200,7 @@ export default function TokoPage() {
                             style={{
                               width: "100%",
                               padding: "12px 14px",
-                              borderRadius: "10px",
+                              borderRadius: "var(--radius-lg)",
                               border: "none",
                               background: "#23AB4F",
                               color: "white",
@@ -221,7 +221,7 @@ export default function TokoPage() {
                           style={{
                             width: "100%",
                             padding: "12px 14px",
-                            borderRadius: "10px",
+                            borderRadius: "var(--radius-lg)",
                             border: "1px solid var(--border-subtle)",
                             background: "var(--card-bg)",
                             color: "var(--text-secondary)",
@@ -239,7 +239,7 @@ export default function TokoPage() {
                             style={{
                               width: "100%",
                               padding: "12px 14px",
-                              borderRadius: "10px",
+                              borderRadius: "var(--radius-lg)",
                               border: "none",
                               background: "#EE4D2D",
                               color: "white",
@@ -260,7 +260,7 @@ export default function TokoPage() {
                           style={{
                             width: "100%",
                             padding: "12px 14px",
-                            borderRadius: "10px",
+                            borderRadius: "var(--radius-lg)",
                             border: "1px solid var(--border-subtle)",
                             background: "var(--card-bg)",
                             color: "var(--text-secondary)",
