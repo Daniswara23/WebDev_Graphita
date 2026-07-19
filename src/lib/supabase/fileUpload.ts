@@ -15,17 +15,17 @@ const BUCKETS = {
 
 type BucketName = keyof typeof BUCKETS;
 
-// Buat client khusus storage dengan service_role key (bypass RLS)
 function getStorageClient() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!url || !anonKey) {
+    throw new Error("Missing Supabase credentials. Check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.");
+  }
+
+  return createClient(url, anonKey);
 }
 
-/**
- * Validate file type and size
- */
 export function validateFile(
   file: File | null,
   allowedTypes: string[],
@@ -44,9 +44,21 @@ export function validateFile(
   }
 }
 
-/**
- * Upload file ke Supabase Storage
- */
+async function withRetry<T>(fn: () => Promise<T>, retries = 2, delayMs = 800): Promise<T> {
+  let lastError: unknown;
+  for (let i = 0; i <= retries; i++) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error;
+      if (i < retries) {
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+      }
+    }
+  }
+  throw lastError instanceof Error ? lastError : new Error("Upload failed after retries.");
+}
+
 export async function uploadFile(
   bucket: BucketName,
   file: File,
@@ -58,22 +70,26 @@ export async function uploadFile(
   const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
   const filePath = path ? `${path}/${fileName}` : fileName;
 
-  const { error: uploadError } = await supabase.storage
-    .from(bucketName)
-    .upload(filePath, file, {
-      cacheControl: "3600",
-      upsert: false,
-    });
+  const upload = async () => {
+    const { error: uploadError } = await supabase.storage
+      .from(bucketName)
+      .upload(filePath, file, {
+        cacheControl: "3600",
+        upsert: false,
+      });
 
-  if (uploadError) {
-    throw new Error("Gagal upload file: " + uploadError.message);
-  }
+    if (uploadError) {
+      throw new Error("Gagal upload file: " + uploadError.message);
+    }
 
-  const { data: urlData } = supabase.storage
-    .from(bucketName)
-    .getPublicUrl(filePath);
+    const { data: urlData } = supabase.storage
+      .from(bucketName)
+      .getPublicUrl(filePath);
 
-  return urlData.publicUrl;
+    return urlData.publicUrl;
+  };
+
+  return withRetry(upload);
 }
 
 /**
@@ -87,10 +103,14 @@ export async function deleteFile(
     const supabase = getStorageClient();
     const bucketName = BUCKETS[bucket];
     const urlParts = fileUrl.split(`/${bucketName}/`);
-    
+
     if (urlParts.length > 1) {
       const filePath = `${bucketName}/${urlParts[1]}`;
-      await supabase.storage.from(bucketName).remove([filePath]);
+      const { error: removeError } = await supabase.storage.from(bucketName).remove([filePath]);
+
+      if (removeError) {
+        console.error("Storage delete error:", removeError);
+      }
     }
   } catch (error) {
     console.error("Error deleting file:", error);

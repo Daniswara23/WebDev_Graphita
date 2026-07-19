@@ -6,7 +6,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { requireAuth } from "@/lib/supabase/server";
 import { slugify, validateExternalUrl } from "@/lib/supabase/formatHelpers";
 import { uploadPdf, deleteFile } from "@/lib/supabase/fileUpload";
 
@@ -21,7 +21,7 @@ function validateSourceType(sourceType: string): asserts sourceType is "pdf" | "
 /* ───── Actions ───── */
 
 export async function createArticle(formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const title = String(formData.get("title") ?? "");
   const excerpt = String(formData.get("excerpt") ?? "");
@@ -43,7 +43,16 @@ export async function createArticle(formData: FormData) {
 
   if (sourceType === "pdf") {
       if (!file) throw new Error("File PDF wajib diupload.");
-      fileUrl = await uploadPdf(file);
+      try {
+        fileUrl = await uploadPdf(file);
+      } catch (e) {
+        if (e instanceof Error) {
+          if (e.message.toLowerCase().includes("upload")) {
+            throw new Error("Gagal upload PDF. Cek koneksi internet lalu coba lagi.");
+          }
+        }
+        throw e;
+      }
   } else {
     validateExternalUrl(externalUrl);
     externalUrlValue = externalUrl;
@@ -70,7 +79,7 @@ export async function createArticle(formData: FormData) {
 }
 
 export async function updateArticle(id: string, formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const title = String(formData.get("title") ?? "");
   const excerpt = String(formData.get("excerpt") ?? "");
@@ -94,7 +103,16 @@ export async function updateArticle(id: string, formData: FormData) {
 
   if (sourceType === "pdf") {
     if (file && file.size > 0) {
-      fileUrl = await uploadPdf(file);
+      try {
+        fileUrl = await uploadPdf(file);
+      } catch (e) {
+        if (e instanceof Error) {
+          if (e.message.toLowerCase().includes("upload")) {
+            throw new Error("Gagal upload PDF. Cek koneksi internet lalu coba lagi.");
+          }
+        }
+        throw e;
+      }
     } else {
       fileUrl = existingFileUrl || null;
     }
@@ -127,7 +145,7 @@ export async function updateArticle(id: string, formData: FormData) {
 }
 
 export async function deleteArticle(id: string) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   // Get file_url to delete from storage
   const { data: article } = await supabase

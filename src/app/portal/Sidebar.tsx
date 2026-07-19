@@ -103,7 +103,12 @@ const NAV_ITEMS = [
 ];
 
 export default function Sidebar({ adminName }: { adminName: string }) {
-  const pathname = usePathname();
+const pathname = usePathname();
+
+  // Memoize pattern check to reduce re-computation on re-renders
+  const isActiveItem = (itemHref: string) => {
+    return pathname === itemHref || pathname.startsWith(itemHref + "/");
+  };
 
   return (
     <aside className={styles.aside}>
@@ -126,19 +131,16 @@ export default function Sidebar({ adminName }: { adminName: string }) {
 
       {/* Navigation */}
       <nav className={styles.nav}>
-        {NAV_ITEMS.map((item) => {
-          const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`${styles.navLink} ${isActive ? styles.navLinkActive : ""}`}
-            >
-              <span className={styles.navIcon}>{item.icon}</span>
-              {item.label}
-            </Link>
-          );
-        })}
+        {NAV_ITEMS.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className={`${styles.navLink} ${isActiveItem(item.href) ? styles.navLinkActive : ""}`}
+          >
+            <span className={styles.navIcon}>{item.icon}</span>
+            {item.label}
+          </Link>
+        ))}
       </nav>
 
       {/* Logout */}

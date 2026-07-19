@@ -6,11 +6,11 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { requireAuth } from "@/lib/supabase/server";
 import { uploadResearchPdf, deleteFile } from "@/lib/supabase/fileUpload";
 
 export async function createReport(formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const title = String(formData.get("title") ?? "");
   const subtitle = String(formData.get("subtitle") ?? "").trim();
@@ -26,7 +26,16 @@ export async function createReport(formData: FormData) {
 
   // Upload PDF to Supabase Storage if file provided
   if (file && file.size > 0) {
-    fileUrl = await uploadResearchPdf(file);
+    try {
+      fileUrl = await uploadResearchPdf(file);
+    } catch (e) {
+      if (e instanceof Error) {
+        if (e.message.toLowerCase().includes("upload")) {
+          throw new Error("Gagal upload PDF riset. Cek koneksi internet lalu coba lagi.");
+        }
+      }
+      throw e;
+    }
   }
 
   // subtitle: kolom NOT NULL di DB — simpan string kosong jika tidak diisi
@@ -45,7 +54,7 @@ export async function createReport(formData: FormData) {
 }
 
 export async function updateReport(id: string, formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const title = String(formData.get("title") ?? "");
   const subtitle = String(formData.get("subtitle") ?? "").trim();
@@ -62,7 +71,16 @@ export async function updateReport(id: string, formData: FormData) {
 
   // Upload new PDF if provided
   if (file && file.size > 0) {
-    fileUrl = await uploadResearchPdf(file);
+    try {
+      fileUrl = await uploadResearchPdf(file);
+    } catch (e) {
+      if (e instanceof Error) {
+        if (e.message.toLowerCase().includes("upload")) {
+          throw new Error("Gagal upload PDF riset. Cek koneksi internet lalu coba lagi.");
+        }
+      }
+      throw e;
+    }
   }
 
   // subtitle: kolom NOT NULL di DB — simpan string kosong jika tidak diisi
@@ -84,7 +102,7 @@ export async function updateReport(id: string, formData: FormData) {
 }
 
 export async function deleteReport(id: string) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   // Get file_url to delete from storage
   const { data: report } = await supabase

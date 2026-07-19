@@ -8,11 +8,11 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { requireAuth } from "@/lib/supabase/server";
 import { toEmbedUrl } from "./embed-utils";
 
 export async function createCaseVideo(formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const title = String(formData.get("title") ?? "").trim();
   const videoUrl = String(formData.get("video_url") ?? "").trim();
@@ -44,7 +44,7 @@ export async function createCaseVideo(formData: FormData) {
 }
 
 export async function updateCaseVideo(id: string, formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const title = String(formData.get("title") ?? "").trim();
   const videoUrl = String(formData.get("video_url") ?? "").trim();
@@ -79,7 +79,7 @@ export async function updateCaseVideo(id: string, formData: FormData) {
 }
 
 export async function deleteCaseVideo(id: string) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const { error } = await supabase.from("case_videos").delete().eq("id", id);
 

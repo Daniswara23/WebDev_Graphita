@@ -6,10 +6,10 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { requireAuth } from "@/lib/supabase/server";
 
 export async function createTestimonial(formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const quote = String(formData.get("quote") ?? "");
   const author = String(formData.get("author") ?? "");
@@ -34,7 +34,7 @@ export async function createTestimonial(formData: FormData) {
 }
 
 export async function updateTestimonial(id: string, formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const quote = String(formData.get("quote") ?? "");
   const author = String(formData.get("author") ?? "");
@@ -62,7 +62,7 @@ export async function updateTestimonial(id: string, formData: FormData) {
 }
 
 export async function deleteTestimonial(id: string) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const { error } = await supabase.from("testimonials").delete().eq("id", id);
 

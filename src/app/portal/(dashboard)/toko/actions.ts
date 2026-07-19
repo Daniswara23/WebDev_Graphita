@@ -6,11 +6,11 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { requireAuth } from "@/lib/supabase/server";
 import { uploadImage } from "@/lib/supabase/fileUpload";
 
 export async function createProduct(formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const name = String(formData.get("name") ?? "");
   const description = String(formData.get("description") ?? "");
@@ -24,7 +24,19 @@ export async function createProduct(formData: FormData) {
     throw new Error("Nama dan deskripsi wajib diisi.");
   }
 
-  const imageUrl = imageFile ? await uploadImage(imageFile) : null;
+  let imageUrl: string | null = null;
+  if (imageFile) {
+    try {
+      imageUrl = await uploadImage(imageFile);
+    } catch (e) {
+      if (e instanceof Error) {
+        if (e.message.toLowerCase().includes("upload")) {
+          throw new Error("Gagal upload foto produk. Cek koneksi internet lalu coba lagi.");
+        }
+      }
+      throw e;
+    }
+  }
 
   const { error } = await supabase.from("products").insert({
     name,
@@ -44,7 +56,7 @@ export async function createProduct(formData: FormData) {
 }
 
 export async function updateProduct(id: string, formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const name = String(formData.get("name") ?? "");
   const description = String(formData.get("description") ?? "");
@@ -58,7 +70,19 @@ export async function updateProduct(id: string, formData: FormData) {
     throw new Error("Nama dan deskripsi wajib diisi.");
   }
 
-  const imageUrl = imageFile && imageFile.size > 0 ? await uploadImage(imageFile) : null;
+  let imageUrl: string | null = null;
+  if (imageFile && imageFile.size > 0) {
+    try {
+      imageUrl = await uploadImage(imageFile);
+    } catch (e) {
+      if (e instanceof Error) {
+        if (e.message.toLowerCase().includes("upload")) {
+          throw new Error("Gagal upload foto produk. Cek koneksi internet lalu coba lagi.");
+        }
+      }
+      throw e;
+    }
+  }
 
   const updateData: Record<string, unknown> = {
     name,
@@ -85,7 +109,7 @@ export async function updateProduct(id: string, formData: FormData) {
 }
 
 export async function deleteProduct(id: string) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const { error } = await supabase.from("products").delete().eq("id", id);
 

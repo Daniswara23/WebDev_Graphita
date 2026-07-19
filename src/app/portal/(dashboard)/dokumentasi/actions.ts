@@ -7,7 +7,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { requireAuth } from "@/lib/supabase/server";
 
 function slugify(text: string): string {
   return text
@@ -19,7 +19,7 @@ function slugify(text: string): string {
 }
 
 export async function createGallery(formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const title = String(formData.get("title") ?? "").trim();
   const description = String(formData.get("description") ?? "").trim();
@@ -81,7 +81,7 @@ export async function createGallery(formData: FormData) {
 }
 
 export async function updateGallery(id: string, formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const title = String(formData.get("title") ?? "").trim();
   const description = String(formData.get("description") ?? "").trim();
@@ -146,7 +146,7 @@ export async function updateGallery(id: string, formData: FormData) {
 }
 
 export async function deleteGallery(id: string) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   // Images will be deleted automatically via ON DELETE CASCADE
   const { error } = await supabase

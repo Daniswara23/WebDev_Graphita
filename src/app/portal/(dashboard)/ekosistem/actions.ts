@@ -6,14 +6,14 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { requireAuth } from "@/lib/supabase/server";
 
 // ─────────────────────────────────────────────────────────────
 // ECOSYSTEM PARTNERS
 // ─────────────────────────────────────────────────────────────
 
 export async function createPartner(formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const category = String(formData.get("category") ?? "donor");
   const name = String(formData.get("name") ?? "");
@@ -40,7 +40,7 @@ export async function createPartner(formData: FormData) {
 }
 
 export async function updatePartner(id: string, formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const category = String(formData.get("category") ?? "donor");
   const name = String(formData.get("name") ?? "");
@@ -70,7 +70,7 @@ export async function updatePartner(id: string, formData: FormData) {
 }
 
 export async function deletePartner(id: string) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const { error } = await supabase
     .from("ecosystem_partners")
@@ -87,7 +87,7 @@ export async function deletePartner(id: string) {
 // ─────────────────────────────────────────────────────────────
 
 export async function createCaseStudy(formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const title = String(formData.get("title") ?? "");
   const client = String(formData.get("client") ?? "");
@@ -116,7 +116,7 @@ export async function createCaseStudy(formData: FormData) {
 }
 
 export async function updateCaseStudy(id: string, formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const title = String(formData.get("title") ?? "");
   const client = String(formData.get("client") ?? "");
@@ -148,7 +148,7 @@ export async function updateCaseStudy(id: string, formData: FormData) {
 }
 
 export async function deleteCaseStudy(id: string) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const { error } = await supabase
     .from("ecosystem_case_studies")

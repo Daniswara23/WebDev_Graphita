@@ -6,7 +6,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { requireAuth } from "@/lib/supabase/server";
 
 const PLATFORM_OPTIONS = [
   { value: "linkedin", label: "LinkedIn", icon: "/images/LinkedIn-logo.png" },
@@ -16,7 +16,7 @@ const PLATFORM_OPTIONS = [
 ] as const;
 
 export async function createSocialLink(formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const platform = String(formData.get("platform") ?? "");
   const url = String(formData.get("url") ?? "");
@@ -50,7 +50,7 @@ export async function createSocialLink(formData: FormData) {
 }
 
 export async function updateSocialLink(id: string, formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const platform = String(formData.get("platform") ?? "");
   const url = String(formData.get("url") ?? "");
@@ -81,7 +81,7 @@ export async function updateSocialLink(id: string, formData: FormData) {
 }
 
 export async function deleteSocialLink(id: string) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const { error } = await supabase.from("social_links").delete().eq("id", id);
 

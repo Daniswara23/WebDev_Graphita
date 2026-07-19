@@ -6,10 +6,10 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { requireAuth } from "@/lib/supabase/server";
 
 export async function updateMarketplaceLink(id: string, formData: FormData) {
-  const supabase = await createClient();
+  const { supabase } = await requireAuth();
 
   const url = String(formData.get("url") ?? "");
   const isActive = formData.get("is_active") === "on";

@@ -10,6 +10,8 @@ import { useState } from "react";
 import { createGallery } from "../actions";
 import { toDirectImageUrl } from "@/lib/gdrive";
 
+// NOTE: gdrive.ts is used above for URL preview helper
+
 type ImageEntry = {
   id: string;
   url: string;
