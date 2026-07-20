@@ -44,7 +44,7 @@ export async function createArticle(formData: FormData) {
   if (sourceType === "pdf") {
       if (!file) throw new Error("File PDF wajib diupload.");
       try {
-        fileUrl = await uploadPdf(supabase, file);
+        fileUrl = await uploadPdf(file);
       } catch (e) {
         if (e instanceof Error) {
           if (e.message.toLowerCase().includes("upload")) {
@@ -104,7 +104,7 @@ export async function updateArticle(id: string, formData: FormData) {
   if (sourceType === "pdf") {
     if (file && file.size > 0) {
       try {
-        fileUrl = await uploadPdf(supabase, file);
+        fileUrl = await uploadPdf(file);
       } catch (e) {
         if (e instanceof Error) {
           if (e.message.toLowerCase().includes("upload")) {
@@ -155,7 +155,7 @@ export async function deleteArticle(id: string) {
     .single();
 
   if (article?.file_url) {
-    await deleteFile(supabase, "pdf", article.file_url);
+    await deleteFile("pdf", article.file_url);
   }
 
   const { error } = await supabase.from("articles").delete().eq("id", id);

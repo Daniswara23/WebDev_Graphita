@@ -6,40 +6,31 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import Sidebar from "@/app/portal/Sidebar";
 
-export const dynamic = "force-dynamic";
-
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
-  let adminName: string | null = null;
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
 
-  try {
-    const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-
-    if (!user) {
-      redirect("/portal/login");
-    }
-
-    // Cek admin dengan error handling
-    const { data: admin, error: adminError } = await supabase
-      .from("admin_users")
-      .select("full_name")
-      .eq("email", user.email)
-      .maybeSingle();
-
-    if (adminError || !admin) {
-      await supabase.auth.signOut();
-      redirect("/portal/login");
-    }
-
-    adminName = admin.full_name;
-  } catch (error) {
-    console.error("Dashboard layout error:", error);
-    redirect("/portal/login?error=auth_failed");
+  if (!user) {
+    redirect("/portal/login");
   }
+
+  // Cek admin
+  const { data: admin, error: adminError } = await supabase
+    .from("admin_users")
+    .select("full_name")
+    .eq("email", user.email)
+    .maybeSingle();
+
+  if (adminError || !admin) {
+    await supabase.auth.signOut();
+    redirect("/portal/login");
+  }
+
+  const adminName = admin.full_name;
 
   return (
     <div style={{ display: "flex", minHeight: "100vh", background: "var(--bg-primary)" }}>
-      <Sidebar adminName={adminName!} />
+      <Sidebar adminName={adminName} />
       <main style={{ flex: 1, marginLeft: "260px", padding: "32px 40px", overflow: "auto" }}>
         {children}
       </main>

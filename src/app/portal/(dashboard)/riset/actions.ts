@@ -27,7 +27,7 @@ export async function createReport(formData: FormData) {
   // Upload PDF to Supabase Storage if file provided
   if (file && file.size > 0) {
     try {
-      fileUrl = await uploadResearchPdf(supabase, file);
+      fileUrl = await uploadResearchPdf(file);
     } catch (e) {
       if (e instanceof Error) {
         if (e.message.toLowerCase().includes("upload")) {
@@ -72,7 +72,7 @@ export async function updateReport(id: string, formData: FormData) {
   // Upload new PDF if provided
   if (file && file.size > 0) {
     try {
-      fileUrl = await uploadResearchPdf(supabase, file);
+      fileUrl = await uploadResearchPdf(file);
     } catch (e) {
       if (e instanceof Error) {
         if (e.message.toLowerCase().includes("upload")) {
@@ -112,7 +112,7 @@ export async function deleteReport(id: string) {
     .single();
 
   if (report?.file_url) {
-    await deleteFile(supabase, "research", report.file_url);
+    await deleteFile("research", report.file_url);
   }
 
   const { error } = await supabase.from("research_reports").delete().eq("id", id);

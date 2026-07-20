@@ -27,7 +27,7 @@ export async function createProduct(formData: FormData) {
   let imageUrl: string | null = null;
   if (imageFile) {
     try {
-      imageUrl = await uploadImage(supabase, imageFile);
+      imageUrl = await uploadImage(imageFile);
     } catch (e) {
       if (e instanceof Error) {
         if (e.message.toLowerCase().includes("upload")) {
@@ -73,7 +73,7 @@ export async function updateProduct(id: string, formData: FormData) {
   let imageUrl: string | null = null;
   if (imageFile && imageFile.size > 0) {
     try {
-      imageUrl = await uploadImage(supabase, imageFile);
+      imageUrl = await uploadImage(imageFile);
     } catch (e) {
       if (e instanceof Error) {
         if (e.message.toLowerCase().includes("upload")) {

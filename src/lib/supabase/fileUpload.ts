@@ -1,4 +1,13 @@
-import type { SupabaseClient } from "@supabase/supabase-js";
+/*
+  src/lib/supabase/fileUpload.ts — Shared helper untuk upload file ke Supabase Storage.
+  Consolidate semua upload logic yang sebelumnya redundant di actions files.
+  
+  NOTE: Gunakan service_role key untuk bypass RLS di Storage (server-side only).
+        Aman karena fungsi ini hanya dipanggil dari Server Actions.
+        Lalu gunakan Supabase client dengan service_role key untuk upload/delete.
+*/
+
+import { createClient } from "@supabase/supabase-js";
 
 const BUCKETS = {
   pdf: "articles",
@@ -7,6 +16,19 @@ const BUCKETS = {
 } as const;
 
 type BucketName = keyof typeof BUCKETS;
+
+function getStorageClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!url || !serviceKey) {
+    throw new Error(
+      "Missing Supabase credentials. Check NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY."
+    );
+  }
+
+  return createClient(url, serviceKey);
+}
 
 export function validateFile(
   file: File | null,
@@ -26,11 +48,7 @@ export function validateFile(
   }
 }
 
-async function withRetry<T>(
-  fn: () => Promise<T>,
-  retries = 2,
-  delayMs = 800
-): Promise<T> {
+async function withRetry<T>(fn: () => Promise<T>, retries = 2, delayMs = 800): Promise<T> {
   let lastError: unknown;
   for (let i = 0; i <= retries; i++) {
     try {
@@ -46,11 +64,11 @@ async function withRetry<T>(
 }
 
 export async function uploadFile(
-  supabase: SupabaseClient,
   bucket: BucketName,
   file: File,
   path?: string
 ): Promise<string> {
+  const supabase = getStorageClient();
   const bucketName = BUCKETS[bucket];
   const fileExt = file.name.split(".").pop();
   const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
@@ -82,11 +100,11 @@ export async function uploadFile(
  * Delete file dari Supabase Storage
  */
 export async function deleteFile(
-  supabase: SupabaseClient,
   bucket: BucketName,
   fileUrl: string
 ): Promise<void> {
   try {
+    const supabase = getStorageClient();
     const bucketName = BUCKETS[bucket];
     const urlParts = fileUrl.split(`/${bucketName}/`);
 
@@ -106,28 +124,28 @@ export async function deleteFile(
 /**
  * Upload PDF file (validasi tipe + size 10MB)
  */
-export async function uploadPdf(supabase: SupabaseClient, file: File): Promise<string> {
+export async function uploadPdf(file: File): Promise<string> {
   validateFile(file, ["application/pdf"], 10);
-  return uploadFile(supabase, "pdf", file, "articles");
+  return uploadFile("pdf", file, "articles");
 }
 
 /**
  * Upload Research PDF (validasi tipe + size 10MB)
  */
-export async function uploadResearchPdf(supabase: SupabaseClient, file: File): Promise<string> {
+export async function uploadResearchPdf(file: File): Promise<string> {
   validateFile(file, ["application/pdf"], 10);
-  return uploadFile(supabase, "research", file, "research-reports");
+  return uploadFile("research", file, "research-reports");
 }
 
 /**
  * Upload Image file (validasi tipe + size 5MB)
  */
-export async function uploadImage(supabase: SupabaseClient, file: File): Promise<string | null> {
+export async function uploadImage(file: File): Promise<string | null> {
   if (!file || file.size === 0) return null;
 
   try {
     validateFile(file, ["image/jpeg", "image/png", "image/webp", "image/jpg"], 5);
-    return uploadFile(supabase, "image", file, "product-images");
+    return uploadFile("image", file, "product-images");
   } catch (error) {
     console.error("Image upload error:", error);
     return null;
