@@ -41,7 +41,8 @@ export default async function EditSocialLinkPage({ params }: { params: Promise<{
         Edit Social Media
       </h1>
 
-      <form action={updateSocialLink.bind(null, link.id)} style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "20px" }}>
+      <form action={updateSocialLink} style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "20px" }}>
+        <input type="hidden" name="id" value={link.id} />
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Platform *</span>
           <select 

@@ -49,9 +49,10 @@ export async function createSocialLink(formData: FormData) {
   redirect("/portal/social-links");
 }
 
-export async function updateSocialLink(id: string, formData: FormData) {
+export async function updateSocialLink(formData: FormData) {
   const { supabase } = await requireAuth();
 
+  const id = String(formData.get("id") ?? "");
   const platform = String(formData.get("platform") ?? "");
   const url = String(formData.get("url") ?? "");
   const is_active = formData.get("is_active") === "true";

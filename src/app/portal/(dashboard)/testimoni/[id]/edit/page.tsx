@@ -29,7 +29,8 @@ export default async function EditTestimoniPage({ params }: { params: Promise<{ 
         Edit Feedback
       </h1>
 
-      <form action={updateTestimonial.bind(null, id)} style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "20px" }}>
+      <form action={updateTestimonial} style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "20px" }}>
+        <input type="hidden" name="id" value={id} />
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Nama Penulis *</span>
           <input type="text" name="author" defaultValue={testimonial.author} required style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />

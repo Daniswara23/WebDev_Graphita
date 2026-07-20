@@ -33,9 +33,10 @@ export async function createTestimonial(formData: FormData) {
   redirect("/portal/testimoni");
 }
 
-export async function updateTestimonial(id: string, formData: FormData) {
+export async function updateTestimonial(formData: FormData) {
   const { supabase } = await requireAuth();
 
+  const id = String(formData.get("id") ?? "");
   const quote = String(formData.get("quote") ?? "");
   const author = String(formData.get("author") ?? "");
   const company = String(formData.get("company") ?? "");

@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WebDev Graphita — Website Grahita Indonesia
+
+Website resmi Grahita Indonesia, dibangun dengan [Next.js](https://nextjs.org).
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (Turbopack)
+- **Database & Storage:** Supabase
+- **Styling:** CSS Modules + Inline Styles
+- **Deployment:** Hostinger
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka [http://localhost:3000](http://localhost:3000) di browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Changelog — WEB_GAS_1.2.6
 
-## Learn More
+### 1. Perbaikan Error "Unexpected end of form" (Next.js 16 + Turbopack)
 
-To learn more about Next.js, take a look at the following resources:
+**Masalah:** Form dengan `<input type="file">` di Server Component menyebabkan error `"Unexpected end of form"` dan `"Functions cannot be passed directly to Client Components"`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Solusi:** Semua form yang memiliki file upload diubah menjadi **Client Component** (`"use client"`). Server Action tetap dipanggil dari dalam Client Component.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**File baru:**
+- `src/components/EditRisetForm.tsx` — Client component edit riset
+- `src/components/EditTokoForm.tsx` — Client component edit toko
+- `src/components/EditPublikasiForm.tsx` — Client component edit publikasi
+- `src/components/CreateRisetForm.tsx` — Client component create riset
+- `src/components/CreateTokoForm.tsx` — Client component create toko
+- `src/components/CreatePublikasiForm.tsx` — Client component create publikasi
 
-## Deploy on Vercel
+**File diubah:**
+- `src/app/portal/(dashboard)/riset/[id]/edit/page.tsx`
+- `src/app/portal/(dashboard)/riset/create/page.tsx`
+- `src/app/portal/(dashboard)/toko/[id]/edit/page.tsx`
+- `src/app/portal/(dashboard)/toko/create/page.tsx`
+- `src/app/portal/(dashboard)/publikasi/[id]/edit/page.tsx`
+- `src/app/portal/(dashboard)/publikasi/create/page.tsx`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 2. Validasi Ukuran File di Client-Side
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Masalah:** Upload file > 10MB (misal 20MB) gagal tanpa peringatan apapun.
+
+**Solusi:** Validasi ukuran file dilakukan di browser sebelum form dikirim. Jika melebihi batas, muncul pesan error merah dan form tidak dikirim.
+
+**Batas ukuran:**
+- PDF (Riset & Publikasi): **maks 10 MB**
+- Image (Toko): **maks 5 MB**
+
+**File diubah:**
+- `src/app/portal/(dashboard)/publikasi/ArticleFormatSelector.tsx` — Validasi + label "maks 10MB"
+
+### 3. Perbaikan Binding Server Action
+
+**Masalah:** Penggunaan `.bind(null, id)` pada form action menyebabkan error di Next.js 16.
+
+**Solusi:** Semua form edit yang tidak punya file upload menggunakan **hidden input** (`<input type="hidden" name="id" value={id} />`) dan memanggil server action langsung tanpa binding.
+
+**File diubah:**
+- `src/app/portal/(dashboard)/riset/actions.ts`
+- `src/app/portal/(dashboard)/toko/actions.ts`
+- `src/app/portal/(dashboard)/publikasi/actions.ts`
+- `src/app/portal/(dashboard)/marketplace-links/actions.ts`
+- `src/app/portal/(dashboard)/marketplace-links/[id]/edit/page.tsx`
+- `src/app/portal/(dashboard)/case-videos/actions.ts`
+- `src/app/portal/(dashboard)/case-videos/[id]/edit/page.tsx`
+- `src/app/portal/(dashboard)/social-links/actions.ts`
+- `src/app/portal/(dashboard)/social-links/[id]/edit/page.tsx`
+- `src/app/portal/(dashboard)/testimoni/actions.ts`
+- `src/app/portal/(dashboard)/testimoni/[id]/edit/page.tsx`
+- `src/app/portal/(dashboard)/ekosistem/actions.ts`
+- `src/app/portal/(dashboard)/ekosistem/case-studies/[id]/edit/page.tsx`
+- `src/app/portal/(dashboard)/ekosistem/partners/[id]/edit/page.tsx`
+
+### 4. Storage Policies & Migration
+
+**File baru:**
+- `supabase/019_setup_all_storage_policies.sql` — SQL migration untuk storage policies
+
+### 5. Optimasi Preload CSS Warning
+
+**Masalah:** Warning `"The resource was preloaded using link preload but not used"` untuk CSS chunk.
+
+**Solusi:** Konfigurasi `next.config.ts` dioptimasi untuk mengurangi preload CSS yang tidak terpakai.
+
+**File diubah:**
+- `next.config.ts`
+
+### 6. Cleanup
+
+- `src/lib/supabase/upload.ts` — Dihapus (deprecated, digantikan `fileUpload.ts`)
+- `src/components/EditFormWrapper.tsx` — Dihapus (tidak jadi dipakai)

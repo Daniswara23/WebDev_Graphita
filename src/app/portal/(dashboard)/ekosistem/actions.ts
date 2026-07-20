@@ -39,9 +39,10 @@ export async function createPartner(formData: FormData) {
   redirect("/portal/ekosistem");
 }
 
-export async function updatePartner(id: string, formData: FormData) {
+export async function updatePartner(formData: FormData) {
   const { supabase } = await requireAuth();
 
+  const id = String(formData.get("id") ?? "");
   const category = String(formData.get("category") ?? "donor");
   const name = String(formData.get("name") ?? "");
   const description = String(formData.get("description") ?? "");
@@ -115,9 +116,10 @@ export async function createCaseStudy(formData: FormData) {
   redirect("/portal/ekosistem");
 }
 
-export async function updateCaseStudy(id: string, formData: FormData) {
+export async function updateCaseStudy(formData: FormData) {
   const { supabase } = await requireAuth();
 
+  const id = String(formData.get("id") ?? "");
   const title = String(formData.get("title") ?? "");
   const client = String(formData.get("client") ?? "");
   const sector = String(formData.get("sector") ?? "");

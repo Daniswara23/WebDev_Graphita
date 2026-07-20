@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 type Mode = "create" | "edit";
 
@@ -16,8 +16,21 @@ export default function ArticleFormatSelector({
   defaultSourceType = "",
   existingFileUrl = null,
   existingExternalUrl = null,
-}: Props) {
+  onFileError,
+}: Props & { onFileError?: (error: string | null) => void }) {
   const [sourceType, setSourceType] = useState<"" | "pdf" | "link">(defaultSourceType);
+  const fileRef = useRef<HTMLInputElement>(null);
+  const MAX_SIZE_MB = 10;
+
+  function handleFileChange() {
+    const file = fileRef.current?.files?.[0];
+    if (file && file.size > MAX_SIZE_MB * 1024 * 1024) {
+      onFileError?.(`Ukuran file maksimal ${MAX_SIZE_MB} MB. File Anda ${(file.size / (1024 * 1024)).toFixed(1)} MB.`);
+      fileRef.current!.value = "";
+    } else {
+      onFileError?.(null);
+    }
+  }
 
   return (
     <div style={{ background: "var(--card-bg)", padding: "20px", borderRadius: "var(--radius-lg)", border: "1px solid var(--card-border)" }}>
@@ -65,13 +78,15 @@ export default function ArticleFormatSelector({
           )}
           <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <span style={{ fontSize: "11px", color: "var(--text-secondary)" }}>
-              {mode === "edit" ? "Ganti PDF baru (kosongkan jika tidak ingin diganti)" : "File PDF (maks 10MB)"}
+              {mode === "edit" ? "Ganti PDF baru (kosongkan jika tidak ingin diganti, maks 10MB)" : "File PDF (maks 10MB)"}
             </span>
             <input
+              ref={fileRef}
               type="file"
               name="file"
               accept="application/pdf"
               required={mode === "create"}
+              onChange={handleFileChange}
               style={{ padding: "10px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "14px" }}
             />
           </label>

@@ -27,6 +27,7 @@ function getStorageClient() {
     );
   }
 
+  console.log("[Storage] Creating client with URL:", url, "Key present:", !!serviceKey);
   return createClient(url, serviceKey);
 }
 
@@ -75,6 +76,8 @@ export async function uploadFile(
   const filePath = path ? `${path}/${fileName}` : fileName;
 
   const upload = async () => {
+    console.log("[Storage] Upload attempt:", { bucket: bucketName, filePath, fileSize: file.size, fileType: file.type });
+    
     const { error: uploadError } = await supabase.storage
       .from(bucketName)
       .upload(filePath, file, {
@@ -83,6 +86,7 @@ export async function uploadFile(
       });
 
     if (uploadError) {
+      console.error("[Storage] Upload error:", uploadError);
       throw new Error("Gagal upload file: " + uploadError.message);
     }
 

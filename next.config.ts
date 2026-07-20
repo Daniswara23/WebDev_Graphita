@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: "10mb",
     },
+    optimizePackageImports: ["@supabase/ssr", "@supabase/supabase-js"],
   },
   images: {
     remotePatterns: [

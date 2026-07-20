@@ -78,9 +78,10 @@ export async function createArticle(formData: FormData) {
   redirect("/portal/publikasi");
 }
 
-export async function updateArticle(id: string, formData: FormData) {
+export async function updateArticle(formData: FormData) {
   const { supabase } = await requireAuth();
 
+  const id = String(formData.get("id") ?? "");
   const title = String(formData.get("title") ?? "");
   const excerpt = String(formData.get("excerpt") ?? "");
   const content = String(formData.get("content") ?? "");

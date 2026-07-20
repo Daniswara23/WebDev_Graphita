@@ -43,7 +43,8 @@ export default async function EditMarketplaceLinkPage({
         Ubah tautan marketplace. Kosongkan jika belum tersedia (akan tampil "Segera Hadir").
       </p>
 
-      <form action={updateMarketplaceLink.bind(null, link.id)} style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "20px" }}>
+      <form action={updateMarketplaceLink} style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "20px" }}>
+        <input type="hidden" name="id" value={link.id} />
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Platform</span>
           <input

@@ -8,9 +8,10 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireAuth } from "@/lib/supabase/server";
 
-export async function updateMarketplaceLink(id: string, formData: FormData) {
+export async function updateMarketplaceLink(formData: FormData) {
   const { supabase } = await requireAuth();
 
+  const id = String(formData.get("id") ?? "");
   const url = String(formData.get("url") ?? "");
   const isActive = formData.get("is_active") === "on";
 

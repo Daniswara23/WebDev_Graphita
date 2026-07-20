@@ -41,7 +41,8 @@ export default async function EditCaseStudyPage({ params }: { params: Promise<{ 
         Edit Case Study
       </h1>
 
-      <form action={updateCaseStudy.bind(null, id)} style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "20px" }}>
+      <form action={updateCaseStudy} style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "20px" }}>
+        <input type="hidden" name="id" value={id} />
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Judul *</span>
           <input type="text" name="title" required defaultValue={cs.title} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />

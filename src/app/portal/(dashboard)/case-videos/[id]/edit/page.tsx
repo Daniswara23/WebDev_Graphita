@@ -24,7 +24,8 @@ export default async function EditCaseVideoPage({ params }: { params: Promise<{ 
         Edit Video
       </h1>
 
-      <form action={updateCaseVideo.bind(null, id)} style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "20px" }}>
+      <form action={updateCaseVideo} style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "20px" }}>
+        <input type="hidden" name="id" value={id} />
         <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Judul Video *</span>
           <input

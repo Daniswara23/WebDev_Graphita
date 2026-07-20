@@ -43,9 +43,10 @@ export async function createCaseVideo(formData: FormData) {
   redirect("/portal/case-videos");
 }
 
-export async function updateCaseVideo(id: string, formData: FormData) {
+export async function updateCaseVideo(formData: FormData) {
   const { supabase } = await requireAuth();
 
+  const id = String(formData.get("id") ?? "");
   const title = String(formData.get("title") ?? "").trim();
   const videoUrl = String(formData.get("video_url") ?? "").trim();
   const sortOrderRaw = String(formData.get("sort_order") ?? "0");

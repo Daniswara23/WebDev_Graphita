@@ -53,9 +53,10 @@ export async function createReport(formData: FormData) {
   redirect("/portal/riset");
 }
 
-export async function updateReport(id: string, formData: FormData) {
+export async function updateReport(formData: FormData) {
   const { supabase } = await requireAuth();
 
+  const id = String(formData.get("id") ?? "");
   const title = String(formData.get("title") ?? "");
   const subtitle = String(formData.get("subtitle") ?? "").trim();
   const year = parseInt(String(formData.get("year") ?? "0"), 10);

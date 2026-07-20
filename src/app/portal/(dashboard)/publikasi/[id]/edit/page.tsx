@@ -5,8 +5,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { updateArticle } from "../../actions";
-import ArticleFormatSelector from "../../ArticleFormatSelector";
+import { EditPublikasiForm } from "@/components/EditPublikasiForm";
 
 export default async function EditArtikelPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -14,9 +13,6 @@ export default async function EditArtikelPage({ params }: { params: Promise<{ id
   const { data: article } = await supabase.from("articles").select("*").eq("id", id).single();
 
   if (!article) notFound();
-
-  // Determine source type based on existing data
-  const currentSourceType = article.file_url ? "pdf" : article.external_url ? "link" : "";
 
   return (
     <div>
@@ -28,72 +24,7 @@ export default async function EditArtikelPage({ params }: { params: Promise<{ id
         Edit Artikel
       </h1>
 
-      <form action={updateArticle.bind(null, id)} style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "20px" }}>
-        <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-          <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Judul *</span>
-          <input type="text" name="title" defaultValue={article.title} required style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
-        </label>
-
-        <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-          <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Kategori *</span>
-          <select name="category" defaultValue={article.category} required style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }}>
-            {["Keberlanjutan", "Riset", "Pangan", "SDGs", "UMKM", "Lingkungan", "Lainnya"].map((cat) => (
-              <option key={cat} value={cat} style={{ background: "var(--bg-primary)" }}>{cat}</option>
-            ))}
-          </select>
-        </label>
-
-        <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-          <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Ringkasan (excerpt) *</span>
-          <textarea name="excerpt" defaultValue={article.excerpt} required rows={3} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px", resize: "vertical" }} />
-        </label>
-
-        <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-          <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Konten (opsional)</span>
-          <textarea name="content" defaultValue={article.content ?? ""} rows={10} style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px", resize: "vertical", fontFamily: "monospace" }} />
-        </label>
-
-        {/* Pilihan Format Artikel */}
-        <ArticleFormatSelector
-          mode="edit"
-          defaultSourceType={currentSourceType}
-          existingFileUrl={article.file_url}
-          existingExternalUrl={article.external_url}
-        />
-
-        <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-          <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Tanggal Publikasi *</span>
-          <input type="date" name="published_at" defaultValue={article.published_at ?? ""} required style={{ padding: "12px 16px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
-        </label>
-
-        <div style={{ display: "flex", gap: "12px", marginTop: "12px" }}>
-          <button type="submit" style={{
-            padding: "12px 28px",
-            background: "var(--gold)",
-            color: "var(--navy-dark)",
-            border: "none",
-            borderRadius: "var(--radius-lg)",
-            fontSize: "13px",
-            fontWeight: 700,
-            letterSpacing: "1.5px",
-            textTransform: "uppercase",
-            cursor: "pointer",
-          }}>
-            Simpan
-          </button>
-          <Link href="/portal/publikasi" style={{
-            padding: "12px 28px",
-            background: "transparent",
-            border: "1px solid var(--border-subtle)",
-            color: "var(--text-secondary)",
-            borderRadius: "var(--radius-lg)",
-            fontSize: "13px",
-            textDecoration: "none",
-          }}>
-            Batal
-          </Link>
-        </div>
-      </form>
+      <EditPublikasiForm article={article} />
     </div>
   );
 }

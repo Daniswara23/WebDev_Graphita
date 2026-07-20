@@ -55,9 +55,10 @@ export async function createProduct(formData: FormData) {
   redirect("/portal/toko");
 }
 
-export async function updateProduct(id: string, formData: FormData) {
+export async function updateProduct(formData: FormData) {
   const { supabase } = await requireAuth();
 
+  const id = String(formData.get("id") ?? "");
   const name = String(formData.get("name") ?? "");
   const description = String(formData.get("description") ?? "");
   const label = String(formData.get("label") ?? "");
