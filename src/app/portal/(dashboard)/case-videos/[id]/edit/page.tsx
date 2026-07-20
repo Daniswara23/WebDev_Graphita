@@ -6,6 +6,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { updateCaseVideo } from "../../actions";
+import FormActions from "@/components/FormActions";
 
 export default async function EditCaseVideoPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -80,33 +81,7 @@ export default async function EditCaseVideoPage({ params }: { params: Promise<{ 
           </label>
         </div>
 
-        <div style={{ display: "flex", gap: "12px", marginTop: "12px" }}>
-          <button type="submit" style={{
-            padding: "12px 28px",
-            background: "var(--gold)",
-            color: "var(--navy-dark)",
-            border: "none",
-            borderRadius: "var(--radius-lg)",
-            fontSize: "13px",
-            fontWeight: 700,
-            letterSpacing: "1.5px",
-            textTransform: "uppercase",
-            cursor: "pointer",
-          }}>
-            Simpan Perubahan
-          </button>
-          <Link href="/portal/case-videos" style={{
-            padding: "12px 28px",
-            background: "transparent",
-            border: "1px solid var(--border-subtle)",
-            color: "var(--text-secondary)",
-            borderRadius: "var(--radius-lg)",
-            fontSize: "13px",
-            textDecoration: "none",
-          }}>
-            Batal
-          </Link>
-        </div>
+        <FormActions submitLabel="Simpan Perubahan" submitLoadingLabel="Menyimpan..." cancelHref="/portal/case-videos" />
       </form>
     </div>
   );

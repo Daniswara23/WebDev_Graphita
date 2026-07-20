@@ -83,15 +83,15 @@ export default function ContactSection({ socialLinks }: { socialLinks: SocialLin
             <p style={{ fontSize: "var(--text-lg)", color: "var(--text-secondary)", lineHeight: "var(--line-relaxed)", marginBottom: "8px" }}>
               <strong>Grahita Adhi Sasmita</strong>
             </p>
-            <p style={{ fontSize: "var(--text-lg)", color: "var(--text-secondary)", lineHeight: "var(--line-relaxed)", marginBottom: "16px" }}>
-              Jakarta, Indonesia
+            <p style={{ fontSize: "var(--text-base)", color: "var(--text-secondary)", lineHeight: "var(--line-relaxed)", marginBottom: "16px" }}>
+              Area Sawah, Tlogoadi, Mlati, Sleman Regency, Special Region of Yogyakarta 55288
             </p>
             <div style={{ background: "var(--overlay-gold)", padding: "16px", borderRadius: "var(--radius-lg)", border: "1px solid rgba(201,147,58,0.2)" }}>
               <p style={{ fontSize: "var(--text-base)", color: "var(--text-primary)", margin: "0" }}>
                 hello@grahitaadhisasmita.com
               </p>
               <p style={{ fontSize: "var(--text-base)", color: "var(--text-primary)", margin: "8px 0 0 0" }}>
-                +62 (Hubungi untuk informasi)
+                +62 21 1234 5678
               </p>
             </div>
           </div>

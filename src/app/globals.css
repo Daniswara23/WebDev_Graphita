@@ -583,6 +583,12 @@ html:not(.light-mode) .contact-form-select {
   }
 }
 
+/* Spin animation for loading indicators */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 /* Dokumentasi Swiper height */
 @media (max-width: 768px) {
   [class*="swiper-wrapper"] > [class*="swiper-slide"] > div[style*="height: 400px"],

@@ -3,6 +3,7 @@
 import { updateReport } from "@/app/portal/(dashboard)/riset/actions";
 import Link from "next/link";
 import { useRef, useState } from "react";
+import { SubmitButton } from "@/components/SubmitButton";
 
 type Report = {
   id: string;
@@ -77,20 +78,7 @@ export function EditRisetForm({ report }: { report: Report }) {
       </label>
 
       <div style={{ display: "flex", gap: "12px", marginTop: "12px" }}>
-        <button type="submit" style={{
-          padding: "12px 28px",
-          background: "var(--gold)",
-          color: "var(--navy-dark)",
-          border: "none",
-          borderRadius: "var(--radius-lg)",
-          fontSize: "13px",
-          fontWeight: 700,
-          letterSpacing: "1.5px",
-          textTransform: "uppercase",
-          cursor: "pointer",
-        }}>
-          Simpan
-        </button>
+        <SubmitButton label="Simpan" loadingLabel="Menyimpan..." />
         <Link href="/portal/riset" style={{
           padding: "12px 28px",
           background: "transparent",

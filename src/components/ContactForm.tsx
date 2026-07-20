@@ -1,12 +1,12 @@
 /*
   ContactForm.tsx — FORMULIR KONTAK
   Kiriman disimpan ke tabel `contact_submissions` di Supabase.
-  Tampilan tidak berubah.
+  Dilengkapi honeypot + time validation anti-spam.
 */
 
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 
 function FormButtonText() {
@@ -22,12 +22,32 @@ function FormButtonText() {
 export default function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+  const [formSuccess, setFormSuccess] = useState(false);
+  const [loadTime] = useState(() => Date.now()); // catat kapan form dirender
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formRef.current) return;
 
     const formData = new FormData(formRef.current);
+
+    // --- HONEYPOT CHECK ---
+    const honeypot = formData.get("website") as string;
+    if (honeypot) {
+      // Bot terdeteksi — diam-diam anggap sukses agar bot tidak curiga
+      setFormSuccess(true);
+      formRef.current.reset();
+      return;
+    }
+
+    // --- TIME VALIDATION ---
+    const elapsed = Date.now() - loadTime;
+    if (elapsed < 3000) {
+      setFormError("Formulir dikirim terlalu cepat. Mohon tunggu beberapa saat.");
+      return;
+    }
+
     const name             = formData.get("name")             as string;
     const email            = formData.get("email")            as string;
     const organization     = formData.get("company")          as string;
@@ -36,6 +56,7 @@ export default function ContactForm() {
     const serviceInterest  = formData.get("service_interest") as string;
 
     setSubmitting(true);
+    setFormError(null);
 
     const { error } = await supabase
       .from("contact_submissions")
@@ -44,12 +65,58 @@ export default function ContactForm() {
     setSubmitting(false);
 
     if (error) {
-      alert("Terjadi kesalahan. Silakan coba lagi.");
+      setFormError("Terjadi kesalahan. Silakan coba lagi.");
     } else {
-      alert("Pesan Anda telah terkirim. Tim kami akan menghubungi Anda segera.");
+      setFormSuccess(true);
       formRef.current.reset();
     }
   };
+
+  if (formSuccess) {
+    return (
+      <section id="contact" style={{ padding: "80px 56px", background: "var(--section-bg-alt)" }}>
+        <div style={{ maxWidth: "700px", margin: "0 auto", textAlign: "center" }}>
+          <div style={{
+            width: "64px",
+            height: "64px",
+            margin: "0 auto 24px",
+            borderRadius: "50%",
+            background: "rgba(82, 183, 136, 0.15)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}>
+            <svg width={32} height={32} viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20,6 9,17 4,12" />
+            </svg>
+          </div>
+          <h2 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-3xl)", fontWeight: 700, color: "var(--text-primary)", marginBottom: "16px" }}>
+            Pesan Terkirim!
+          </h2>
+          <p style={{ fontSize: "var(--text-lg)", color: "var(--text-secondary)", marginBottom: "32px" }}>
+            Terima kasih. Tim kami akan menghubungi Anda dalam 24 jam kerja.
+          </p>
+          <button
+            onClick={() => setFormSuccess(false)}
+            style={{
+              padding: "12px 28px",
+              background: "var(--gold)",
+              color: "var(--navy-dark)",
+              border: "none",
+              borderRadius: "var(--radius-lg)",
+              fontSize: "13px",
+              fontWeight: 600,
+              letterSpacing: "1px",
+              textTransform: "uppercase",
+              cursor: "pointer",
+            }}
+          >
+            Kirim Pesan Lagi
+          </button>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="contact" style={{ padding: "80px 56px", background: "var(--section-bg-alt)" }}>
@@ -72,7 +139,27 @@ export default function ContactForm() {
           </p>
         </div>
 
+        {formError && (
+          <div style={{
+            padding: "12px 16px",
+            background: "#fef2f2",
+            border: "1px solid #fca5a5",
+            borderRadius: "var(--radius-md)",
+            color: "#b91c1c",
+            fontSize: "14px",
+            marginBottom: "20px",
+          }}>
+            {formError}
+          </div>
+        )}
+
         <form ref={formRef} onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+          {/* Honeypot — tidak terlihat oleh manusia */}
+          <div style={{ position: "absolute", left: "-9999px", opacity: 0 }} aria-hidden="true">
+            <label htmlFor="website">Website</label>
+            <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+          </div>
+
           <div className="contact-form-row">
             <input
               name="name"
@@ -158,7 +245,16 @@ export default function ContactForm() {
               e.currentTarget.style.transform = "translateY(0)";
             }}
           >
-            {submitting ? "Mengirim..." : <FormButtonText />}
+            {submitting ? (
+              <span style={{ display: "flex", alignItems: "center", gap: "8px", justifyContent: "center" }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ animation: "spin 1s linear infinite" }}>
+                  <circle cx="12" cy="12" r="10" strokeDasharray="31.4 31.4" strokeLinecap="round" />
+                </svg>
+                Mengirim...
+              </span>
+            ) : (
+              <FormButtonText />
+            )}
           </button>
         </form>
         <p style={{ fontSize: "var(--text-sm)", color: "var(--text-secondary)", marginTop: "28px", textAlign: "center" }}>

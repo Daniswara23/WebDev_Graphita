@@ -4,6 +4,7 @@ import { updateArticle } from "@/app/portal/(dashboard)/publikasi/actions";
 import ArticleFormatSelector from "@/app/portal/(dashboard)/publikasi/ArticleFormatSelector";
 import Link from "next/link";
 import { useState } from "react";
+import { SubmitButton } from "@/components/SubmitButton";
 
 type Article = {
   id: string;
@@ -67,20 +68,7 @@ export function EditPublikasiForm({ article }: { article: Article }) {
       </label>
 
       <div style={{ display: "flex", gap: "12px", marginTop: "12px" }}>
-        <button type="submit" style={{
-          padding: "12px 28px",
-          background: "var(--gold)",
-          color: "var(--navy-dark)",
-          border: "none",
-          borderRadius: "var(--radius-lg)",
-          fontSize: "13px",
-          fontWeight: 700,
-          letterSpacing: "1.5px",
-          textTransform: "uppercase",
-          cursor: "pointer",
-        }}>
-          Simpan
-        </button>
+        <SubmitButton label="Simpan" loadingLabel="Menyimpan..." />
         <Link href="/portal/publikasi" style={{
           padding: "12px 28px",
           background: "transparent",

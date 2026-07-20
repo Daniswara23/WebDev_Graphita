@@ -6,6 +6,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { updateMarketplaceLink } from "../../actions";
+import FormActions from "@/components/FormActions";
 
 const PLATFORM_LABELS: Record<string, string> = {
   tokopedia: "Tokopedia",
@@ -74,33 +75,7 @@ export default async function EditMarketplaceLinkPage({
           <span style={{ fontSize: "13px", color: "var(--text-primary)" }}>Tampilkan di halaman toko</span>
         </label>
 
-        <div style={{ display: "flex", gap: "12px", marginTop: "12px" }}>
-          <button type="submit" style={{
-            padding: "12px 28px",
-            background: "var(--gold)",
-            color: "var(--navy-dark)",
-            border: "none",
-            borderRadius: "var(--radius-lg)",
-            fontSize: "13px",
-            fontWeight: 700,
-            letterSpacing: "1.5px",
-            textTransform: "uppercase",
-            cursor: "pointer",
-          }}>
-            Simpan
-          </button>
-          <Link href="/portal/marketplace-links" style={{
-            padding: "12px 28px",
-            background: "transparent",
-            border: "1px solid var(--border-subtle)",
-            color: "var(--text-secondary)",
-            borderRadius: "var(--radius-lg)",
-            fontSize: "13px",
-            textDecoration: "none",
-          }}>
-            Batal
-          </Link>
-        </div>
+        <FormActions submitLabel="Simpan" submitLoadingLabel="Menyimpan..." cancelHref="/portal/marketplace-links" />
       </form>
     </div>
   );

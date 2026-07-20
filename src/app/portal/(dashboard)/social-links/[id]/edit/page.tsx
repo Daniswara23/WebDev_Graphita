@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { updateSocialLink } from "../../actions";
 import { PLATFORM_OPTIONS } from "../../constants";
+import FormActions from "@/components/FormActions";
 
 type SocialLink = {
   id: string;
@@ -110,33 +111,7 @@ export default async function EditSocialLinkPage({ params }: { params: Promise<{
           <span style={{ fontSize: "12px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Aktif</span>
         </label>
 
-        <div style={{ display: "flex", gap: "12px", marginTop: "12px" }}>
-          <button type="submit" style={{
-            padding: "12px 28px",
-            background: "var(--gold)",
-            color: "var(--navy-dark)",
-            border: "none",
-            borderRadius: "var(--radius-lg)",
-            fontSize: "13px",
-            fontWeight: 700,
-            letterSpacing: "1.5px",
-            textTransform: "uppercase",
-            cursor: "pointer",
-          }}>
-            Simpan
-          </button>
-          <Link href="/portal/social-links" style={{
-            padding: "12px 28px",
-            background: "transparent",
-            border: "1px solid var(--border-subtle)",
-            color: "var(--text-secondary)",
-            borderRadius: "var(--radius-lg)",
-            fontSize: "13px",
-            textDecoration: "none",
-          }}>
-            Batal
-          </Link>
-        </div>
+        <FormActions submitLabel="Simpan" submitLoadingLabel="Menyimpan..." cancelHref="/portal/social-links" />
       </form>
     </div>
   );
