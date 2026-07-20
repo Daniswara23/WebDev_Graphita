@@ -4,19 +4,46 @@
 
 "use client";
 
-import { useActionState } from "react";
-import { useSearchParams } from "next/navigation";
-import { loginAction, type LoginState } from "./actions";
-
-const initialState: LoginState = {};
+import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function LoginForm() {
+  const router = useRouter();
   const params = useSearchParams();
   const next = params.get("next") ?? "/portal/dashboard";
-  const [state, formAction, pending] = useActionState(loginAction, initialState);
+  const [error, setError] = useState<string | null>(null);
+  const [pending, setPending] = useState(false);
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setPending(true);
+    setError(null);
+
+    const formData = new FormData(event.currentTarget);
+
+    try {
+      const response = await fetch("/api/portal/login", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.error || "Login gagal.");
+        setPending(false);
+        return;
+      }
+
+      router.push(data.redirectTo || next);
+    } catch {
+      setError("Terjadi kesalahan jaringan. Coba lagi.");
+      setPending(false);
+    }
+  }
 
   return (
-    <form action={formAction} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
       <input type="hidden" name="next" value={next} />
 
       <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
@@ -29,9 +56,9 @@ export default function LoginForm() {
         <input type="password" name="password" required autoComplete="current-password" style={{ padding: "14px 18px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "15px" }} />
       </label>
 
-      {state.error && (
+      {error && (
         <div style={{ padding: "12px 16px", background: "rgba(220,38,38,0.1)", border: "1px solid rgba(220,38,38,0.4)", color: "#fca5a5", borderRadius: "var(--radius-md)", fontSize: "13px" }}>
-          {state.error}
+          {error}
         </div>
       )}
 

@@ -5,8 +5,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { logoutAction } from "@/app/portal/login/actions";
+import { usePathname, useRouter } from "next/navigation";
 import ThemeToggle from "@/components/ThemeToggle";
 import styles from "./Sidebar.module.css";
 
@@ -104,6 +103,16 @@ const NAV_ITEMS = [
 
 export default function Sidebar({ adminName }: { adminName: string }) {
 const pathname = usePathname();
+const router = useRouter();
+
+  async function handleLogout() {
+    try {
+      await fetch("/api/portal/logout", { method: "POST" });
+    } catch {
+      // ignore
+    }
+    router.push("/portal/login");
+  }
 
   // Memoize pattern check to reduce re-computation on re-renders
   const isActiveItem = (itemHref: string) => {
@@ -145,11 +154,9 @@ const pathname = usePathname();
 
       {/* Logout */}
       <div className={styles.footer}>
-        <form action={logoutAction}>
-          <button type="submit" className={styles.logoutBtn}>
-            Keluar
-          </button>
-        </form>
+        <button type="button" onClick={handleLogout} className={styles.logoutBtn}>
+          Keluar
+        </button>
       </div>
     </aside>
   );
