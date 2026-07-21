@@ -37,7 +37,7 @@ export default function Etos3T() {
   const cardColors = ["#52b788", "#4997d0", "#a0785a"];
 
   return (
-    <section style={{ padding: "96px 56px" }}>
+    <section className="animate-on-scroll" style={{ padding: "96px 56px" }}>
       <div style={{ textAlign: "center", marginBottom: "64px" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "16px" }}>
           <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
@@ -55,6 +55,7 @@ export default function Etos3T() {
           <div
             key={item.id}
             onClick={() => toggleCard(index)}
+            className="grid-item hover-lift"
             style={{
               padding: "40px 24px",
               background: expandedIndex === index ? "var(--overlay-gold)" : "var(--card-bg)",
@@ -67,6 +68,7 @@ export default function Etos3T() {
               display: "flex",
               flexDirection: "column",
               justifyContent: expandedIndex === index ? "flex-start" : "center",
+              animationDelay: `${index * 0.15}s`,
             }}
             onMouseEnter={(e) => {
               if (expandedIndex !== index) {

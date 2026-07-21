@@ -1,12 +1,16 @@
 /*
-  portal/ekosistem/page.tsx — Kelola Ekosistem & Jejaring (Partners + Case Studies).
+  portal/ekosistem/page.tsx — Kelola Ekosistem & Jejaring (Partners + Case Studies) dengan sorting interaktif.
 */
 
+"use client";
+
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 import { deletePartner } from "./actions";
 import { deleteCaseStudy } from "./actions";
 import DeleteButton from "@/app/portal/(dashboard)/DeleteButton";
+import { useSort } from "@/hooks/useSort";
 
 type Partner = {
   id: string;
@@ -27,17 +31,53 @@ type CaseStudy = {
   sort_order: number;
 };
 
-export default async function EkosistemAdminPage() {
-  const supabase = await createClient();
-  const { data: partners } = await supabase
-    .from("ecosystem_partners")
-    .select("*")
-    .order("sort_order");
+const categoryLabel = (cat: string) => {
+  const map: Record<string, string> = {
+    donor: "Penyandang Dana",
+    technical: "Mitra Teknis",
+    government: "Pemerintah & LSM",
+    corporate: "Korporasi",
+    academic: "Lembaga Pendidikan",
+    ngo: "NGO & Komunitas",
+  };
+  return map[cat] || cat;
+};
 
-  const { data: caseStudies } = await supabase
-    .from("ecosystem_case_studies")
-    .select("*")
-    .order("sort_order");
+export default function EkosistemAdminPage() {
+  const [partners, setPartners] = useState<Partner[]>([]);
+  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      const [partnersRes, casesRes] = await Promise.all([
+        supabase.from("ecosystem_partners").select("*").order("sort_order"),
+        supabase.from("ecosystem_case_studies").select("*").order("sort_order"),
+      ]);
+      if (partnersRes.data) setPartners(partnersRes.data as Partner[]);
+      if (casesRes.data) setCaseStudies(casesRes.data as CaseStudy[]);
+      setLoading(false);
+    }
+    fetchData();
+  }, []);
+
+  const { sortedData: sortedPartners, toggleSort: togglePartnerSort, getSortIndicator: getPartnerIndicator } = useSort(partners, "sort_order");
+  const { sortedData: sortedCaseStudies, toggleSort: toggleCaseSort, getSortIndicator: getCaseIndicator } = useSort(caseStudies, "sort_order");
+
+  const thStyle: React.CSSProperties = {
+    padding: "14px 18px",
+    fontSize: "11px",
+    color: "var(--text-secondary)",
+    textTransform: "uppercase",
+    letterSpacing: "1px",
+    cursor: "pointer",
+    userSelect: "none",
+    whiteSpace: "nowrap",
+  };
+
+  if (loading) {
+    return <div style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)" }}>Memuat...</div>;
+  }
 
   return (
     <div>
@@ -76,24 +116,32 @@ export default async function EkosistemAdminPage() {
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr style={{ borderBottom: "1px solid var(--card-border)", textAlign: "left" }}>
-                <th style={{ padding: "14px 18px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Kategori</th>
-                <th style={{ padding: "14px 18px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Nama</th>
-                <th style={{ padding: "14px 18px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Deskripsi</th>
-                <th style={{ padding: "14px 18px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px", textAlign: "right" }}>Aksi</th>
+                <th style={thStyle} onClick={() => togglePartnerSort("sort_order")}>
+                  Urutan{getPartnerIndicator("sort_order")}
+                </th>
+                <th style={thStyle} onClick={() => togglePartnerSort("category")}>
+                  Kategori{getPartnerIndicator("category")}
+                </th>
+                <th style={thStyle} onClick={() => togglePartnerSort("name")}>
+                  Nama{getPartnerIndicator("name")}
+                </th>
+                <th style={{ ...thStyle, cursor: "default" }}>Deskripsi</th>
+                <th style={{ ...thStyle, textAlign: "right", cursor: "default" }}>Aksi</th>
               </tr>
             </thead>
             <tbody>
-              {(!partners || partners.length === 0) ? (
+              {sortedPartners.length === 0 ? (
                 <tr>
-                  <td colSpan={4} style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", fontSize: "14px" }}>
+                  <td colSpan={5} style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", fontSize: "14px" }}>
                     Belum ada partner. Klik "+ Partner Baru" untuk menambah.
                   </td>
                 </tr>
               ) : (
-                (partners as Partner[]).map((p) => (
+                sortedPartners.map((p) => (
                   <tr key={p.id} style={{ borderBottom: "1px solid var(--card-border)" }}>
+                    <td style={{ padding: "14px 18px", fontSize: "13px", color: "var(--text-secondary)", textAlign: "center" }}>{p.sort_order}</td>
                     <td style={{ padding: "14px 18px", fontSize: "13px", color: "var(--text-secondary)" }}>
-                      {p.category === "donor" ? "Penyandang Dana" : p.category === "technical" ? "Mitra Teknis" : "Pemerintah & LSM"}
+                      {categoryLabel(p.category)}
                     </td>
                     <td style={{ padding: "14px 18px", fontSize: "14px", fontWeight: 600, color: "var(--text-primary)" }}>{p.name}</td>
                     <td style={{ padding: "14px 18px", fontSize: "13px", color: "var(--text-secondary)", maxWidth: "260px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
@@ -152,22 +200,32 @@ export default async function EkosistemAdminPage() {
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr style={{ borderBottom: "1px solid var(--card-border)", textAlign: "left" }}>
-                <th style={{ padding: "14px 18px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Sektor</th>
-                <th style={{ padding: "14px 18px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Judul</th>
-                <th style={{ padding: "14px 18px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Klien</th>
-                <th style={{ padding: "14px 18px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px", textAlign: "right" }}>Aksi</th>
+                <th style={thStyle} onClick={() => toggleCaseSort("sort_order")}>
+                  Urutan{getCaseIndicator("sort_order")}
+                </th>
+                <th style={thStyle} onClick={() => toggleCaseSort("sector")}>
+                  Sektor{getCaseIndicator("sector")}
+                </th>
+                <th style={thStyle} onClick={() => toggleCaseSort("title")}>
+                  Judul{getCaseIndicator("title")}
+                </th>
+                <th style={thStyle} onClick={() => toggleCaseSort("client")}>
+                  Klien{getCaseIndicator("client")}
+                </th>
+                <th style={{ ...thStyle, textAlign: "right", cursor: "default" }}>Aksi</th>
               </tr>
             </thead>
             <tbody>
-              {(!caseStudies || caseStudies.length === 0) ? (
+              {sortedCaseStudies.length === 0 ? (
                 <tr>
-                  <td colSpan={4} style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", fontSize: "14px" }}>
+                  <td colSpan={5} style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", fontSize: "14px" }}>
                     Belum ada case study. Klik "+ Case Study Baru" untuk menambah.
                   </td>
                 </tr>
               ) : (
-                (caseStudies as CaseStudy[]).map((cs) => (
+                sortedCaseStudies.map((cs) => (
                   <tr key={cs.id} style={{ borderBottom: "1px solid var(--card-border)" }}>
+                    <td style={{ padding: "14px 18px", fontSize: "13px", color: "var(--text-secondary)", textAlign: "center" }}>{cs.sort_order}</td>
                     <td style={{ padding: "14px 18px", fontSize: "13px", color: "var(--text-secondary)" }}>{cs.sector}</td>
                     <td style={{ padding: "14px 18px", fontSize: "14px", fontWeight: 600, color: "var(--text-primary)" }}>{cs.title}</td>
                     <td style={{ padding: "14px 18px", fontSize: "13px", color: "var(--text-secondary)" }}>{cs.client}</td>

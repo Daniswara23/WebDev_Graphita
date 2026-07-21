@@ -108,7 +108,7 @@ export default function StatsBar() {
       {stats.map((item, index) => (
         <div
           key={item.id}
-          className="stats-bar-item"
+          className="stats-bar-item animate-on-scroll"
           style={{
             textAlign: "center",
             padding: "8px 24px",
@@ -117,6 +117,7 @@ export default function StatsBar() {
               index < stats.length - 1
                 ? "1px solid var(--border-subtle)"
                 : "none",
+            animationDelay: `${index * 0.15}s`,
           }}
         >
           <div

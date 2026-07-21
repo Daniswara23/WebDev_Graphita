@@ -156,7 +156,7 @@ export default function ServicesPage() {
         </div>
 
         {/* CTA Section */}
-        <div style={{ padding: "80px 56px", textAlign: "center", background: "var(--cta-bg)" }}>
+        <div className="animate-on-scroll" style={{ padding: "80px 56px", textAlign: "center", background: "var(--cta-bg)" }}>
           <h3 style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-3xl)", fontWeight: 700, color: "var(--cta-text)", marginBottom: "8px" }}>
             Mari Berkolaborasi untuk Membangun Ekosistem yang Berdaya
           </h3>
@@ -165,6 +165,7 @@ export default function ServicesPage() {
           </p>
           <button
             onClick={goToContact}
+            className="hover-lift hover-glow"
             style={{
               padding: "14px 40px",
               background: "var(--cta-btn-bg, #c9a84c)",

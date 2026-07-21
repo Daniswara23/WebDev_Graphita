@@ -19,6 +19,7 @@ export default function CtaBand() {
   };
   return (
     <div
+      className="animate-on-scroll"
       style={{
         background: "var(--cta-bg, #ffffff)",
         padding: "56px",
@@ -56,6 +57,7 @@ export default function CtaBand() {
       {/* Tombol kanan */}
       <button
         onClick={goToContact}
+        className="hover-lift hover-glow"
         style={{
           padding: "14px 40px",
           background: "var(--cta-btn-bg, #c9a84c)",

@@ -300,6 +300,8 @@ button, a, .card, .service-card, .article-card {
 
 .hover-lift:hover { transform: translateY(-4px); }
 .hover-glow:hover { box-shadow: 0 10px 30px rgba(201, 168, 76, 0.2); }
+.hover-glow-blue:hover { box-shadow: 0 10px 30px rgba(91, 140, 255, 0.25); }
+.hover-glow-gold:hover { box-shadow: 0 10px 30px rgba(169, 123, 45, 0.25); }
 .hover-scale:hover { transform: scale(1.02); }
 
 .button-primary {

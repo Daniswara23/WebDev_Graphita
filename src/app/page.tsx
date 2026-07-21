@@ -54,7 +54,7 @@ export default async function HomePage() {
           <AboutOverviewContainer />
         </Suspense>
 
-        {/* 4. Value */}
+        {/* 4. Value — Layanan & Produk Nyata */}
         <Suspense fallback={<SectionSkeleton />}>
           <Services />
         </Suspense>
@@ -62,14 +62,14 @@ export default async function HomePage() {
           <StorePreview />
         </Suspense>
 
-        {/* 5. Etos */}
-        <Suspense fallback={<SectionSkeleton />}>
-          <Etos3T />
-        </Suspense>
-
         {/* 5b. Ecosystem & Kolaborasi */}
         <Suspense fallback={<SectionSkeleton />}>
           <EcosystemHub />
+        </Suspense>
+
+        {/* 5. Etos */}
+        <Suspense fallback={<SectionSkeleton />}>
+          <Etos3T />
         </Suspense>
 
         {/* 6. CTA */}

@@ -1,34 +1,94 @@
 /*
-  dokumentasi/page.tsx — Daftar galeri foto dokumentasi kegiatan (admin).
+  dokumentasi/page.tsx — Daftar galeri foto dokumentasi kegiatan (admin) dengan sorting interaktif.
 */
 
+"use client";
+
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 import { deleteGallery } from "./actions";
 import DeleteButton from "@/app/portal/(dashboard)/DeleteButton";
+import { useSort } from "@/hooks/useSort";
 
-export default async function DokumentasiPage() {
-  const supabase = await createClient();
-  const { data: galleries } = await supabase
-    .from("photo_galleries")
-    .select("id, title, event_date, is_published, sort_order, created_at")
-    .order("sort_order", { ascending: true });
+type Gallery = {
+  id: string;
+  title: string;
+  event_date: string;
+  is_published: boolean;
+  sort_order: number;
+  created_at: string;
+};
 
-  // Get image count for each gallery
-  let imageCounts: Record<string, number> = {};
-  if (galleries && galleries.length > 0) {
-    const { data: counts } = await supabase
-      .from("gallery_images")
-      .select("gallery_id")
-      .in("gallery_id", galleries.map((g) => g.id));
+type GalleryWithCount = Gallery & { image_count: number };
 
-    if (counts) {
-      imageCounts = counts.reduce((acc: Record<string, number>, img) => {
-        acc[img.gallery_id] = (acc[img.gallery_id] || 0) + 1;
-        return acc;
-      }, {});
+export default function DokumentasiPage() {
+  const [galleries, setGalleries] = useState<GalleryWithCount[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data: galleryData } = await supabase
+        .from("photo_galleries")
+        .select("id, title, event_date, is_published, sort_order, created_at")
+        .order("sort_order", { ascending: true });
+
+      if (galleryData && galleryData.length > 0) {
+        const { data: counts } = await supabase
+          .from("gallery_images")
+          .select("gallery_id")
+          .in("gallery_id", galleryData.map((g) => g.id));
+
+        const imageCounts: Record<string, number> = {};
+        if (counts) {
+          counts.forEach((img) => {
+            imageCounts[img.gallery_id] = (imageCounts[img.gallery_id] || 0) + 1;
+          });
+        }
+
+        setGalleries(
+          galleryData.map((g) => ({
+            ...(g as Gallery),
+            image_count: imageCounts[g.id] || 0,
+          }))
+        );
+      } else {
+        setGalleries([]);
+      }
+      setLoading(false);
     }
+    fetchData();
+  }, []);
+
+  const { sortedData, toggleSort, getSortIndicator } = useSort(galleries, "sort_order");
+
+  const thStyle: React.CSSProperties = {
+    padding: "14px 18px",
+    fontSize: "11px",
+    color: "var(--text-secondary)",
+    textTransform: "uppercase",
+    letterSpacing: "1px",
+    cursor: "pointer",
+    userSelect: "none",
+    whiteSpace: "nowrap",
+  };
+
+  if (loading) {
+    return <div style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)" }}>Memuat...</div>;
   }
+
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return "—";
+    try {
+      return new Date(dateStr).toLocaleDateString("id-ID", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
+    } catch {
+      return dateStr;
+    }
+  };
 
   return (
     <div>
@@ -52,7 +112,7 @@ export default async function DokumentasiPage() {
           letterSpacing: "1px",
           textTransform: "uppercase",
         }}>
-          + Event Baru
+          + Galeri Baru
         </Link>
       </div>
 
@@ -60,46 +120,55 @@ export default async function DokumentasiPage() {
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
             <tr style={{ borderBottom: "1px solid var(--card-border)", textAlign: "left" }}>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Event</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Tanggal</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Foto</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Urutan</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Status</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px", textAlign: "right" }}>Aksi</th>
+              <th style={thStyle} onClick={() => toggleSort("sort_order")}>
+                Urutan{getSortIndicator("sort_order")}
+              </th>
+              <th style={thStyle} onClick={() => toggleSort("title")}>
+                Judul{getSortIndicator("title")}
+              </th>
+              <th style={thStyle} onClick={() => toggleSort("event_date")}>
+                Tanggal{getSortIndicator("event_date")}
+              </th>
+              <th style={{ ...thStyle, cursor: "default" }}>Foto</th>
+              <th style={thStyle} onClick={() => toggleSort("is_published")}>
+                Status{getSortIndicator("is_published")}
+              </th>
+              <th style={{ ...thStyle, textAlign: "right", cursor: "default" }}>Aksi</th>
             </tr>
           </thead>
           <tbody>
-            {(!galleries || galleries.length === 0) ? (
+            {sortedData.length === 0 ? (
               <tr>
                 <td colSpan={6} style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", fontSize: "14px" }}>
-                  Belum ada dokumentasi. Klik &ldquo;+ Event Baru&rdquo; untuk menambahkan.
+                  Belum ada galeri. Klik "+ Galeri Baru" untuk menambah.
                 </td>
               </tr>
             ) : (
-              galleries.map((gallery) => (
+              sortedData.map((gallery) => (
                 <tr key={gallery.id} style={{ borderBottom: "1px solid var(--card-border)" }}>
-                  <td style={{ padding: "16px 20px" }}>
+                  <td style={{ padding: "14px 18px", fontSize: "13px", color: "var(--text-secondary)", textAlign: "center" }}>{gallery.sort_order}</td>
+                  <td style={{ padding: "14px 18px" }}>
                     <div style={{ fontSize: "15px", fontWeight: 600, color: "var(--text-primary)" }}>{gallery.title}</div>
                   </td>
-                  <td style={{ padding: "16px 20px", fontSize: "13px", color: "var(--text-primary)" }}>
-                    {gallery.event_date
-                      ? new Date(gallery.event_date + "T12:00:00").toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })
-                      : "—"}
+                  <td style={{ padding: "14px 18px", fontSize: "13px", color: "var(--text-secondary)" }}>
+                    {formatDate(gallery.event_date)}
                   </td>
-                  <td style={{ padding: "16px 20px", fontSize: "13px", color: "var(--text-primary)" }}>
-                    {imageCounts[gallery.id] || 0} foto
+                  <td style={{ padding: "14px 18px", fontSize: "13px", color: "var(--text-primary)" }}>
+                    {gallery.image_count} foto
                   </td>
-                  <td style={{ padding: "16px 20px", fontSize: "13px", color: "var(--text-primary)" }}>
-                    {gallery.sort_order}
+                  <td style={{ padding: "14px 18px", fontSize: "13px", color: "var(--text-secondary)" }}>
+                    <span style={{
+                      padding: "3px 10px",
+                      borderRadius: "var(--radius-full)",
+                      fontSize: "11px",
+                      fontWeight: 600,
+                      background: gallery.is_published ? "rgba(82, 183, 136, 0.2)" : "rgba(148, 163, 184, 0.2)",
+                      color: gallery.is_published ? "#52b788" : "#94a3b8",
+                    }}>
+                      {gallery.is_published ? "Publikasi" : "Draft"}
+                    </span>
                   </td>
-                  <td style={{ padding: "16px 20px" }}>
-                    {gallery.is_published ? (
-                      <span style={{ fontSize: "12px", color: "#52b788" }}>● Publik</span>
-                    ) : (
-                      <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>● Draf</span>
-                    )}
-                  </td>
-                  <td style={{ padding: "16px 20px", textAlign: "right" }}>
+                  <td style={{ padding: "14px 18px", textAlign: "right" }}>
                     <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}>
                       <Link href={`/portal/dokumentasi/${gallery.id}/edit`} style={{
                         padding: "6px 14px",
@@ -114,7 +183,7 @@ export default async function DokumentasiPage() {
                       </Link>
                       <DeleteButton
                         action={deleteGallery.bind(null, gallery.id)}
-                        confirmMessage={`Hapus event "${gallery.title}" beserta semua fotonya?`}
+                        confirmMessage="Hapus galeri ini beserta semua fotonya?"
                       />
                     </div>
                   </td>
@@ -124,10 +193,6 @@ export default async function DokumentasiPage() {
           </tbody>
         </table>
       </div>
-
-      <p style={{ fontSize: "12px", color: "var(--text-secondary)", marginTop: "16px" }}>
-        💡 Paste URL foto (ImgBB, Cloudinary, atau URL gambar lainnya) ke form, dan foto akan otomatis tampil di website.
-      </p>
     </div>
   );
 }

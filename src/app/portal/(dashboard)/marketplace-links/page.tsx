@@ -1,26 +1,59 @@
 /*
-  portal/marketplace-links/page.tsx — Daftar marketplace links (admin).
+  portal/marketplace-links/page.tsx — Daftar marketplace links (admin) dengan sorting interaktif.
 */
 
+"use client";
+
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+import { useSort } from "@/hooks/useSort";
 
 const PLATFORM_LABELS: Record<string, string> = {
   tokopedia: "Tokopedia",
   shopee: "Shopee",
 };
 
-const PLATFORM_ICONS: Record<string, string> = {
-  tokopedia: "/images/tokopedia-logo.png",
-  shopee: "/images/shopee-logo.png",
+type MarketplaceLink = {
+  id: string;
+  platform: string;
+  url: string | null;
+  is_active: boolean;
+  sort_order: number;
 };
 
-export default async function MarketplaceLinksAdminPage() {
-  const supabase = await createClient();
-  const { data: links } = await supabase
-    .from("marketplace_links")
-    .select("*")
-    .order("sort_order");
+export default function MarketplaceLinksAdminPage() {
+  const [links, setLinks] = useState<MarketplaceLink[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await supabase
+        .from("marketplace_links")
+        .select("*")
+        .order("sort_order");
+      if (data) setLinks(data as MarketplaceLink[]);
+      setLoading(false);
+    }
+    fetchData();
+  }, []);
+
+  const { sortedData, toggleSort, getSortIndicator } = useSort(links, "sort_order");
+
+  const thStyle: React.CSSProperties = {
+    padding: "14px 18px",
+    fontSize: "11px",
+    color: "var(--text-secondary)",
+    textTransform: "uppercase",
+    letterSpacing: "1px",
+    cursor: "pointer",
+    userSelect: "none",
+    whiteSpace: "nowrap",
+  };
+
+  if (loading) {
+    return <div style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)" }}>Memuat...</div>;
+  }
 
   return (
     <div>
@@ -37,22 +70,30 @@ export default async function MarketplaceLinksAdminPage() {
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
             <tr style={{ borderBottom: "1px solid var(--card-border)", textAlign: "left" }}>
-              <th style={{ padding: "14px 18px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Platform</th>
-              <th style={{ padding: "14px 18px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>URL</th>
-              <th style={{ padding: "14px 18px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Status</th>
-              <th style={{ padding: "14px 18px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px", textAlign: "right" }}>Aksi</th>
+              <th style={thStyle} onClick={() => toggleSort("sort_order")}>
+                Urutan{getSortIndicator("sort_order")}
+              </th>
+              <th style={thStyle} onClick={() => toggleSort("platform")}>
+                Platform{getSortIndicator("platform")}
+              </th>
+              <th style={{ ...thStyle, cursor: "default" }}>URL</th>
+              <th style={thStyle} onClick={() => toggleSort("is_active")}>
+                Status{getSortIndicator("is_active")}
+              </th>
+              <th style={{ ...thStyle, textAlign: "right", cursor: "default" }}>Aksi</th>
             </tr>
           </thead>
           <tbody>
-            {(!links || links.length === 0) ? (
+            {sortedData.length === 0 ? (
               <tr>
-                <td colSpan={4} style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", fontSize: "14px" }}>
+                <td colSpan={5} style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", fontSize: "14px" }}>
                   Belum ada data marketplace.
                 </td>
               </tr>
             ) : (
-              links.map((link) => (
+              sortedData.map((link) => (
                 <tr key={link.id} style={{ borderBottom: "1px solid var(--card-border)" }}>
+                  <td style={{ padding: "14px 18px", fontSize: "13px", color: "var(--text-secondary)", textAlign: "center" }}>{link.sort_order}</td>
                   <td style={{ padding: "14px 18px", fontSize: "14px", fontWeight: 600, color: "var(--text-primary)" }}>
                     {PLATFORM_LABELS[link.platform] || link.platform}
                   </td>

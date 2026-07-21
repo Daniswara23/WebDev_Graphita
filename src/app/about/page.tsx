@@ -40,19 +40,19 @@ export default function AboutPage() {
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "24px" }}>
-              <div className="hover-lift" style={{ background: "var(--brand-grahita-bg)", padding: "32px 24px", borderRadius: "var(--radius-lg)", border: "1px solid var(--brand-grahita-border)", textAlign: "center" }}>
+              <div className="grid-item hover-lift hover-glow-blue" style={{ background: "var(--brand-grahita-bg)", padding: "32px 24px", borderRadius: "var(--radius-lg)", border: "1px solid var(--brand-grahita-border)", textAlign: "center", animationDelay: "0s" }}>
                 <div style={{ width: "56px", height: "56px", borderRadius: "var(--radius-full)", border: "2px solid var(--brand-grahita)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: 800, color: "var(--brand-grahita)", fontFamily: "Times New Roman, serif", margin: "0 auto 16px" }}>G</div>
                 <h3 style={{ fontSize: "22px", fontWeight: 700, color: "var(--brand-grahita)", marginBottom: "10px" }}>Grahita</h3>
                 <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6 }}><strong>Pemahaman Mendalam</strong><br />Kepercayaan bahwa setiap perubahan dimulai dari pengenalan konteks yang benar — tidak hanya melihat angka, tetapi memahami cerita.</p>
               </div>
 
-              <div className="hover-lift" style={{ background: "rgba(169, 123, 45, 0.08)", padding: "32px 24px", borderRadius: "var(--radius-lg)", border: "1px solid rgba(169, 123, 45, 0.15)", textAlign: "center" }}>
+              <div className="grid-item hover-lift hover-glow-gold" style={{ background: "rgba(169, 123, 45, 0.08)", padding: "32px 24px", borderRadius: "var(--radius-lg)", border: "1px solid rgba(169, 123, 45, 0.15)", textAlign: "center", animationDelay: "0.15s" }}>
                 <div style={{ width: "56px", height: "56px", borderRadius: "var(--radius-full)", border: "2px solid #a97b2d", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: 800, color: "#a97b2d", fontFamily: "Times New Roman, serif", margin: "0 auto 16px" }}>A</div>
                 <h3 style={{ fontSize: "22px", fontWeight: 700, color: "#a97b2d", marginBottom: "10px" }}>Adhi</h3>
                 <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6 }}><strong>Keunggulan / Pelopor</strong><br />Komitmen untuk selalu hadir sebagai pelopor — mengangkat standar, merancang solusi inovatif, menjadi contoh konkret keberlanjutan.</p>
               </div>
 
-              <div className="hover-lift" style={{ background: "var(--brand-grahita-bg)", padding: "32px 24px", borderRadius: "var(--radius-lg)", border: "1px solid var(--brand-grahita-border)", textAlign: "center" }}>
+              <div className="grid-item hover-lift hover-glow-blue" style={{ background: "var(--brand-grahita-bg)", padding: "32px 24px", borderRadius: "var(--radius-lg)", border: "1px solid var(--brand-grahita-border)", textAlign: "center", animationDelay: "0.3s" }}>
                 <div style={{ width: "56px", height: "56px", borderRadius: "var(--radius-full)", border: "2px solid var(--brand-sasmita)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: 800, color: "var(--brand-sasmita)", fontFamily: "Times New Roman, serif", margin: "0 auto 16px" }}>S</div>
                 <h3 style={{ fontSize: "22px", fontWeight: 700, color: "var(--brand-sasmita)", marginBottom: "10px" }}>Sasmita</h3>
                 <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6 }}><strong>Pendekatan Ramah & Inklusif</strong><br />Setiap interaksi adalah kesempatan membangun hubungan lasting — menghormati perbedaan, mendengarkan, dan menciptakan ruang kolaborasi nyaman.</p>
@@ -65,7 +65,7 @@ export default function AboutPage() {
             <h2 style={{ fontSize: "32px", fontWeight: 700, color: "var(--text-primary)", marginBottom: "24px", textAlign: "center" }}>
               Landasan Cerita
             </h2>
-            <div className="hover-lift" style={{ background: "var(--card-bg)", padding: "48px", borderRadius: "var(--radius-lg)", border: "1px solid var(--card-border)" }}>
+            <div className="hover-lift hover-glow" style={{ background: "var(--card-bg)", padding: "48px", borderRadius: "var(--radius-lg)", border: "1px solid var(--card-border)", transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)" }}>
               <p style={{ fontSize: "18px", color: "var(--text-primary)", lineHeight: "1.8", marginBottom: "24px" }}>
                 Kami mulai dari mendengar. Setiap pendekatan kami rancang berdasarkan siapa Anda, apa yang penting bagi tim, dan bagaimana perubahan itu bisa terasa alami.
               </p>
@@ -81,7 +81,7 @@ export default function AboutPage() {
               Nilai Inti Kami
             </h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "32px" }}>
-<div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "var(--card-bg)", padding: "32px", borderRadius: "var(--radius-lg)", border: "1px solid var(--card-border)", textAlign: "center" }}>
+<div className="grid-item hover-lift hover-glow" style={{ background: "var(--card-bg)", padding: "32px", borderRadius: "var(--radius-lg)", border: "1px solid var(--card-border)", textAlign: "center", animationDelay: "0s" }}>
                 <div style={{ width: "52px", height: "52px", margin: "0 auto 16px", borderRadius: "var(--radius-lg)", background: "rgba(45,106,79,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green-light)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     {/* Gunung — Gigih: 3 puncak bertingkat */}
@@ -95,7 +95,7 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "var(--card-bg)", padding: "32px", borderRadius: "var(--radius-lg)", border: "1px solid var(--card-border)", textAlign: "center" }}>
+              <div className="grid-item hover-lift hover-glow" style={{ background: "var(--card-bg)", padding: "32px", borderRadius: "var(--radius-lg)", border: "1px solid var(--card-border)", textAlign: "center", animationDelay: "0.15s" }}>
                 <div style={{ width: "52px", height: "52px", margin: "0 auto 16px", borderRadius: "var(--radius-lg)", background: "rgba(45,106,79,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green-light)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     {/* Daun — Adaptif: garis kontinu melengkung */}
@@ -110,7 +110,7 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "var(--card-bg)", padding: "32px", borderRadius: "var(--radius-lg)", border: "1px solid var(--card-border)", textAlign: "center" }}>
+              <div className="grid-item hover-lift hover-glow" style={{ background: "var(--card-bg)", padding: "32px", borderRadius: "var(--radius-lg)", border: "1px solid var(--card-border)", textAlign: "center", animationDelay: "0.3s" }}>
                 <div style={{ width: "52px", height: "52px", margin: "0 auto 16px", borderRadius: "var(--radius-lg)", background: "rgba(45,106,79,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green-light)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     {/* Cincin Bertaut — Sinergi: dua lingkaran interlock */}
@@ -137,28 +137,28 @@ export default function AboutPage() {
             </p>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
-              <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "var(--overlay-gold)", padding: "24px", borderRadius: "var(--radius-lg)", border: "1px solid rgba(201,147,58,0.3)" }}>
+              <div className="grid-item hover-lift hover-glow" style={{ background: "var(--overlay-gold)", padding: "24px", borderRadius: "var(--radius-lg)", border: "1px solid rgba(201,147,58,0.3)", animationDelay: "0s" }}>
                 <h4 style={{ fontSize: "20px", fontWeight: 700, color: "var(--gold)", marginBottom: "12px" }}>Pemberdayaan Ekonomi</h4>
                 <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: "1.6" }}>
                   Mendorong peluang kerja dan usaha lokal yang memberi dampak ke masyarakat.
                 </p>
               </div>
 
-              <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "var(--overlay-gold)", padding: "24px", borderRadius: "var(--radius-lg)", border: "1px solid rgba(201,147,58,0.3)" }}>
+              <div className="grid-item hover-lift hover-glow" style={{ background: "var(--overlay-gold)", padding: "24px", borderRadius: "var(--radius-lg)", border: "1px solid rgba(201,147,58,0.3)", animationDelay: "0.15s" }}>
                 <h4 style={{ fontSize: "20px", fontWeight: 700, color: "var(--gold)", marginBottom: "12px" }}>Kesehatan & Kesejahteraan</h4>
                 <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: "1.6" }}>
                   Membantu organisasi menghadirkan lingkungan kerja yang lebih aman dan lebih manusiawi.
                 </p>
               </div>
 
-              <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "var(--overlay-gold)", padding: "24px", borderRadius: "var(--radius-lg)", border: "1px solid rgba(201,147,58,0.3)" }}>
+              <div className="grid-item hover-lift hover-glow" style={{ background: "var(--overlay-gold)", padding: "24px", borderRadius: "var(--radius-lg)", border: "1px solid rgba(201,147,58,0.3)", animationDelay: "0.3s" }}>
                 <h4 style={{ fontSize: "20px", fontWeight: 700, color: "var(--gold)", marginBottom: "12px" }}>Inovasi yang Relevan</h4>
                 <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: "1.6" }}>
                   Menyusun pendekatan baru yang sesuai konteks dan bisa dipraktikkan setiap hari.
                 </p>
               </div>
 
-              <div className="grid-item hover-lift hover-glow animate-delay-100" style={{ background: "var(--overlay-gold)", padding: "24px", borderRadius: "var(--radius-lg)", border: "1px solid rgba(201,147,58,0.3)" }}>
+              <div className="grid-item hover-lift hover-glow" style={{ background: "var(--overlay-gold)", padding: "24px", borderRadius: "var(--radius-lg)", border: "1px solid rgba(201,147,58,0.3)", animationDelay: "0.45s" }}>
                 <h4 style={{ fontSize: "20px", fontWeight: 700, color: "var(--gold)", marginBottom: "12px" }}>Kemitraan Nyata</h4>
                 <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: "1.6" }}>
                   Membangun relasi lintas sektor yang mendukung keberlanjutan jangka panjang.

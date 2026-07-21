@@ -49,6 +49,9 @@ export default async function EditPartnerPage({ params }: { params: Promise<{ id
             <option value="donor" style={{ background: "var(--bg-primary)" }}>Penyandang Dana</option>
             <option value="technical" style={{ background: "var(--bg-primary)" }}>Mitra Teknis</option>
             <option value="government" style={{ background: "var(--bg-primary)" }}>Pemerintah & LSM</option>
+            <option value="corporate" style={{ background: "var(--bg-primary)" }}>Korporasi</option>
+            <option value="academic" style={{ background: "var(--bg-primary)" }}>Lembaga Pendidikan</option>
+            <option value="ngo" style={{ background: "var(--bg-primary)" }}>NGO & Komunitas</option>
           </select>
         </label>
 
@@ -68,6 +71,9 @@ export default async function EditPartnerPage({ params }: { params: Promise<{ id
             <option value="handHeart" style={{ background: "var(--bg-primary)" }}>handHeart (Donor)</option>
             <option value="microscope" style={{ background: "var(--bg-primary)" }}>microscope (Teknis)</option>
             <option value="building" style={{ background: "var(--bg-primary)" }}>building (Pemerintah/LSM)</option>
+            <option value="globe" style={{ background: "var(--bg-primary)" }}>globe (Korporasi)</option>
+            <option value="graduationCap" style={{ background: "var(--bg-primary)" }}>graduationCap (Pendidikan)</option>
+            <option value="users" style={{ background: "var(--bg-primary)" }}>users (NGO/Komunitas)</option>
             <option value="default" style={{ background: "var(--bg-primary)" }}>default (Lingkaran)</option>
           </select>
         </label>

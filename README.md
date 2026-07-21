@@ -19,7 +19,95 @@ Buka [http://localhost:3000](http://localhost:3000) di browser.
 
 ---
 
-## Changelog — WEB_GAS_1.2.6
+## Changelog — WEB_GAS_1.2.8
+
+### 1. Loading Skeleton & Halaman Loading
+
+**Masalah:** Saat navigasi antar halaman (home, contact, dokumentasi), pengalaman pengguna terasa kosong tanpa indikasi loading.
+
+**Solusi:** Dibuat komponen `PageSkeleton` reusable dengan animasi pulse dan spinner, digunakan di 3 halaman utama.
+
+**File baru:**
+- `src/components/LoadingSkeleton.tsx` — Komponen skeleton reusable dengan animasi pulse + spinner
+- `src/app/loading.tsx` — Loading state untuk halaman home
+- `src/app/contact/loading.tsx` — Loading state untuk halaman contact
+- `src/app/dokumentasi/loading.tsx` — Loading state untuk halaman dokumentasi
+
+### 2. Sortable Tables (useSort Hook)
+
+**Masalah:** Tabel di portal admin tidak bisa diurutkan berdasarkan kolom, menyulitkan pencarian data ketika jumlah data sudah banyak.
+
+**Solusi:** Dibuat custom hook `useSort` yang menyediakan sorting ascending/descending untuk semua tipe data (string, number, boolean) dengan locale Indonesia.
+
+**File baru:**
+- `src/hooks/useSort.ts` — Custom hook useSort dengan toggle direction dan sort indicator
+
+**File diubah (menerapkan sortable tables):**
+- `src/app/portal/(dashboard)/case-videos/page.tsx` — Sortable columns
+- `src/app/portal/(dashboard)/dokumentasi/page.tsx` — Sortable columns
+- `src/app/portal/(dashboard)/ekosistem/page.tsx` — Sortable columns
+- `src/app/portal/(dashboard)/marketplace-links/page.tsx` — Sortable columns
+- `src/app/portal/(dashboard)/social-links/page.tsx` — Sortable columns
+- `src/app/portal/(dashboard)/testimoni/page.tsx` — Sortable columns
+- `src/app/portal/(dashboard)/toko/page.tsx` — Sortable columns
+
+### 3. Visual Refinements — Animasi & Hover Effects
+
+**Perbaikan tampilan pada halaman About dan komponen global:**
+
+**File diubah:**
+- `src/app/about/page.tsx` — Menambahkan class `hover-glow-blue`, `hover-glow-gold`, `grid-item`, serta `animationDelay` pada setiap card filosofi nama, nilai inti, dan fokus dampak
+- `src/app/globals.css` — Menambahkan:
+  - Style dasar `.grid-item` dengan opacity & transform untuk scroll animation
+  - Utility class `.hover-glow-blue` dan `.hover-glow-gold`
+  - Animasi `@keyframes spin` untuk loading spinner
+  - Class `.loading` dengan pulse animation
+
+### 4. Portfolio Statistik — Menambahkan Photo Galleries
+
+**Masalah:** Counter portofolio visual di StatsBar hanya menghitung articles + research_reports, belum termasuk photo_galleries.
+
+**Solusi:** Menambahkan query count dari tabel `photo_galleries` (is_published = true) ke dalam total portofolio.
+
+**File diubah:**
+- `src/components/StatsBar.tsx` — Menambahkan `photo_galleries` count ke total portofolio
+
+### 5. EcosystemHub — Cegah Duplikat Partner & Case Studies
+
+**Masalah:** Data partner dan case studies di EcosystemHub bisa tampil duplikat jika ada data serupa di database.
+
+**Solusi:** Menambahkan deduplikasi dengan `Map` berdasarkan kombinasi key unik.
+
+**File diubah:**
+- `src/components/EcosystemHub.tsx` — Filter duplikat partner (key: category + name) dan case studies (key: title + client + sector)
+
+### 6. Security Headers — CSP, HSTS & More
+
+**Masalah:** Website belum memiliki security headers untuk melindungi dari serangan XSS, clickjacking, dan MIME-type sniffing.
+
+**Solusi:** Menambahkan security headers lengkap di `next.config.ts` melalui fungsi `headers()`.
+
+**File diubah:**
+- `next.config.ts` — Menambahkan:
+  - Content-Security-Policy (CSP)
+  - X-Frame-Options: DENY
+  - X-Content-Type-Options: nosniff
+  - Strict-Transport-Security (HSTS, max-age=2 tahun)
+  - Referrer-Policy: strict-origin-when-cross-origin
+  - Permissions-Policy (nonaktifkan camera, microphone, geolocation)
+
+### 7. Perbaikan Minor
+
+- `src/app/services/page.tsx` — Minor styling adjustment
+- `src/components/CtaBand.tsx` — Button styling improvements
+- `src/components/Footer.tsx` — Minor styling updates
+- `src/components/Etos3T.tsx` — Minor styling updates
+- `src/components/ContactForm.tsx` — Minor adjustment
+- `src/app/page.tsx` — Lazy loading order refinement
+
+---
+
+## Changelog — WEB_GAS_1.2.7
 
 ### 1. Perbaikan Error "Unexpected end of form" (Next.js 16 + Turbopack)
 
@@ -96,3 +184,11 @@ Buka [http://localhost:3000](http://localhost:3000) di browser.
 
 - `src/lib/supabase/upload.ts` — Dihapus (deprecated, digantikan `fileUpload.ts`)
 - `src/components/EditFormWrapper.tsx` — Dihapus (tidak jadi dipakai)
+
+---
+
+## Changelog — WEB_GAS_1.2.6
+
+...
+
+*(Changelog sebelumnya tidak diubah dan tetap tersimpan)*

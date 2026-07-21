@@ -53,6 +53,31 @@ const iconMap: Record<string, React.ReactNode> = {
       <path d="M9 14h.01M15 14h.01M9 17h.01M13 17h.01" />
     </svg>
   ),
+  // Bola dunia — korporasi
+  globe: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="28" height="28">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+      <path d="M2 12h20" />
+    </svg>
+  ),
+  // Topi toga — lembaga pendidikan
+  graduationCap: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="28" height="28">
+      <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+      <path d="M22 10v6" />
+      <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+    </svg>
+  ),
+  // Dua orang — NGO & komunitas
+  users: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="28" height="28">
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+      <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+      <circle cx="9" cy="7" r="4" />
+    </svg>
+  ),
   // Default: lingkaran sebagai fallback
   default: (
     <svg viewBox="0 0 24 24" fill="none" stroke="#52b788" strokeWidth="1.5" width="28" height="28">
@@ -128,6 +153,9 @@ export default function EcosystemHub() {
               {cat === "donor" && "Penyandang Dana"}
               {cat === "technical" && "Mitra Teknis"}
               {cat === "government" && "Pemerintah & LSM"}
+              {cat === "corporate" && "Korporasi"}
+              {cat === "academic" && "Lembaga Pendidikan"}
+              {cat === "ngo" && "NGO & Komunitas"}
             </button>
           ))}
         </div>
@@ -139,6 +167,9 @@ export default function EcosystemHub() {
               {activeCategory === "donor" && "Penyandang Dana"}
               {activeCategory === "technical" && "Mitra Teknis"}
               {activeCategory === "government" && "Pemerintah & Organisasi Sosial"}
+              {activeCategory === "corporate" && "Korporasi"}
+              {activeCategory === "academic" && "Lembaga Pendidikan"}
+              {activeCategory === "ngo" && "NGO & Komunitas"}
             </h3>
             <p style={{ fontSize: "var(--text-base)", color: "var(--text-secondary)", marginBottom: "32px", lineHeight: 1.6 }}>
               {activePartners[0]?.description}

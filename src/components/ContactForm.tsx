@@ -153,7 +153,7 @@ export default function ContactForm() {
           </div>
         )}
 
-        <form ref={formRef} onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+        <form ref={formRef} onSubmit={handleSubmit} method="POST" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           {/* Honeypot — tidak terlihat oleh manusia */}
           <div style={{ position: "absolute", left: "-9999px", opacity: 0 }} aria-hidden="true">
             <label htmlFor="website">Website</label>

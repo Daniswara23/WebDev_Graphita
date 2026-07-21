@@ -1,18 +1,56 @@
 /*
-  portal/toko/page.tsx — Daftar produk toko (admin).
+  portal/toko/page.tsx — Daftar produk toko (admin) dengan sorting interaktif.
 */
 
+"use client";
+
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 import { deleteProduct } from "./actions";
 import DeleteButton from "@/app/portal/(dashboard)/DeleteButton";
+import { useSort } from "@/hooks/useSort";
 
-export default async function TokoAdminPage() {
-  const supabase = await createClient();
-  const { data: products } = await supabase
-    .from("products")
-    .select("*")
-    .order("sort_order");
+type Product = {
+  id: string;
+  name: string;
+  label: string | null;
+  is_active: boolean;
+  sort_order: number;
+};
+
+export default function TokoAdminPage() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await supabase
+        .from("products")
+        .select("id, name, label, is_active, sort_order")
+        .order("sort_order");
+      if (data) setProducts(data as Product[]);
+      setLoading(false);
+    }
+    fetchData();
+  }, []);
+
+  const { sortedData, toggleSort, getSortIndicator } = useSort(products, "sort_order");
+
+  const thStyle: React.CSSProperties = {
+    padding: "16px 20px",
+    fontSize: "11px",
+    color: "var(--text-secondary)",
+    textTransform: "uppercase",
+    letterSpacing: "1px",
+    cursor: "pointer",
+    userSelect: "none",
+    whiteSpace: "nowrap",
+  };
+
+  if (loading) {
+    return <div style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)" }}>Memuat...</div>;
+  }
 
   return (
     <div>
@@ -44,22 +82,32 @@ export default async function TokoAdminPage() {
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
             <tr style={{ borderBottom: "1px solid var(--card-border)", textAlign: "left" }}>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Nama Produk</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Label</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Status</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px", textAlign: "right" }}>Aksi</th>
+              <th style={thStyle} onClick={() => toggleSort("sort_order")}>
+                Urutan{getSortIndicator("sort_order")}
+              </th>
+              <th style={thStyle} onClick={() => toggleSort("name")}>
+                Nama Produk{getSortIndicator("name")}
+              </th>
+              <th style={thStyle} onClick={() => toggleSort("label")}>
+                Label{getSortIndicator("label")}
+              </th>
+              <th style={thStyle} onClick={() => toggleSort("is_active")}>
+                Status{getSortIndicator("is_active")}
+              </th>
+              <th style={{ ...thStyle, textAlign: "right", cursor: "default" }}>Aksi</th>
             </tr>
           </thead>
           <tbody>
-            {(!products || products.length === 0) ? (
+            {sortedData.length === 0 ? (
               <tr>
-                <td colSpan={4} style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", fontSize: "14px" }}>
+                <td colSpan={5} style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", fontSize: "14px" }}>
                   Belum ada produk. Klik "+ Produk Baru" untuk menambah.
                 </td>
               </tr>
             ) : (
-              products.map((product) => (
+              sortedData.map((product) => (
                 <tr key={product.id} style={{ borderBottom: "1px solid var(--card-border)" }}>
+                  <td style={{ padding: "16px 20px", fontSize: "13px", color: "var(--text-secondary)", textAlign: "center" }}>{product.sort_order}</td>
                   <td style={{ padding: "16px 20px" }}>
                     <div style={{ fontSize: "15px", fontWeight: 600, color: "var(--text-primary)" }}>{product.name}</div>
                   </td>

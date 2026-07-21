@@ -29,7 +29,7 @@ export default function Footer() {
 
   return (
     <footer className="site-footer" style={{ background: "var(--footer-bg)", padding: "48px 56px 24px", borderTop: "1px solid var(--footer-border)" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "32px", maxWidth: "1200px", margin: "0 auto" }}>
+      <div className="animate-on-scroll" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "32px", maxWidth: "1200px", margin: "0 auto" }}>
         <div style={{ maxWidth: "300px" }}>
           <div style={{ fontFamily: "var(--font-primary)", fontSize: "var(--text-2xl)", fontWeight: 700, letterSpacing: "0.5px", marginBottom: "12px" }}>
             <span style={{ color: "var(--brand-grahita)" }}>Grahita</span>{" "}

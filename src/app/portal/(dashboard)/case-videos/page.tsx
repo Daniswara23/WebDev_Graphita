@@ -1,18 +1,57 @@
 /*
-  case-videos/page.tsx — Daftar video carousel "Sekilas Tentang Kami" (admin).
+  case-videos/page.tsx — Daftar video carousel "Sekilas Tentang Kami" (admin) dengan sorting interaktif.
 */
 
+"use client";
+
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 import { deleteCaseVideo } from "./actions";
 import DeleteButton from "@/app/portal/(dashboard)/DeleteButton";
+import { useSort } from "@/hooks/useSort";
 
-export default async function CaseVideosPage() {
-  const supabase = await createClient();
-  const { data: videos } = await supabase
-    .from("case_videos")
-    .select("id, title, video_url, sort_order, is_active, created_at")
-    .order("sort_order", { ascending: true });
+type Video = {
+  id: string;
+  title: string;
+  video_url: string;
+  sort_order: number;
+  is_active: boolean;
+  created_at: string;
+};
+
+export default function CaseVideosPage() {
+  const [videos, setVideos] = useState<Video[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await supabase
+        .from("case_videos")
+        .select("id, title, video_url, sort_order, is_active, created_at")
+        .order("sort_order", { ascending: true });
+      if (data) setVideos(data as Video[]);
+      setLoading(false);
+    }
+    fetchData();
+  }, []);
+
+  const { sortedData, toggleSort, getSortIndicator } = useSort(videos, "sort_order");
+
+  const thStyle: React.CSSProperties = {
+    padding: "16px 20px",
+    fontSize: "11px",
+    color: "var(--text-secondary)",
+    textTransform: "uppercase",
+    letterSpacing: "1px",
+    cursor: "pointer",
+    userSelect: "none",
+    whiteSpace: "nowrap",
+  };
+
+  if (loading) {
+    return <div style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)" }}>Memuat...</div>;
+  }
 
   return (
     <div>
@@ -22,7 +61,7 @@ export default async function CaseVideosPage() {
             Video Carousel
           </h1>
           <p style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
-            Kelola video untuk section "Sekilas Tentang Kami". Video ditampilkan sebagai carousel di samping gambar.
+            Kelola video untuk section &ldquo;Sekilas Tentang Kami&rdquo;. Video ditampilkan sebagai carousel di samping gambar.
           </p>
         </div>
         <Link href="/portal/case-videos/create" style={{
@@ -44,22 +83,28 @@ export default async function CaseVideosPage() {
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
             <tr style={{ borderBottom: "1px solid var(--card-border)", textAlign: "left" }}>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Judul</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Link</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Urutan</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px" }}>Status</th>
-              <th style={{ padding: "16px 20px", fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "1px", textAlign: "right" }}>Aksi</th>
+              <th style={thStyle} onClick={() => toggleSort("title")}>
+                Judul{getSortIndicator("title")}
+              </th>
+              <th style={{ ...thStyle, cursor: "default" }}>Link</th>
+              <th style={thStyle} onClick={() => toggleSort("sort_order")}>
+                Urutan{getSortIndicator("sort_order")}
+              </th>
+              <th style={thStyle} onClick={() => toggleSort("is_active")}>
+                Status{getSortIndicator("is_active")}
+              </th>
+              <th style={{ ...thStyle, textAlign: "right", cursor: "default" }}>Aksi</th>
             </tr>
           </thead>
           <tbody>
-            {(!videos || videos.length === 0) ? (
+            {sortedData.length === 0 ? (
               <tr>
                 <td colSpan={5} style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", fontSize: "14px" }}>
                   Belum ada video. Klik "+ Video Baru" untuk menambahkan.
                 </td>
               </tr>
             ) : (
-              videos.map((video) => (
+              sortedData.map((video) => (
                 <tr key={video.id} style={{ borderBottom: "1px solid var(--card-border)" }}>
                   <td style={{ padding: "16px 20px" }}>
                     <div style={{ fontSize: "15px", fontWeight: 600, color: "var(--text-primary)" }}>{video.title}</div>
