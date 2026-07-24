@@ -145,7 +145,7 @@ export default function Navbar() {
             href="/portal/login"
             className="navbar-admin-link"
             style={{
-              fontSize: "11px",
+              fontSize: "clamp(9px, 0.9vw, 11px)",
               color: "var(--navbar-text)",
               textDecoration: "none",
               letterSpacing: "1px",
@@ -167,7 +167,7 @@ export default function Navbar() {
                 background: "var(--gold)",
                 color: "var(--navy-dark)",
                 fontFamily: "var(--font-primary)",
-                fontSize: "var(--text-sm)",
+                fontSize: "clamp(10px, 1vw, 13px)",
                 fontWeight: 500,
                 letterSpacing: "1px",
                 textTransform: "uppercase",

@@ -466,13 +466,6 @@ html:not(.light-mode) .contact-form-select {
   }
 }
 
-/* Medium/Large screens: sembunyikan Admin link agar tidak bertumpuk */
-@media (max-width: 1400px) {
-  .navbar-admin-link {
-    display: none !important;
-  }
-}
-
 /* StatsBar responsive */
 @media (max-width: 768px) {
   .stats-bar-container {
