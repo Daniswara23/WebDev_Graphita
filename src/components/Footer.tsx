@@ -59,9 +59,13 @@ export default function Footer() {
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
               <circle cx="12" cy="9" r="2.5" />
             </svg>
-            <span style={{ fontSize: "var(--text-sm)", color: "var(--footer-link)" }}>Area Sawah, Tlogoadi, Mlati, Sleman Regency, Special Region of Yogyakarta 55288</span>
+            <span style={{ fontSize: "var(--text-sm)", color: "var(--footer-link)" }}>
+              Plaosan RT.06/RW.18 Area Sawah Tlogoadi<br />
+              Kecamatan Mlati Kabupaten Sleman<br />
+              Daerah Istimewa Yogyakarta 55288, Indonesia
+            </span>
           </div>
-          <p style={{ fontSize: "var(--text-sm)", color: "var(--footer-link)" }}>hello@grahitaadhisasmita.com</p>
+          <p style={{ fontSize: "var(--text-sm)", color: "var(--footer-link)" }}>client-service@grahitas.co.id</p>
           <p style={{ fontSize: "var(--text-sm)", color: "var(--footer-link)" }}>+62 21 1234 5678</p>
         </div>
       </div>

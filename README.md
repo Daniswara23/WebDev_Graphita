@@ -107,6 +107,56 @@ Buka [http://localhost:3000](http://localhost:3000) di browser.
 
 ---
 
+## Changelog — WEB_GAS_1.2.9
+
+### 1. Idle Timeout — Auto-Logout Portal Admin
+
+**Masalah:** Sesi admin tetap aktif meskipun tidak ada aktivitas, meningkatkan risiko keamanan jika admin meninggalkan perangkat.
+
+**Solusi:** Dibuat komponen `IdleTimeout` yang mendeteksi inactivity selama 30 menit, menampilkan warning modal 30 detik sebelum logout otomatis.
+
+**File baru:**
+- `src/components/IdleTimeout.tsx` — Client component dengan event listener (mousedown, keydown, mousemove, touchstart, scroll, click) untuk mereset timer, modal warning dengan tombol "Saya masih di sini" dan "Logout Sekarang"
+
+**File diubah:**
+- `src/app/portal/(dashboard)/layout.tsx` — Integrasi komponen `IdleTimeout` di layout dashboard
+
+### 2. Responsive Navbar — Sembunyikan Admin Link di Layar Sedang
+
+**Masalah:** Link "Admin" di navbar bertumpuk dengan menu lain pada layar 1200–1400px.
+
+**Solusi:** Menambahkan media query untuk menyembunyikan `.navbar-admin-link` pada layar ≤1400px.
+
+**File diubah:**
+- `src/app/globals.css` — Menambahkan `@media (max-width: 1400px) { .navbar-admin-link { display: none !important; } }`
+
+### 3. Portal Layout Refinements
+
+**Perbaikan tata letak halaman portal untuk konsistensi dan keamanan.**
+
+**File diubah:**
+- `src/app/portal/layout.tsx` — Penyesuaian layout portal
+- `src/app/portal/(dashboard)/layout.tsx` — Penambahan komentar dokumentasi dan import IdleTimeout
+
+### 4. Proxy Improvements
+
+**Peningkatan pada proxy server untuk menangani request dengan lebih baik.**
+
+**File diubah:**
+- `src/proxy.ts` — Perubahan signifikan (69 baris baru) untuk meningkatkan handling proxy
+
+### 5. UI Component Updates
+
+**Perbaikan minor pada beberapa komponen UI.**
+
+**File diubah:**
+- `src/components/ContactSection.tsx` — Penyesuaian section kontak
+- `src/components/Footer.tsx` — Update styling footer
+- `src/components/Navbar.tsx` — Penyesuaian navigasi
+- `src/components/TestimonialsModal.tsx` — Perbaikan modal testimoni
+
+---
+
 ## Changelog — WEB_GAS_1.2.7
 
 ### 1. Perbaikan Error "Unexpected end of form" (Next.js 16 + Turbopack)

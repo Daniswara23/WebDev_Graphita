@@ -84,11 +84,13 @@ export default function ContactSection({ socialLinks }: { socialLinks: SocialLin
               <strong>Grahita Adhi Sasmita</strong>
             </p>
             <p style={{ fontSize: "var(--text-base)", color: "var(--text-secondary)", lineHeight: "var(--line-relaxed)", marginBottom: "16px" }}>
-              Area Sawah, Tlogoadi, Mlati, Sleman Regency, Special Region of Yogyakarta 55288
+              Plaosan RT.06/RW.18 Area Sawah Tlogoadi<br />
+              Kecamatan Mlati Kabupaten Sleman<br />
+              Daerah Istimewa Yogyakarta 55288, Indonesia
             </p>
             <div style={{ background: "var(--overlay-gold)", padding: "16px", borderRadius: "var(--radius-lg)", border: "1px solid rgba(201,147,58,0.2)" }}>
               <p style={{ fontSize: "var(--text-base)", color: "var(--text-primary)", margin: "0" }}>
-                hello@grahitaadhisasmita.com
+                client-service@grahitas.co.id
               </p>
               <p style={{ fontSize: "var(--text-base)", color: "var(--text-primary)", margin: "8px 0 0 0" }}>
                 +62 21 1234 5678

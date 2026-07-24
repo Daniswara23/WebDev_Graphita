@@ -143,7 +143,7 @@ export default function TestimonialsModal({ onClose }: { onClose: () => void }) 
               transition: "color 0.3s ease, transform 0.3s ease",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.color = "var(--white)";
+              e.currentTarget.style.color = "var(--gold-light)";
               e.currentTarget.style.transform = "rotate(90deg)";
             }}
             onMouseLeave={(e) => {

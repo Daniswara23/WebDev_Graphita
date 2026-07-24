@@ -85,7 +85,7 @@ export default function Navbar() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "clamp(12px, 2.5vw, 36px)",
+            gap: "clamp(8px, 1.6vw, 36px)",
             listStyle: "none",
           }}
           className="navbar-desktop-menu"
@@ -138,11 +138,12 @@ export default function Navbar() {
         {/* DESKTOP AKSI */}
         <div
           className="navbar-desktop-menu"
-          style={{ display: "flex", gap: "12px", alignItems: "center" }}
+          style={{ display: "flex", gap: "clamp(8px, 1.2vw, 12px)", alignItems: "center" }}
         >
           <ThemeToggle />
           <Link
             href="/portal/login"
+            className="navbar-admin-link"
             style={{
               fontSize: "11px",
               color: "var(--navbar-text)",
@@ -161,7 +162,7 @@ export default function Navbar() {
             <button
               className="hover-lift hover-glow"
               style={{
-                padding: "8px 22px",
+                padding: "8px clamp(12px, 1.5vw, 22px)",
                 border: "1px solid var(--gold)",
                 background: "var(--gold)",
                 color: "var(--navy-dark)",
@@ -172,6 +173,7 @@ export default function Navbar() {
                 textTransform: "uppercase",
                 cursor: "pointer",
                 borderRadius: "var(--radius-lg)",
+                whiteSpace: "nowrap",
               }}
             >
               Mulai Kolaborasi

@@ -1,7 +1,7 @@
 /*
   portal/layout.tsx — Root layout untuk semua halaman /portal/*.
-  Layout minimal tanpa auth guard.
-  Auth guard + sidebar ada di (dashboard)/layout.tsx.
+  Auth guard sudah di-handle oleh src/proxy.ts.
+  Layout ini hanya sebagai wrapper minimal.
 */
 
 export default function PortalRootLayout({ children }: { children: React.ReactNode }) {
