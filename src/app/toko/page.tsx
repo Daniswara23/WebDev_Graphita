@@ -9,6 +9,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { createClient } from "@/lib/supabase/server";
 import TokoClient from "./toko-client";
+import type { Product, MarketplaceLink } from "./types";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -24,24 +25,6 @@ export const metadata: Metadata = {
       "Produk pangan asli, langsung dari petani dan UMKM lokal. Beli melalui Tokopedia, Shopee, atau channel e-commerce resmi.",
     url: "https://grahitas.co.id/toko",
   },
-};
-
-export type Product = {
-  id: string;
-  name: string;
-  description: string;
-  label: string | null;
-  image_url: string | null;
-  tokopedia_url: string | null;
-  shopee_url: string | null;
-};
-
-export type MarketplaceLink = {
-  id: string;
-  platform: string;
-  url: string | null;
-  is_active: boolean;
-  sort_order: number;
 };
 
 export default async function TokoPage() {

@@ -6,7 +6,7 @@
 */
 
 import { useState, useMemo } from "react";
-import type { Product, MarketplaceLink } from "./page";
+import type { Product, MarketplaceLink } from "./types";
 
 // Styles constants
 const SHARED_STYLES = {

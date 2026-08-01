@@ -6,7 +6,7 @@
 */
 
 import Link from "next/link";
-import type { Article, ResearchReport } from "./page";
+import type { Article, ResearchReport } from "./types";
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr + "T12:00:00");

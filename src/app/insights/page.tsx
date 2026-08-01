@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { createClient } from "@/lib/supabase/server";
 import InsightsClient from "./insights-client";
+import type { Article, ResearchReport } from "./types";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -23,25 +24,6 @@ export const metadata: Metadata = {
       "Artikel, publikasi ilmiah, dan laporan riset mengenai keberlanjutan, ESG, dan pembangunan berkelanjutan.",
     url: "https://grahitas.co.id/insights",
   },
-};
-
-export type Article = {
-  id: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  published_at: string;
-  file_url: string | null;
-  external_url: string | null;
-};
-
-export type ResearchReport = {
-  id: string;
-  title: string;
-  subtitle: string;
-  year: number;
-  category: string;
-  file_url: string | null;
 };
 
 export default async function InsightsPage() {
