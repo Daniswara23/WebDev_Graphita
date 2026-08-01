@@ -19,6 +19,46 @@ Buka [http://localhost:3000](http://localhost:3000) di browser.
 
 ---
 
+## Changelog — WEB_GAS_1.3.0
+
+### 1. Perbaikan Form Kontak — Honeypot False Positive & Validasi 1000 Kata
+
+**Masalah 1 (Honeypot False Positive):** Honeypot anti-spam lama menggunakan `<input type="text" name="website">` dengan label "Website" yang disembunyikan via CSS. Browser autofill (Chrome/Edge) menganggapnya field valid dan mengisinya otomatis saat user mengetik nama/email yang sama dengan pengiriman sebelumnya. Akibatnya form dianggap bot → halaman langsung menampilkan "Pesan Terkirim!" **tanpa insert ke database** → pesan tidak muncul di admin.
+
+**Masalah 2 (Validasi >1000 kata tidak berfungsi):** Check honeypot berada sebelum check word count. Karena honeypot terisi autofill, fungsi langsung `return` sebelum validasi kata dijalankan — sehingga pesan >1000 kata tetap menampilkan sukses tanpa error.
+
+**Solusi:**
+- Honeypot diubah menjadi `<input type="hidden" name="company_website">` — browser autofill tidak akan pernah mengisi field hidden, namun bot naif yang mengisi semua field tetap terdeteksi
+- Tombol submit di-disable saat pesan >1000 kata (tampilan "Pesan Terlalu Panjang" dengan opacity 50%)
+- Pesan error permanen ditampilkan di bawah textarea + border merah saat melebihi 1000 kata
+- Error handling Supabase ditingkatkan — deteksi `error.code === "23514"` (constraint violation) dengan pesan spesifik per constraint
+- `console.error` dengan detail error untuk memudahkan diagnosa
+
+**File diubah:**
+- `src/components/ContactForm.tsx` — Perbaikan honeypot, validasi word count, dan error handling
+
+**File baru (migrasi database):**
+- `supabase/022_fix_contact_validation.sql` — Perbaikan fungsi `fn_count_words` (mengembalikan 0 untuk input kosong, bukan NULL) + pastikan CHECK constraints aktif (idempotent)
+
+### 2. Fitur Hapus Pesan di Admin Portal
+
+**Masalah:** Admin tidak bisa menghapus pesan masuk di halaman `/portal/pesan` karena tidak ada RLS policy DELETE untuk tabel `contact_submissions` di database.
+
+**Solusi:**
+- Menambahkan RLS policy DELETE untuk admin di tabel `contact_submissions`
+- Membuat server action `deletePesan(id)` dengan proteksi `requireAuth()`
+- Menambahkan tombol Hapus (dengan konfirmasi) di halaman daftar pesan dan halaman detail pesan
+
+**File baru:**
+- `supabase/023_add_contact_delete_policy.sql` — RLS policy DELETE untuk admin
+- `src/app/portal/(dashboard)/pesan/actions.ts` — Server action delete pesan
+
+**File diubah:**
+- `src/app/portal/(dashboard)/pesan/page.tsx` — Tombol Hapus di daftar pesan
+- `src/app/portal/(dashboard)/pesan/[id]/page.tsx` — Tombol Hapus di halaman detail
+
+---
+
 ## Changelog — WEB_GAS_1.2.8
 
 ### 1. Loading Skeleton & Halaman Loading

@@ -5,6 +5,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { deletePesan } from "../actions";
+import DeleteButton from "@/app/portal/(dashboard)/DeleteButton";
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
@@ -24,9 +26,12 @@ export default async function PesanDetailPage({ params }: { params: Promise<{ id
         &larr; Kembali ke daftar pesan
       </Link>
 
-      <h1 style={{ fontSize: "28px", fontWeight: 700, color: "var(--text-primary)", marginBottom: "32px" }}>
-        Detail Pesan
-      </h1>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "32px" }}>
+        <h1 style={{ fontSize: "28px", fontWeight: 700, color: "var(--text-primary)", margin: 0 }}>
+          Detail Pesan
+        </h1>
+        <DeleteButton action={deletePesan.bind(null, msg.id)} confirmMessage="Hapus pesan ini?" />
+      </div>
 
       <div style={{ maxWidth: "720px", display: "flex", flexDirection: "column", gap: "16px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: "12px", padding: "16px 20px", background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: "var(--radius-lg)" }}>

@@ -4,6 +4,8 @@
 
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { deletePesan } from "./actions";
+import DeleteButton from "@/app/portal/(dashboard)/DeleteButton";
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
@@ -81,17 +83,20 @@ export default async function PesanPage() {
                       {formatDate(msg.created_at)}
                     </td>
                     <td style={{ padding: "16px 20px", textAlign: "right" }}>
-                      <Link href={`/portal/pesan/${msg.id}`} style={{
-                        padding: "6px 14px",
-                        background: "var(--bg-secondary)",
-                        border: "1px solid var(--border-subtle)",
-                        borderRadius: "var(--radius-md)",
-                        color: "var(--text-primary)",
-                        textDecoration: "none",
-                        fontSize: "12px",
-                      }}>
-                        Detail
-                      </Link>
+                      <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}>
+                        <Link href={`/portal/pesan/${msg.id}`} style={{
+                          padding: "6px 14px",
+                          background: "var(--bg-secondary)",
+                          border: "1px solid var(--border-subtle)",
+                          borderRadius: "var(--radius-md)",
+                          color: "var(--text-primary)",
+                          textDecoration: "none",
+                          fontSize: "12px",
+                        }}>
+                          Detail
+                        </Link>
+                        <DeleteButton action={deletePesan.bind(null, msg.id)} confirmMessage="Hapus pesan ini?" />
+                      </div>
                     </td>
                   </tr>
                 );

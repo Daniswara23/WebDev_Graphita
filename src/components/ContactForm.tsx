@@ -1,13 +1,21 @@
 /*
   ContactForm.tsx — FORMULIR KONTAK
   Kiriman disimpan ke tabel `contact_submissions` di Supabase.
-  Dilengkapi honeypot + time validation anti-spam.
+  Dilengkapi honeypot anti-spam + validasi kata (maksimal 1000 kata).
 */
 
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { supabase } from "@/lib/supabase";
+
+const MAX_WORDS = 1000;
+
+function countWords(text: string): number {
+  const trimmed = text.trim();
+  if (!trimmed) return 0;
+  return trimmed.split(/\s+/).length;
+}
 
 function FormButtonText() {
   const type = typeof window !== "undefined"
@@ -25,6 +33,9 @@ export default function ContactForm() {
   const [formError, setFormError] = useState<string | null>(null);
   const [formSuccess, setFormSuccess] = useState(false);
   const [loadTime] = useState(() => Date.now()); // catat kapan form dirender
+  const [wordCount, setWordCount] = useState(0);
+
+  const isOverLimit = wordCount > MAX_WORDS;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,10 +44,13 @@ export default function ContactForm() {
     const formData = new FormData(formRef.current);
 
     // --- HONEYPOT CHECK ---
-    const honeypot = formData.get("website") as string;
+    // Field tersembunyi (type="hidden") — browser autofill tidak akan mengisinya,
+    // hanya bot naif yang mengisi semua field.
+    const honeypot = formData.get("company_website") as string;
     if (honeypot) {
       // Bot terdeteksi — diam-diam anggap sukses agar bot tidak curiga
       setFormSuccess(true);
+      setWordCount(0);
       formRef.current.reset();
       return;
     }
@@ -55,6 +69,13 @@ export default function ContactForm() {
     const requestType      = formData.get("request_type")     as string;
     const serviceInterest  = formData.get("service_interest") as string;
 
+    // --- WORD COUNT VALIDATION ---
+    const msgWordCount = countWords(message);
+    if (msgWordCount > MAX_WORDS) {
+      setFormError(`Pesan maksimal ${MAX_WORDS} kata. Anda menulis ${msgWordCount} kata. Silakan persingkat pesan Anda.`);
+      return;
+    }
+
     setSubmitting(true);
     setFormError(null);
 
@@ -65,9 +86,28 @@ export default function ContactForm() {
     setSubmitting(false);
 
     if (error) {
-      setFormError("Terjadi kesalahan. Silakan coba lagi.");
+      console.error("Contact form insert error:", error);
+
+      // 23514 = constraint violation dari database
+      if (error.code === "23514") {
+        const detail = error.message || "";
+        if (detail.includes("message_word_limit")) {
+          setFormError(`Pesan maksimal ${MAX_WORDS} kata. Silakan persingkat pesan Anda.`);
+        } else if (detail.includes("email_valid")) {
+          setFormError("Format email tidak valid. Periksa kembali alamat email Anda.");
+        } else if (detail.includes("name_length")) {
+          setFormError("Nama harus diisi dan maksimal 100 karakter.");
+        } else if (detail.includes("organization_length")) {
+          setFormError("Perusahaan/Organisasi maksimal 200 karakter.");
+        } else {
+          setFormError("Data yang Anda masukkan tidak valid. Periksa kembali formulir Anda.");
+        }
+      } else {
+        setFormError("Terjadi kesalahan. Silakan coba lagi.");
+      }
     } else {
       setFormSuccess(true);
+      setWordCount(0);
       formRef.current.reset();
     }
   };
@@ -153,12 +193,16 @@ export default function ContactForm() {
           </div>
         )}
 
-        <form ref={formRef} onSubmit={handleSubmit} method="POST" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          {/* Honeypot — tidak terlihat oleh manusia */}
-          <div style={{ position: "absolute", left: "-9999px", opacity: 0 }} aria-hidden="true">
-            <label htmlFor="website">Website</label>
-            <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
-          </div>
+        <form ref={formRef} onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+          {/* Honeypot — type="hidden" agar browser autofill tidak pernah mengisinya */}
+          <input
+            type="hidden"
+            name="company_website"
+            value=""
+            autoComplete="off"
+            tabIndex={-1}
+            aria-hidden="true"
+          />
 
           <div className="contact-form-row">
             <input
@@ -166,6 +210,7 @@ export default function ContactForm() {
               type="text"
               placeholder="Nama Anda"
               required
+              maxLength={100}
               style={{ flex: 1, padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "var(--text-base)" }}
             />
             <input
@@ -173,6 +218,7 @@ export default function ContactForm() {
               type="email"
               placeholder="Alamat Email"
               required
+              maxLength={254}
               style={{ flex: 1, padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "var(--text-base)" }}
             />
           </div>
@@ -181,6 +227,7 @@ export default function ContactForm() {
             type="text"
             placeholder="Perusahaan/Organisasi"
             className="contact-form-input"
+            maxLength={200}
             style={{ padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "var(--text-base)" }}
           />
           <div className="contact-form-row">
@@ -208,16 +255,32 @@ export default function ContactForm() {
   <option value="lainnya">Lainnya</option>
 </select>
           </div>
-          <textarea
-            name="message"
-            placeholder="Ceritakan tentang tantangan Anda..."
-            rows={4}
-            required
-            style={{ padding: "14px 20px", background: "var(--input-bg)", border: "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "var(--text-base)", resize: "vertical" }}
-          />
+          <div>
+            <textarea
+              name="message"
+              placeholder="Ceritakan tentang tantangan Anda..."
+              rows={4}
+              required
+              maxLength={7000}
+              onChange={(e) => setWordCount(countWords(e.target.value))}
+              style={{ width: "100%", boxSizing: "border-box", padding: "14px 20px", background: "var(--input-bg)", border: isOverLimit ? "1px solid #fca5a5" : "1px solid var(--input-border)", color: "var(--text-primary)", borderRadius: "var(--radius-md)", fontSize: "var(--text-base)", resize: "vertical" }}
+            />
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "6px", gap: "12px" }}>
+              {isOverLimit ? (
+                <span style={{ fontSize: "12px", color: "#b91c1c" }}>
+                  Pesan maksimal {MAX_WORDS} kata. Saat ini {wordCount} kata — tombol kirim dinonaktifkan.
+                </span>
+              ) : (
+                <span />
+              )}
+              <span style={{ fontSize: "12px", color: isOverLimit ? "#b91c1c" : "var(--text-secondary)", whiteSpace: "nowrap" }}>
+                {wordCount} / {MAX_WORDS} kata
+              </span>
+            </div>
+          </div>
           <button
             type="submit"
-            disabled={submitting}
+            disabled={submitting || isOverLimit}
             style={{
               padding: "16px 40px",
               background: "var(--gold)",
@@ -227,15 +290,15 @@ export default function ContactForm() {
               fontWeight: 600,
               letterSpacing: "1px",
               textTransform: "uppercase",
-              cursor: submitting ? "not-allowed" : "pointer",
+              cursor: submitting || isOverLimit ? "not-allowed" : "pointer",
               border: "none",
               borderRadius: "var(--radius-lg)",
               transition: "all 0.3s ease",
               alignSelf: "center",
-              opacity: submitting ? 0.7 : 1,
+              opacity: submitting || isOverLimit ? 0.5 : 1,
             }}
             onMouseEnter={(e) => {
-              if (!submitting) {
+              if (!submitting && !isOverLimit) {
                 e.currentTarget.style.background = "var(--gold-light)";
                 e.currentTarget.style.transform = "translateY(-2px)";
               }
@@ -252,6 +315,8 @@ export default function ContactForm() {
                 </svg>
                 Mengirim...
               </span>
+            ) : isOverLimit ? (
+              <span>Pesan Terlalu Panjang</span>
             ) : (
               <FormButtonText />
             )}
