@@ -141,23 +141,6 @@ export default function Navbar() {
           style={{ display: "flex", gap: "clamp(8px, 1.2vw, 12px)", alignItems: "center" }}
         >
           <ThemeToggle />
-          <Link
-            href="/portal/login"
-            className="navbar-admin-link"
-            style={{
-              fontSize: "clamp(9px, 0.9vw, 11px)",
-              color: "var(--navbar-text)",
-              textDecoration: "none",
-              letterSpacing: "1px",
-              textTransform: "uppercase",
-              transition: "color 0.2s",
-              marginRight: "4px",
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.color = "var(--gold-light)"}
-            onMouseLeave={(e) => e.currentTarget.style.color = "var(--navbar-text)"}
-          >
-            Admin
-          </Link>
           <Link href="/contact">
             <button
               className="hover-lift hover-glow"
@@ -362,25 +345,6 @@ export default function Navbar() {
 
             {/* Divider */}
             <div style={{ height: "1px", background: "var(--border-subtle)", margin: "16px 0" }} />
-
-            {/* Admin link */}
-            <Link
-              href="/portal/login"
-              style={{
-                color: "var(--text-secondary)",
-                textDecoration: "none",
-                fontSize: "14px",
-                letterSpacing: "1px",
-                textTransform: "uppercase",
-                display: "block",
-                padding: "12px 16px",
-                borderRadius: "var(--radius-lg)",
-                transition: "all 0.2s ease",
-              }}
-              onClick={handleLinkClick}
-            >
-              Admin Portal
-            </Link>
 
             {/* CTA Button */}
             <Link href="/contact" style={{ textDecoration: "none", marginTop: "8px" }} onClick={handleLinkClick}>
