@@ -1,6 +1,22 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tentang Kami",
+  description:
+    "PT Grahita Adhi Sasmita adalah konsultan keberlanjutan yang membantu organisasi membangun jejak keberlanjutan yang jelas, personal, dan terasa. Kenali filosofi nama, visi, dan etos kami.",
+  alternates: {
+    canonical: "https://grahitas.co.id/about",
+  },
+  openGraph: {
+    title: "Tentang Kami | PT Grahita Adhi Sasmita",
+    description:
+      "Kenali filosofi nama, visi, dan etos PT Grahita Adhi Sasmita — sahabat organisasi menuju keberlanjutan yang maknawi.",
+    url: "https://grahitas.co.id/about",
+  },
+};
 
 export default function AboutPage() {
   return (

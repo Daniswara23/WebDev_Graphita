@@ -1,16 +1,29 @@
-"use client";
-
 /*
-  services/page.tsx — Halaman /services
+  services/page.tsx — Halaman /services (server component)
   Data diambil dari tabel `service_details` di Supabase.
-  Tampilan tidak berubah.
+  Tampilan tidak berubah — hanya cara data di-fetch yang berubah (server-side).
 */
 
-import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabase";
+import Link from "next/link";
+import { createClient } from "@/lib/supabase/server";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Layanan",
+  description:
+    "Layanan PT Grahita Adhi Sasmita: riset & pemetaan sosial, perencanaan strategis keberlanjutan, pengembangan kapasitas komunitas, fasilitasi kolaborasi multipihak, dan publikasi ilmu pengetahuan.",
+  alternates: {
+    canonical: "https://grahitas.co.id/services",
+  },
+  openGraph: {
+    title: "Layanan | PT Grahita Adhi Sasmita",
+    description:
+      "Ragam layanan keberlanjutan yang dibangun untuk langkah nyata — riset, konsultasi, pengembangan kapasitas, kolaborasi multipihak, dan publikasi.",
+    url: "https://grahitas.co.id/services",
+  },
+};
 
 type ServiceDetail = {
   id: string;
@@ -75,26 +88,18 @@ const serviceIcons: Record<string, React.ReactNode> = {
   ),
 };
 
-export default function ServicesPage() {
-  const [services, setServices] = useState<ServiceDetail[]>([]);
+export default async function ServicesPage() {
+  const supabase = await createClient();
 
-  useEffect(() => {
-    supabase
-      .from("service_details")
-      .select("id, title, description, features")
-      .order("sort_order")
-      .then(({ data }) => {
-        if (data) setServices(data);
-      });
-  }, []);
+  const { data: services } = await supabase
+    .from("service_details")
+    .select("id, title, description, features")
+    .order("sort_order");
+
+  const serviceList: ServiceDetail[] = (services ?? []) as ServiceDetail[];
 
   // Ambil ikon berdasarkan title, fallback ke div kosong
   const getIcon = (title: string) => serviceIcons[title] || null;
-
-  const router = useRouter();
-  const goToContact = () => {
-    router.push("/contact");
-  };
 
   return (
     <>
@@ -120,7 +125,7 @@ export default function ServicesPage() {
         <div className="animate-on-scroll" style={{ padding: "80px 56px", background: "var(--section-bg-alt)" }}>
           <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(500px, 1fr))", gap: "48px" }}>
-              {services.map((service, index) => (
+              {serviceList.map((service, index) => (
                 <div
                   key={service.id}
                   className="grid-item hover-lift hover-glow animate-delay-100"
@@ -163,10 +168,11 @@ export default function ServicesPage() {
           <p style={{ fontSize: "var(--text-base)", color: "var(--cta-text-muted)", fontWeight: 300, marginBottom: "32px" }}>
             Hubungi kami untuk konsultasi awal — bersama kita wujudkan dampak yang berkelanjutan.
           </p>
-          <button
-            onClick={goToContact}
+          <Link
+            href="/contact"
             className="hover-lift hover-glow"
             style={{
+              display: "inline-block",
               padding: "14px 40px",
               background: "var(--cta-btn-bg, #c9a84c)",
               color: "var(--cta-btn-text, #0c1163)",
@@ -179,10 +185,11 @@ export default function ServicesPage() {
               border: "none",
               borderRadius: "var(--radius-md)",
               whiteSpace: "nowrap",
+              textDecoration: "none",
             }}
           >
             Mulai Kolaborasi
-          </button>
+          </Link>
         </div>
       </main>
       <Footer />

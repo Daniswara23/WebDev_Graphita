@@ -8,6 +8,22 @@ import { createClient } from "@/lib/supabase/server";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { GalleryList, GallerySkeleton, Gallery } from "./dokumentasi-client";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dokumentasi Kegiatan",
+  description:
+    "Lihat dokumentasi kegiatan dan program PT Grahita Adhi Sasmita — dari pelatihan, workshop, hingga kolaborasi keberlanjutan bersama berbagai organisasi.",
+  alternates: {
+    canonical: "https://grahitas.co.id/dokumentasi",
+  },
+  openGraph: {
+    title: "Dokumentasi Kegiatan | PT Grahita Adhi Sasmita",
+    description:
+      "Lihat dokumentasi kegiatan dan program PT Grahita Adhi Sasmita — dari pelatihan, workshop, hingga kolaborasi keberlanjutan.",
+    url: "https://grahitas.co.id/dokumentasi",
+  },
+};
 
 async function getGalleries(): Promise<Gallery[]> {
   const supabase = await createClient();

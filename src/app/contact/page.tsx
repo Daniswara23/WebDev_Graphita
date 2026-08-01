@@ -3,6 +3,22 @@ import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
 import { createClient } from "@/lib/supabase/server";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Hubungi Kami",
+  description:
+    "Hubungi PT Grahita Adhi Sasmita untuk konsultasi keberlanjutan, ESG, CSR, dan laporan keberlanjutan. Kami siap menjadi sahabat organisasi Anda.",
+  alternates: {
+    canonical: "https://grahitas.co.id/contact",
+  },
+  openGraph: {
+    title: "Hubungi Kami | PT Grahita Adhi Sasmita",
+    description:
+      "Hubungi PT Grahita Adhi Sasmita untuk konsultasi keberlanjutan, ESG, CSR, dan laporan keberlanjutan.",
+    url: "https://grahitas.co.id/contact",
+  },
+};
 
 type SocialLink = {
   id: string;

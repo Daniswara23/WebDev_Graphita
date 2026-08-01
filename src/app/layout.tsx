@@ -14,9 +14,71 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 import ScrollAnimations from "@/components/ScrollAnimations";
 
 // Metadata = informasi halaman yang muncul di tab browser & hasil Google
+// SEO: metadataBase penting untuk canonical URL & Open Graph
 export const metadata: Metadata = {
-  title: "PT Grahita Adhi Sasmita",
-  description: "Sahabat organisasi dalam membangun jejak keberlanjutan yang jelas, personal, dan terasa.",
+  metadataBase: new URL("https://grahitas.co.id"),
+  title: {
+    default: "PT Grahita Adhi Sasmita — Konsultan Keberlanjutan & ESG",
+    template: "%s | PT Grahita Adhi Sasmita",
+  },
+  description:
+    "PT Grahita Adhi Sasmita adalah konsultan keberlanjutan (sustainability) & ESG di Indonesia. Sahabat organisasi dalam membangun jejak keberlanjutan yang jelas, personal, dan terasa.",
+  keywords: [
+    "Grahita Adhi Sasmita",
+    "konsultan keberlanjutan",
+    "sustainability consultant Indonesia",
+    "ESG Indonesia",
+    "laporan keberlanjutan",
+    "CSR",
+    "SDGs",
+    "konsultan lingkungan",
+  ],
+  authors: [{ name: "PT Grahita Adhi Sasmita" }],
+  creator: "PT Grahita Adhi Sasmita",
+  publisher: "PT Grahita Adhi Sasmita",
+  formatDetection: { email: false, address: false, telephone: false },
+  openGraph: {
+    type: "website",
+    locale: "id_ID",
+    url: "https://grahitas.co.id",
+    siteName: "PT Grahita Adhi Sasmita",
+    title: "PT Grahita Adhi Sasmita — Konsultan Keberlanjutan & ESG",
+    description:
+      "Sahabat organisasi dalam membangun jejak keberlanjutan yang jelas, personal, dan terasa.",
+    images: [
+      {
+        url: "/images/logo-GAS.png",
+        width: 1200,
+        height: 630,
+        alt: "PT Grahita Adhi Sasmita",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PT Grahita Adhi Sasmita — Konsultan Keberlanjutan & ESG",
+    description:
+      "Sahabat organisasi dalam membangun jejak keberlanjutan yang jelas, personal, dan terasa.",
+    images: ["/images/logo-GAS.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://grahitas.co.id",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -49,6 +111,22 @@ export default function RootLayout({
                 // Jika theme === 'dark' atau default, biarkan tanpa class (dark mode default)
               })();
             `,
+          }}
+        />
+        {/* JSON-LD Structured Data — Organization Schema untuk SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "PT Grahita Adhi Sasmita",
+              url: "https://grahitas.co.id",
+              logo: "https://grahitas.co.id/images/logo-GAS.png",
+              description:
+                "Sahabat organisasi dalam membangun jejak keberlanjutan yang jelas, personal, dan terasa.",
+              sameAs: [],
+            }),
           }}
         />
       </head>
