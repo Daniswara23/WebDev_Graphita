@@ -1,0 +1,23 @@
+name: Keep Supabase Alive
+
+on:
+  schedule:
+    # Jalankan setiap 24 jam (setiap hari jam 06:00 UTC = 13:00 WIB)
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Memungkinkan trigger manual dari GitHub UI
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase REST API
+        run: |
+          curl -s -o /dev/null -w "Supabase status: %{http_code}\n" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/"
+
+      - name: Ping Website (Vercel)
+        run: |
+          curl -s -o /dev/null -w "Website status: %{http_code}\n" \
+            "${{ secrets.WEBSITE_URL }}"
