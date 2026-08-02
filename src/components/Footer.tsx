@@ -71,7 +71,7 @@ export default function Footer() {
       </div>
       <div style={{ height: "1px", background: "var(--footer-border)", margin: "40px 0" }} />
       <div style={{ textAlign: "center", fontSize: "var(--text-xs)", color: "var(--footer-text-muted)" }}>
-        © 2024 Grahita Adhi Sasmita. Semua hak dilindungi.
+        © 2025 Grahita Adhi Sasmita. Semua hak dilindungi.
       </div>
     </footer>
   );
