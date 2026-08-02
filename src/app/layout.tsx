@@ -76,8 +76,19 @@ export const metadata: Metadata = {
     canonical: "https://grahitas.co.id",
   },
   icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
+    // Favicon for modern browsers (SVG)
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/images/logo-GAS.png", sizes: "512x512", type: "image/png" },
+      { url: "/images/logo-GAS.png", sizes: "192x192", type: "image/png" },
+      { url: "/images/logo-GAS.png", sizes: "48x48", type: "image/png" },
+      { url: "/images/logo-GAS.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/logo-GAS.png", sizes: "16x16", type: "image/png" },
+    ],
+    // Apple Touch Icon
+    apple: [
+      { url: "/images/logo-GAS.png", sizes: "180x180", type: "image/png" },
+    ],
   },
 };
 
